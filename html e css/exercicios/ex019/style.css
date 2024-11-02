@@ -1,8 +1,8 @@
 @charset "UTF-8";
 
 /*
-em HTML é id    = em CSS é #
-em HTML é class = em CSS é .
+em HTML é id    = em CSS é # (só pode um elemento por documento)
+em HTML é class = em CSS é . (pode vários elementos)
 */
 
 body{
@@ -34,4 +34,8 @@ h2{
 
 .avancado{
     color: #803c3c;
+}
+
+.destaque{
+    background-color: yellow;
 }
