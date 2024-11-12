@@ -1,3 +1,1 @@
 # Study development
-
-Study development
