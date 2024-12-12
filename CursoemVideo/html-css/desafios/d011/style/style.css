@@ -1,0 +1,17 @@
+@charset "UTF-8";
+
+body{
+    height: 97vh;
+    background: black url('../images/espaco.jpg') center center no-repeat fixed;
+    background-size: cover;
+}
+#container{
+    background-size: 100% 100%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+img{
+    height: 250px;
+}
