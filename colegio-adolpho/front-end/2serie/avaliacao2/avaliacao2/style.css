@@ -1,0 +1,31 @@
+.nome{
+text-align: center;
+border-radius: 100px;
+border: 2px solid grey;
+width:200px;
+}
+table{
+    border-radius: 5px;
+    border: 2px solid black;
+}
+th, td{
+text-align: center;
+border-radius: 10px;
+border: 2px solid gray;
+}
+.capa{
+    width: 10cm;
+}
+.texto{
+    border: 2px solid gray;
+    border-radius: 5px;
+    width: 25cm;
+}
+.bottom{
+    border-bottom: 2px solid gray;
+    border-radius: 5px;
+    width: 2cm;
+}
+tr:nth-child(even){background-color: gray;}
+tr:hover{background-color: mediumaquamarine;}
+th{background-color: mediumseagreen;}

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<style>
+      form {
+        /* Apenas para centralizar o form na página */
+        margin: 0 auto;
+        width: 400px;
+        /* Para ver as bordas do formulário */
+        padding: 1em;
+        border: 1px solid #ccc;
+        border-radius: 1em;
+      }
+
+      input:focus,
+      textarea:focus {
+        /* Dar um pouco de destaque nos elementos ativos */
+        border-color: #000;
+      }
+    </style>
+  </head>
+  <body>
+    <form>
+      <fieldset>
+        <legend>Formulario de cadastro do aluno</legend>
+        <p>
+          <input type="text" name="nome_completo" id="entrada_nome" value="Nome completo" />
+          <label for="entrada_nome">Digite seu nome completo</label>
+        </p>
+      </fieldset>
+    </form>
+  </body>
+</html>
