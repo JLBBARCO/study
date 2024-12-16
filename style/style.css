@@ -79,6 +79,37 @@ a.externo:hover{
     text-decoration: underline;
 }
 
+table{
+    border-collapse: collapse;
+    margin: auto;
+    width: 75vw;
+    background-color: #fff;
+    min-width: 200px;
+    max-width: 700px;
+}
+
+tbody >tr:nth-child(odd){
+    background-color: lightgray;
+}
+
+th, td{
+    border: 2px solid black;
+    padding: 10px;
+}
+
+th{
+    text-align: center;
+}
+
+td{
+    text-align: justify;
+}
+
+table .num{
+    width: 50px;
+    text-align: center;
+}
+
 ul.conteudo>li{
     margin: 5%;
 }
