@@ -1,4 +1,6 @@
 @charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Yellowtail&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Aldrich&display=swap');
 
 :root{
     --cor1: #009DF0;
@@ -6,6 +8,9 @@
     --cor3: #385D70;
     --cor4: #2E3E46;
     --cor5: #2B3033;
+    --fonte01: Arial, Helvetica, sans-serif;
+    --fonte02: "Yellowtail", 'cursive';
+    --fonte03: "Aldrich", sans-serif;
 }
 
 *{
@@ -13,11 +18,17 @@
     padding: 0;
 }
 
+body{
+    font-family: var(--fonte01);
+}
+
 header{
     text-align: center;
     padding: 15px;
     background-color: var(--cor3);
     color: white;
+    font-family: var(--fonte02);
+    font-size: 1.5em;
 }
 
 header a{
@@ -65,6 +76,14 @@ main a.interno{
     transition-duration: .25s;
 }
 
+a{
+    font-family: var(--fonte03);
+}
+
+a.externo::after{
+    content: '\00A0\1F517';
+}
+
 a.interno:hover{
     text-decoration: underline;
 }
@@ -82,10 +101,15 @@ a.externo:hover{
 table{
     border-collapse: collapse;
     margin: auto;
+    margin-bottom: 25px;
     width: 75vw;
     background-color: #fff;
     min-width: 200px;
     max-width: 700px;
+}
+
+caption{
+    padding: 20px;
 }
 
 tbody >tr:nth-child(odd){
@@ -94,7 +118,7 @@ tbody >tr:nth-child(odd){
 
 th, td{
     border: 2px solid black;
-    padding: 10px;
+    padding: 15px;
 }
 
 th{
