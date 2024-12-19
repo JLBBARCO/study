@@ -6,6 +6,7 @@
     <title>Markdown</title>
     <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/markdown/markdown-original.svg" type="image/x-icon">
     <link rel="stylesheet" href="../../style/style.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <header>
@@ -15,7 +16,368 @@
         <a href="../../index.html" class="interno">Home</a>
         <a href="../cursoemvideo.html">⬅️</a>
     </nav>
-    <main></main>
+    <main>
+        <section>
+            <ul>
+                <article>
+                    <h2>Formatações em Markdown</h2>
+                    <p>A linguagem Markdown exige que entre uma linha de código e outra, possua uma vazia. <br>Ex:</p>
+                    <div class="code">
+                        <pre>
+                            <code>
+    1|  # Título
+    2|
+    3| Texto
+                            </code>
+                        </pre>
+                    </div>
+                    <div class="resultado">
+                        <p>Resultado:</p>
+                        <h1>Título</h1>
+                        Texto
+                    </div>
+                </article>
+                <article>
+                    <h2>Títulos e linhas horizontais</h2>
+                    <p>Para criar títulos, podemos usar de uma # até seis ###### para definir o nível do título para que o conteúdo fique organizado corretamente. Para criar linhas horizontais, podemos usar três traços --- ou três asteriscos ***</p>
+                    <div class="code">
+                        <pre>
+                            <code>
+    # Texto principal
+    ***
+    Teste
+                            </code>
+                        </pre>
+                    </div>
+                    <div class="resultado">
+                        <p>Resultado: <h1 style="margin: 0 5px;border-bottom: 1px solid black;">Texto principal</h1></p> Teste
+                    </div>
+                </article>
+                <h2>Markdown Simples</h2>
+                <li>
+                    <h3>Itálico</h3>
+                    <p>Para colocar uma palavra em itálico, podemos colocá-la entre asteriscos simples ou entre underlines simples</p>
+                    <div class="code">
+                        <pre>
+                            <code>
+    *Exemplo*
+    _Exemplo_
+                            </code>
+                        </pre>
+                    </div>
+                    <div class="resultado">
+                        <p>Resultado:</p>
+                        <em>Exemplo</em>
+                    </div>
+                </li>
+                <li>
+                    <h3>Negrito</h3>
+                    <p>Para usar o negrito, basta colocar asteriscos duplos ou underlines duplos para delimitar o termo.</p>
+                    <div class="code">
+                        <pre>
+                            <code>
+    __Exemplo__
+    **Exemplo**
+                            </code>
+                        </pre>
+                    </div>
+                    <div class="resultado">
+                        <p>Resultado:</p>
+                        <strong>Exemplo</strong>
+                    </div>
+                </li>
+                <li>
+                    <h3>Riscado (strike)</h3>
+                    <p>Para riscar um texto, coloque-o entre dois símbolos de til</p>
+                    <div class="code">
+                        <pre>
+                            <code>
+    ~~Exemplo~~
+                            </code>
+                        </pre>
+                    </div>
+                    <div class="resultado">
+                        <p>Resultado:</p>
+                        <del>Exemplo</del>
+                    </div>
+                </li>
+                <li>
+                    <h3>Dá pra misturar?</h3>
+                    <p>É possível também juntar as formatações de forma hierárquica.</p>
+                    <div class="code">
+                        <pre>
+                            <code>
+    _**Exemplo**_
+                            </code>
+                        </pre>
+                    </div>
+                    <div class="resultado">
+                        <p>Resultado:</p>
+                        <strong><em>Exemplo</em></strong>
+                    </div>
+                </li>
+                <h2>Listas</h2>
+                <li>
+                    <h3>Listas numeradas</h3>
+                    <p>Para criar uma lista numerada, comece a linha com um número qualquer, seguido de um ponto. O primeiro número da lista vai indicar onde ela começa, os itens seguintes, se estiverem em linhas consecutivas, vão continuar a sequência.</p>
+                    <div class="code">
+                        <pre>
+                            <code>
+    1. Exemplo01
+    1. Exemplo02
+    5. Exemplo03
+    0. Exemplo04
+                            </code>
+                        </pre>
+                    </div>
+                    <div class="resultado">
+                        <p>Resultado:</p>
+                        <ol>
+                            <li>Exemplo01</li>
+                            <li>Exemplo02</li>
+                            <li>Exemplo03</li>
+                            <li>Exemplo04</li>
+                        </ol>
+                    </div>
+                </li>
+                <li>
+                    <h3>Listas com marcadores</h3>
+                    <p>Basta usar um asterisco seguido de um espaço ou um traço seguido de espaço no início de uma linha para que ele seja parte de uma lista demarcada.</p>
+                    <div class="code">
+                        <pre>
+                            <code>
+    * Opção 1
+    * Opção 2
+        * Opção 3
+    * Opção 4
+                            </code>
+                        </pre>
+                    </div>
+                    <div class="resultado">
+                        <p>Resultado:</p>
+                        <ul>
+                            <li>Opção 1</li>
+                            <li>Opção 2</li>
+                            <ul>
+                                <li>Opção 3</li>
+                            </ul>
+                            <li>Opção 4</li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <h3>Listas de tarefas</h3>
+                    <p>Colocando um sinal - [ ] ou - [x] antes de cada item, criamos listas de tarefa com itens marcados ou desmarcados.</p>
+                    <div class="code">
+                        <pre>
+                            <code>
+    - [ ] pão
+    - [x] leite
+    - [ ] manteiga
+                            </code>
+                        </pre>
+                    </div>
+                    <div class="resultado">
+                        <p>Resultado:</p>
+                        <p>
+                            ☐ pão <br>
+                            🗹 leite <br>
+                            ☐ manteiga
+                        </p>
+                    </div>
+                </li>
+                <h2>Imagens</h2>
+                <p>Para inserir uma imagem, vamos usar o símbolo ![ ]( ) onde a descrição fica entre colchetes e o endereço da imagem entre parênteses.</p>
+                <div class="code">
+                    <pre>
+                        <code>
+    ![GitHub]<br>  (https://github.githubassets.com/favicons/favicon-dark.png)
+                        </code>
+                    </pre>
+                </div>
+                <div class="resultado">
+                    <p>Resultado:</p>
+                    <img src="https://github.githubassets.com/favicons/favicon-dark.png" alt="GitHub logo" style="background-color: gray; padding: 5px; border-radius: 50%; width: 50px; height: 50px;">
+                </div>
+                <h2>Links</h2>
+                <p>Para inserir links, a simbologia é semelhante à usada com as imagens, apenas removemos o sinal de exclamação.</p>
+                <div class="code">
+                    <pre>
+                        <code>
+    [Meu GitHub](https://github.com/jlbbarco)
+                        </code>
+                    </pre>
+                </div>
+                <div class="resultado">
+                    <p>Resultado:</p>
+                    <a href="http://github.io" target="_blank" rel="noopener noreferrer">Meu GitHub</a>
+                </div>
+                <h2>Trechos de códigos</h2>
+                <p>Como o GitHub é uma rede social para programadores, nada mais interessante do que aprendermos a demarcar nossos códigos e comandos. Podemos usar dois tipos de marcação:</p>
+                <li>
+                    <h3>Comando isolado</h3>
+                    <p>Se for citar um comando apenas, basta colocá-lo entre crases.</p>
+                    <div class="code">
+                        <pre>
+                            <code>
+    Gostaria de mais informações sobre o comando <br>   `window.document.querySelector()`
+                            </code>
+                        </pre>
+                    </div>
+                    <div class="resultado">
+                        <p>Resultado:</p>
+                        <p>Gostaria de mais informações sobre o comando <pre><code>window.document.querySelector()</code></pre></p>
+                    </div>
+                </li>
+                <li>
+                    <h3>Trecho de código</h3>
+                    <p>Para compartilhar um código com mais linhas, basta colocar todas elas dentro de um grupo delimitado entre três crases consecutivas (sem espaço entre elas).</p>
+                    <div class="code">
+                        <pre>
+                            <code>
+                                <p>Olha só o programa que criei em **Python**</p>
+    ``` <br>
+    num = int(input('Digite um número: ')) <br>
+    if num % 2 == 0: <br>
+        print(f'O valor {num} é PAR') <br>
+    else: <br>
+        print(f'O valor {num} é ÍMPAR') <br>
+    print('Fim do Programa') <br>
+    ```
+                            </code>
+                        </pre>
+                    </div>
+                    <div class="resultado">
+                        <p>Resultado:</p>
+                        <p>Olha só o programa que criei em <strong>Python</strong>:</p>
+                        <pre>
+                            <code>
+    num = int(input('Digite um número: '))
+    if num % 2 == 0:
+        print(f'O valor {num} é PAR')
+    else:
+        print(f'O valor {num} é ÍMPAR')
+    print('Fim do Programa')
+                            </code>
+                        </pre>
+                    </div>
+                </li>
+                <h2>Ligações entre conteúdos</h2>
+                <p>Quando criamos conteúdos em <em>markdown</em> para o <strong>GitHub</strong>, podemos relacionar conteúdos com outros ou com pessoas usando essas marcas.</p>
+                <li>
+                    <h3>Citação</h3>
+                    <p>Ao responder alguém, podemos realizar citações a outras mensagens completas ou a trechos dela, usando sinais de &gt; no início da linha.</p>
+                    <div class="code">
+                        <pre>
+                            <code>
+                                <p>Como **Steve Jobs** disse uma vez: <br>&gt; Decidir o que não fazer é tão <br>&gt; importante quanto decidir <br>&gt; o que fazer <br>Bela frase!</p>
+                            </code>
+                        </pre>
+                    </div>
+                    <div class="resultado">
+                        <p>Resultado:</p>
+                        <p>Como <strong>Steve Jobs</strong> disse uma vez:</p>
+                        <blockquote style="border-left: 3px solid lightgray; margin: 10px; padding: 5px;">Decidir o que não fazer é tão <br> importante quanto decidir <br> o que fazer</blockquote>
+                        <p>Bela frase!</p>
+                    </div>
+                </li>
+                <li>
+                    <h3>Menções a Usuários</h3>
+                    <p>Se você precisar mencionar algum usuário, pode indicar o nome do perfil logo após o símbolo de @.</p>
+                    <div class="code">
+                        <pre>
+                            <code>
+                                <p>Durante o curso, usamos o perfil @gafanhotos para <br> exercitar as ações em Git e GitHub.</p>
+                            </code>
+                        </pre>
+                    </div>
+                    <div class="resultado">
+                        <p>Resultado:</p>
+                        <img src="img/mencao-usuario.png" alt="Menções a Usuários">
+                    </div>
+                </li>
+                <li>
+                    <h3>Menções a Issues</h3>
+                    <p>Também podemos mencionar Issues e Pull Requests de nosso repositório usando o símbolo de # seguido do número do elemento (sem espaços).</p>
+                    <div class="code">
+                        <pre>
+                            <code>
+                                <p>Analisando a Issue #3 , vamos rever o que foi indicado pelo usuário.</p>
+                            </code>
+                        </pre>
+                    </div>
+                    <div class="resultado">
+                        <p>Resultado:</p>
+                        <img src="img/mencao-issue.png" alt="Menções a Issues">
+                    </div>
+                </li>
+                <h2>Símbolos</h2>
+                <li>
+                    <h3>Escapando símbolos</h3>
+                    <p>Até o momento, vimos que temos vários símbolos que servem para criar formatações. Mas e se por acaso quisermos mostrar exatamente o símbolo sem seu efeito de formatação? A resposta é simples: usamos uma barra invertida  antes do símbolo para eliminar o efeito de formatação.</p>
+                    <div class="code">
+                        <pre>
+                            <code>
+                                <p>Podemos criar títulos usando \## antes do texto <br>Podemos criar citações usando \&gt; antes do conteúdo <br>Podemos adicionar imagens usando \!\[descrição]\(endereço)</p>
+                            </code>
+                        </pre>
+                    </div>
+                    <div class="resultado">
+                        <p>Resultado:</p>
+                        <p>Podemos criar títulos usando ## antes do texto <br>Podemos criar citações usando &gt; antes do conteúdo <br>Podemos adicionar imagens usando ![descrição](endereço)</p>
+                    </div>
+                </li>
+                <li>
+                    <h3>Emojis</h3>
+                    <p>Existem códigos especiais para emojis em markdown, que devem ser representados entre símbolos de <strong>::</strong></p>
+                    <div class="code">
+                        <p>Boas iniciativas merecem aplausos :clap: <br>Fatos importantes merecem atenção :eyes: <br>Momentos difíceis requerem força :muscle: <br>Mensagens bem escritas merecem um like :+1:</p>
+                    </div>
+                    <div class="resultado">
+                        <p>Resultado:</p>
+                        <p>Boas iniciativas merecem aplausos 👏 <br>Fatos importantes merecem atenção 👀 <br>Momentos difíceis requerem força 💪 <br>Mensagens bem escritas merecem um like 👍</p>
+                    </div>
+                </li>
+                <h2>Tabelas</h2>
+                <p>Criar tabelas em markdown é extremamente simples. Basta usar as barras em pé (pipes) | e as barras deitadas (traços) - de forma organizada.</p>
+                <div class="code">
+                    <p>Ano  |    Curso  |   Professor   |   Aulas <br>:---: |   ---:    |   :---    |   :---: <br>2013  |   HTML+CSS+JS |   Gustavo Guanabara   |   36 <br>2018 |   Hardware    |   Alfredo Jr  |   28 <br>2019 |   Linux   |   Ricardo Pinheiro    |   15</p>
+                </div>
+                <div class="resultado">
+                    <p>Resultado:</p>
+                    <table style="width: 100%;">
+                        <tr style="background-color: white;">
+                            <th scope="col" class="centro">Ano</th>
+                            <th scope="col" class="direita">Curso</th>
+                            <th scope="col" class="esquerda">Professor</th>
+                            <th scope="col" class="centro">Aulas</th>
+                        </tr>
+                        <tr>
+                            <td class="centro">2013</td>
+                            <td class="direita">HTML+CSS+JS</td>
+                            <td class="esquerda">Gustavo Guanabara</td>
+                            <td class="centro">36</td>
+                        </tr>
+                        <tr>
+                            <td class="centro">2018</td>
+                            <td class="direita">Hardware</td>
+                            <td class="esquerda">Alfredo Jr</td>
+                            <td class="centro">28</td>
+                        </tr>
+                        <tr>
+                            <td class="centro">2019</td>
+                            <td class="direita">Linux</td>
+                            <td class="esquerda">Ricardo Pinheiro</td>
+                            <td class="centro">15</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="recado">
+                    <p>Perceba que na segunda linha do exemplo, indicamos o alinhamento de cada coluna, seguindo os padrões a seguir: <br>--- Formatação padrão (alinhamento à esquerda) <br>:--- Alinhamento à esquerda <br>:---: Conteúdo Centralizado <br>---: Alinhamento à direita</p>
+                </div>
+            </ul>
+        </section>
+    </main>
     <footer>
         <p>Site criado por <a href="https://github.com/jlbbarco" target="_blank" class="interno">José Luiz B Barco</a> para estudar</p>
     </footer>
