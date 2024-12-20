@@ -6,7 +6,72 @@
     <title>Markdown</title>
     <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/markdown/markdown-original.svg" type="image/x-icon">
     <link rel="stylesheet" href="../../style/style.css">
-    <link rel="stylesheet" href="css/style.css">
+    <style>
+        div.code, .resultado{
+            margin: 5px 10%;
+            padding: 10px;
+            border: 1px dashed black;
+            border-radius: 10px;
+            background-color: white;
+            color: black;
+        }
+
+        div.resultado p{
+            margin: 0 0 10px 0;
+        }
+
+        div.resultado ol{
+            margin: 0 10%;
+        }
+
+        div.resultado div.codigo{
+            border: 0;
+            border-radius: 0;
+            font-family: monospace;
+            padding: 5px 25px;
+            background-color: lightgray;
+        }
+
+        div.resultado img{
+            width: 100%;
+        }
+
+        div.code p{
+            text-align: start;
+            font-family: monospace;
+            word-wrap: break-word;
+            margin: 25px;
+        }
+
+        div.resultado p.code{
+            text-align: start;
+            font-family: monospace;
+            word-wrap: break-word;
+            margin: 25px;
+            padding: 10px;
+            background-color: lightgray;
+        }
+
+        div.resultado div.code{
+            text-indent: 10pt;
+        }
+        
+        th, td{
+            padding: 5px;
+        }
+
+        .centro{
+            text-align: center;
+        }
+
+        .direita{
+            text-align: right;
+        }
+
+        .esquerda{
+            text-align: left;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -189,11 +254,7 @@
                 <h2>Imagens</h2>
                 <p>Para inserir uma imagem, vamos usar o símbolo ![ ]( ) onde a descrição fica entre colchetes e o endereço da imagem entre parênteses.</p>
                 <div class="code">
-                    <pre>
-                        <code>
-    ![GitHub]<br>  (https://github.githubassets.com/favicons/favicon-dark.png)
-                        </code>
-                    </pre>
+                    <p>![GitHub](https://github.githubassets.com/favicons/favicon-dark.png)</p>
                 </div>
                 <div class="resultado">
                     <p>Resultado:</p>
@@ -202,11 +263,7 @@
                 <h2>Links</h2>
                 <p>Para inserir links, a simbologia é semelhante à usada com as imagens, apenas removemos o sinal de exclamação.</p>
                 <div class="code">
-                    <pre>
-                        <code>
-    [Meu GitHub](https://github.com/jlbbarco)
-                        </code>
-                    </pre>
+                    <p>[Meu GitHub](https://github.com/jlbbarco)</p>
                 </div>
                 <div class="resultado">
                     <p>Resultado:</p>
@@ -218,11 +275,7 @@
                     <h3>Comando isolado</h3>
                     <p>Se for citar um comando apenas, basta colocá-lo entre crases.</p>
                     <div class="code">
-                        <pre>
-                            <code>
-    Gostaria de mais informações sobre o comando <br>   `window.document.querySelector()`
-                            </code>
-                        </pre>
+                        <p>Gostaria de mais informações sobre o comando `window.document.querySelector()`</p>
                     </div>
                     <div class="resultado">
                         <p>Resultado:</p>
@@ -233,33 +286,27 @@
                     <h3>Trecho de código</h3>
                     <p>Para compartilhar um código com mais linhas, basta colocar todas elas dentro de um grupo delimitado entre três crases consecutivas (sem espaço entre elas).</p>
                     <div class="code">
-                        <pre>
-                            <code>
-                                <p>Olha só o programa que criei em **Python**</p>
-    ``` <br>
-    num = int(input('Digite um número: ')) <br>
-    if num % 2 == 0: <br>
-        print(f'O valor {num} é PAR') <br>
-    else: <br>
-        print(f'O valor {num} é ÍMPAR') <br>
-    print('Fim do Programa') <br>
-    ```
-                            </code>
-                        </pre>
+                        <p>Olha só o programa que criei em **Python**</p>
+                        <p>```</p>
+                        <p>num = int(input('Digite um número: '))</p>
+                        <p>if num % 2 == 0:</p>
+                        <p style="text-indent: 20pt;">print(f'O valor {num} é PAR')</p>
+                        <p>else:</p>
+                        <p style="text-indent: 20pt;">print(f'O valor {num} é ÍMPAR')</p>
+                        <p>print('Fim do Programa')</p>
+                        <p>```</p>
                     </div>
                     <div class="resultado">
                         <p>Resultado:</p>
                         <p>Olha só o programa que criei em <strong>Python</strong>:</p>
-                        <pre>
-                            <code>
-    num = int(input('Digite um número: '))
-    if num % 2 == 0:
-        print(f'O valor {num} é PAR')
-    else:
-        print(f'O valor {num} é ÍMPAR')
-    print('Fim do Programa')
-                            </code>
-                        </pre>
+                        <div class="codigo">
+                            <p>num = (input('Digite um número: '))</p>
+                            <p>if num% 2 == 0:</p>
+                            <p style="text-indent: 20pt;">print(f'O valor {num} é PAR)</p>
+                            <p>else:</p>
+                            <p style="text-indent: 20pt;">print(f'O valor {num} é ÍMPAR)</p>
+                            <p>print('Fim do Programa')</p>
+                        </div>
                     </div>
                 </li>
                 <h2>Ligações entre conteúdos</h2>
@@ -285,11 +332,7 @@
                     <h3>Menções a Usuários</h3>
                     <p>Se você precisar mencionar algum usuário, pode indicar o nome do perfil logo após o símbolo de @.</p>
                     <div class="code">
-                        <pre>
-                            <code>
-                                <p>Durante o curso, usamos o perfil @gafanhotos para <br> exercitar as ações em Git e GitHub.</p>
-                            </code>
-                        </pre>
+                        <p>Durante o curso, usamos o perfil @gafanhotos para <br> exercitar as ações em Git e GitHub.</p>
                     </div>
                     <div class="resultado">
                         <p>Resultado:</p>
@@ -300,11 +343,7 @@
                     <h3>Menções a Issues</h3>
                     <p>Também podemos mencionar Issues e Pull Requests de nosso repositório usando o símbolo de # seguido do número do elemento (sem espaços).</p>
                     <div class="code">
-                        <pre>
-                            <code>
-                                <p>Analisando a Issue #3 , vamos rever o que foi indicado pelo usuário.</p>
-                            </code>
-                        </pre>
+                        <p>Analisando a Issue #3 , vamos rever o que foi indicado pelo usuário.</p>
                     </div>
                     <div class="resultado">
                         <p>Resultado:</p>
@@ -316,11 +355,7 @@
                     <h3>Escapando símbolos</h3>
                     <p>Até o momento, vimos que temos vários símbolos que servem para criar formatações. Mas e se por acaso quisermos mostrar exatamente o símbolo sem seu efeito de formatação? A resposta é simples: usamos uma barra invertida  antes do símbolo para eliminar o efeito de formatação.</p>
                     <div class="code">
-                        <pre>
-                            <code>
-                                <p>Podemos criar títulos usando \## antes do texto <br>Podemos criar citações usando \&gt; antes do conteúdo <br>Podemos adicionar imagens usando \!\[descrição]\(endereço)</p>
-                            </code>
-                        </pre>
+                        <p>Podemos criar títulos usando \## antes do texto <br>Podemos criar citações usando \&gt; antes do conteúdo <br>Podemos adicionar imagens usando \!\[descrição]\(endereço)</p>
                     </div>
                     <div class="resultado">
                         <p>Resultado:</p>

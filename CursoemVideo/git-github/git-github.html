@@ -6,6 +6,20 @@
     <title>Git & GitHub</title>
     <link rel="stylesheet" href="../../style/style.css">
     <link rel="shortcut icon" href="https://github.githubassets.com/favicons/favicon-dark.png" type="image/x-icon">
+    <style>
+        aside{
+            margin: 5px;
+            padding: 10px;
+            border: 1px solid;
+            border-radius: 10px;
+            background-color: #fff;
+        }
+
+        ul ol, ol ul{
+            margin: 0 5%;
+            font-family: monospace;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -15,7 +29,85 @@
         <a href="../../index.html" class="interno">Home</a>
         <a href="../cursoemvideo.html">⬅️</a>
     </nav>
-    <main></main>
+    <main>
+        <section>
+            <h2>Git</h2>
+            <article>
+                <h3>Possíveis erros</h3>
+                <h4>Erro de login</h4>
+                <p>Para resolver, acesse o Git Bash, digite: <br>git config --global user.name "<abbr title="Entre aspas, inserir nome de usuário GitHub">__________</abbr>" <br>git config --global user.email "<abbr title="Entre aspas, inserir email vinculado ao GitHub">__________</abbr>"</p>
+            </article>
+        </section>
+        <section>
+            <h2>GitHub</h2>
+        </section>
+        <section>
+            <h2>Visual Studio Code (VS Code)</h2>
+            <p>Ao fazer login com a conta do GitHub, o VS Code baixa automaticamente todas as extensões necessárias para a vinculação.</p>
+            <article>
+                <h3>Atalhos</h3>
+                <ul>
+                    <p>Estes comandos serão executados no Terminal GitBash do VSCode com a pasta que deseja enviar aberta.</p>
+                    <li>
+                        <h3>Repositório <strong>SEM COMMITs</strong></h3>
+                        <ol>
+                            <li>
+                                <p><abbr title="Inicia o repositório local">git init</abbr></p>
+                            </li>
+                            <li>
+                                <p><abbr title="Seleciona o README para fazer o commit">git add README.md</abbr></p>
+                            </li>
+                            <li>
+                                <p><abbr title="Cria o primeiro commit do repositório com o nome firs commit">git commit -m "first commit"</abbr></p>
+                            </li>
+                            <li>
+                                <p><abbr title="Cria a branch main / ramificação principal">git branch -M main</abbr></p>
+                            </li>
+                            <li>
+                                <p><abbr title="Vincula o repositório local ao remoto">git remote add origin '<em>link do repositório</em>'</abbr></p>
+                            </li>
+                            <li>
+                                <p><abbr title="Envia tanto o commit quanto a nova branch para o repositório remoto">git push -u origin main</abbr></p>
+                            </li>
+                        </ol>
+                    </li>
+                    <li>
+                        <h3>Repositório funcional</h3>
+                        <ol>
+                            <li>
+                                <p><abbr title="Seleciona todos os arquivos modificados">git add --all</abbr></p>
+                            </li>
+                            <li>
+                                <p><abbr title="Cria um commit">git commit -m "<em>nome do commit</em>"</abbr></p>
+                            </li>
+                            <li>
+                                <p><abbr title="Vincula ao repositório">git remote add origin '<em>link do repositório</em>'</abbr></p>
+                            </li>
+                            <li>
+                                <p><abbr title="Seleciona a branch main, caso não exista, este comando cria">git branch -M main</abbr></p>
+                            </li>
+                            <li>
+                                <p><abbr title="Envia ao repositório remoto">git push -u origin main</abbr></p>
+                            </li>
+                        </ol>
+                    </li>
+                </ul>
+            </article>
+        </section>
+        <aside>
+            <h2>Download</h2>
+            <ul>
+                <li>
+                    <a href="https://git-scm.com/downloads" target="_blank" rel="noopener noreferrer" class="externo">Git</a>
+                    <p>Gerencia repositórios locais.</p>
+                </li>
+                <li>
+                    <a href="http://" target="_blank" rel="noopener noreferrer" class="externo">GitHub Desktop</a>
+                    <p>Programa que possibilita a gestão dos repositórios.</p>
+                </li>
+            </ul>
+        </aside>
+    </main>
     <footer>
         <p>Site criado por <a href="https://github.com/jlbbarco" target="_blank" class="interno">José Luiz B Barco</a> para estudar</p>
     </footer>
