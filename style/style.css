@@ -121,42 +121,6 @@ a.externo:hover{
     text-decoration: underline;
 }
 
-table{
-    border-collapse: collapse;
-    margin: auto;
-    margin-bottom: 25px;
-    width: 75vw;
-    background-color: #fff;
-    min-width: 200px;
-    max-width: 700px;
-}
-
-caption{
-    padding: 20px;
-}
-
-tbody >tr:nth-child(odd){
-    background-color: lightgray;
-}
-
-th, td{
-    border: 2px solid black;
-    padding: 15px;
-}
-
-th{
-    text-align: center;
-}
-
-td{
-    text-align: justify;
-}
-
-table .num{
-    width: 50px;
-    text-align: center;
-}
-
 ul>li{
     margin: 5%;
 }
