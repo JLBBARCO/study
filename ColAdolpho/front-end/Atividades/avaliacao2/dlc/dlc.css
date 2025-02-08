@@ -1,0 +1,22 @@
+table{
+    border: 2px solid black;
+    border-radius: 4px;
+    text-align: center;
+}
+tr:hover{background-color: lightblue;}
+th, td{
+    border: 2px solid grey;
+    border-radius: 2px;
+}
+th{
+    color: white;
+    background-color: blue;
+}
+.link{
+    border-bottom: 2px solid darkorange;
+    border-radius: 2px;
+}
+.preço{
+    border: 2px solid green;
+    border-radius: 2px;
+}
