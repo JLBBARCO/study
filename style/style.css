@@ -7,11 +7,11 @@
 /* estilização base */
 
 :root{
-    --cor1: #009DF0;
-    --cor2: #218CC5;
-    --cor3: #385D70;
-    --cor4: #2E3E46;
-    --cor5: #2B3033;
+    --cor0: #F7F7F7;
+    --cor1: #A9CFE5;
+    --cor2: #12577B;
+    --cor3: #021B33;
+    --cor4: #000;
     --fonte01: Arial, Helvetica, sans-serif;
     --fonte02: "Sour Gummy", serif;
     --fonte03: "Aldrich", sans-serif;
@@ -32,7 +32,7 @@ header{
     text-align: center;
     padding: 15px;
     background-color: var(--cor3);
-    color: white;
+    color: var(--cor0);
     font-family: var(--fonte02);
     font-size: 1.5em;
     font-variant: small-caps;
@@ -43,7 +43,7 @@ header h1{
 }
 
 header a{
-    color: white;
+    color: var(--cor0);
     text-decoration: none;
 }
 
@@ -61,7 +61,7 @@ nav{
 
 nav a{
     padding: 10px;
-    color: white;
+    color: var(--cor0);
     text-decoration: none;
     transition-duration: .5s;
     font-weight: bold;
@@ -69,8 +69,8 @@ nav a{
 }
 
 nav a:hover{
-    background-color: var(--cor4);
-    border: 3px solid var(--cor5);
+    background-color: var(--cor2);
+    border: 3px solid var(--cor0);
 }
 
 /* Conteúdo */
@@ -80,19 +80,19 @@ main{
     margin: auto;
     min-width: 250px;
     max-width: 750px;
-    background-color: var(--cor2);
+    background-color: var(--cor1);
     box-shadow: 0px 7px 7px #0000006b;
 }
 
 main a.interno{
     text-decoration: none;
-    color: black;
+    color: var(--cor4);
     transition-duration: .25s;
 }
 
 main a.externo{
     text-decoration: none;
-    color: black;
+    color: var(--cor4);
     transition-duration: .25;
 }
 
@@ -136,15 +136,15 @@ iframe.interno{
 /* Rodapé */
 
 footer{
-    background-color: black;
-    color: white;
+    background-color: var(--cor3);
+    color: var(--cor0);
     text-align: center;
     padding: 10px;
 }
 
 footer a{
     text-decoration: none;
-    color: white;
+    color: var(--cor0);
     transition-duration: .5s;
 }
 
