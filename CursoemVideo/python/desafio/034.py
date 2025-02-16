@@ -1,7 +1,7 @@
-salario = float(input('Digite seu salário: R$'))
+salario = float(input('Qual é o seu salário? R$'))
 if salario > 1250:
-    aumento1 = salario*10/100
-    print('O aumento foi de R${:.2f}, e o total vai ser de R${:.2f}'.format(aumento1, salario+aumento1))
+    novo = salario+(salario*10/100)
+    print('Quem ganhava R${:.2f} passa a ganhar R${:.2f}'.format(salario, novo))
 else:
-    aumento2 = salario*15/100
-    print('O aumento foi de R${:.2f}, e o total vai ser de R${:.2f}'.format(aumento2, salario+aumento2))
+    novo = salario+(salario*15/100)
+    print('Quem ganhava R${:.2f} passa a ganhar R${:.2f}'.format(salario, novo))
