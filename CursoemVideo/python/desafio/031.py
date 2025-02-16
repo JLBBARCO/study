@@ -1,7 +1,4 @@
-distancia = float(input('Digite a distância da viagem em km: '))
-if distancia <= 200:
-    valor1 = distancia * .5
-    print('Sua passagem terá o valor de R${:.2f}'.format(valor1))
-else:
-    valor2 = distancia * .45
-    print('Sua passagem terá o valor de R${:.2f}'.format(valor2))
+distancia = float(input('Qual é a distância da sua viagem? '))
+print('Você está prestes a começar uma viagem de {:.1f}km.'.format(distancia))
+preço = distancia * .5 if distancia <= 200 else distancia * .45
+print('E o preço da sua passagem será de R${:.2f}'.format(preço))
