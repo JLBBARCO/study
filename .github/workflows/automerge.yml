@@ -1,0 +1,37 @@
+name: Auto PR and Merge
+
+on:
+  push:
+    branches:
+      - jlbbarco
+
+jobs:
+  create-pull-request:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Create pull request
+      uses: repo-sync/pull-request@v2
+      with:
+        source_branch: jlbbarco
+        destination_branch: main
+        pr_title: 'Automated PR: Merging branch nome-da-sua-branch into main'
+        pr_body: 'This pull request was automatically created and merged by GitHub Actions.'
+        pr_reviewers: ''
+
+  merge-pull-request:
+    needs: create-pull-request
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Merge pull request
+      uses: dev-drprasad/delete-pull-request-branch@v2
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        pull_request_number: ${{ needs.create-pull-request.outputs.pr_number }}
