@@ -90,6 +90,7 @@ main a.interno{
     text-decoration: none;
     color: var(--cor4);
     transition-duration: .25s;
+    font-weight: bold;
 }
 
 main a.externo{
