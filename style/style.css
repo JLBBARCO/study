@@ -90,7 +90,6 @@ main a.interno{
     text-decoration: none;
     color: var(--cor4);
     transition-duration: .25s;
-    font-weight: bold;
 }
 
 main a.externo{
@@ -108,6 +107,7 @@ main p{
 }
 
 a{
+    font-weight: bold;
     font-family: var(--fonte03);
     font-variant: small-caps;
 }
