@@ -107,7 +107,6 @@ main p{
 }
 
 a{
-    font-weight: bold;
     font-family: var(--fonte03);
     font-variant: small-caps;
 }
@@ -117,6 +116,7 @@ a.externo::after{
 }
 
 a.interno:hover{
+    font-weight: bold;
     text-decoration: underline;
 }
 

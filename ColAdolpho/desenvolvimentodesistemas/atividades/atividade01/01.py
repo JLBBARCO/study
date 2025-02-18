@@ -1,3 +1,3 @@
 print('Olá, mundo!')
-nome = 'José Luiz'
+nome = str(input('Digite seu nome: '))
 print(nome)
