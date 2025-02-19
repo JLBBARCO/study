@@ -78,7 +78,7 @@ nav a:hover{
 /* Conteúdo */
 
 main{
-    padding: 20px;
+    padding: 50px;
     margin: auto;
     min-width: 250px;
     max-width: 750px;
@@ -106,6 +106,10 @@ main p{
     text-indent: 30px;
 }
 
+h2, h2, h4, h5, h6{
+    line-height: 2em;
+}
+
 a{
     font-family: var(--fonte03);
     font-variant: small-caps;
@@ -124,7 +128,7 @@ a.externo:hover{
     text-decoration: underline;
 }
 
-ul>li{
+ul li, ol li{
     margin: 5%;
 }
 
