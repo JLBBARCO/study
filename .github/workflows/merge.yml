@@ -1,0 +1,22 @@
+name: Automatic Merge
+
+on:
+  push:
+    branches:
+      - jlbbarco
+
+jobs:
+  merge:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Merge branch
+      run: |
+        git config --global user.name 'github-actions[bot]'
+        git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+        git checkout main
+        git merge jlbbarco
+        git push origin main
