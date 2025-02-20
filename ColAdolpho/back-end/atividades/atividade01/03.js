@@ -1,3 +1,3 @@
-let nascimento = 2008;
+const nascimento = 2008;
 let idade = 2025 - nascimento;
-console.log(idade);
+console.log('Minha idade é: ' + idade);
