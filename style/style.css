@@ -26,14 +26,13 @@
 body{
     font-family: var(--fonte01);
     background-color: #ababab;
-    margin-top: 50px;
 }
 
 /* Cabeçalho */
 
 header{
     text-align: center;
-    padding: 15px;
+    padding: 50px 15px 15px;
     background-color: var(--cor3);
     color: var(--cor0);
     font-family: var(--fonte02);
