@@ -14,6 +14,13 @@ caption{
     padding: 20px;
 }
 
+thead {
+    position: sticky;
+    top: 50px;
+    background-color: #fff;
+    z-index: 1;
+}
+
 tbody >tr:nth-child(odd){
     background-color: lightgray;
 }
