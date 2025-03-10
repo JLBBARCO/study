@@ -1,10 +1,9 @@
-user = 0
 while True:
-    print('-'*30)
-    user = int(input('Quer ver a tabuada de qual valor? '))
-    print('-'*30)
-    if user < 0:
+    n = int(input('Quer ver a tabuada de qual valor? '))
+    print('-' * 30)
+    if n < 0:
         break
     for c in range(1, 11):
-        print(f'{user} x {c} = {user*c}')
+        print(f'{n} x {c} = {n * c}')
+    print('-' * 30)
 print('PROGRAMA TABUADA ENCERRADO. Volte sempre!')
