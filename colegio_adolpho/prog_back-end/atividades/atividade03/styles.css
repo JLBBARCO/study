@@ -35,15 +35,7 @@ body {
 }
 
 .limpar {
-    grid-column: span 2;
-}
-
-.excluir {
-    grid-column: span 2;
-}
-
-.resultado {
-    grid-row: span 2;
+    grid-column: span 3;
 }
 
 button {
