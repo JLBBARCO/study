@@ -14,18 +14,21 @@
         <h1>Git & GitHub</h1>
     </header>
     <nav>
+        <div class="nav_buttons">
+            <a href="../../index.html">Página Inicial</a>
+            <a href="../cursoemvideo.html">⬅️</a>
+        </div>
         <div class="nav_links">
-            <div class="nav_links">
-                <a href="../../index.html">Página Inicial</a>
-                <a href="../cursoemvideo.html">⬅️</a>
-                <a href="#markdown" class="interno">Markdown</a>
-            </div>
+            <a href="#git" class="interno">Git</a>
+            <a href="#github" class="interno">GitHub</a>
+            <a href="markdown/markdown.html" class="interno">Markdown</a>
         </div>
     </nav>
     <main>
-        <section>
-            <h2>Comandos do git</h2>
-            <h2>Como entrar em uma branch específica?</h2>
+        <section id="git">
+            <h2>Git</h2>
+            <h3>Comandos do git</h3>
+            <h3>Como entrar em uma branch específica?</h3>
             <p>Para alternar entre branches, basta usar git checkout &lt;nome-do-<strong>branch</strong>&gt;. Caso precise listar todos os nomes de branches, só usar git <strong>branch</strong> antes.</p>
             <h3>Como entrar em uma branch no git?</h3>
             <p>Uso: branch atuais</p>
@@ -36,7 +39,7 @@
             <p>Em <a href="https://github.com" class="externo">GitHub</a>, acesse a página principal do repositório. No menu "Branch", escolha o branch que contém seus commits. Acima da lista de arquivos, na faixa amarela, clique em Comparação e solicitação de pull para criar uma solicitação de pull para o branch associado.</p>
             <h3>Como escolher a branch?</h3>
             <p>Para mudar para uma outra branch basta usar o comando checkout, passando o nome da branch. Se você adicionar -b, uma nova branch será criada.</p>
-            <h2>Como Navegar Entre Branches no Git (git branch e git checkout)</h2>
+            <h3>Como Navegar Entre Branches no Git (git branch e git checkout)</h3>
             <h3>Como ver em qual branch estou?</h3>
             <p>Você pode ver isso facilmente executando um simples somando git log que mostra para onde os ponteiros do branch estão apontando.</p>
             <h3>Como mudar a branch padrão no git?</h3>
@@ -93,14 +96,11 @@
             <h3>O que o comando git log faz?</h3>
             <p>O comando git lof exibe instantâneos que receberam commit. Ele permite que você liste e filtre o histórico do projeto e pesquise alterações específicas. Embora o git status permita que o diretório de trabalho e a área de staging sejam inspecionados, o git log funciona apenas com o histórico que recebeu commit.</p>
         </section>
-        <section>
-            <h2>Linguagens aprendidas dentro do curso:</h2>
-            <ul>
-                <li><h3><a href="markdown/markdown.html" id="markdown" class="interno">Markdown</a></h3></li>
-            </ul>
+        <section id="github">
+            <h2>GitHub</h2>
         </section>
         <aside>
-            <h2>Download</h2>
+            <h3>Download</h3>
             <ul>
                 <li>
                     <a href="https://git-scm.com/downloads" target="_blank" rel="noopener noreferrer" class="externo">Git</a>
