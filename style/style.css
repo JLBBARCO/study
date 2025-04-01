@@ -69,12 +69,13 @@ nav{
 .nav_buttons {
     display: flex;
     gap: 2rem;
-    width: 75%;
+    width: 65vw;
 }
 
 .nav_links {
     display: flex;
     gap: 2rem;
+    overflow-x: auto;
 }
 
 nav a{

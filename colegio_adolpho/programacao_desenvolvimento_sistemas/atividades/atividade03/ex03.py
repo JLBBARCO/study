@@ -1,15 +1,23 @@
+# 2ª Prova - Exercício 01
+# Sistema de caixa eletrônico simplificado
+# Aluno 1: José Luiz Bruiani Barco
+# Aluno 2: Pedro Henrique Pavani Cesare
+
+import os
 extrato = list() # Cria uma lista vazia para armazenar o extrato
 saldo = saque = 0 # Inicializa com saldo e o número de saques em zero
+limite_saque = 3 # Define o limite de saques diários
+limite_valor_saque = 1000 # Define o limite de valor de saque
 
 # Loop infinito para o menu de opções
 while True:
     # Informa as opções e pede que o usuário escolha uma
     print("\n===== MENU =====")
-    print("1. Consultar saldo")
-    print("2. Depositar")
-    print("3. Sacar")
-    print("4. Extrato")
-    print("5. Sair")
+    print("[ 1 ] Consultar saldo")
+    print("[ 2 ] Depositar")
+    print("[ 3 ] Sacar")
+    print("[ 4 ] Extrato")
+    print("[ 5 ] Sair")
     opção = input('Digite uma opção: ')
     print('-'*30)
 
@@ -35,7 +43,7 @@ while True:
     elif opção == '3':
         # Se o número de saques for maior que 3, informa o limite
         saque += 1
-        if saque > 3:
+        if saque > limite_saque:
             print('Limite de saques diários atingido.')
 
         else:
@@ -69,6 +77,7 @@ while True:
     elif opção == '5':
         # Se for, informa que a operação foi encerrada e sai do loop
         print('Operação encerrada.', end=' ')
+        os.system('cls') # Limpa o terminal
         break
     # Verifica se a opção é inválida
     else:
