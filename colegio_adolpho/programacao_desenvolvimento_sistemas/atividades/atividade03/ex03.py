@@ -3,11 +3,11 @@
 # Aluno 1: José Luiz Bruiani Barco
 # Aluno 2: Pedro Henrique Pavani Cesare
 
-import os
+import os, time
 extrato = list() # Cria uma lista vazia para armazenar o extrato
 saldo = saque = 0 # Inicializa com saldo e o número de saques em zero
 limite_saque = 3 # Define o limite de saques diários
-limite_valor_saque = 1000 # Define o limite de valor de saque
+limite_valor_saque = 500 # Define o limite de valor de saque
 
 # Loop infinito para o menu de opções
 while True:
@@ -23,11 +23,14 @@ while True:
 
     # Verifica a opção escolhida pelo usuário
     if opção == '1':
+        os.system('cls') # Limpa o terminal
         # Consulta o saldo atual
         print(f'Seu saldo é de R${saldo:.2f}')
+        print('-'*30)
 
     # Verifica se a opção é para depositar
     elif opção == '2':
+        os.system('cls') # Limpa o terminal
         # Pede o valor do depósito e verifica se é válido
         deposito = float(input('Digite o valor do depósito: R$'))
 
@@ -38,19 +41,14 @@ while True:
             # Se o valor for inválido, pede novamente
             saldo += deposito
             extrato.append(f'Depósito de R$ {deposito:.2f}')
+            print('-'*30)
 
     # Verifica se a opção é para sacar
     elif opção == '3':
-        # Se o número de saques for maior que 3, informa o limite
-        saque += 1
-        if saque > limite_saque:
-            print('Limite de saques diários atingido.')
-
-        else:
-            # Se não, pede o valor do saque e verifica se é válido
-            valor = float(input('Digite o valor do saque: R$'))
-            # Verifica se o valor é válido e se há saldo suficiente
-            # Se o valor for inválido ou maior que o saldo, informa o erro
+        os.system('cls') # Limpa o terminal
+        valor = float(input('Digite o valor do saque: R$')) # Pede ao usuário o valor do saque
+        valor_dia = valor # Inicializa o valor do saque diário com o valor do saque
+        if saque <= limite_saque and valor_dia <= limite_valor_saque: # Verifica se o número de saques e o valor do saque estão dentro dos limites
 
             if valor <= 0:
                 print('Valor inválido. Tente novamente.')
@@ -59,10 +57,20 @@ while True:
                 print('Saldo insuficiente.')
 
             else:
+                valor_dia += valor # Adiciona o valor do saque ao valor diário
+                saque += 1
                 saldo -= valor
                 extrato.append(f'Saque de R${valor:.2f}')
+        elif saque > limite_saque:
+            print('Limite de saques diários atingido.')
+
+        elif valor > limite_valor_saque:
+            print('O valor excede o limite de saque diário.')
+        print('-'*30)
+
     # Verifica se a opção é para ver o extrato
     elif opção == '4':
+        os.system('cls') # Limpa o terminal
         # Se o extrato estiver vazio, informa que não há movimentações
         if not extrato:
             print('Não há movimentações no extrato.')
@@ -72,12 +80,13 @@ while True:
             print('Extrato:')
             for i in range(len(extrato)):
                 print(f'{i+1}. {extrato[i]}')
+                print('-'*30)
 
     # Verifica se a opção é para sair
     elif opção == '5':
         # Se for, informa que a operação foi encerrada e sai do loop
-        print('Operação encerrada.', end=' ')
         os.system('cls') # Limpa o terminal
+        print('Operação encerrada.', end=' ')
         break
     # Verifica se a opção é inválida
     else:
