@@ -32,7 +32,7 @@ body{
 
 header{
     text-align: center;
-    padding: 75px 15px 15px;
+    padding: 100px 15px 15px;
     background-color: var(--cor3);
     color: var(--cor0);
     font-family: var(--fonte02);
@@ -68,14 +68,23 @@ nav{
 
 .nav_buttons {
     display: flex;
+    margin: 5px;
     gap: 2rem;
-    width: 65vw;
+    width: 50vw;
 }
 
 .nav_links {
     display: flex;
+    margin: 5px;
     gap: 2rem;
-    overflow-x: auto;
+    overflow-x: auto; /* Permite a rolagem horizontal */
+    white-space: nowrap; /* Impede quebra de linha */
+    width: 50vw;
+    text-align: right;
+}
+
+.nav_links a {
+    margin-left: auto; /* Empurra os links para a direita */
 }
 
 nav a{
