@@ -1,3 +1,5 @@
+let botao_acessibilidade = document.getElementById('opcoes_acessibilidade');
+botao_acessibilidade.style.display = 'none';
 document.addEventListener('DOMContentLoaded', function () {
 
     const aumentaFonteBotao = document.getElementById('aumentar-fonte');
@@ -18,3 +20,7 @@ document.addEventListener('DOMContentLoaded', function () {
     })
 
 })
+
+function acessibilidade() {
+    botao_acessibilidade.style.display = 'block';
+}
