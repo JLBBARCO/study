@@ -1,5 +1,11 @@
-let botao_acessibilidade = document.getElementById('opcoes_acessibilidade');
-botao_acessibilidade.style.display = 'none';
+document.querySelector('button#botao_acessibilidade').addEventListener('click', function () {
+
+    let opcoes_acessibilidade = document.querySelector('div#opcoes-acessibilidade');
+
+    opcoes_acessibilidade.style.display = 'block';
+
+});
+
 document.addEventListener('DOMContentLoaded', function () {
 
     const aumentaFonteBotao = document.getElementById('aumentar-fonte');
@@ -20,7 +26,3 @@ document.addEventListener('DOMContentLoaded', function () {
     })
 
 })
-
-function acessibilidade() {
-    botao_acessibilidade.style.display = 'block';
-}
