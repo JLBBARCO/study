@@ -73,8 +73,27 @@ nav{
     width: 50vw;
 }
 
+.acessibilidade {
+    position: fixed;
+    right: 1px;
+}
+
+.acessibilidade button {
+    padding: 10px;
+    border-radius: 10px;
+    margin: 5px;
+    border: 0;
+    color: var(--cor0);
+    background-color: var(--cor2);
+}
+
+.botao_acessibilidade {
+    transform: rotate(-90deg);
+}
+
 .nav_links {
     display: flex;
+    flex-direction: row;
     margin: 5px;
     gap: 2rem;
     overflow-x: auto; /* Permite a rolagem horizontal */
