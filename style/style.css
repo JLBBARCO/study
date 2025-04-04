@@ -53,6 +53,44 @@ header a:hover{
     text-decoration: underline;
 }
 
+.acessibilidade {
+    position: fixed;
+    right: 20px;
+    z-index: 1000;
+}
+
+.acessibilidade button {
+    padding: 10px;
+    border-radius: 10px;
+    margin: 5px;
+    border: 0;
+    color: var(--cor0);
+    background-color: var(--cor2);
+}
+
+.acessibilidade button:hover {
+    background-color: var(--cor3);
+    color: var(--cor0);
+    cursor: pointer;
+}
+
+.botao_acessibilidade {
+    transform: rotate(-90deg);
+    transform-origin: right center;
+}
+
+.opcoes_acessibilidade {
+    margin-top: 10px;
+    margin-right: 40px;
+    display: flex;
+    flex-direction: column;
+    display: none;
+}
+
+.opcoes_acessibilidade button {
+    margin-bottom: 5px;
+}
+
 /* Barra de Navegação */
 
 nav{
@@ -73,27 +111,8 @@ nav{
     width: 50vw;
 }
 
-.acessibilidade {
-    position: fixed;
-    right: 1px;
-}
-
-.acessibilidade button {
-    padding: 10px;
-    border-radius: 10px;
-    margin: 5px;
-    border: 0;
-    color: var(--cor0);
-    background-color: var(--cor2);
-}
-
-.botao_acessibilidade {
-    transform: rotate(-90deg);
-}
-
 .nav_links {
     display: flex;
-    flex-direction: row;
     margin: 5px;
     gap: 2rem;
     overflow-x: auto; /* Permite a rolagem horizontal */
