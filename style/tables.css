@@ -23,7 +23,7 @@ caption{
 
 thead {
     position: sticky;
-    top: 0;
+    top: 75px;
     background-color: var(--fundo1);
     z-index: 1;
 }

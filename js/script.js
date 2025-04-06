@@ -27,12 +27,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// Data
-var data = new Date()
-var atual = data.getFullYear()
-var ano = document.querySelector('div#ano')
-ano.innerHTML = `${atual}`
-
 document.addEventListener('DOMContentLoaded', () => {
     const navLinksButton = document.getElementById('nav-links-button');
     const navLinks = document.querySelector('.nav_links');
@@ -53,3 +47,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
+// Data
+var data = new Date();
+var atual = data.getFullYear();
+var ano = document.querySelector('div#ano');
+ano.innerHTML = `${atual}`;
