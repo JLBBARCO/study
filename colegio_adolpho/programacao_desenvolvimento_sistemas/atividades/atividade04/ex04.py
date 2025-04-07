@@ -4,42 +4,56 @@
 # Aluno 2: Kayki G Rocha Ribeiro
 
 from random import randint
-tentativa_máxima = 10
-tentativas = 0
 
 while True:
-    numero_pc = randint(1, 5)
-    pontuação = tentativa_máxima - tentativas
-    pontuação_user = list()
+    pontuação = tentativa_máxima = 10
+    tentativas = 0
+    numero_pc = randint(1, 1)
+    pontuação_user = [0, 0]
     recorde = list()
 
     print('{:=^30}'.format(' JOGO DE ADIVINHAÇÃO '))
     print(f'Tente adivinhar o número entre 1 e 100. Você tem {tentativa_máxima} tentativas!')
 
-    for c in range(tentativa_máxima):
+    while True:
+        tentativas += 1
         user = int(input('Digite um número de 1 a 100: '))
+        
         if user == numero_pc:
+            pontuação + 1
             print('Você acertou!', end=' ')
+
             user_name = input('Digite seu nome: ')
-            print(f'Seu nome é {user_name}, e você fez {tentativas} tentativas, e sua pontuação foi {pontuação} pontos!')
-            pontuação_user.append(user_name)
-            pontuação_user.append(pontuação)
+
+            print(f'Seu nome é {user_name}, e usou {tentativas} tentativas. Sua pontuação foi {pontuação} pontos!')
+            
+            pontuação_user[0], pontuação_user[1] = user_name, pontuação
             recorde.append(pontuação_user[:])
             pontuação_user.clear()
-            tentativas += 1
+
             break
+
         elif user < numero_pc:
+
             print('O número é maior!')
-            tentativas += 1
+
         elif user > numero_pc:
+
             print('O número é menor!')
-            tentativas += 1
+            
         if tentativas == tentativa_máxima:
+
             print('Você perdeu!')
             print(f'O número era {numero_pc}!')
+
             break
+
+        pontuação = tentativas
+
     continuar = input('Deseja continuar jogando? (S/N): ').strip().upper()[0]
+
     if continuar == 'N':
+        
         print('Obrigado por jogar!')
-        print('Os recordes foram:')
+
         break
