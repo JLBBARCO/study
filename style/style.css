@@ -60,7 +60,7 @@ header a:hover{
     z-index: 1000;
 }
 
-#accessibility-trigger img {
+#accessibility-trigger img, .voltar {
     width: 25px;
 }
 
