@@ -5,7 +5,7 @@ Site created for study.
 Links of pages:
 
 * [Initial Page](https://jlbbarco.github.io/study/index.html)
-    * [Curse in Video](https://jlbbarco.github.io/study/cursoemvideo/cursoemvideo.html)
+    * [Video Course](https://jlbbarco.github.io/study/cursoemvideo/cursoemvideo.html)
         * [HTML5 & CSS3](https://jlbbarco.github.io/study/cursoemvideo/html-css/html-css.html)
         * [Git & GitHub](https://jlbbarco.github.io/study/cursoemvideo/git-github/git-github.html)
             * [Markdown](https://jlbbarco.github.io/study/cursoemvideo/git-github/markdown/markdown.html)

@@ -46,6 +46,94 @@ document.addEventListener('DOMContentLoaded', () => {
             navLinks.style.display = 'none';
         }
     });
+
+    const theme_css = document.getElementById('theme-css');
+    const theme_button = document.getElementById('theme-button');
+
+    theme_button.addEventListener('click', () => {
+        if (theme_css.getAttribute('href') === 'style/light.css') {
+            const accessibility_icon = document.getElementById('accessibility-icon');
+            const theme_icon = document.querySelector('.theme');
+            const go_back = document.querySelector('.voltar');
+
+            theme_css.setAttribute('href', 'style/dark.css');
+            accessibility_icon.setAttribute('src', 'img/icons/accessibility-dark.png');
+            theme_icon.setAttribute('src', 'img/icons/theme-dark.png');
+            go_back.setAttribute('src', 'img/icons/left-light.png');
+
+        } else if (theme_css.getAttribute('href') === 'style/dark.css') {
+            const accessibility_icon = document.getElementById('accessibility-icon');
+            const theme_icon = document.querySelector('.theme');
+            const go_back = document.querySelector('.voltar');
+
+            theme_css.setAttribute('href', 'style/light.css');
+            accessibility_icon.setAttribute('src', 'img/icons/accessibility-light.png');
+            theme_icon.setAttribute('src', 'img/icons/theme-light.png');
+            go_back.setAttribute('src', 'img/icons/left-light.png');
+
+        } else if (theme_css.getAttribute('href') === '../style/light.css') {
+            const accessibility_icon = document.getElementById('accessibility-icon');
+            const theme_icon = document.querySelector('.theme');
+            const go_back = document.querySelector('.voltar');
+
+            theme_css.setAttribute('href', 'style/dark.css');
+            accessibility_icon.setAttribute('src', '../img/icons/accessibility-dark.png');
+            theme_icon.setAttribute('src', '../img/icons/theme-dark.png');
+            go_back.setAttribute('src', '../img/icons/left-light.png');
+
+        } else if (theme_css.getAttribute('href') === '../style/dark.css') {
+            const accessibility_icon = document.getElementById('accessibility-icon');
+            const theme_icon = document.querySelector('.theme');
+            const go_back = document.querySelector('.voltar');
+
+            theme_css.setAttribute('href', '../style/light.css');
+            accessibility_icon.setAttribute('src', 'img/icons/accessibility-light.png');
+            theme_icon.setAttribute('src', '../img/icons/theme-light.png');
+            go_back.setAttribute('src', '../img/icons/left-light.png');
+
+        } else if (theme_css.getAttribute('href') === '../../style/light.css') {
+            const accessibility_icon = document.getElementById('accessibility-icon');
+            const theme_icon = document.querySelector('.theme');
+            const go_back = document.querySelector('.voltar');
+
+            theme_css.setAttribute('href', '../../style/dark.css');
+            accessibility_icon.setAttribute('src', '../../img/icons/accessibility-dark.png');
+            theme_icon.setAttribute('src', '../../img/icons/theme-dark.png');
+            go_back.setAttribute('src', '../../img/icons/left-light.png');
+
+        } else if (theme_css.getAttribute('href') === '../../style/dark.css') {
+            const accessibility_icon = document.getElementById('accessibility-icon');
+            const theme_icon = document.querySelector('.theme');
+            const go_back = document.querySelector('.voltar');
+
+            theme_css.setAttribute('href', '../../style/light.css');
+            accessibility_icon.setAttribute('src', '../../img/icons/accessibility-light.png');
+            theme_icon.setAttribute('src', '../../img/icons/theme-light.png');
+            go_back.setAttribute('src', '../../img/icons/left-light.png');
+
+        } else if (theme_css.getAttribute('href') === '../../../style/light.css') {
+            const accessibility_icon = document.getElementById('accessibility-icon');
+            const theme_icon = document.querySelector('.theme');
+            const go_back = document.querySelector('.voltar');
+
+            theme_css.setAttribute('href', '../../../style/dark.css');
+            accessibility_icon.setAttribute('src', '../../../img/icons/accessibility-dark.png');
+            theme_icon.setAttribute('src', '../../../img/icons/theme-dark.png');
+            go_back.setAttribute('src', '../../../img/icons/left-light.png');
+
+        } else if (theme_css.getAttribute('href') === '../../../style/dark.css') {
+            const accessibility_icon = document.getElementById('accessibility-icon');
+            const theme_icon = document.querySelector('.theme');
+            const go_back = document.querySelector('.voltar');
+
+            theme_css.setAttribute('href', '../../../style/light.css');
+            accessibility_icon.setAttribute('src', '../../../img/icons/accessibility-light.png');
+            theme_icon.setAttribute('src', '../../../img/icons/theme-light.png');
+            go_back.setAttribute('src', '../../../img/icons/left-light.png');
+
+        } 
+    });
+
 });
 
 // Data

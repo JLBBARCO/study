@@ -1,18 +1,10 @@
 @charset "UTF-8";
 
-:root {
-    --fundo1: #fff;
-    --fundo2: #d3d3d3;
-    --borda: #000;
-    --fonte: #000;
-}
-
 table{
     border-collapse: collapse;
     margin: auto;
     margin-bottom: 25px;
     width: 75vw;
-    background-color: var(--fundo1);
     min-width: 200px;
     max-width: 650px;
 }
@@ -24,16 +16,10 @@ caption{
 thead {
     position: sticky;
     top: 75px;
-    background-color: var(--fundo1);
     z-index: 1;
 }
 
-tbody >tr:nth-child(odd){
-    background-color: var(--fundo2);
-}
-
 th, td{
-    border: 2px solid var(--borda);
     padding: 15px;
 }
 
@@ -54,10 +40,7 @@ table .num{
 div.code, .resultado{
     margin: 5px 10%;
     padding: 10px;
-    border: 1px dashed var(--borda);
     border-radius: 10px;
-    background-color: var(--fundo1);
-    color: var(--fonte);
 }
 
 div.resultado p{
@@ -73,7 +56,6 @@ div.resultado div.codigo{
     border-radius: 0;
     font-family: monospace;
     padding: 5px 25px;
-    background-color: var(--fundo2);
 }
 
 div.resultado img{
@@ -93,7 +75,6 @@ div.resultado p.code{
     word-wrap: break-word;
     margin: 25px;
     padding: 10px;
-    background-color: var(--fundo2);
 }
 
 div.resultado div.code{
@@ -116,9 +97,7 @@ div.resultado div.code{
 aside{
     margin: 5px;
     padding: 10px;
-    border: 1px solid var(--borda);
     border-radius: 10px;
-    background-color: var(--fundo1);
 }
 
 ul ol, ol ul{
