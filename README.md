@@ -1,6 +1,6 @@
 # Study development
 
-Site created for study.
+Repository for my studies. Anyone can clone and use this repository for studies
 
 Links of pages:
 

@@ -86,10 +86,6 @@ header a:hover{
     display: flex;
 }
 
-#theme-button {
-    display: none;
-}
-
 #theme-button img {
     width: 25px;
     height: 25px;
