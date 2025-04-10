@@ -47,10 +47,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    const theme_css = document.getElementById('theme-css');
-    const theme_button = document.getElementById('theme-button');
-
+    
     theme_button.addEventListener('click', () => {
+        const theme_css = document.getElementById('theme-css');
+        const theme_button = document.getElementById('theme-button');
+        
         if (theme_css.getAttribute('href') === 'style/light.css') {
             const accessibility_icon = document.getElementById('accessibility-icon');
             const theme_icon = document.querySelector('.theme');
