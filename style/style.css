@@ -219,6 +219,111 @@ iframe.interno{
     margin: auto;
 }
 
+table{
+    border-collapse: collapse;
+    margin: auto;
+    margin-bottom: 25px;
+    width: 75vw;
+    min-width: 200px;
+    max-width: 650px;
+}
+
+caption{
+    padding: 20px;
+}
+
+thead {
+    position: sticky;
+    top: 75px;
+    z-index: 1;
+}
+
+th, td{
+    padding: 15px;
+}
+
+th{
+    text-align: center;
+}
+
+td{
+    text-align: justify;
+}
+
+table .num{
+    width: 50px;
+    text-align: center;
+}
+
+/* Código exemplo */
+div.code, .resultado{
+    margin: 5px 10%;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+div.resultado p{
+    margin: 0 0 10px 0;
+}
+
+div.resultado ol{
+    margin: 0 10%;
+}
+
+div.resultado div.codigo{
+    border: 0;
+    border-radius: 0;
+    font-family: monospace;
+    padding: 5px 25px;
+}
+
+div.resultado img{
+    width: 100%;
+}
+
+div.code p{
+    text-align: start;
+    font-family: monospace;
+    word-wrap: break-word;
+    margin: 25px;
+}
+
+div.resultado p.code{
+    text-align: start;
+    font-family: monospace;
+    word-wrap: break-word;
+    margin: 25px;
+    padding: 10px;
+}
+
+div.resultado div.code{
+    text-indent: 10pt;
+}
+
+.centro{
+    text-align: center;
+}
+
+.direita{
+    text-align: right;
+}
+
+.esquerda{
+    text-align: left;
+}
+
+/* Caixa de downloads */
+aside{
+    margin: 5px;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+ul ol, ol ul{
+    margin: 0 5%;
+    font-family: monospace;
+}
+
 /* Rodapé */
 
 footer{
