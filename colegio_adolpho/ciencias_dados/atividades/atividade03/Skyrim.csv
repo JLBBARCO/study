@@ -1,27 +1,294 @@
 ,Name,Damage,Weight,Category
-222,Ancient Nord Bow,8,12.0,Archery
-223,Angi's Bow,7,7.0,Archery
-224,Auriel's Bow DG,13,11.0,Archery
-225,Bow of the Hunt,10,7.0,Archery
-226,Daedric Bow,19,18.0,Archery
-227,Dragonbone Bow DG,20,20.0,Archery
+275,Practice Arrow,0,0.0,Archery
+181,Fork,1,0.5,One-Handed
+161,Illusory War Axe,1,14.0,One-Handed
+126,Phantom Sword,1,0.0,One-Handed
+182,Knife,2,0.5,One-Handed
+143,Wooden Sword ,2,3.0,One-Handed
+277,Rusty Arrow,4,0.0,Archery
+34,Iron Dagger,4,2.0,One-Handed
+174,Pickaxe,5,10.0,One-Handed
+175,Poacher's Axe,5,10.0,One-Handed
+180,Woodcutter's Axe,5,10.0,One-Handed
+22,Alessandra's Dagger,5,1.0,One-Handed
+46,Valdr's Lucky Dagger,5,2.5,One-Handed
+158,Hoarfrost ,5,10.0,One-Handed
+45,Steel Dagger,5,2.5,One-Handed
+145,Ancient Nordic Pickaxe ,5,10.0,One-Handed
+42,Shiv,5,2.0,One-Handed
+171,Notched Pickaxe,5,10.0,One-Handed
+41,Rundi's Dagger,5,2.5,One-Handed
+38,Nettlebane,6,10.0,One-Handed
+238,Froki's Bow,6,5.0,Archery
+29,Dragon Priest Dagger,6,5.0,One-Handed
+35,Kahvozein's Fang,6,5.0,One-Handed
+40,Orcish Dagger,6,3.0,One-Handed
+249,Long Bow,6,5.0,Archery
+110,Iron Sword,7,9.0,One-Handed
+270,Forsworn Arrow,7,0.0,Archery
+269,Falmer Arrow,7,0.0,Archery
+112,Lunar Iron Sword (Lvl 4-5),7,9.0,One-Handed
+69,Amren's Family Sword,7,9.0,One-Handed
 229,Dravin's Bow,7,7.0,Archery
-231,Dwarven Black Bow of Fate DR,13,10.0,Archery
-230,Dwarven Bow,12,10.0,Archery
-232,Ebony Bow,17,16.0,Archery
-233,Elven Bow,13,12.0,Archery
-236,Firiniel's End,13,12.0,Archery
-237,Forsworn Bow,12,11.0,Archery
+111,Lunar Iron Sword (Lvl 2-3),7,9.0,One-Handed
+65,Rusty Mace,7,13.0,One-Handed
+246,Hunting Bow,7,7.0,Archery
+113,Lunar Iron Sword (Lvl 6+),7,9.0,One-Handed
+223,Angi's Bow,7,7.0,Archery
+30,Dwarven Dagger,7,3.5,One-Handed
+127,Queen Freydis's Sword,8,10.0,One-Handed
+162,Iron War Axe,8,11.0,One-Handed
+25,Bloodthorn,8,2.5,One-Handed
+131,Silver Sword,8,7.0,One-Handed
+43,Skyforge Steel Dagger,8,2.5,One-Handed
+163,Lunar Iron War Axe (Lvl 2-3),8,11.0,One-Handed
+70,Ancient Nord Sword,8,12.0,One-Handed
+36,Keening,8,4.0,One-Handed
+136,The Pale Blade (Lvl 1-5),8,12.0,One-Handed
+134,Steel Sword,8,10.0,One-Handed
+129,Red Eagle's Fury,8,12.0,One-Handed
+106,Hjalti's Sword,8,12.0,One-Handed
+74,Ceremonial Sword,8,12.0,One-Handed
+101,Ghostblade,8,1.0,One-Handed
+39,Nordic Dagger ,8,3.5,One-Handed
+96,Gauldur Blackblade (Lvl 1-11),8,12.0,One-Handed
+272,Iron Arrow,8,0.0,Archery
+97,Gauldur Blackblade (Lvl 12-18),8,12.0,One-Handed
+104,Harkon's Sword ,8,9.0,One-Handed
+116,Lunar Steel Sword (Lvl 8+),8,10.0,One-Handed
+115,Lunar Steel Sword (Lvl 6-7),8,10.0,One-Handed
+164,Lunar Iron War Axe (Lvl 4-5),8,11.0,One-Handed
+165,Lunar Iron War Axe (Lvl 6+),8,11.0,One-Handed
+137,The Pale Blade (Lvl 6-11),8,12.0,One-Handed
+114,Lunar Steel Sword (Lvl 4-5),8,10.0,One-Handed
+222,Ancient Nord Bow,8,12.0,Archery
+109,Imperial Sword,8,10.0,One-Handed
+32,Elven Dagger,8,4.0,One-Handed
+26,Borvir's Dagger,8,4.0,One-Handed
 239,Gauldur Blackbow,8,12.0,Archery
 240,Gauldur Blackbow,8,12.0,Archery
+156,Ghorbash's Ancestral Axe,8,11.0,One-Handed
+178,Steel War Axe,9,12.0,One-Handed
+168,Lunar Steel War Axe (Lvl 6+),9,12.0,One-Handed
+167,Lunar Steel War Axe (Lvl 4-5),9,12.0,One-Handed
+33,Glass Dagger,9,4.5,One-Handed
+166,Lunar Steel War Axe (Lvl 2-3),9,12.0,One-Handed
+146,Ceremonial Axe,9,14.0,One-Handed
+56,Lunar Iron Mace (Lvl 4-5),9,13.0,One-Handed
+57,Lunar Iron Mace (Lvl 6+),9,13.0,One-Handed
+55,Lunar Iron Mace (Lvl 2-3),9,13.0,One-Handed
+54,Iron Mace,9,13.0,One-Handed
+144,Ancient Nord War Axe,9,14.0,One-Handed
+179,Ulfric's War Axe,9,12.0,One-Handed
+125,Orcish Sword,9,11.0,One-Handed
+247,Imperial Bow,9,8.0,Archery
+60,Lunar Steel Mace (Lvl 8+),10,14.0,One-Handed
+285,Steel Bolt,10,0.0,Archery
+279,Steel Arrow,10,0.0,Archery
+288,Exploding Steel Bolt of Ice,10,0.0,Archery
+261,Ancient Nord Arrow,10,0.0,Archery
+44,Stalhrim Dagger ,10,4.5,One-Handed
+24,Blade of Sacrifice,10,4.0,One-Handed
+90,Dwarven Sword,10,12.0,One-Handed
+83,Dragonbane (Lvl 1-18),10,10.0,One-Handed
+225,Bow of the Hunt,10,7.0,Archery
+173,Orcish War Axe,10,13.0,One-Handed
+58,Lunar Steel Mace (Lvl 4-5),10,14.0,One-Handed
+59,Lunar Steel Mace (Lvl 6-7),10,14.0,One-Handed
+94,Falmer Sword,10,18.0,One-Handed
+287,Exploding Steel Bolt of Fire,10,0.0,Archery
+118,Nightingale Blade (Lvl1-18),10,11.0,One-Handed
+75,Chillrend (Lv 1-10),10,11.0,One-Handed
+67,Steel Mace,10,14.0,One-Handed
+31,Ebony Dagger,10,5.0,One-Handed
+252,Orcish Bow,10,9.0,Archery
+276,Riekling Spear DR,10,0.0,Archery
+95,Forsworn Sword,10,13.0,One-Handed
+53,Horksbane ,10,14.0,One-Handed
+289,Exploding Steel Bolt of Shock,10,0.0,Archery
+99,Gauldur Blackblade (Lvl 27-35),11,15.0,One-Handed
+151,Dwarven War Axe,11,14.0,One-Handed
+148,Dawnguard Rune Axe ,11,13.0,One-Handed
+149,Dawnguard War Axe ,11,13.0,One-Handed
+124,Nordic Sword ,11,12.0,One-Handed
+73,Bolar's Oathblade,11,10.0,One-Handed
+89,Drainheart Sword,11,3.0,One-Handed
+190,Ebony Blade,11,10.0,Two-Handed
+128,Red Eagle's Bane,11,15.0,One-Handed
+63,Orcish Mace,11,15.0,One-Handed
+71,Blades Sword,11,10.0,One-Handed
+105,Herebane's Courage,11,13.0,One-Handed
+100,Gauldur Blackblade (Lvl 36+),11,15.0,One-Handed
+119,Nightingale Blade (Lvl 19-26),11,12.0,One-Handed
+123,Nord Hero Sword,11,9.0,One-Handed
+76,Chillrend (Lvl 11-18),11,12.0,One-Handed
+93,Elven Sword,11,13.0,One-Handed
+92,Eduj,11,9.0,One-Handed
+98,Gauldur Blackblade (Lvl 19-26),11,15.0,One-Handed
+107,Honed Ancient Nord Sword,11,15.0,One-Handed
+84,Dragonbane (Lvl 19-26),11,11.0,One-Handed
+68,Akaviri Sword ,11,10.0,One-Handed
+37,Mehrunes' Razor,11,3.0,One-Handed
+159,Honed Draugr War Axe,11,16.0,One-Handed
+138,The Pale Blade (Lvl 12-18),11,15.0,One-Handed
+140,The Pale Blade (Lvl 27+),11,15.0,One-Handed
+155,Forsworn Axe,11,15.0,One-Handed
+139,The Pale Blade (Lvl 19-26),11,15.0,One-Handed
+142,Windshear,11,10.0,One-Handed
+154,Falmer War Axe,11,21.0,One-Handed
+130,Scimitar,11,10.0,One-Handed
+132,Skyforge Steel Sword,11,10.0,One-Handed
+141,Vilkas's Sword,11,10.0,One-Handed
+27,Daedric Dagger,11,6.0,One-Handed
+250,Nord Hero Bow,11,7.0,Archery
+28,Dragonbone Dagger ,12,6.5,One-Handed
+169,Nord Hero War Axe,12,11.0,One-Handed
+23,Blade of Woe,12,7.0,One-Handed
+170,Nordic War Axe ,12,14.0,One-Handed
+274,Orcish Arrow,12,0.0,Archery
+49,Dwarven Mace,12,16.0,One-Handed
+172,Okin,12,11.0,One-Handed
+176,Skyforge Steel War Axe,12,12.0,One-Handed
+153,Elven War Axe,12,15.0,One-Handed
+103,Grimsever,12,14.0,One-Handed
+102,Glass Sword,12,14.0,One-Handed
+260,Zephyr DG,12,10.0,Archery
+255,Nightingale Bow,12,9.0,Archery
+77,Chillrend (Lvl 19-26),12,13.0,One-Handed
+108,Honed Falmer Sword,12,18.0,One-Handed
+120,Nightingale Blade (Lvl 27-35),12,13.0,One-Handed
+82,Dawnbreaker,12,10.0,One-Handed
+85,Dragonbane (Lvl 27-35),12,12.0,One-Handed
+230,Dwarven Bow,12,10.0,Archery
+234,Falmer Bow,12,15.0,Archery
+237,Forsworn Bow,12,11.0,Archery
+64,Prelate's Mace ,13,7.0,One-Handed
+135,Soulrender ,13,10.0,One-Handed
+72,Bloodscythe ,13,10.0,One-Handed
+78,Chillrend (Lvl 27-35),13,14.0,One-Handed
+91,Ebony Sword,13,15.0,One-Handed
+133,Stalhrim Sword ,13,14.0,One-Handed
+51,Elven Mace,13,17.0,One-Handed
+251,Nordic Bow DR,13,11.0,Archery
+256,Nightingale Bow,13,11.0,Archery
+86,Dragonbane (Lvl 36-45),13,13.0,One-Handed
+121,Nightingale Blade (Lvl 36-45),13,14.0,One-Handed
+233,Elven Bow,13,12.0,Archery
+236,Firiniel's End,13,12.0,Archery
+224,Auriel's Bow DG,13,11.0,Archery
+231,Dwarven Black Bow of Fate DR,13,10.0,Archery
+62,Nordic Mace ,13,16.0,One-Handed
+160,Honed Falmer War Axe,13,21.0,One-Handed
+79,Chillrend (Lvl 36-45),14,15.0,One-Handed
 241,Gauldur Blackbow,14,18.0,Archery
 242,Gauldur Blackbow,14,18.0,Archery
+228,Drainspell Bow,14,6.0,Archery
+122,Nightingale Blade (Lvl 46+),14,15.0,One-Handed
+273,Nordic Arrow DR,14,0.0,Archery
+290,Exploding Dwarven Bolt of Fire,14,0.0,Archery
+52,Glass Mace,14,18.0,One-Handed
+265,Dwarven Arrow,14,0.0,Archery
+157,Glass War Axe,14,16.0,One-Handed
+291,Exploding Dwarven Bolt of Ice,14,0.0,Archery
 243,Gauldur Blackbow,14,18.0,Archery
+286,Dwarven Bolt,14,0.0,Archery
+87,Dragonbane (Lvl 46+),14,14.0,One-Handed
+81,Daedric Sword,14,16.0,One-Handed
+254,Supple Ancient Nord Bow,14,18.0,Archery
+292,Exploding Dwarven Bolt of Shock,14,0.0,Archery
+194,Iron Greatsword,15,16.0,Two-Handed
+147,Daedric War Axe,15,18.0,One-Handed
+235,Falmer Supple Bow,15,20.0,Archery
 244,Glass Bow,15,14.0,Archery
+152,Ebony War Axe,15,17.0,One-Handed
+177,Stalhrim War Axe ,15,16.0,One-Handed
+257,Nightingale Bow,15,13.0,Archery
+88,Dragonbone Sword ,15,19.0,One-Handed
+80,Chillrend (Lvl 46+),15,16.0,One-Handed
+280,Sunhallowed Elven Arrow DG,16,0.0,Archery
+47,Daedric Mace,16,20.0,One-Handed
+61,Mace of Molag Bal,16,18.0,One-Handed
+50,Ebony Mace,16,19.0,One-Handed
+262,Bloodcursed Elven Arrow DG,16,0.0,Archery
+268,Elven Arrow,16,0.0,Archery
+117,Miraak's Sword ,16,3.0,One-Handed
+10,Iron Battleaxe,16,20.0,Two-Handed
+66,Stalhrim Mace ,16,18.0,One-Handed
+150,Dragonbone War Axe ,16,21.0,One-Handed
 245,Glass Bow of the Stag Prince DR,16,14.0,Archery
-246,Hunting Bow,7,7.0,Archery
-250,Nord Hero Bow,11,7.0,Archery
-251,Nordic Bow DR,13,11.0,Archery
-252,Orcish Bow,10,9.0,Archery
 253,Stalhrim Bow DR,17,15.0,Archery
-260,Zephyr DG,12,10.0,Archery
+258,Nightingale Bow,17,15.0,Archery
+201,Steel Greatsword,17,17.0,Two-Handed
+8,Headsman's Axe,17,11.0,Two-Handed
+198,Silver Greatsword,17,12.0,Two-Handed
+183,Ancient Nord Greatsword,17,18.0,Two-Handed
+19,The Woodsman's Friend,17,20.0,Two-Handed
+48,Dragonbone Mace ,17,22.0,One-Handed
+202,Stormfang ,17,17.0,Two-Handed
+232,Ebony Bow,17,16.0,Archery
+184,Balgruuf's Greatsword,17,17.0,Two-Handed
+197,Orcish Greatsword,18,18.0,Two-Handed
+203,Aegisbane,18,24.0,Two-Handed
+213,Iron Warhammer,18,24.0,Two-Handed
+0,Ancient Nord Battle Axe,18,22.0,Two-Handed
+17,Steel Battleaxe,18,21.0,Two-Handed
+16,Steel Battleaxe of Fiery Souls,18,21.0,Two-Handed
+271,Glass Arrow,18,0.0,Archery
+13,Orcish Battleaxe,19,25.0,Two-Handed
+283,Enhanced Crossbow,19,15.0,Archery
+281,Crossbow,19,14.0,Archery
+226,Daedric Bow,19,18.0,Archery
+188,Dwarven Greatsword,19,19.0,Two-Handed
+259,Nightingale Bow,19,18.0,Archery
+267,Ebony Arrow,20,0.0,Archery
+266,Dwarven Sphere Centurion Arrow,20,0.0,Archery
+218,Steel Warhammer,20,25.0,Two-Handed
+199,Skyforge Steel Greatsword,20,17.0,Two-Handed
+4,Dwarven Battleaxe,20,23.0,Two-Handed
+278,Stalhrim Arrow DR,20,0.0,Archery
+191,Elven Greatsword,20,20.0,Two-Handed
+220,Trollsbane,20,25.0,Two-Handed
+193,Honed Ancient Nord Greatsword,20,21.0,Two-Handed
+195,Nord Hero Greatsword,20,16.0,Two-Handed
+196,Nordic Greatsword DR,20,19.0,Two-Handed
+227,Dragonbone Bow DG,20,20.0,Archery
+192,Glass Greatsword,21,22.0,Two-Handed
+12,Nordic Battleaxe DR,21,23.0,Two-Handed
+14,Skyforge Steel Battleaxe,21,21.0,Two-Handed
+3,Drainblood Battleaxe,21,5.0,Two-Handed
+11,Nord Hero Battle Axe,21,20.0,Two-Handed
+6,Elven Battleaxe,21,24.0,Two-Handed
+219,The Longhammer,21,18.0,Two-Handed
+216,Shagrol's Warhammer,21,26.0,Two-Handed
+215,Orcish Warhammer,21,26.0,Two-Handed
+9,Honed Ancient Nord Battle Axe,21,25.0,Two-Handed
+185,Bloodskal Blade DR,21,16.0,Two-Handed
+209,Dwarven Warhammer,22,27.0,Two-Handed
+18,Rueful Axe,22,10.0,Two-Handed
+206,Dawnguard Warhammer ,22,26.0,Two-Handed
+189,Ebony Greatsword,22,22.0,Two-Handed
+284,Enhanced Dwarven Crossbow,22,21.0,Archery
+282,Dwarven Crossbow,22,20.0,Archery
+207,Dawnguard Rune Hammer ,22,26.0,Two-Handed
+7,Glass Battleaxe,22,25.0,Two-Handed
+5,Ebony Battleaxe,23,26.0,Two-Handed
+200,Stalhrim Greatsword ,23,21.0,Two-Handed
+214,Nordic Warhammer ,23,27.0,Two-Handed
+211,Elven Warhammer,23,28.0,Two-Handed
+204,Champion's Cudgel ,24,27.0,Two-Handed
+212,Glass Warhammer,24,29.0,Two-Handed
+263,Daedric Arrow,24,0.0,Archery
+15,Stalhrim Battleaxe ,24,25.0,Two-Handed
+186,Daedric Greatsword,24,23.0,Two-Handed
+248,Karliah's Bow,25,9.0,Archery
+264,Dragonbone Arrow DG,25,0.0,Archery
+210,Ebony Warhammer,25,30.0,Two-Handed
+221,Volendrung,25,26.0,Two-Handed
+187,Dragonbone Greatsword ,25,27.0,Two-Handed
+21,Wuuthrad,25,25.0,Two-Handed
+1,Daedric Battleaxe,25,27.0,Two-Handed
+217,Stalhrim Warhammer ,26,29.0,Two-Handed
+2,Dragonbone Battleaxe ,26,30.0,Two-Handed
+205,Daedric Warhammer,27,31.0,Two-Handed
+20,Tsun's Battleaxe,27,36.0,Two-Handed
+208,Dragonbone Warhammer ,28,33.0,Two-Handed

@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     document.querySelector('button#botao-acessibilidade').addEventListener('click', function() {
 
-        document.querySelector('div#opcoes-acessibilidade').style.display = 'block';
+        acessibilidade = document.getElementById('opcoes-acessibilidade').style.display = 'block';
 
     })
 
