@@ -39,6 +39,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (navLinksButton && navLinks) {
         // Alterna entre mostrar e ocultar a div.nav_links ao clicar no botão
         navLinksButton.addEventListener('click', () => {
+            if (!navLinks.style.display || navLinks.style.display === '') {
+                navLinks.style.display = 'none'; // Initialize display property if not set
+            }
             navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
         });
 
