@@ -1,82 +1,83 @@
-/* Arquivo CSS Tema Dark */
+/* Arquivo CSS Tema Light */
 
 @charset "UTF-8";
 
 /* estilização base */
 
 :root{
-    --cor0: #fff;
-    --cor1: #333;
-    --cor2: #1b3d6d;
-    --cor3: #0e3c55;
-    --cor4: #011327;
-    --cor5: #555;
-    --cor-body: #333;
+    --fundo: #e3f2fd;
+    --tabela: #fff;
+    --destaque: #90caf9;
+    --interativo: #42a4f5;
+    --título: #1565c0;
+    --detalhes: #0d47a1;
+    --texto: #000;
+    --cor-body: #ccc;
     --shadow: 0px 7px 7px #0000006b;
-    --borda_padrão: 2px solid var(--cor0);
-    --borda_traçada: 2px dashed var(--cor0);
+    --borda_padrão: 2px solid var(--detalhes);
+    --borda_traçada: 2px dashed var(--detalhes);
 }
 
 body{
     background-color: var(--cor-body);
-    color: var(--cor0);
+    color: var(--texto);
 }
 
 a {
-    color: var(--cor0);
+    color: var(--texto);
 }
 
 /* Cabeçalho */
 
 header{
-    background-color: var(--cor4);
+    background-color: var(--destaque);
+}
+
+header h1{
+    color: var(--título);
 }
 
 #accessibility-button button {
-    background-color: var(--cor3);
+    background-color: var(--interativo);
 }
 
 #accessibility-button button:hover {
-    background-color: var(--cor4);
+    background-color: var(--destaque);
 }
 
 /* Barra de Navegação */
 
 nav, .nav_links {
-    background-color: var(--cor4);
+    background-color: var(--destaque);
     box-shadow: var(--shadow);
 }
 
 .tres_barrinhas {
-    background-color: var(--cor0);
-}
-
-.nav_links a:hover {
-    background-color: var(--cor3);
+    background-color: var(--texto);
 }
 
 nav button {
-    background-color: var(--cor4);
+    background-color: var(--destaque);
 }
 
 nav a:hover, nav button:hover {
-    background-color: var(--cor3);
+    background-color: var(--interativo);
     border: var(--borda_padrão);
 }
 
 /* Conteúdo */
 
 main{
-    background-color: var(--cor2);
+    background-color: var(--fundo);
     box-shadow: var(--shadow);
 }
 
 table, thead{
-    background-color: var(--cor5);
+    background-color: var(--tabela);
 }
 
 tbody >tr:nth-child(odd){
-    background-color: var(--cor1);
+    background-color: var(--destaque);
 }
 
 th, td{
@@ -86,21 +87,21 @@ th, td{
 /* Código exemplo */
 div.code, .resultado{
     border: var(--borda_traçada);
-    background-color: var(--cor5);
+    background-color: var(--destaque);
 }
 
 div.codigo, p.code {
-    background-color: var(--cor1);
+    background-color: var(--destaque);
 }
 
 /* Caixa de downloads */
 aside{
     border: var(--borda_padrão);
-    background-color: var(--cor5);
+    background-color: var(--destaque);
 }
 
 /* Rodapé */
 
 footer{
-    background-color: var(--cor4);
+    background-color: var(--destaque);
 }
