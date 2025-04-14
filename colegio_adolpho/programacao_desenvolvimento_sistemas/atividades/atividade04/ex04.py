@@ -64,12 +64,12 @@ while True:
     continuar = input('Deseja continuar jogando? (S/N): ').strip().upper()[0]
 
     if continuar == 'N':
-        rank.sort()
+        rank.sort(reverse=True)
         print('{:=^65}'.format(' RANKING '))
-        print(f'{'NOME':<30}|{'PONTUAÇÃO':>30}')
-        print('='*65)
+        print(f'  {'NOME':<30}|{'PONTUAÇÃO':>30}')
+        print('-'*31, '|', '-'*31)
         for p, u in rank:
-            print(f'{u:<30}|{p:>30}')
-        print('=' * 65)
+            print(f'  {u:<30}|{p:>30}')
+        print('-'*31, '|', '-'*31)
         print('Obrigado por jogar!')
         break
