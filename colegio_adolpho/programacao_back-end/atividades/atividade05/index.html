@@ -1,0 +1,137 @@
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfólio</title>
+    <link rel="shortcut icon" href="assets/profile.png" type="image/x-icon">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <nav id="navbar">
+            <div class="nav-container">
+                <div class="logo">Portfólio</div>
+                <ul class="nav-links">
+                    <li><a href="#home" class="nav-link">Home</a></li>
+                    <li><a href="#about" class="nav-link">Sobre mim</a></li>
+                    <li><a href="#projects" class="nav-link">Projetos</a></li>
+                    <li><a href="#contact" class="nav-link">Contato</a></li>
+                </ul>
+                <button id="theme-toggle" aria-label="Toggle dark mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <div class="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="full-height">
+            <canvas id="particles"></canvas>
+            <div class="hero-content">
+                <h1>José Luiz B Barco</h1>
+                <h2>Técnico em Desenvolvimento de Sistemas</h2>
+                <p class="tagline"></p>
+                <a href="#about" class="cta-button">Saiba mais</a>
+            </div>
+        </section>
+
+        <section id="about">
+            <div class="container">
+                <h2>Sobre mim</h2>
+                <div class="aboutabout-content">
+                    <div class="profile-pic">
+                        <div class="circle-frame"></div>
+                    </div>
+                    <div class="about-texts">
+                        <p class="bio-text">Sou gamer e programador.</p>
+                    </div>
+                    <div class="skills-grid"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects">
+            <div class="container">
+                <h2>Meus projetos</h2>
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <div class="project-image">
+                            <img src="assets/estudos.jpeg" alt="Imagem do site">
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">Estudos</h3>
+                            <p class="project-description">Um site de estudos onde salvo todos os arquivos que faço quando estou estudando programação.</p>
+                            <div class="project-tech">HTML</div>
+                            <div class="project-tech">CSS</div>
+                            <div class="project-tech">JavaScript</div>
+                            <div class="project-tech">Python</div>
+                            <div class="project-links">
+                                <a href="http://jlbbarco.github.io/study/" target="_blank" rel="noopener noreferrer" class="project-link">Live Demo</a>
+                                <a href="http://github.com/jlbbarco/study/" target="_blank" rel="noopener noreferrer" class="project-link">View Code</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <div class="project-image">
+                            <img src="assets/" alt="Imagem do site">
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">Site do Portfólio</h3>
+                            <p class="project-description">Esse site de portfólio, tendo o template sido desenvolvido por José Luiz B Barco.</p>
+                            <div class="project-tech">HTML</div>
+                            <div class="project-tech">CSS</div>
+                            <div class="project-tech">JavaScript</div>
+                            <div class="project-links">
+                                <a href="http://jlbbarco.github.io/" target="_blank" rel="noopener noreferrer" class="project-link">Live Demo</a>
+                                <a href="http://github.com/jlbbarco/jlbbarco.github.io/" target="_blank" rel="noopener noreferrer" class="project-link">View Code</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="container">
+                <h2>Contato</h2>
+                <div class="contact-content">
+                    <form id="contact-form">
+                        <div class="form-group">
+                            <input type="text" id="name" name="name" required placeholder="Seu nome">
+                        </div>
+                        <div class="form-group">
+                            <input type="email" id="email" name="email" required placeholder="Seu email">
+                        </div>
+                        <div class="form-group">
+                            <textarea id="message" name="message" required placeholder="Sua mensagem"></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">Enviar mensagem</button>
+                    </form>
+                    <div class="social-links">
+                        <h3>Se conecte comigo</h3>
+                        <div class="social-icons">
+                            <a href="https://linkedin.com/joseluizbbarco" target="_blank"><i class="fab fa-linkedin"></i></a>
+                            <a href="https://github.com/jlbbarco" target="_blank"><i class="fab fa-github"></i></a>
+                            <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; <span id="year"></span> Site criado por José Luiz B Barco.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
