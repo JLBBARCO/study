@@ -72,9 +72,11 @@ header {
     display: flex;
     list-style: none;
     gap: 2rem;
+    padding: 20px;
 }
 
 .nav-link {
+    margin: 10px;
     text-decoration: none;
     color: var(--text-color);
     font-weight: 500;
@@ -98,6 +100,7 @@ header {
 }
 
 .nav-link:hover::after {
+    top: 75%;
     width: 100%;
 }
 
@@ -225,7 +228,7 @@ header {
     width: 300px;
     height: 300px;
     border-radius: 50%;
-    background: url('assets/profile.png') center/cover no-repeat;
+    background: url('https://avatars.githubusercontent.com/u/159829462?v=4') center/cover no-repeat;
     overflow: hidden;
     animation: animate 6s ease-in-out infinite;
     box-shadow: 0 10px 15px rgba(0, 0, 0, 0.15);
@@ -322,12 +325,15 @@ header {
 
 .project-image {
     height: 200px;
-    /*background-color: #eee;*/
-    background-image: url('assets/project.png');
     position: relative;
     overflow: hidden;
 }
-/*
+
+.project-image img {
+    width: 100%;
+}
+
+
 .project-image::before {
     content: '';
     position: absolute;
@@ -339,7 +345,7 @@ header {
     opacity: 0;
     transition: var(--transition);
 }
-*/
+
 .project-card:hover .project-image::before {
     opacity: 1;
 }

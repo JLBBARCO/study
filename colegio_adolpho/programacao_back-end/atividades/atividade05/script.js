@@ -43,15 +43,9 @@ document.addEventListener('DOMContentLoaded', function() {
         { name: 'HTML5', icon: 'fab fa-html5' },
         { name: 'CSS3', icon: 'fab fa-css3-alt' },
         { name: 'JavaScript', icon: 'fab fa-js-square' },
-        { name: 'React', icon: 'fab fa-react' },
-        { name: 'Node.js', icon: 'fab fa-node' },
         { name: 'Git', icon: 'fab fa-git-alt' },
         { name: 'GitHub', icon: 'fab fa-github' },
         { name: 'Python', icon: 'fab fa-python' },
-        { name: 'Figma', icon: 'fab fa-figma' },
-        { name: 'NPM', icon: 'fab fa-npm' },
-        { name: 'AWS', icon: 'fab fa-aws' },
-        { name: 'Docker', icon: 'fab fa-docker' }
     ];
 
     const skillsGrid = document.querySelector('.skills-grid');
@@ -77,23 +71,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }, { threshold: 0.5 });
     skillObserver.disconnect();
 
-    const projects = [
-        {
-            title: 'Estudos',
-            description: 'Um site de estudos onde salvo todos os arquivos que faço quando estou estudando programação.',
-            technologies: ['HTML', 'CSS', 'JavaScript', 'Python'],
-            liveLink: 'https://jlbbarco.github.io/study',
-            codeLink: 'https://github.com/jlbbarco/study/'
-        },
-        {
-            title: 'Site do portfólio',
-            description: 'Esse site de portfólio, tendo o template sido desenvolvido por José Luiz B Barco.',
-            technologies: ['HTML', 'CSS', 'JavaScript'],
-            liveLink: 'https://jlbbarco.github.io/',
-            codeLink: 'https://github.com/jlbbarco/jlbbarco.github.io/'
-        }
-    ];
-
     const projectsGrid = document.querySelector('.projects-grid');
     
     projects.forEach(project => {
@@ -101,20 +78,6 @@ document.addEventListener('DOMContentLoaded', function() {
             `<span class="tech-tag">${tech}</span>`
         ).join('');
 
-        const projectHTML = `
-            <div class="project-card">
-                <div class="project-image"></div>
-                <div class="project-content">
-                    <h3 class="project-title">${project.title}</h3>
-                    <p class="project-description">${project.description}</p>
-                    <div class="project-tech">${techHTML}</div>
-                    <div class="project-links">
-                        <a href="${project.liveLink}" class="project-link" target="_blank">Live Demo</a>
-                        <a href="${project.codeLink}" class="project-link" target="_blank">View Code</a>
-                    </div>
-                </div>
-            </div>
-        `;
         projectsGrid.innerHTML += projectHTML;
     });
 
