@@ -196,10 +196,174 @@ document.addEventListener('DOMContentLoaded', function() {
     increaseFont.addEventListener('click', () => {
         fontSize += 0.1;
         document.body.style.fontSize = fontSize + 'em';
+        localStorage.setItem('fontSize', fontSize); // Salvar tamanho da fonte no localStorage
     });
-
+    
     decreaseFont.addEventListener('click', () => {
         fontSize -= 0.1;
         document.body.style.fontSize = fontSize + 'em';
+        localStorage.setItem('fontSize', fontSize); // Salvar tamanho da fonte no localStoragedocument.addEventListener('DOMContentLoaded', function() {
+    // Botão de acessibilidade
+    document.getElementById('button-accessibility').addEventListener('click', () => {
+        const accessibilityOptions = document.getElementById('accessibility-options');
+        accessibilityOptions.style.display = (accessibilityOptions.style.display === 'flex') ? 'none' : 'flex';
+    });
+
+    // Controle de tamanho da fonte
+    const increaseFont = document.getElementById('increase-font');
+    const decreaseFont = document.getElementById('decrease-font');
+    let fontSize = parseFloat(localStorage.getItem('fontSize')) || 1; // Restaurar tamanho da fonte salvo
+
+    const updateFontSize = (delta) => {
+        fontSize = Math.max(0.5, fontSize + delta); // Evitar tamanho de fonte muito pequeno
+        document.body.style.fontSize = fontSize + 'em';
+        localStorage.setItem('fontSize', fontSize); // Salvar tamanho da fonte no localStorage
+    };
+
+    increaseFont.addEventListener('click', () => updateFontSize(0.1));
+    decreaseFont.addEventListener('click', () => updateFontSize(-0.1));
+
+    // Menu hambúrguer
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    if (hamburger && navLinks) {
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+    }
+
+    // Alternância de tema
+    const themeToggle = document.getElementById('theme-toggle');
+    if (themeToggle) {
+        const themeIcon = themeToggle.querySelector('i');
+        const savedTheme = localStorage.getItem('data-theme') || 'light'; // Restaurar tema salvo
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        themeIcon.className = savedTheme === 'dark' ? 'icon-dark' : 'icon-light';
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            themeIcon.className = newTheme === 'dark' ? 'icon-dark' : 'icon-light';
+            localStorage.setItem('data-theme', newTheme); // Salvar tema no localStorage
+        });
+    }
+});document.addEventListener('DOMContentLoaded', () => {
+    // Menu hambúrguer
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    if (hamburger && navLinks) {
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+    }
+
+    // Alternância de tema
+    const themeToggle = document.getElementById('theme-toggle');
+    if (themeToggle) {
+        const themeIcon = themeToggle.querySelector('i');
+        const savedTheme = localStorage.getItem('data-theme') || 'light'; // Restaurar tema salvo
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        themeIcon.className = savedTheme === 'dark' ? 'fa-sun' : 'fa-moon';
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            themeIcon.className = newTheme === 'dark' ? 'fa-sun' : 'fa-moon';
+            localStorage.setItem('data-theme', newTheme); // Salvar tema no localStorage
+        });
+    }
+
+    // Controle de tamanho da fonte
+    const increaseFont = document.getElementById('increase-font');
+    const decreaseFont = document.getElementById('decrease-font');
+    let fontSize = parseFloat(localStorage.getItem('fontSize')) || 1; // Restaurar tamanho da fonte salvo
+
+    const updateFontSize = (delta) => {
+        fontSize = Math.max(0.5, fontSize + delta); // Evitar tamanho de fonte muito pequeno
+        document.body.style.fontSize = fontSize + 'em';
+        localStorage.setItem('fontSize', fontSize); // Salvar tamanho da fonte no localStorage
+    };
+
+    if (increaseFont && decreaseFont) {
+        increaseFont.addEventListener('click', () => updateFontSize(0.1));
+        decreaseFont.addEventListener('click', () => updateFontSize(-0.1));
+    }
+
+    // Aplicar tamanho da fonte salvo ao carregar a página
+    document.body.style.fontSize = fontSize + 'em';
+});
+    });
+});document.addEventListener('DOMContentLoaded', () => {
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeIcon = themeToggle.querySelector('i');
+    let fontSize = parseFloat(localStorage.getItem('fontSize')) || 1;
+
+    // Restaurar tema salvo
+    const savedTheme = localStorage.getItem('data-theme') || 'light';
+    document.body.setAttribute('data-theme', savedTheme);
+    if (savedTheme === 'dark') {
+        themeIcon.classList.replace('fa-moon', 'fa-sun');
+    } else {
+        themeIcon.classList.replace('fa-sun', 'fa-moon');
+    }
+
+    // Restaurar tamanho da fonte salvo
+    document.body.style.fontSize = fontSize + 'em';
+
+    // Alternar menu hambúrguer
+    hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('active');
+        navLinks.classList.toggle('active');
+    });
+
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+            hamburger.classList.remove('active');
+            navLinks.classList.remove('active');
+        });
+    });
+
+    // Alternar tema
+    themeToggle.addEventListener('click', () => {
+        const currentTheme = document.body.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        document.body.setAttribute('data-theme', newTheme);
+        localStorage.setItem('data-theme', newTheme); // Salvar tema no localStorage
+
+        if (newTheme === 'dark') {
+            themeIcon.classList.replace('fa-moon', 'fa-sun');
+        } else {
+            themeIcon.classList.replace('fa-sun', 'fa-moon');
+        }
+    });
+
+    // Suavizar rolagem para âncoras
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+
+    // Aumentar e diminuir fonte
+    const increaseFont = document.getElementById('increase-font');
+    const decreaseFont = document.getElementById('decrease-font');
+
+    increaseFont.addEventListener('click', () => {
+        fontSize += 0.1;
+        document.body.style.fontSize = fontSize + 'em';
+        localStorage.setItem('fontSize', fontSize); // Salvar tamanho da fonte no localStorage
+    });
+
+    decreaseFont.addEventListener('click', () => {
+        fontSize = Math.max(0.5, fontSize - 0.1); // Limitar tamanho mínimo
+        document.body.style.fontSize = fontSize + 'em';
+        localStorage.setItem('fontSize', fontSize); // Salvar tamanho da fonte no localStorage
     });
 });
