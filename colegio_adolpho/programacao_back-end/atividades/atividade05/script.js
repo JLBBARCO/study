@@ -177,3 +177,29 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 1500);
     });
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('button-accessibility').addEventListener('click', () => {
+        const accessibilityOptions = document.getElementById('accessibility-options');
+
+        if (accessibilityOptions.style.display === 'flex') {
+            accessibilityOptions.style.display = 'none';
+        } else {
+            accessibilityOptions.style.display = 'flex';
+        };
+    });
+
+    const increaseFont = document.getElementById('increase-font');
+    const decreaseFont = document.getElementById('decrease-font');
+    let fontSize = 1;
+
+    increaseFont.addEventListener('click', () => {
+        fontSize += 0.1;
+        document.body.style.fontSize = fontSize + 'em';
+    });
+
+    decreaseFont.addEventListener('click', () => {
+        fontSize -= 0.1;
+        document.body.style.fontSize = fontSize + 'em';
+    });
+});
