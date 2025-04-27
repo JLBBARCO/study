@@ -80,11 +80,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// Atualiza o ano no rodapé
+// Rodapé
 document.addEventListener('DOMContentLoaded', () => {
-    const ano = document.querySelector('div#ano');
-    if (ano) {
-        const data = new Date();
-        ano.innerHTML = `${data.getFullYear()}`;
-    }
+    const data = new Date();
+    const ano = data.getFullYear();
+
+    document.getElementById('copyright').innerHTML = `${ano} Site criado por <a href="http://github.com/JLBBARCO" target="_blank" rel="noopener noreferrer">José Luiz B Barco</a>`;
 });
