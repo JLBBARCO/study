@@ -85,5 +85,5 @@ document.addEventListener('DOMContentLoaded', () => {
     const data = new Date();
     const ano = data.getFullYear();
 
-    document.getElementById('copyright').innerHTML = `${ano} Site criado por <a href="http://github.com/JLBBARCO" target="_blank" rel="noopener noreferrer">José Luiz B Barco</a>`;
+    document.getElementById('copyright').innerHTML = `&copy; ${ano} Site criado por <a href="http://github.com/JLBBARCO" target="_blank" rel="noopener noreferrer">José Luiz B Barco</a>`;
 });
