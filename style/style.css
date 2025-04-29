@@ -23,6 +23,21 @@ body{
     background-color: #ababab;
 }
 
+a {
+    text-decoration: none;
+    font-family: var(--fonte03);
+    font-variant: small-caps;
+    font-size: 1.1em;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+a.externo::after {
+    content: '\1F517';
+}
+
 /* Cabeçalho */
 
 header{
@@ -35,14 +50,6 @@ header{
 
 header h1{
     font-size: 2em;
-}
-
-header a{
-    text-decoration: none;
-}
-
-header a:hover{
-    text-decoration: underline;
 }
 
 #accessibility-button {
@@ -93,7 +100,7 @@ header a:hover{
 
 /* Barra de Navegação */
 
-nav{
+nav {
     display: flex;
     width: 100%;
     padding: 15px;
@@ -131,7 +138,6 @@ nav{
 }
 
 .nav_links a {
-    text-decoration: none;
     padding: 10px;
     transition: background-color 0.3s ease;
 }
@@ -163,16 +169,6 @@ main{
     max-width: 750px;
 }
 
-main a.interno{
-    text-decoration: none;
-    transition-duration: .25s;
-}
-
-main a.externo{
-    text-decoration: none;
-    transition-duration: .25;
-}
-
 main p{
     margin: 0 1em;
     text-align: justify;
@@ -183,24 +179,6 @@ main p{
 
 h2, h2, h4, h5, h6{
     line-height: 2em;
-}
-
-a{
-    font-family: var(--fonte03);
-    font-variant: small-caps;
-}
-
-a.externo::after{
-    content: '\1F517';
-}
-
-a.interno:hover{
-    font-weight: bold;
-    text-decoration: underline;
-}
-
-a.externo:hover{
-    text-decoration: underline;
 }
 
 ul li, ol li{
@@ -329,14 +307,4 @@ footer{
 
 footer div {
     margin: 10px;
-}
-
-footer a{
-    text-decoration: none;
-    transition-duration: .5s;
-}
-
-footer a:hover{
-    text-decoration: underline;
-    font-weight: bolder;
 }
