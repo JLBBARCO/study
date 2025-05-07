@@ -18,5 +18,6 @@ def metade(preço=0):
     return res
 
 
-def moeda(preço=0, moeda='R$'):
-    return f'{moeda}{preço:.2f}'.replace('.', ',')
+def moeda(preço=0.00, moeda='R$'):
+    retorno = f'{moeda} {preço}'.replace('.', ',')
+    return retorno
