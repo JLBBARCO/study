@@ -27,8 +27,16 @@ plt.show()
 a = [5, 7, 8, 7, 2, 9]
 b = [99, 86, 87, 88, 100, 85]
 
-plt.scatter(a, b, color='#f00', marker='o')
+plt.scatter(a, b, color='#f00', marker='x')
 plt.title('Gráfico de Dispersão')
 plt.xlabel('Eixo A')
 plt.ylabel('Eixo B')
+plt.show()
+
+# Histograma
+dados = [1, 2, 2, 3, 3, 3, 4, 4, 5, 5, 5, 5]
+plt.hist(dados, bins=5, color='#ff0', edgecolor='black')
+plt.title('Histograma')
+plt.xlabel('Valores')
+plt.ylabel('Frequência')
 plt.show()

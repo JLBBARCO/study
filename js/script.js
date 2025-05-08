@@ -13,6 +13,12 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    document.addEventListener('click', (event) => {
+        if (!accessibilityTrigger.contains(event.target) && event.target !== accessibilityButton) {
+            document.getElementById('accessibility-options').style.display = 'none';
+        }
+    });
+
     // Ajusta o tamanho da fonte
     if (increaseFontButton && decreaseFontButton) {
         document.body.style.fontSize = font + 'em';
