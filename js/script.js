@@ -1,12 +1,11 @@
-// Acessibilidade
 document.addEventListener('DOMContentLoaded', () => {
+    // Acessibilidade
     const accessibilityTrigger = document.getElementById('accessibility-trigger');
     const accessibilityButton = document.getElementById('accessibility-button');
     const increaseFontButton = document.getElementById('increase-font');
     const decreaseFontButton = document.getElementById('decrease-font');
     let font = parseFloat(localStorage.getItem('fontSize')) || 1;
 
-    // Alterna a visibilidade das opções de acessibilidade
     if (accessibilityTrigger && accessibilityButton) {
         accessibilityTrigger.addEventListener('click', () => {
             accessibilityButton.classList.toggle('active');
@@ -14,12 +13,17 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     document.addEventListener('click', (event) => {
-        if (!accessibilityTrigger.contains(event.target) && event.target !== accessibilityButton) {
-            document.getElementById('accessibility-options').style.display = 'none';
+        if (
+            accessibilityTrigger &&
+            accessibilityButton &&
+            !accessibilityTrigger.contains(event.target) &&
+            event.target !== accessibilityButton
+        ) {
+            const options = document.getElementById('accessibility-options');
+            if (options) options.style.display = 'none';
         }
     });
 
-    // Ajusta o tamanho da fonte
     if (increaseFontButton && decreaseFontButton) {
         document.body.style.fontSize = font + 'em';
 
@@ -30,66 +34,71 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         decreaseFontButton.addEventListener('click', () => {
-            font = Math.max(0.5, font - 0.1); // Limita o tamanho mínimo da fonte
+            font = Math.max(0.5, font - 0.1);
             document.body.style.fontSize = font + 'em';
             localStorage.setItem('fontSize', font);
         });
     }
-});
 
-// Menu de navegação
-document.addEventListener('DOMContentLoaded', () => {
+    // Menu de navegação
     const navLinksButton = document.getElementById('nav-links-button');
     const navLinks = document.querySelector('.nav_links');
 
     if (navLinksButton && navLinks) {
-        // Alterna entre mostrar e ocultar a div.nav_links ao clicar no botão
         navLinksButton.addEventListener('click', () => {
             if (!navLinks.style.display || navLinks.style.display === '') {
-                navLinks.style.display = 'none'; // Initialize display property if not set
+                navLinks.style.display = 'none';
             }
             navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
         });
 
-        // Fecha o menu ao clicar fora dele
         document.addEventListener('click', (event) => {
             if (!navLinks.contains(event.target) && event.target !== navLinksButton) {
                 navLinks.style.display = 'none';
             }
         });
     }
-});
 
-// Tema
-document.addEventListener('DOMContentLoaded', () => {
+    // Tema com ícone dinâmico
     const themeButton = document.getElementById('theme-button');
     const themeCss = document.getElementById('theme-css');
+    const themeIcon = themeButton ? themeButton.querySelector('i') : null;
 
     if (themeButton && themeCss) {
-        // Define os caminhos relativos para os temas
-        const lightTheme = themeCss.getAttribute('href').replace('dark.css', 'light.css');
-        const darkTheme = themeCss.getAttribute('href').replace('light.css', 'dark.css');
+        // Caminho relativo dinâmico para subpastas
+        function getThemePath(theme) {
+            const path = window.location.pathname;
+            const depth = path.split('/').length - 2; // -2 para ignorar '' e o arquivo
+            let rel = '';
+            for (let i = 0; i < depth; i++) rel += '../';
+            return rel + 'style/' + theme + '.css';
+        }
 
-        // Carrega o tema salvo no localStorage ou define o padrão como 'light'
+        function updateThemeIcon(theme) {
+            if (themeIcon) {
+                themeIcon.classList.remove('fa-sun', 'fa-moon');
+                themeIcon.classList.add(theme === 'dark' ? 'fa-sun' : 'fa-moon');
+            }
+        }
+
         const savedTheme = localStorage.getItem('theme') || 'light';
-        themeCss.setAttribute('href', savedTheme === 'light' ? lightTheme : darkTheme);
+        themeCss.setAttribute('href', getThemePath(savedTheme));
+        updateThemeIcon(savedTheme);
 
-        // Alterna entre os temas ao clicar no botão
         themeButton.addEventListener('click', () => {
             const currentTheme = themeCss.getAttribute('href').includes('dark') ? 'dark' : 'light';
             const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-
-            // Atualiza o tema no link e salva no localStorage
-            themeCss.setAttribute('href', newTheme === 'light' ? lightTheme : darkTheme);
+            themeCss.setAttribute('href', getThemePath(newTheme));
             localStorage.setItem('theme', newTheme);
+            updateThemeIcon(newTheme);
         });
     }
-});
 
-// Rodapé
-document.addEventListener('DOMContentLoaded', () => {
-    const data = new Date();
-    const ano = data.getFullYear();
-
-    document.getElementById('copyright').innerHTML = `&copy; ${ano} Site criado por <a href="http://github.com/JLBBARCO" target="_blank" rel="noopener noreferrer">José Luiz B Barco</a>`;
+    // Rodapé
+    const copyright = document.getElementById('copyright');
+    if (copyright) {
+        const data = new Date();
+        const ano = data.getFullYear();
+        copyright.innerHTML = `&copy; ${ano} Site criado por <a href="http://github.com/JLBBARCO" target="_blank" rel="noopener noreferrer">José Luiz B Barco</a>`;
+    }
 });

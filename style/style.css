@@ -15,6 +15,7 @@
 *{
     margin: 0;
     padding: 0;
+    font-size: 1em;
     box-sizing: border-box;
 }
 
@@ -173,12 +174,38 @@ main p{
     text-indent: 30px;
 }
 
-h2, h2, h4, h5, h6{
+h2, h3, h4, h5, h6{
     line-height: 2em;
 }
 
-ul li, ol li{
+h2{
+    font-size: 1.5em;
+    margin: 0 1em;
+}
+
+h3{
+    font-size: 1.4em;
+    margin: 0 1em;
+}
+
+h4{
+    font-size: 1.3em;
+    margin: 0 1em;
+}
+
+h5{
+    font-size: 1.2em;
+    margin: 0 1em;
+}
+
+h6{
+    font-size: 1.1em;
+    margin: 0 1em;
+}
+
+ul, ol{
     margin: 5%;
+    text-align: justify;
 }
 
 iframe.interno{
@@ -208,16 +235,14 @@ thead {
     z-index: 1;
 }
 
-th, td{
-    padding: 15px;
-}
-
 th{
     text-align: center;
+    padding: 15px;
 }
 
 td{
     text-align: justify;
+    padding: 15px;
 }
 
 table .num{
@@ -287,11 +312,6 @@ aside{
     margin: 5px;
     padding: 10px;
     border-radius: 10px;
-}
-
-ul ol, ol ul{
-    margin: 0 5%;
-    font-family: monospace;
 }
 
 /* Rodapé */

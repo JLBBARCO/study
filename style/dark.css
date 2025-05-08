@@ -72,7 +72,7 @@ main{
     box-shadow: var(--shadow);
 }
 
-table, thead{
+table {
     background-color: var(--cor5);
 }
 
