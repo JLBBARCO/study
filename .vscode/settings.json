@@ -8,6 +8,7 @@
     "blok",
     "Bruiani",
     "Bugdroid",
+    "codigo",
     "Cursoem",
     "Dandroids",
     "docstrings",
@@ -25,7 +26,10 @@
     "Kayki",
     "Km",
     "leiaint",
+    "linestyle",
     "Lolipop",
+    "matplotlib",
+    "Matplotlib",
     "Morrill",
     "nasc",
     "nomedabranch",
@@ -38,6 +42,8 @@
     "Torrone",
     "vsicons",
     "webhint",
-    "winget"
+    "winget",
+    "xlabel",
+    "ylabel"
   ]
 }

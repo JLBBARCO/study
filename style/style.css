@@ -60,6 +60,7 @@ header h1{
 }
 
 #accessibility-trigger img, .voltar {
+    height: 25px;
     width: 25px;
 }
 
@@ -91,11 +92,6 @@ header h1{
 
 #accessibility-button.active #accessibility-options {
     display: flex;
-}
-
-#theme-button img {
-    width: 25px;
-    height: 25px;
 }
 
 /* Barra de Navegação */
