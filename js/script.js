@@ -1,4 +1,23 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Menu de navegação
+    const navLinksButton = document.getElementById('nav-links-button');
+    const navLinks = document.querySelector('.nav_links');
+
+    if (navLinksButton && navLinks) {
+        navLinksButton.addEventListener('click', () => {
+            if (!navLinks.style.display || navLinks.style.display === '') {
+                navLinks.style.display = 'none';
+            }
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+        });
+
+        document.addEventListener('click', (event) => {
+            if (!navLinks.contains(event.target) && event.target !== navLinksButton) {
+                navLinks.style.display = 'none';
+            }
+        });
+    }
+
     // Acessibilidade
     const accessibilityTrigger = document.getElementById('accessibility-trigger');
     const accessibilityButton = document.getElementById('accessibility-button');
@@ -40,24 +59,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Menu de navegação
-    const navLinksButton = document.getElementById('nav-links-button');
-    const navLinks = document.querySelector('.nav_links');
-
-    if (navLinksButton && navLinks) {
-        navLinksButton.addEventListener('click', () => {
-            if (!navLinks.style.display || navLinks.style.display === '') {
-                navLinks.style.display = 'none';
-            }
-            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
-        });
-
-        document.addEventListener('click', (event) => {
-            if (!navLinks.contains(event.target) && event.target !== navLinksButton) {
-                navLinks.style.display = 'none';
-            }
-        });
-    }
 
     // Tema com ícone dinâmico
     const themeButton = document.getElementById('theme-button');
