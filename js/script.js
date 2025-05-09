@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
-
+    
     // Acessibilidade
     const accessibilityTrigger = document.getElementById('accessibility-trigger');
     const accessibilityButton = document.getElementById('accessibility-button');
@@ -56,42 +56,6 @@ document.addEventListener('DOMContentLoaded', () => {
             font = Math.max(0.5, font - 0.1);
             document.body.style.fontSize = font + 'em';
             localStorage.setItem('fontSize', font);
-        });
-    }
-
-
-    // Tema com ícone dinâmico
-    const themeButton = document.getElementById('theme-button');
-    const themeCss = document.getElementById('theme-css');
-    const themeIcon = themeButton ? themeButton.querySelector('i') : null;
-
-    if (themeButton && themeCss) {
-        // Caminho relativo dinâmico para subpastas
-        function getThemePath(theme) {
-            const path = window.location.pathname;
-            const depth = path.split('/').length - 2; // -2 para ignorar '' e o arquivo
-            let rel = '';
-            for (let i = 0; i < depth; i++) rel += '../';
-            return rel + 'style/' + theme + '.css';
-        }
-
-        function updateThemeIcon(theme) {
-            if (themeIcon) {
-                themeIcon.classList.remove('fa-sun', 'fa-moon');
-                themeIcon.classList.add(theme === 'dark' ? 'fa-sun' : 'fa-moon');
-            }
-        }
-
-        const savedTheme = localStorage.getItem('theme') || 'light';
-        themeCss.setAttribute('href', getThemePath(savedTheme));
-        updateThemeIcon(savedTheme);
-
-        themeButton.addEventListener('click', () => {
-            const currentTheme = themeCss.getAttribute('href').includes('dark') ? 'dark' : 'light';
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            themeCss.setAttribute('href', getThemePath(newTheme));
-            localStorage.setItem('theme', newTheme);
-            updateThemeIcon(newTheme);
         });
     }
 

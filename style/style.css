@@ -7,9 +7,36 @@
 /* estilização base */
 
 :root{
+    --fundo: #e3f2fd;
+    --tabela: #fff;
+    --destaque: #90caf9;
+    --interativo: #42a4f5;
+    --texto: #000;
+    --detalhes: #0d47a1;
+    --título: #1565c0;
+    --cor-body: #ccc;
+    --shadow: 0px 7px 7px #0000006b;
+    --borda_padrão: 2px solid var(--detalhes);
+    --borda_traçada: 2px dashed var(--detalhes);
     --fonte01: Arial, Helvetica, sans-serif;
     --fonte02: "Sour Gummy", serif;
     --fonte03: "Aldrich", sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root{
+    --fundo: #1b3d6d;
+    --tabela: #555;
+    --destaque: #011327;
+    --interativo: #0e3c55;
+    --texto: #fff;
+    --detalhes: #fff;
+    --título: var(--texto);
+    --cor-body: #333;
+    --shadow: 0px 7px 7px #0000006b;
+    --borda_padrão: 2px solid var(--detalhes);
+    --borda_traçada: 2px dashed var(--detalhes);
+}
 }
 
 *{
@@ -21,7 +48,8 @@
 
 body{
     font-family: var(--fonte01);
-    background-color: #ababab;
+    background-color: var(--cor-body);
+    color: var(--texto);
 }
 
 a {
@@ -29,6 +57,7 @@ a {
     font-family: var(--fonte03);
     font-variant: small-caps;
     font-size: 1.1em;
+    color: var(--texto);
 }
 
 a:hover {
@@ -39,6 +68,10 @@ a.externo::after {
     content: '\1F517';
 }
 
+i {
+    color: var(--texto);
+}
+
 /* Cabeçalho */
 
 header{
@@ -47,10 +80,12 @@ header{
     font-family: var(--fonte02);
     font-size: 1.5em;
     font-variant: small-caps;
+    background-color: var(--destaque);
 }
 
 header h1{
     font-size: 2em;
+    color: var(--título);
 }
 
 #accessibility-button {
@@ -58,6 +93,17 @@ header h1{
     position: fixed;
     right: 20px;
     z-index: 1000;
+}
+
+#accessibility-button button {
+    background-color: var(--interativo);
+    color: var(--texto);
+    border-radius: 10px;
+    border: 0;
+}
+
+#accessibility-button button:hover {
+    background-color: var(--destaque);
 }
 
 #accessibility-trigger img, .voltar {
@@ -104,6 +150,8 @@ nav {
     position: sticky;
     top: 0;
     z-index: 1000;
+    background-color: var(--destaque);
+    box-shadow: var(--shadow);
 }
 
 .nav_buttons {
@@ -118,6 +166,7 @@ nav {
     width: 25px;
     height: 5px;
     margin: 3px;
+    background-color: var(--texto);
 }
 
 .nav_links {
@@ -132,6 +181,8 @@ nav {
     padding: 10px 0;
     z-index: 1000;
     transition: all 0.3s ease;
+    background-color: var(--destaque);
+    box-shadow: var(--shadow);
 }
 
 .nav_links a {
@@ -155,6 +206,12 @@ nav a, nav button {
     font-weight: bold;
     border-radius: 5px;
     border: 0;
+    background-color: var(--destaque);
+}
+
+nav a:hover, nav button:hover {
+    background-color: var(--interativo);
+    border: var(--borda_padrão);
 }
 
 /* Conteúdo */
@@ -164,6 +221,8 @@ main{
     margin: auto;
     min-width: 250px;
     max-width: 750px;
+    background-color: var(--fundo);
+    box-shadow: var(--shadow);
 }
 
 main p{
@@ -230,6 +289,7 @@ table{
     width: 75vw;
     min-width: 200px;
     max-width: 650px;
+    background-color: var(--tabela);
 }
 
 caption{
@@ -240,16 +300,23 @@ thead {
     position: sticky;
     top: 75px;
     z-index: 1;
+    background-color: var(--tabela);
+}
+
+tbody >tr:nth-child(odd){
+    background-color: var(--destaque);
 }
 
 th{
     text-align: center;
     padding: 15px;
+    border: var(--borda_padrão);
 }
 
 td{
     text-align: justify;
     padding: 15px;
+    border: var(--borda_padrão);
 }
 
 table .num{
@@ -262,6 +329,12 @@ div.code, .resultado{
     margin: 5px 10%;
     padding: 10px;
     border-radius: 10px;
+    border: var(--borda_padrão);
+    background-color: var(--destaque);
+}
+
+div.codigo, p.code {
+    background-color: var(--destaque);
 }
 
 div.resultado p{
@@ -315,17 +388,20 @@ div.resultado div.code{
 }
 
 /* Caixa de downloads */
-aside{
+aside {
     margin: 5px;
     padding: 10px;
     border-radius: 10px;
+    border: var(--borda_padrão);
+    background-color: var(--destaque);
 }
 
 /* Rodapé */
 
-footer{
+footer {
     text-align: center;
     padding: 10px;
+    background-color: var(--destaque);
 }
 
 footer div {

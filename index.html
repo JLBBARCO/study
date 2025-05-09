@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Meus Estudos</title>
     <link rel="stylesheet" href="style/style.css" media="screen" />
-    <link rel="stylesheet" href="style/light.css" id="theme-css" media="screen" />
     <link rel="stylesheet" href="style/print.css" media="print" />
     <link rel="shortcut icon" href="img/icons/favicon/book.png" type="image/x-icon" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -18,10 +17,8 @@
         <div class="nav_buttons">
             <a href="https://jlbbarco.github.io/">Home</a>
         </div>
-        <button id="nav-links-button">
-            <div class="tres_barrinhas"></div>
-            <div class="tres_barrinhas"></div>
-            <div class="tres_barrinhas"></div>
+        <button id="nav-links-button" aria-label="Menu">
+            <i class="fa-solid fa-bars fa-xl"></i>
         </button>
         <div class="nav_links">
             <a href="https://jlbbarco.github.io/contact">Contato</a>
@@ -42,13 +39,12 @@
     </main>
     <footer>
         <div id="accessibility-button">
-            <button id="accessibility-trigger">
+            <button id="accessibility-trigger" aria-label="Acessibilidade">
                 <i class="fa-solid fa-universal-access"></i>
             </button>
             <div id="accessibility-options">
                 <button id="increase-font">A +</button>
                 <button id="decrease-font">A -</button>
-                <button id="theme-button"><i class="fa fa-moon"></i></button>
             </div>
         </div>
         <div id="copyright"></div>
