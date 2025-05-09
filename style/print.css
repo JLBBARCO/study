@@ -1,11 +1,19 @@
 @charset "UTF-8";
 
+:root {
+    --background-color: #fff;
+    --text-color: black;
+    --font-family: 'Courier New', Courier, monospace;
+    --border: 1px solid black;
+    --border-radius: 10px;
+}
+
 * {
     margin: 10px;
     padding: 10px;
-    background-color: #fff;
-    color: black;
-    font-family: 'Courier New', Courier, monospace;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    font-family: var(--font-family);
     line-height: 1.5em;
 }
 
@@ -15,7 +23,7 @@ nav, footer{
 
 a{
     text-decoration: none;
-    color: black;
+    color: var(--text-color);
 }
 
 table{
@@ -23,6 +31,11 @@ table{
 }
 
 th, td{
-    border: 1px solid black;
+    border: var(--border);
     padding: 15px;
+}
+
+.resultado, .code, .codigo {
+    border: var(--border);
+    border-radius: var(--border-radius);
 }

@@ -1,0 +1,4 @@
+Claudia; 50
+Reginaldo; 47
+Jose; 16
+Vicente; 10
