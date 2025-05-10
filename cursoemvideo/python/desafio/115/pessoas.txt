@@ -1,4 +1,5 @@
-Claudia; 50
-Reginaldo; 47
-Jose; 16
-Vicente; 10
+Jos�;16
+Alfredo;55
+Maria;70
+Cleiton;56
+Enzo;5
