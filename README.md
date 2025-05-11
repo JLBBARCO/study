@@ -5,6 +5,8 @@ Repository for my studies. Anyone can clone and use this repository for studies
 Links of pages:
 
 * [Initial Page](https://jlbbarco.github.io/study/index.html)
+    * [My Projects](https://jlbbarco.github.io/study/meus_projetos/meus_projetos.html)
+        * [Python System](https://jlbbarco.github.io/study/meus_projetos/sistema_py/)
     * [Video Course](https://jlbbarco.github.io/study/cursoemvideo/cursoemvideo.html)
         * [HTML5 & CSS3](https://jlbbarco.github.io/study/cursoemvideo/html-css/html-css.html)
         * [Git & GitHub](https://jlbbarco.github.io/study/cursoemvideo/git-github/git-github.html)

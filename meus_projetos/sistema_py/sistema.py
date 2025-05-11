@@ -15,6 +15,7 @@ while True:
 
     if escolha == 0:
         lib.interface.cabeçalho('Saindo do sistema... Até logo!')
+        sleep(.5)
         break
 
     elif escolha == 1:
