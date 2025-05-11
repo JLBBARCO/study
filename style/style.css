@@ -333,10 +333,6 @@ div.code, .resultado{
     background-color: var(--destaque);
 }
 
-div.codigo, p.code {
-    background-color: var(--destaque);
-}
-
 div.resultado p{
     margin: 0 0 10px 0;
 }
@@ -345,34 +341,17 @@ div.resultado ol{
     margin: 0 10%;
 }
 
-div.resultado div.codigo{
-    border: 0;
-    border-radius: 0;
-    font-family: monospace;
-    padding: 5px 25px;
-}
-
-div.resultado img{
+div.resultado img {
     width: 100%;
 }
 
-div.code p{
-    text-align: start;
-    font-family: monospace;
-    word-wrap: break-word;
-    margin: 25px;
-}
-
-div.resultado p.code{
+.code {
     text-align: start;
     font-family: monospace;
     word-wrap: break-word;
     margin: 25px;
     padding: 10px;
-}
-
-div.resultado div.code{
-    text-indent: 10pt;
+    background-color: var(--destaque);
 }
 
 .centro{
