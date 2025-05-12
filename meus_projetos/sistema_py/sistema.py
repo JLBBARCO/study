@@ -6,7 +6,7 @@ lib.interface.cabeçalho('Sistema Python')
 while True:
     print('Escolha uma das opções abaixo:')
     opções = ('Sair', 'Sorteio', 'Conversor', 'Calculadora', 'IA', 'Downloads', 'Jogos')
-    lib.interface.menu(opções, mostrarTítulo=False)
+    lib.interface.menu(opções, título=False)
 
     escolha = int(input('Escolha: '))
     while escolha < 0 or escolha > len(opções):
@@ -30,10 +30,16 @@ while True:
         lib.conversor_unidades.conversor()
 
     elif escolha == 3:
-        pass
+        import lib.calculadora
 
     elif escolha == 4:
-        pass
+        import lib.ia
+
+    elif escolha == 5:
+        import lib.downloads
+
+    elif escolha == 6:
+        import lib.jogos
 
     else:
         print('\033[31mOpção inválida. Tente novamente.\033[m')

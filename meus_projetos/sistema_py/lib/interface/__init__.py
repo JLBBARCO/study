@@ -16,14 +16,15 @@ def cabeçalho(txt):
     print(txt.center(60))
     linha()
 
-def menu(opções=[], título='MENU DE OPÇÕES', mostrarTítulo=True):
+def menu(opções=[], título='MENU DE OPÇÕES'):
     """
     -> Cria um menu de opções para o programa.
     :param opções: Informações sobre a opção.
-    :param título: Título do menu
-    :param mostrarTítulo: Declara se o título do menu será mostrado. Padrão True.
+    :param título: Título do menu, se não for passado, o padrão é 'MENU DE OPÇÕES'. False para não mostrar o título.
     """
-    if mostrarTítulo is True:
+    if título == False:
+        pass
+    else:
         cabeçalho(título)
     for i, c in enumerate(opções):
         print(f'\033[33m{i}\033[m - \033[34m{c}\033[m')

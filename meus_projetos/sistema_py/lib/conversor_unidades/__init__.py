@@ -3,67 +3,57 @@ from .. import interface
 
 # Função principal
 def conversor():
-    try:
-        while True:
-            opções = [
-                'Voltar',
-                'Temperatura'
-            ]
-            interface.menu(opções, título='Conversor')
-            resposta = int(input('Selecione uma opção: '))
-            if resposta == 0:
-                break
+    while True:
+        interface.linha()
+        interface.cabeçalho('Conversor de Temperaturas')
+        interface.linha()
+        print(
+            'Escolha duas das opções abaixo:\n'
+            'Sair\n'
+            'Celsius\n'
+            'Fahrenheit\n'
+            'Kelvin\n'
+        )
+        resposta1 = input('De qual medida quer converter? ').strip().title()
+        resposta2 = input('Para qual medida quer converter? ').strip().title()
 
-            elif resposta == 1:
-                    temperatura()
+        if resposta1 == 'Celsius' and resposta2 == 'Kelvin':
+            conversão = float(input('Digite a temperatura em Celsius: '))
+            resultado = conversão + 273.15
+            print(f"A temperatura em Kelvin é: {resultado:.2f} K")
 
-            else:
-                print('\033[31mERRO! Digite uma opção válida.\033[m')
-        return
-    except resposta is float or str:
-        print('\033[31mERRO! Digite um número inteiro válido.')
+        elif resposta1 == 'Kelvin' and resposta2 == 'Celsius':
+            conversão = float(input('Digite a temperatura em Kelvin: '))
+            resultado = conversão - 273.15
+            print(f"A temperatura em Celsius é: {resultado:.2f} °C")
 
-    except KeyboardInterrupt:
-        return
+        elif resposta1 == 'Fahrenheit' and resposta2 == 'Kelvin':
+            conversão = float(input('Digite a temperatura em Fahrenheit: '))
+            resultado = (conversão - 32) * 5/9 + 273.15
+            print(f"A temperatura em Kelvin é: {resultado:.2f} K")
 
-def temperatura():
-    try:
-        opções = [
-            'Voltar',
-            '°C para °K',
-            '°K para °C',
-            '°C para °F',
-            '°F para °C',
-            '°F para °K',
-            '°K para °F',
-        ]
-        interface.menu(opções, título='Conversor de Temperatura')
-        resposta = int(input('Selecione uma opção: '))
-        while True:
-            if resposta == 0:
-                break
-            elif resposta == 1:
-                # °C para °K
-                pass
-            elif resposta == 2:
-                # °K para °C
-                pass
-            elif resposta == 3:
-                # °C para °F
-                pass
-            elif resposta == 4:
-                # °F para °C
-                pass
-            elif resposta == 5:
-                # °F para °K
-                pass
-            elif resposta == 6:
-                # °K para °F
-                pass
-            else:
-                print('\033[31mERRO! Digite uma opção válida.\033[m')
-        return
-    except (float, str):
-        print('\033[31mERRO! Digite um número válido.\033[m')
-    except KeyboardInterrupt:
-        return
+        elif resposta1 == 'Kelvin' and resposta2 == 'Fahrenheit':
+            conversão = float(input('Digite a temperatura em Kelvin: '))
+            resultado = (conversão - 273.15) * 9/5 + 32
+            print(f"A temperatura em Fahrenheit é: {resultado:.2f} °F")
+
+        elif resposta1 == 'Celsius' and resposta2 == 'Fahrenheit':
+            conversão = float(input('Digite a temperatura em Celsius: '))
+            resultado = (conversão * 9/5) + 32
+            print(f"A temperatura em Fahrenheit é: {resultado:.2f} °F")
+
+        elif resposta1 == 'Fahrenheit' and resposta2 == 'Celsius':
+            conversão = float(input('Digite a temperatura em Fahrenheit: '))
+            resultado = (conversão - 32) * 5/9
+            print(f"A temperatura em Celsius é: {resultado:.2f} °C")
+
+        elif resposta1 == resposta2:
+            print('\033[33mAs unidades de origem e destino são iguais. Nenhuma conversão necessária.\033[m')
+
+        elif resposta1 == 'Sair' or resposta2 == 'Sair':
+            print('Saindo do conversor...')
+            break
+
+        else:
+            print('\033[31mERRO! Digite uma opção válida.\033[m')
+            continue
