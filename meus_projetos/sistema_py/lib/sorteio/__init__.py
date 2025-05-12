@@ -3,6 +3,7 @@ import random
 from time import sleep
 from .. import interface
 
+# Função Principal
 def sorteio():
     """
     -> Mostra as opções de sorteio, pede ao usuário escolher alguma, e executa a função referente a escolha do usuário.
@@ -13,22 +14,33 @@ def sorteio():
                 'Voltar',
                 'Sorteio de Números',
                 'Gerador de Senhas Alphanuméricas',
-                'Gerador de Senhas Alphanuméricas com Caracteres Especiais'
+                'Gerador de Senhas Alphanuméricas com Caracteres Especiais',
+                'Gerador de Nomes'
             ]
-            interface.menu(opções, 'OPÇÕES DE SORTEIO')
+            interface.menu(opções, 'Sorteio')
             resposta = int(input('Escolha: '))
             if resposta == 0:
                 interface.cabeçalho('VOLTANDO AO MENU PRINCIPAL...')
                 break
+
             elif resposta == 1:
                 sorteio_números()
+
             elif resposta == 2:
                 gerador_senha_alphanumérica()
+
             elif resposta == 3:
                 gerador_senha_alphanumérica_caracteres()
+
+            elif resposta == 4:
+                gerador_nomes()
+                
             else:
                 print('\033[0;31mERRO! Digite uma opção válida.\033[m')
         return
+    except resposta is float or str:
+        print('\033[31mERRO! Digite um número inteiro válido.\033[m')
+
     except KeyboardInterrupt:
         return
 
@@ -106,3 +118,16 @@ def gerador_senha_alphanumérica_caracteres():
     for c in password:
         interface.resultado(valor=c, linhas=False)
     print()
+
+def gerador_nomes():
+    """
+    -> Pede ao usuário a quantidade de nomes a serem gerados, e gera uma lista com esses nomes.
+    """
+    quantidade = int(input('Digite a quantidade de nomes: '))
+    nomes = list()
+    from faker import Faker
+    fake = Faker()
+    for _ in range(quantidade):
+        nome = fake.name()
+        nomes.append(nome)
+    interface.resultado(nomes, fim='; ')

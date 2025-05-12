@@ -1,12 +1,11 @@
 # Importações
 from time import sleep
 import lib.interface
-import lib.sorteio
 
 lib.interface.cabeçalho('Sistema Python')
 while True:
     print('Escolha uma das opções abaixo:')
-    opções = ('Sair', 'Sorteio')
+    opções = ('Sair', 'Sorteio', 'Conversor')
     lib.interface.menu(opções, mostrarTítulo=False)
 
     escolha = int(input('Escolha: '))
@@ -19,7 +18,16 @@ while True:
         break
 
     elif escolha == 1:
+        sleep(.25)
+        import lib.sorteio
+        sleep(.25)
         lib.sorteio.sorteio()
+
+    elif escolha == 2:
+        sleep(.25)
+        import lib.conversor_unidades
+        sleep(.25)
+        lib.conversor_unidades.conversor()
 
     else:
         print('\033[31mOpção inválida. Tente novamente.\033[m')
