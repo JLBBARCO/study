@@ -5,7 +5,14 @@ import lib.interface
 lib.interface.cabeçalho('Sistema Python')
 while True:
     print('Escolha uma das opções abaixo:')
-    opções = ('Sair', 'Sorteio', 'Conversor', 'Calculadora', 'IA', 'Downloads', 'Jogos')
+    opções = (
+        'Sair',
+        'Sorteio',
+        'Conversor',
+        'Jogos',
+        'IA',
+        'Downloads',
+        )
     lib.interface.menu(opções, título=False)
 
     escolha = int(input('Escolha: '))
@@ -30,16 +37,16 @@ while True:
         lib.conversor_unidades.conversor()
 
     elif escolha == 3:
-        import lib.calculadora
+        sleep(.25)
+        import lib.jogos
+        sleep(.25)
+        lib.jogos.jogos()
 
     elif escolha == 4:
         import lib.ia
 
     elif escolha == 5:
         import lib.downloads
-
-    elif escolha == 6:
-        import lib.jogos
 
     else:
         print('\033[31mOpção inválida. Tente novamente.\033[m')

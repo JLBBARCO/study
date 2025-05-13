@@ -17,7 +17,11 @@ def conversor():
         resposta1 = input('De qual medida quer converter? ').strip().title()
         resposta2 = input('Para qual medida quer converter? ').strip().title()
 
-        if resposta1 == 'Celsius' and resposta2 == 'Kelvin':
+        if resposta1 == 'Sair' or resposta2 == 'Sair':
+            print('Saindo do conversor...')
+            break
+
+        elif resposta1 == 'Celsius' and resposta2 == 'Kelvin':
             conversão = float(input('Digite a temperatura em Celsius: '))
             resultado = conversão + 273.15
             print(f"A temperatura em Kelvin é: {resultado:.2f} K")
@@ -49,10 +53,6 @@ def conversor():
 
         elif resposta1 == resposta2:
             print('\033[33mAs unidades de origem e destino são iguais. Nenhuma conversão necessária.\033[m')
-
-        elif resposta1 == 'Sair' or resposta2 == 'Sair':
-            print('Saindo do conversor...')
-            break
 
         else:
             print('\033[31mERRO! Digite uma opção válida.\033[m')
