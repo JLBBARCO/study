@@ -25,8 +25,9 @@ print(f'O número {user} é {resultado}')
 # Programa 03
 print('Programa 03')
 def fibonacci(limite):
-    n1, n2 = 0, 1
-    sequencia = []
+    n1 = 0
+    n2 = 1
+    sequencia = list()
     while n1 < limite:
         sequencia.append(n1)
         n1, n2 = n2, n1 + n2
@@ -38,6 +39,18 @@ print('Sequência de Fibonacci:', ' -> '.join(map(str, numeros)))
 
 # Programa 04
 print('Programa 04')
+from statistics import mode, mean, median
+def estatísticas(números):
+    print(f'A média é {mean(números)}, a mediana é {median(números)}, a moda é {mode(números)}, valor máximo é {max(números)} e o valor mínimo é {min(números)}.')
+    return
+
+número = list()
+while True:
+    user = int(input('Digite um número (ou 0 para sair): '))
+    if user == 0:
+        break
+    número.append(user)
+estatísticas(número)
 
 # Programa 05
 print('Programa 05')
