@@ -6,7 +6,7 @@
 
 /* estilização base */
 
-:root{
+:root {
     --fundo: #e3f2fd;
     --tabela: #fff;
     --destaque: #90caf9;
@@ -36,17 +36,17 @@
     --shadow: 0px 7px 7px #0000006b;
     --borda_padrão: 2px solid var(--detalhes);
     --borda_traçada: 2px dashed var(--detalhes);
-}
+    }
 }
 
-*{
+* {
     margin: 0;
     padding: 0;
     font-size: 1em;
     box-sizing: border-box;
 }
 
-body{
+body {
     font-family: var(--fonte01);
     background-color: var(--cor-body);
     color: var(--texto);
@@ -74,7 +74,7 @@ i {
 
 /* Cabeçalho */
 
-header{
+header {
     text-align: center;
     padding: 25px;
     font-family: var(--fonte02);
@@ -83,7 +83,7 @@ header{
     background-color: var(--destaque);
 }
 
-header h1{
+header h1 {
     font-size: 2em;
     color: var(--título);
 }
@@ -216,7 +216,7 @@ nav a:hover, nav button:hover {
 
 /* Conteúdo */
 
-main{
+main {
     padding: 50px;
     margin: auto;
     min-width: 250px;
@@ -225,7 +225,7 @@ main{
     box-shadow: var(--shadow);
 }
 
-main p{
+main p {
     margin: 0 1em;
     text-align: justify;
     line-height: 2em;
@@ -233,41 +233,41 @@ main p{
     text-indent: 30px;
 }
 
-h2, h3, h4, h5, h6{
+h2, h3, h4, h5, h6 {
     line-height: 2em;
 }
 
-h2{
+h2 {
     font-size: 1.5em;
     margin: 0 1em;
 }
 
-h3{
+h3 {
     font-size: 1.4em;
     margin: 0 1em;
 }
 
-h4{
+h4 {
     font-size: 1.3em;
     margin: 0 1em;
 }
 
-h5{
+h5 {
     font-size: 1.2em;
     margin: 0 1em;
 }
 
-h6{
+h6 {
     font-size: 1.1em;
     margin: 0 1em;
 }
 
-ul, ol{
+ul, ol {
     margin: 5%;
     text-align: justify;
 }
 
-iframe.interno{
+iframe.interno {
     display: block;
     min-width: 200px;
     max-width: 700px;
@@ -282,7 +282,7 @@ img {
     height: auto;
 }
 
-table{
+table {
     border-collapse: collapse;
     margin: auto;
     margin-bottom: 25px;
@@ -292,7 +292,7 @@ table{
     background-color: var(--tabela);
 }
 
-caption{
+caption {
     padding: 20px;
 }
 
@@ -303,29 +303,29 @@ thead {
     background-color: var(--tabela);
 }
 
-tbody >tr:nth-child(odd){
+tbody >tr:nth-child(odd) {
     background-color: var(--destaque);
 }
 
-th{
+th {
     text-align: center;
     padding: 15px;
     border: var(--borda_padrão);
 }
 
-td{
+td {
     text-align: justify;
     padding: 15px;
     border: var(--borda_padrão);
 }
 
-table .num{
+table .num {
     width: 50px;
     text-align: center;
 }
 
 /* Código exemplo */
-div.code, .resultado{
+div.code, .resultado {
     margin: 5px 10%;
     padding: 10px;
     border-radius: 10px;
@@ -333,11 +333,11 @@ div.code, .resultado{
     background-color: var(--destaque);
 }
 
-div.resultado p{
+div.resultado p {
     margin: 0 0 10px 0;
 }
 
-div.resultado ol{
+div.resultado ol {
     margin: 0 10%;
 }
 
@@ -354,15 +354,15 @@ div.resultado img {
     background-color: var(--destaque);
 }
 
-.centro{
+.centro {
     text-align: center;
 }
 
-.direita{
+.direita {
     text-align: right;
 }
 
-.esquerda{
+.esquerda {
     text-align: left;
 }
 
@@ -385,4 +385,46 @@ footer {
 
 footer div {
     margin: 10px;
+}
+
+@media print {
+    :root {
+        --background-color: #fff;
+        --text-color: black;
+        --font-family: 'Courier New', Courier, monospace;
+        --border: 1px solid black;
+        --border-radius: 10px;
+    }
+
+    * {
+        margin: 10px;
+        padding: 10px;
+        background-color: var(--background-color);
+        color: var(--text-color);
+        font-family: var(--font-family);
+        line-height: 1.5em;
+    }
+
+    nav, footer {
+        display: none;
+    }
+
+    a {
+        text-decoration: none;
+        color: var(--text-color);
+    }
+
+    table {
+        border-collapse: collapse;
+    }
+
+    th, td {
+        border: var(--border);
+        padding: 15px;
+    }
+
+    .resultado, .code, .codigo {
+        border: var(--border);
+        border-radius: var(--border-radius);
+    }
 }
