@@ -72,9 +72,7 @@ lista_idades = list()
 lista_telefones = list()
 
 while True:
-    nome = input('Digite seu nome: (Digite 0 para parar) ').strip().title()
-    if nome == '0':  # Verifica antes de adicionar às listas
-        break
+    nome = input('Digite seu nome: ').strip().title()
 
     idade = int(input('Digite sua idade: '))
     telefone = input('Digite seu telefone: ').strip()
@@ -83,6 +81,9 @@ while True:
     lista_idades.append(idade)
     lista_telefones.append(telefone)
 
+    if input('Deseja continuar? (s/n): ').strip().lower() != 's':
+        break
+
 # Exibe os dados após o término do loop
 for c in range(len(lista_nomes)):
-    print(f'Nome: {lista_nomes[c]}, Idade: {lista_idades[c]}, Telefone: {lista_telefones[c]}')
+    print(f'Nome: {lista_nomes[c]:<20} | Idade: {lista_idades[c]:^20} | Telefone: {lista_telefones[c]:>20}')
