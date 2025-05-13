@@ -18,9 +18,8 @@ def par_ou_impar(num):
     else:
         return 'Ímpar'
 
-user = int(input('Digite um número para verificar se é Par ou Ímpar: '))
-resultado = par_ou_impar(user)
-print(f'O número {user} é {resultado}')
+resultado = par_ou_impar(media_resultado)
+print(f'O número {media_resultado} é {resultado}')
 
 # Programa 03
 print('Programa 03')
@@ -33,8 +32,7 @@ def fibonacci(limite):
         n1, n2 = n2, n1 + n2
     return sequencia
 
-user = int(input('Digite o limite da sequência de Fibonacci: '))
-numeros = fibonacci(user)
+numeros = fibonacci(media_resultado)
 print('Sequência de Fibonacci:', ' -> '.join(map(str, numeros)))
 
 # Programa 04
@@ -45,11 +43,12 @@ def estatísticas(números):
     return
 
 número = list()
-while True:
-    user = int(input('Digite um número (ou 0 para sair): '))
-    if user == 0:
-        break
-    número.append(user)
+
+número.append(nota1)
+número.append(nota2)
+número.append(nota3)
+número.append(media_resultado)
+
 estatísticas(número)
 
 # Programa 05
@@ -68,3 +67,22 @@ print(f"A frase '{user}' tem {contagem} vogais.")
 
 # Programa 06
 print('Programa 06')
+lista_nomes = []
+lista_idades = []
+lista_telefones = []
+
+while True:
+    nome = input('Digite seu nome: (Digite 0 para parar) ').strip().title()
+    if nome == '0':  # Verifica antes de adicionar às listas
+        break
+
+    idade = int(input('Digite sua idade: '))
+    telefone = input('Digite seu telefone: ').strip()
+
+    lista_nomes.append(nome)
+    lista_idades.append(idade)
+    lista_telefones.append(telefone)
+
+# Exibe os dados após o término do loop
+for c in range(len(lista_nomes)):
+    print(f'Nome: {lista_nomes[c]}, Idade: {lista_idades[c]}, Telefone: {lista_telefones[c]}')
