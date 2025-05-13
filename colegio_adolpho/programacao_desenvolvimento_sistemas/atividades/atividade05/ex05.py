@@ -72,10 +72,21 @@ lista_idades = list()
 lista_telefones = list()
 
 while True:
-    nome = input('Digite seu nome: ').strip().title()
+    try:
+        nome = input('Digite seu nome: ').strip().title()
+        idade = input('Digite sua idade: ').strip()
+        telefone = input('Digite seu telefone: ').strip()
 
-    idade = int(input('Digite sua idade: '))
-    telefone = input('Digite seu telefone: ').strip()
+        # Verifica se algum dos campos está vazio
+        if not nome or not idade or not telefone:
+            raise ValueError('Todos os campos devem ser preenchidos.')
+
+        # Converte a idade para inteiro
+        idade = int(idade)
+
+    except ValueError as e:
+        print(f'\033[31mERRO! {e}\033[m')
+        continue
 
     lista_nomes.append(nome)
     lista_idades.append(idade)
@@ -85,5 +96,6 @@ while True:
         break
 
 # Exibe os dados após o término do loop
-for c in range(len(lista_nomes)):
-    print(f'Nome: {lista_nomes[c]:<20} | Idade: {lista_idades[c]:^20} | Telefone: {lista_telefones[c]:>20}')
+print(f'{"Nome":<20} | {"Idade":^20} | {"Telefone":>20}')
+for nome, idade, telefone in zip(lista_nomes, lista_idades, lista_telefones):
+    print(f'{nome:<20} | {idade:^20} | {telefone:>20}')
