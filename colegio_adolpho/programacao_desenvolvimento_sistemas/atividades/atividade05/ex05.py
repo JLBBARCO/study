@@ -67,9 +67,9 @@ print(f"A frase '{user}' tem {contagem} vogais.")
 
 # Programa 06
 print('Programa 06')
-lista_nomes = []
-lista_idades = []
-lista_telefones = []
+lista_nomes = list()
+lista_idades = list()
+lista_telefones = list()
 
 while True:
     nome = input('Digite seu nome: (Digite 0 para parar) ').strip().title()
