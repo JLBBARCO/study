@@ -67,11 +67,20 @@ print(f"A frase '{user}' tem {contagem} vogais.")
 
 # Programa 06
 print('Programa 06')
-def pessoas():
+def pessoas(nome, idade, telefone):
     lista_nomes = list()
     lista_idades = list()
     lista_telefones = list()
 
+    verifica(lista_nomes, lista_idades, lista_telefones)
+
+    # Exibe os dados após o término do loop
+    print(f'{"Nome":<20} | {"Idade":^20} | {"Telefone":>20}')
+    for nome, idade, telefone in zip(lista_nomes, lista_idades, lista_telefones):
+        print(f'{nome:<20} | {idade:^20} | {telefone:>20}')
+
+
+def verifica(lista_nomes, lista_idades, lista_telefones):
     while True:
         try:
             nome = input('Digite seu nome: ').strip().title()
@@ -82,23 +91,28 @@ def pessoas():
             if not nome or not idade or not telefone:
                 raise ValueError('Todos os campos devem ser preenchidos.')
 
+            # Verifica se o nome contém apenas letras
+            if not nome.replace(' ', '').isalpha():
+                raise ValueError('O nome deve conter apenas letras.')
+
+            # Verifica se idade e telefone são numéricos
+            if not idade.isdigit() or not telefone.isdigit():
+                raise ValueError('A idade e o telefone devem conter apenas números.')
+
             # Converte a idade para inteiro
             idade = int(idade)
+
+            # Adiciona os dados às listas
+            lista_nomes.append(nome)
+            lista_idades.append(idade)
+            lista_telefones.append(telefone)
 
         except ValueError as e:
             print(f'\033[31mERRO! {e}\033[m')
             continue
 
-        lista_nomes.append(nome)
-        lista_idades.append(idade)
-        lista_telefones.append(telefone)
-
+        # Pergunta se o usuário deseja continuar
         if input('Deseja continuar? (s/n): ').strip().lower() != 's':
             break
 
-    # Exibe os dados após o término do loop
-    print(f'{"Nome":<20} | {"Idade":^20} | {"Telefone":>20}')
-    for nome, idade, telefone in zip(lista_nomes, lista_idades, lista_telefones):
-        print(f'{nome:<20} | {idade:^20} | {telefone:>20}')
-
-pessoas()
+pessoas(input('Digite seu nome: '), input('Digite sua idade: '), input('Digite seu telefone: '))
