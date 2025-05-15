@@ -67,35 +67,38 @@ print(f"A frase '{user}' tem {contagem} vogais.")
 
 # Programa 06
 print('Programa 06')
-lista_nomes = list()
-lista_idades = list()
-lista_telefones = list()
+def pessoas():
+    lista_nomes = list()
+    lista_idades = list()
+    lista_telefones = list()
 
-while True:
-    try:
-        nome = input('Digite seu nome: ').strip().title()
-        idade = input('Digite sua idade: ').strip()
-        telefone = input('Digite seu telefone: ').strip()
+    while True:
+        try:
+            nome = input('Digite seu nome: ').strip().title()
+            idade = input('Digite sua idade: ').strip()
+            telefone = input('Digite seu telefone: ').strip()
 
-        # Verifica se algum dos campos está vazio
-        if not nome or not idade or not telefone:
-            raise ValueError('Todos os campos devem ser preenchidos.')
+            # Verifica se algum dos campos está vazio
+            if not nome or not idade or not telefone:
+                raise ValueError('Todos os campos devem ser preenchidos.')
 
-        # Converte a idade para inteiro
-        idade = int(idade)
+            # Converte a idade para inteiro
+            idade = int(idade)
 
-    except ValueError as e:
-        print(f'\033[31mERRO! {e}\033[m')
-        continue
+        except ValueError as e:
+            print(f'\033[31mERRO! {e}\033[m')
+            continue
 
-    lista_nomes.append(nome)
-    lista_idades.append(idade)
-    lista_telefones.append(telefone)
+        lista_nomes.append(nome)
+        lista_idades.append(idade)
+        lista_telefones.append(telefone)
 
-    if input('Deseja continuar? (s/n): ').strip().lower() != 's':
-        break
+        if input('Deseja continuar? (s/n): ').strip().lower() != 's':
+            break
 
-# Exibe os dados após o término do loop
-print(f'{"Nome":<20} | {"Idade":^20} | {"Telefone":>20}')
-for nome, idade, telefone in zip(lista_nomes, lista_idades, lista_telefones):
-    print(f'{nome:<20} | {idade:^20} | {telefone:>20}')
+    # Exibe os dados após o término do loop
+    print(f'{"Nome":<20} | {"Idade":^20} | {"Telefone":>20}')
+    for nome, idade, telefone in zip(lista_nomes, lista_idades, lista_telefones):
+        print(f'{nome:<20} | {idade:^20} | {telefone:>20}')
+
+pessoas()
