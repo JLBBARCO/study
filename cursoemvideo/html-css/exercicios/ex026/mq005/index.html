@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media Query</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/media_queries.css">
+</head>
+<body>
+    <header>
+        <h1>Meu Site</h1>
+        <i id="burger" class="material-icons" onclick="clickMenu()">menu</i>
+        <menu id="itens">
+            <ul>
+                <li><a href="#">Opção 1</a></li>
+                <li><a href="#">Opção 2</a></li>
+                <li><a href="#">Opção 3</a></li>
+                <li><a href="#">Opção 4</a></li>
+                <li><a href="#">Opção 5</a></li>
+            </ul>
+        </menu>
+    </header>
+    <main>
+        <article>
+            <h2>Testando Media Queries</h2>
+            <p><span>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maxime perferendis nisi quibusdam! Quisquam eaque ea mollitia molestias numquam laboriosam odio blanditiis nam. Libero reprehenderit autem quod modi, omnis soluta ipsum.</span><span>Hic consequuntur similique porro quod, perspiciatis reprehenderit, animi ea neque quis minus vel iste! Eligendi est iste debitis voluptate modi. Sunt in aperiam consequatur quia excepturi, incidunt sequi optio ad.</span><span>Eligendi, dolores! Voluptatem qui dolores veniam exercitationem quibusdam libero illum sint nobis veritatis officia, nesciunt dolore esse earum placeat alias praesentium porro iste iusto laboriosam in? Tempore dolore modi ratione?</span></p>
+            <p><span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt obcaecati, dolores facere velit aliquid veniam accusamus cupiditate. Placeat voluptates facilis accusamus impedit, exercitationem, quaerat repellendus eius quam numquam corrupti consequuntur!</span><span>Ipsam, est ducimus. Facere repudiandae tempora, ullam error fugiat libero numquam iure neque praesentium perspiciatis totam quasi tenetur quibusdam exercitationem, quisquam laudantium repellat dolor. Minima, reiciendis hic! Corporis, optio dolore?</span><span>Quas impedit non consequuntur voluptates culpa, vitae optio sequi repudiandae necessitatibus tempora, odit mollitia minus dolorem itaque nostrum eum iste quo veritatis, perferendis a eligendi distinctio ullam! Nobis, aliquam optio.</span></p>
+            <p><span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia quisquam hic deserunt officiis molestias earum in assumenda possimus doloribus mollitia, sequi tempore error, natus odit accusantium dolore perferendis veniam expedita?</span><span>Ducimus suscipit ad aliquam molestiae consequuntur id voluptate, quam illo accusantium! Illum, voluptates? Animi inventore sed fugit maxime praesentium quod laudantium doloribus dolor asperiores atque, sequi hic velit ipsa molestias.</span><span>Fugit illo tempore magnam doloribus voluptatum facere iste aliquid sint expedita, officiis quas a cum officia ex quod. Voluptatum nostrum voluptas, nam fugiat dolorem exercitationem magni alias consequatur deleniti et.</span></p>
+        </article>
+    </main>
+    <script>
+        function clickMenu() {
+            const menu = document.getElementById('itens');
+            const burger = document.getElementById('burger');
+            if (menu.style.display === 'block') {
+                menu.style.display = 'none';
+                burger.innerHTML = 'menu';
+            } else {
+                menu.style.display = 'block';
+                burger.innerHTML = 'close';
+            };
+        };
+    </script>
+</body>
+</html>
