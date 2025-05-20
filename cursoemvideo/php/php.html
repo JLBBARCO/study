@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PHP</title>
+    <link rel="stylesheet" href="../../style/style.css" media="screen">
+    <link rel="stylesheet" href="../../style/print.css" media="print">
     <link rel="shortcut icon" href="../../img/icons/favicon/php.png" type="image/x-icon">
-    <link rel="stylesheet" href="../../style/style.css" >
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
@@ -23,12 +24,12 @@
     <main></main>
     <footer>
         <div id="accessibility-button">
-            <button id="accessibility-trigger" aria-label="Acessibilidade">
+            <button id="accessibility-trigger" aria-label="Acessibilidade" onclick="accessibilityTrigger()">
                 <i class="fa-solid fa-universal-access"></i>
             </button>
             <div id="accessibility-options">
-                <button id="increase-font" aria-label="Aumentar Fonte">A +</button>
-                <button id="decrease-font" aria-label="Diminuir Fonte">A -</button>
+                <button id="increase-font" aria-label="Aumentar Fonte" onclick="increaseFont()">A +</button>
+                <button id="decrease-font" aria-label="Diminuir Fonte" onclick="decreaseFont()">A -</button>
             </div>
         </div>
         <div id="copyright"></div>

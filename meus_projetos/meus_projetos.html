@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meus Projetos</title>
-    <link rel="stylesheet" href="../style/style.css" >
+    <link rel="stylesheet" href="../style/style.css" media="screen">
+    <link rel="stylesheet" href="../style/print.css" media="print">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
@@ -24,12 +25,12 @@
     </main>
     <footer id="footer">
         <div id="accessibility-button">
-            <button id="accessibility-trigger" aria-label="Acessibilidade">
+            <button id="accessibility-trigger" aria-label="Acessibilidade" onclick="accessibilityTrigger()">
                 <i class="fa-solid fa-universal-access"></i>
             </button>
             <div id="accessibility-options">
-                <button id="increase-font">A +</button>
-                <button id="decrease-font">A -</button>
+                <button id="increase-font" onclick="increaseFont()">A +</button>
+                <button id="decrease-font" onclick="decreaseFont()">A -</button>
             </div>
         </div>
         <div id="copyright"></div>

@@ -4,7 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Meus Estudos</title>
-    <link rel="stylesheet" href="style/style.css" />
+    <link rel="stylesheet" href="style/style.css" media="screen" />
+    <link rel="stylesheet" href="style/print.css" media="print" />
     <link rel="shortcut icon" href="img/icons/favicon/book.png" type="image/x-icon" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
@@ -16,7 +17,7 @@
         <div class="nav_buttons">
             <a href="https://jlbbarco.github.io/">Home</a>
         </div>
-        <button id="nav-links-button" aria-label="Menu">
+        <button id="nav-links-button" aria-label="Menu" onclick="navLinks()">
             <i class="fa-solid fa-bars fa-xl"></i>
         </button>
         <div class="nav_links">
@@ -42,12 +43,12 @@
     </main>
     <footer id="footer">
         <div id="accessibility-button">
-            <button id="accessibility-trigger" aria-label="Acessibilidade">
+            <button id="accessibility-trigger" aria-label="Acessibilidade" onclick="accessibilityTrigger()">
                 <i class="fa-solid fa-universal-access"></i>
             </button>
             <div id="accessibility-options">
-                <button id="increase-font">A +</button>
-                <button id="decrease-font">A -</button>
+                <button id="increase-font" onclick="increaseFont()">A +</button>
+                <button id="decrease-font" onclick="decreaseFont()">A -</button>
             </div>
         </div>
         <div id="copyright"></div>

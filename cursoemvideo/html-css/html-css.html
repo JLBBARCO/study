@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HTML5 & CSS3</title>
-    <link rel="stylesheet" href="../../style/style.css" >
+    <link rel="stylesheet" href="../../style/style.css" media="screen">
+    <link rel="stylesheet" href="../../style/print.css" media="print">
     <link rel="shortcut icon" href="../../img/icons/favicon/html5.png" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
@@ -19,7 +20,7 @@
                 <i class="fa-solid fa-backward"></i>
             </a>
         </div>
-        <button id="nav-links-button" type="button" aria-label="Menu">
+        <button id="nav-links-button" type="button" aria-label="Menu" onclick="navLinks()">
             <i class="fa-solid fa-bars fa-xl"></i>
         </button>
         <div class="nav_links">
@@ -99,15 +100,11 @@
                     <tr>
                         <td class="num"><a href="https://github.com/JLBBARCO/study/tree/main/cursoemvideo/html-css/exercicios/ex014">014</a></td>
                         <td>Estilos locais ou internos. Estilização por meio do style. <br> Ex: 
-                    <pre>
-                        <code>
-        &lt;head&gt;
-            &lt;style&gt;&lt;/style&gt;
-        &lt;/head&gt;
-    </code>
-                    </pre>
-                </td>
-            </tr>
+                            <div class="code">
+                                &lt;head&gt; &lt;style&gt;&lt;/style&gt; &lt;/head&gt;
+                            </div>
+                        </td>
+                    </tr>
                     <tr>
                         <td class="num"><a href="https://github.com/JLBBARCO/study/tree/main/cursoemvideo/html-css/exercicios/ex015">015</a></td>
                         <td>Estilos externos. Estilização por meio de arquivos CSS.</td>
@@ -229,12 +226,12 @@
     </main>
     <footer>
         <div id="accessibility-button">
-            <button id="accessibility-trigger" aria-label="Acessibilidade">
+            <button id="accessibility-trigger" aria-label="Acessibilidade" onclick="accessibilityTrigger()">
                 <i class="fa-solid fa-universal-access"></i>
             </button>
             <div id="accessibility-options">
-                <button id="increase-font">A +</button>
-                <button id="decrease-font">A -</button>
+                <button id="increase-font" onclick="increaseFont()">A +</button>
+                <button id="decrease-font" onclick="decreaseFont()">A -</button>
             </div>
         </div>
         <div id="copyright"></div>
