@@ -47,6 +47,7 @@ while True:
 
     elif escolha == 5:
         import lib.downloads
+        lib.downloads.yt_download()
 
     else:
         print('\033[31mOpção inválida. Tente novamente.\033[m')
