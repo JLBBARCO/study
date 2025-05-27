@@ -1,4 +1,4 @@
-arquivo = 'colegio_adolpho/programacao_desenvolvimento_sistemas/atividades/atividade06/ex06.txt'
+arquivo = 'colegio_adolpho/programacao_desenvolvimento_sistemas/atividades/atividade06/arquivo.txt'
 def escritaEmLeitor():
     """
     Função que escreve em um arquivo de texto especificado.
@@ -29,3 +29,7 @@ def escreverArquivo():
 
 def arquivoInexistente():
     resposta = input('Deseja abrir em modo de leitura ou escrita? ').strip().title()
+    if resposta == 'Leitura':
+        open('ex06.txt', 'r').close()
+    elif resposta == 'Escrita':
+        open('ex06.txt', 'w').close()
