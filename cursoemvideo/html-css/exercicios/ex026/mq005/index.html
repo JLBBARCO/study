@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/media_queries.css">
 </head>
-<body>
+<body onresize="mudouTamanho()">
     <header>
         <h1>Meu Site</h1>
         <i id="burger" class="material-icons" onclick="clickMenu()">menu</i>
@@ -40,6 +40,15 @@
             } else {
                 menu.style.display = 'block';
                 burger.innerHTML = 'close';
+            };
+        };
+
+        function mudouTamanho() {
+            if (window.innerWidth >= 768){
+                itens.style.display = 'block';
+            } else {
+                itens.style.display = 'none';
+                burger.innerHTML = 'menu';
             };
         };
     </script>
