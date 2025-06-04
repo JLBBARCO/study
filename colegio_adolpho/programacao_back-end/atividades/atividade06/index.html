@@ -1,38 +1,53 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Estandes</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
+    />
+  </head>
+  <body>
     <header>
-        <h1>Estandes Expoingá</h1>
+      <h1>Estandes Expoingá</h1>
     </header>
     <nav>
-        <a href="estande1">Polícia Militar</a>
-        <a href="estande2"></a>
+      <a href="#estande1">Polícia Militar</a>
+      <a href="#estande2"></a>
     </nav>
     <main>
-        <section id="estande1">
-            <h2>Polícia Militar</h2>
-            <div>
-                <p>Aprendemos neste estande as subdivisões da polícia militar. Essas subdivisões são: Polícia Ambiental, BOPE, Corpo de Bombeiros Militar, ROCAM, SHOCK. Para entrar em alguma dessas subdivisões, é necessário algum curso especializado</p>
-            </div>
-            <a href="https://www.pmpr.pr.gov.br/"><img src="https://th.bing.com/th/id/OSK.83b31b0c60172fa058b52a7d8e228751?w=80&h=80&r=0&o=6&cb=B&pid=23.1" alt="Polícia Militar do Paraná"></a>
-        </section>
+      <section id="estande1" class="estandes">
+        <h2>Polícia Militar</h2>
+        <div>
+          <p>
+            Aprendemos neste estande as subdivisões da polícia militar. Essas
+            subdivisões são: Polícia Ambiental, BOPE, Corpo de Bombeiros
+            Militar, ROCAM, SHOCK. Para entrar em alguma dessas subdivisões, é
+            necessário algum curso especializado
+          </p>
+        </div>
+        <a href="https://www.pmpr.pr.gov.br/"
+          ><img
+            src="https://th.bing.com/th/id/OSK.83b31b0c60172fa058b52a7d8e228751?w=80&h=80&r=0&o=6&cb=B&pid=23.1"
+            alt="Polícia Militar do Paraná"
+        /></a>
+      </section>
     </main>
     <footer>
-        <p>Site feito por <a href="https://github.com/JLBBARCO">José Luiz B Barco</a>.</p>
-        <div class="acessibilidade">
-            <button id="acessibilidade"><i></i></button>
-            <div class="acessibilidade-opcoes">
-                <button id="aumentar">A +</button>
-                <button id="diminuir">A -</button>
-            </div>
+      <div class="acessibilidade">
+        <button id="acessibilidade" onclick="acessibilidade()">
+          <span class="material-symbols-outlined"> accessibility_new </span>
+        </button>
+        <div class="acessibilidade-opcoes">
+          <button id="aumentar" onclick="aumentarFonte()">A +</button>
+          <button id="diminuir" onclick="diminuirFonte()">A -</button>
         </div>
+      </div>
+      <p>Site feito por José Luiz B Barco.</p>
     </footer>
     <script src="script.js"></script>
-</body>
+  </body>
 </html>
