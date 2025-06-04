@@ -1,7 +1,7 @@
 function acessibilidade() {
-  const acessibilidade = document.querySelector(".acessibilidade-opcoes");
+  const acessibilidade = document.querySelector("div.acessibilidade-opcoes");
 
-  if (acessibilidade.display === "none") {
+  if (acessibilidade.style.display === "none") {
     acessibilidade.style.display = "flex";
   } else {
     acessibilidade.style.display = "none";

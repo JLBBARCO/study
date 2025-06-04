@@ -75,10 +75,19 @@ main {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
+.estandes div a {
+  float: right;
+}
+
 .acessibilidade {
   position: fixed;
   bottom: 20px;
   right: 20px;
+}
+
+.acessibilidade button {
+  width: 50px;
+  height: 50px;
 }
 
 #acessibilidade,
@@ -103,7 +112,6 @@ main {
   position: fixed;
   bottom: 80px;
   right: 20px;
-  background-color: var(--first-color);
   padding: 10px;
   border-radius: 8px;
   display: none;
