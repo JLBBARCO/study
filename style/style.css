@@ -50,6 +50,7 @@ body {
   font-family: var(--fonte01);
   color: var(--texto);
   background-color: var(--cor-body);
+  line-height: 1.5;
 }
 
 a {

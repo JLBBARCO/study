@@ -77,6 +77,9 @@ document.addEventListener("DOMContentLoaded", () => {
   if (copyright) {
     const data = new Date();
     const ano = data.getFullYear();
-    copyright.innerHTML = `&copy; ${ano} Site criado por <a href="http://github.com/JLBBARCO" target="_blank" rel="noopener noreferrer">José Luiz B Barco</a>`;
+    copyright.innerHTML = `
+      &copy; ${ano}<br>
+      Site criado por José Luiz B Barco
+    `;
   }
 });
