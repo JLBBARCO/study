@@ -180,4 +180,47 @@ def devolverLivro():
     
 
 def listarLivros():
-    pass
+    from lib.interface import menu
+    
+    opções = ['Voltar', 'Listar Livros Disponíveis', 'Listar Livros Emprestados']
+    
+    while True:
+        menu(opções=opções, textoCabeçalho='Listar Livros')
+        resposta = int(input('Escolha uma opção: '))
+        if resposta == 0:
+            from lib.interface import cabecalho
+            cabecalho()
+            print('{:^60}'.format('Voltando...'))
+            cabecalho()
+            break
+
+        elif resposta == 1:
+            # Lista os livros disponíveis no estoque
+            caminho_livros = os.path.join(os.path.dirname(__file__), 'livros.txt')
+            if os.path.exists(caminho_livros):
+                with open(caminho_livros, 'r') as arquivo:
+                    print("Livros Disponíveis:")
+                    for linha in arquivo:
+                        if ':' in linha:
+                            livro, qtd = linha.strip().split(':')
+                            print(f"{livro}: {qtd} disponível(s)")
+            else:
+                print("O arquivo de estoque não existe.")
+
+        elif resposta == 2:
+            # Lista os livros emprestados
+            caminho_cadastros = os.path.join(os.path.dirname(__file__), 'cadastros.txt')
+            if os.path.exists(caminho_cadastros):
+                with open(caminho_cadastros, 'r') as arquivo:
+                    print("Livros Emprestados:")
+                    for linha in arquivo:
+                        if ':' in linha:
+                            usuario, livro = linha.strip().split(':')
+                            if livro != 'None':
+                                print(f"{usuario} emprestou '{livro}'")
+
+            else:
+                print("O arquivo de cadastros não existe.")
+                
+        else:
+            print("Opção inválida.")

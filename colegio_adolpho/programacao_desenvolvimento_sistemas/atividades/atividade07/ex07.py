@@ -2,9 +2,9 @@ from lib.interface import menu
 from time import sleep
 
 itensMenu = ['Sair', 'Adicionar Livro', 'Emprestar Livro', 'Devolver Livro', 'Listar Livros']
-menu(opções=itensMenu, textoCabeçalho='Library System')
 
 while True:
+    menu(opções=itensMenu, textoCabeçalho='Library System')
     resposta = int(input('Escolha uma opção: '))
     if resposta == 0:
         from lib.interface import cabecalho
