@@ -1,39 +1,73 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>PHP</title>
-    <link rel="stylesheet" href="../../style/style.css" media="screen">
-    <link rel="stylesheet" href="../../style/print.css" media="print">
-    <link rel="shortcut icon" href="../../img/icons/favicon/php.png" type="image/x-icon">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-</head>
-<body>
+    <link rel="stylesheet" href="../../style/style.css" media="screen" />
+    <link rel="stylesheet" href="../../style/print.css" media="print" />
+    <link
+      rel="shortcut icon"
+      href="../../img/icons/favicon/php.png"
+      type="image/x-icon"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+  </head>
+  <body>
     <header>
-        <h1>PHP</h1>
+      <h1>PHP</h1>
     </header>
     <nav>
-        <div class="nav_buttons">
-            <a href="../../index.html">Página Principal</a>
-            <a href="../cursoemvideo.html">
-                <i class="fa-solid fa-backward"></i>
-            </a>
-        </div>
+      <div class="nav_buttons">
+        <a href="../../index.html">Página Principal</a>
+        <a href="../cursoemvideo.html">
+          <i class="fa-solid fa-backward"></i>
+        </a>
+      </div>
     </nav>
-    <main></main>
+    <main>
+      <table>
+        <caption>
+          <h2>Aulas</h2>
+        </caption>
+        <thead>
+          <th>Aulas</th>
+          <th>Descrição</th>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </main>
     <footer>
-        <div id="accessibility-button">
-            <button id="accessibility-trigger" aria-label="Acessibilidade" onclick="accessibilityTrigger()">
-                <i class="fa-solid fa-universal-access"></i>
-            </button>
-            <div id="accessibility-options">
-                <button id="increase-font" aria-label="Aumentar Fonte" onclick="increaseFont()">A +</button>
-                <button id="decrease-font" aria-label="Diminuir Fonte" onclick="decreaseFont()">A -</button>
-            </div>
+      <div id="accessibility-button">
+        <button
+          id="accessibility-trigger"
+          aria-label="Acessibilidade"
+          onclick="accessibilityTrigger()"
+        >
+          <i class="fa-solid fa-universal-access"></i>
+        </button>
+        <div id="accessibility-options">
+          <button
+            id="increase-font"
+            aria-label="Aumentar Fonte"
+            onclick="increaseFont()"
+          >
+            A +
+          </button>
+          <button
+            id="decrease-font"
+            aria-label="Diminuir Fonte"
+            onclick="decreaseFont()"
+          >
+            A -
+          </button>
         </div>
-        <div id="copyright"></div>
+      </div>
+      <div id="copyright"></div>
     </footer>
     <script src="../../js/script.js"></script>
-</body>
+  </body>
 </html>
