@@ -8,7 +8,7 @@
 <body>
     <h1>
         <?php 
-            print "Olá, Mundo!<br>";
+            print "Olá, Mundo! \u{1F30E}"; // Emoji de globo terrestre
         ?>
     </h1>
     <p>Vamos tentar nos livrar da maldição.</p>

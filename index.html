@@ -13,7 +13,7 @@
     />
     <link
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
     />
   </head>
   <body>
@@ -25,7 +25,7 @@
         <a href="https://jlbbarco.github.io/">Home</a>
       </div>
       <button id="nav-links-button" aria-label="Menu" onclick="navLinks()">
-        <i class="fa-solid fa-bars fa-xl"></i>
+        <i class="material-symbols-outlined burger-icon">menu</i>
       </button>
       <div class="nav_links">
         <a href="https://jlbbarco.github.io/contact">Contato</a>
@@ -60,24 +60,23 @@
           Arquivos de estudos de programação e identação digital no Colégio
           Estadual Governador Adolpho de Oliveira Franco
         </li>
+        <li>
+          <h2 class="cursos">
+            <a href="hashtag_programacao/hashtag_programacao.html"
+              >Hashtag Programação</a
+            >
+          </h2>
+          Arquivos de estudos de programação dos cursos do canal do YouTube
+          <a
+            href="https://youtube.com/hashtagprogramacao"
+            target="_blank"
+            class="externo"
+            >Hashtag Programação</a
+          >.
+        </li>
       </ul>
     </main>
-    <footer id="footer">
-      <div id="accessibility-button">
-        <button
-          id="accessibility-trigger"
-          aria-label="Acessibilidade"
-          onclick="accessibilityTrigger()"
-        >
-          <i class="fa-solid fa-universal-access"></i>
-        </button>
-        <div id="accessibility-options">
-          <button id="increase-font" onclick="increaseFont()">A +</button>
-          <button id="decrease-font" onclick="decreaseFont()">A -</button>
-        </div>
-      </div>
-      <div id="copyright"></div>
-    </footer>
+    <footer></footer>
     <script src="js/script.js"></script>
   </body>
 </html>

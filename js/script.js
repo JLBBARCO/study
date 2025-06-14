@@ -3,17 +3,18 @@ document.addEventListener("DOMContentLoaded", () => {
   const navLinksButton = document.getElementById("nav-links-button");
   const navLinks =
     document.querySelector(".nav_links") ||
-    document.querySelector(".nav_links") ||
-    document.querySelector(".nav-links") ||
-    document.querySelector(".nav_links");
-  // Tenta pegar .nav_links ou .nav-links, pois há variações nos arquivos
+    document.querySelector(".nav-links");
+  // Tenta pegar .nav_links ou .nav-links
+  const icon = document.querySelector("i.burger-icon");
 
   if (navLinksButton && navLinks) {
     navLinksButton.addEventListener("click", () => {
       if (navLinks.style.display === "flex") {
         navLinks.style.display = "none";
+        icon.innerHTML = "menu"; // Muda o ícone para "menu"
       } else {
         navLinks.style.display = "flex";
+        icon.innerHTML = "close"; // Muda o ícone para "close"
       }
     });
 
@@ -23,9 +24,11 @@ document.addEventListener("DOMContentLoaded", () => {
         navLinks.style.display === "flex" &&
         !navLinks.contains(event.target) &&
         event.target !== navLinksButton &&
-        !navLinksButton.contains(event.target)
+        !navLinksButton.contains(event.target) &&
+        icon.innerHTML === "close" // Verifica se o ícone é "close"
       ) {
         navLinks.style.display = "none";
+        icon.innerHTML = "menu"; // Muda o ícone de volta para "menu"
       }
     });
 
@@ -36,50 +39,74 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // --- Acessibilidade ---
-  const accessibilityButton = document.getElementById("accessibility-button");
-  const accessibilityTrigger = document.getElementById("accessibility-trigger");
-  const accessibilityOptions = document.getElementById("accessibility-options");
-  const increaseFontButton = document.getElementById("increase-font");
-  const decreaseFontButton = document.getElementById("decrease-font");
-  let font = parseFloat(localStorage.getItem("fontSize")) || 1;
-
-  // Alterna visibilidade das opções de acessibilidade
-  if (accessibilityTrigger && accessibilityOptions) {
-    accessibilityTrigger.addEventListener("click", () => {
-      if (accessibilityOptions.style.display === "flex") {
-        accessibilityOptions.style.display = "none";
-      } else {
-        accessibilityOptions.style.display = "flex";
-      }
-    });
-  }
-
-  // Controle de tamanho da fonte
-  if (increaseFontButton && decreaseFontButton) {
-    document.body.style.fontSize = font + "em";
-
-    increaseFontButton.addEventListener("click", () => {
-      font += 0.1;
-      document.body.style.fontSize = font + "em";
-      localStorage.setItem("fontSize", font);
-    });
-
-    decreaseFontButton.addEventListener("click", () => {
-      font = Math.max(0.5, font - 0.1);
-      document.body.style.fontSize = font + "em";
-      localStorage.setItem("fontSize", font);
-    });
-  }
-
   // --- Rodapé dinâmico ---
-  const copyright = document.getElementById("copyright");
-  if (copyright) {
+  const footer = document.querySelector("footer");
+  if (footer) {
     const data = new Date();
     const ano = data.getFullYear();
-    copyright.innerHTML = `
+    footer.innerHTML = `
+      <div id="accessibility">
+        <button
+          id="accessibility-button"
+          aria-label="Acessibilidade"
+          onclick="accessibilityButton()"
+        >
+          <i class="material-symbols-outlined">accessibility_new</i>
+          </button>
+          <div id="accessibility-options" style="display:none;">
+          <button id="increase-font" onclick="increaseFont()">
+            <i class="material-symbols-outlined">text_increase</i>
+          </button>
+          <button id="decrease-font" onclick="decreaseFont()">
+            <i class="material-symbols-outlined">text_decrease</i>
+          </button>
+          <button id="reset-font" onclick="resetFont()">
+            <i class="material-symbols-outlined">format_clear</i>
+          </button>
+        </div>
+      </div>
       &copy; ${ano}<br>
       Site criado por José Luiz B Barco
     `;
   }
+
+  // Aplica o tamanho da fonte salvo ao carregar a página
+  aplicarFonteSalva();
 });
+
+// Funções de acessibilidade no escopo global
+function accessibilityButton() {
+  var options = document.getElementById("accessibility-options");
+  if (!options) return;
+  options.style.display = options.style.display === "flex" ? "none" : "flex";
+}
+
+function aplicarFonteSalva() {
+  var tamanhoSalvo = localStorage.getItem("tamanhoFonte");
+  if (tamanhoSalvo) {
+    document.querySelector("body").style.fontSize = tamanhoSalvo + "px";
+  }
+}
+
+function increaseFont() {
+  var body = document.querySelector("body");
+  var currentSize = window.getComputedStyle(body).fontSize;
+  var newSize = parseFloat(currentSize) * 1.5;
+  body.style.fontSize = newSize + "px";
+  localStorage.setItem("tamanhoFonte", newSize);
+}
+
+function decreaseFont() {
+  var body = document.querySelector("body");
+  var currentSize = window.getComputedStyle(body).fontSize;
+  var newSize = parseFloat(currentSize) / 1.5;
+  body.style.fontSize = newSize + "px";
+  localStorage.setItem("tamanhoFonte", newSize);
+}
+
+function resetFont() {
+  var body = document.querySelector("body");
+  body.style.fontSize = "1em"; // Tamanho padrão
+  localStorage.removeItem("tamanhoFonte"); // Remove o tamanho salvo
+  aplicarFonteSalva(); // Aplica o tamanho padrão
+}

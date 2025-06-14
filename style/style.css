@@ -91,50 +91,44 @@ header h1 {
   color: var(--título);
 }
 
-#accessibility-button {
-  top: 35%;
+#accessibility {
+  bottom: 5%;
   position: fixed;
   right: 20px;
   z-index: 1000;
 }
 
-#accessibility-button button {
+#accessibility button {
   background-color: var(--interativo);
   color: var(--texto);
-  border-radius: 10px;
   border: 0;
-}
-
-#accessibility-button button:hover {
-  background-color: var(--destaque);
-}
-
-#accessibility-trigger img,
-.voltar {
-  height: 25px;
-  width: 25px;
-}
-
-#accessibility-button button {
   padding: 15px 10px 10px;
   border-radius: 50%;
   width: 50px;
   height: 50px;
   margin: 5px;
-  border: 0;
 }
 
-#accessibility-button button:hover {
+#accessibility button:hover {
   cursor: pointer;
+  background-color: var(--destaque);
+}
+
+#accessibility-button {
+  margin: auto;
+}
+
+#accessibility-button i,
+.voltar {
+  height: 25px;
+  width: 25px;
 }
 
 #accessibility-options {
   margin-top: 10px;
   margin-right: 20%;
-  width: 75px;
-  display: flex;
-  flex-direction: column;
   display: none;
+  left: 5%;
 }
 
 #accessibility-options button {
@@ -143,7 +137,7 @@ header h1 {
   cursor: pointer;
 }
 
-#accessibility-button.active #accessibility-options {
+#accessibility.active #accessibility-options {
   display: flex;
 }
 
