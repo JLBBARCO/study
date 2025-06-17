@@ -1,0 +1,16 @@
+[
+    {
+        "id": 1,
+        "nome": "Laptop",
+        "categoria": "PC",
+        "quantidade": 10,
+        "pre\u00e7o": 2500.0
+    },
+    {
+        "id": 2,
+        "nome": "Moto G34 5G",
+        "categoria": "Celular",
+        "quantidade": 9,
+        "pre\u00e7o": 999.99
+    }
+]
