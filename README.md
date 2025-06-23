@@ -6,10 +6,6 @@ Links of pages:
 
 - [Initial Page](https://jlbbarco.github.io/study/index.html)
 
-  - [My Projects](https://jlbbarco.github.io/study/meus_projetos/meus_projetos.html)
-
-    - [Python System](https://jlbbarco.github.io/study/meus_projetos/sistema_py/)
-
   - [Video Course](https://jlbbarco.github.io/study/cursoemvideo/cursoemvideo.html)
 
     - [HTML5 & CSS3](https://jlbbarco.github.io/study/cursoemvideo/html-css/html-css.html)
@@ -33,5 +29,3 @@ Links of pages:
     - [Data Science](https://jlbbarco.github.io/study/colegio_adolpho/programacao_desenvolvimento_sistemas/programacao_desenvolvimento_sistemas.html)
 
     - [Back-end Programing](https://jlbbarco.github.io/study/colegio_adolpho/programacao_back-end/programacao_back-end.html)
-
-- [Hashtag Programação](https://jlbbarco.github.io/study/hashtag_programacao/hashtag_programacao.html)
