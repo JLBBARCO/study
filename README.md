@@ -24,8 +24,8 @@ Links of pages:
 
     - [Front-end Programming](https://jlbbarco.github.io/study/colegio_adolpho/programacao_front-end/programacao_front-end.html)
 
-    - [Developer Systems Programing](https://jlbbarco.github.io/study/colegio_adolpho/colegio_adolpho.html)
+    - [Developer Systems Programing](https://jlbbarco.github.io/study/colegio_adolpho/programacao_desenvolvimento_sistemas/programacao_desenvolvimento_sistemas.html)
 
-    - [Data Science](https://jlbbarco.github.io/study/colegio_adolpho/programacao_desenvolvimento_sistemas/programacao_desenvolvimento_sistemas.html)
+    - [Data Science](https://jlbbarco.github.io/study/colegio_adolpho/ciencias_dados/ciencias_dados.html)
 
     - [Back-end Programing](https://jlbbarco.github.io/study/colegio_adolpho/programacao_back-end/programacao_back-end.html)
