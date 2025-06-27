@@ -1,13 +1,16 @@
 @charset "UTF-8";
 
+@import url("https://fonts.googleapis.com/css2?family=Bitcount+Grid+Double:wght@100..900&display=swap");
+
 :root {
   --background-color: #f0f0f0;
-  --font-title: "Georgia", serif;
+  --font-title: "Bitcount Grid Double", system-ui;
   --font-text: "Arial", sans-serif;
   --first-color: #3498db;
   --second-color: #b3cde8;
   --third-color: #e74c3c;
   --text-color: #333;
+  --backgroung-footer: #2c3e50;
 }
 
 * {
@@ -32,30 +35,18 @@ a:hover {
   background-color: var(--background-color);
 }
 
-header {
-  font-family: var(--font-title);
-  background-color: var(--first-color);
-  color: white;
-  padding: 20px;
-  text-align: center;
-}
-
 nav {
   background-color: var(--first-color);
-  padding: 10px;
+  padding: 25px;
   text-align: center;
   justify-content: space-between;
-}
-
-nav a {
-  padding: 10px 20px;
+  display: flex;
 }
 
 main {
   padding: 20px;
   background-color: var(--second-color);
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  max-width: 768px;
   margin: auto;
 }
 
@@ -67,16 +58,21 @@ main {
 }
 
 .estandes div {
-  background-color: var(--background-color);
-  border-left: 5px solid var(--third-color);
   border-radius: 10px;
   padding: 20px;
   margin: 10px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .estandes div a {
   float: right;
+}
+
+footer {
+  background-color: var(--backgroung-footer);
+  color: white;
+  text-align: center;
+  padding: 10px;
+  width: 100%;
 }
 
 .acessibilidade {
@@ -117,10 +113,5 @@ main {
   display: none;
 }
 
-footer {
-  background-color: var(--first-color);
-  color: white;
-  text-align: center;
-  padding: 10px;
-  width: 100%;
+@media (min-width: 990px) {
 }
