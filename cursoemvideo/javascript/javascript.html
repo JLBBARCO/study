@@ -8,36 +8,49 @@
     <link rel="stylesheet" href="../../style/print.css" media="print" />
     <link
       rel="shortcut icon"
-      href="../../img/favicon/javascript.png"
+      href="../../assets/favicon/javascript.png"
       type="image/x-icon"
     />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
-    />
   </head>
-  <body>
-    <header>
-      <h1>JavaScript</h1>
-    </header>
+  <body onresize="mudouJanela()">
+    <header></header>
     <nav>
-      <div class="nav_buttons">
-        <a href="../../index.html">Página Inicial</a>
-        <a href="../cursoemvideo.html">
-          <i class="fa-solid fa-backward"></i>
+      <section class="nav_container">
+        <h2>JavaScript</h2>
+      </section>
+      <section class="nav_container">
+        <a href="../../index.html">
+          <img
+            src="../../assets/svg/home.svg"
+            alt="Página Inicial"
+            class="icon"
+          />
         </a>
-      </div>
-      <button
-        id="nav-links-button"
-        type="button"
-        alt="Menu"
-        onclick="navLinks()"
-      >
-        <i class="fa-solid fa-bars fa-xl"></i>
-      </button>
-      <div class="nav_links">
-        <a href="#atividades">Atividades</a>
-      </div>
+        <a href="../cursoemvideo.html">
+          <img
+            src="../../assets/svg/arrow_back.svg"
+            alt="Voltar"
+            class="icon"
+          />
+        </a>
+        <div class="nav_menu">
+          <button
+            id="nav-links-button"
+            type="button"
+            alt="Menu"
+            onclick="navLinks()"
+          >
+            <img
+              src="../../assets/svg/menu.svg"
+              alt="Menu"
+              class="burger-icon icon"
+            />
+          </button>
+          <div class="nav_links">
+            <a href="#atividades">Atividades</a>
+          </div>
+        </div>
+      </section>
     </nav>
     <main>
       <table id="atividades">

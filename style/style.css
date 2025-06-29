@@ -1,8 +1,15 @@
 /* Arquivo CSS principal */
-
 @charset "UTF-8";
-@import url("https://fonts.googleapis.com/css2?family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Aldrich&display=swap");
+
+@font-face {
+  font-family: "Sour Gummy";
+  src: url(../assets/fonts/Sour_Gummy/SourGummy-VariableFont_wdth.ttf)
+    format("truetype");
+}
+@font-face {
+  font-family: "Aldrich";
+  src: url(../assets/fonts/Aldrich/Aldrich-Regular.ttf) format("truetype");
+}
 
 /* estilização base */
 
@@ -69,96 +76,74 @@ a.externo::after {
   content: "\1F517";
 }
 
-i {
-  color: var(--texto);
-  width: 100%;
-  height: 100%;
+.icon {
+  width: 24px;
+  height: 24px;
 }
 
-/* Cabeçalho */
-
-header {
-  text-align: center;
-  padding: 25px;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--fonte02);
-  font-size: 1.5em;
-  font-variant: small-caps;
-  background-color: var(--destaque);
+  font-weight: bold;
+  line-height: 2em;
 }
 
-header h1 {
+h1 {
+  font-size: 2.5em;
+}
+
+h2 {
   font-size: 2em;
-  color: var(--título);
+  margin: 0 1em;
 }
 
-#accessibility {
-  bottom: 5%;
-  position: fixed;
-  right: 20px;
-  z-index: 1000;
+h3 {
+  font-size: 1.5em;
+  margin: 0 1em;
 }
 
-#accessibility button {
-  background-color: var(--interativo);
-  color: var(--texto);
-  border: 0;
-  padding: 15px 10px 10px;
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  margin: 5px;
+h4 {
+  font-size: 1em;
+  margin: 0 1em;
 }
 
-#accessibility button:hover {
-  cursor: pointer;
-  background-color: var(--destaque);
+h5 {
+  font-size: 0.8em;
+  margin: 0 1em;
 }
 
-#accessibility-button {
-  margin: auto;
-}
-
-#accessibility-button i,
-.voltar {
-  height: 25px;
-  width: 25px;
-}
-
-#accessibility-options {
-  margin-top: 10px;
-  margin-right: 20%;
-  display: none;
-  left: 5%;
-}
-
-#accessibility-options button {
-  margin-bottom: 5px;
-  padding: 10px 20px;
-  cursor: pointer;
-}
-
-#accessibility.active #accessibility-options {
-  display: flex;
+h6 {
+  font-size: 0.5em;
+  margin: 0 1em;
 }
 
 /* Barra de Navegação */
-
 nav {
   display: flex;
   width: 100%;
-  padding: 15px;
+  padding: 10px 25px;
   position: sticky;
   top: 0;
   z-index: 1000;
   background-color: var(--destaque);
   box-shadow: var(--shadow);
+  font-size: 0.8em;
 }
 
-.nav_buttons {
+.nav_container {
   display: flex;
-  margin: 5px;
-  gap: 2rem;
-  width: 90vw;
+  justify-content: space-between;
+  align-items: center;
+  width: auto;
+  flex: auto;
+}
+
+.nav_menu {
+  width: auto;
 }
 
 .nav_links {
@@ -188,7 +173,11 @@ nav {
 
 #nav-links-button {
   cursor: pointer;
-  transition: all 0s;
+}
+
+.burger-icon img {
+  width: 24px;
+  height: 24px;
 }
 
 nav a,
@@ -225,39 +214,6 @@ main p {
   line-height: 2em;
   font-size: 1em;
   text-indent: 30px;
-}
-
-h2,
-h3,
-h4,
-h5,
-h6 {
-  line-height: 2em;
-}
-
-h2 {
-  font-size: 1.5em;
-  margin: 0 1em;
-}
-
-h3 {
-  font-size: 1.4em;
-  margin: 0 1em;
-}
-
-h4 {
-  font-size: 1.3em;
-  margin: 0 1em;
-}
-
-h5 {
-  font-size: 1.2em;
-  margin: 0 1em;
-}
-
-h6 {
-  font-size: 1.1em;
-  margin: 0 1em;
 }
 
 ul,
@@ -387,7 +343,54 @@ footer div {
   margin: 10px;
 }
 
-@media screen and (min-width: 750px) {
+#accessibility {
+  bottom: 5%;
+  position: fixed;
+  right: 20px;
+  z-index: 1000;
+}
+
+#accessibility button {
+  background-color: var(--interativo);
+  color: var(--texto);
+  border: 0;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  margin: 5px;
+}
+
+#accessibility button:hover {
+  cursor: pointer;
+  background-color: var(--destaque);
+}
+
+#accessibility-button {
+  margin: auto;
+}
+
+#accessibility-options {
+  margin-top: 10px;
+  margin-right: 20%;
+  display: none;
+  left: 5%;
+}
+
+#accessibility.active #accessibility-options {
+  display: flex;
+}
+
+#accessibility-options button {
+  margin-bottom: 5px;
+  cursor: pointer;
+}
+
+#accessibility-options button img {
+  width: auto;
+  height: auto;
+}
+
+@media screen and (min-width: 990px) {
   body {
     background-color: var(--cor-body);
   }
@@ -396,27 +399,18 @@ footer div {
 
   nav {
     justify-content: space-between;
-  }
-
-  .nav_buttons {
     display: flex;
-    margin: 5px;
-    gap: 2rem;
-    width: 50vw;
   }
 
   .nav_links {
-    display: flex;
-    flex-direction: row; /* Garante lado a lado */
-    justify-content: flex-end; /* Alinha à direita */
+    display: contents;
     align-items: center;
     position: relative;
-    width: 50vw;
+    width: auto;
     text-align: right;
     padding: 10px 0;
     background-color: var(--destaque);
     box-shadow: none;
-    gap: 1.5rem; /* Espaço entre os links */
   }
 
   .nav_links a {
