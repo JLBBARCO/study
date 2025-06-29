@@ -6,34 +6,42 @@
     <title>Meus Estudos</title>
     <link rel="stylesheet" href="style/style.css" media="screen" />
     <link rel="stylesheet" href="style/print.css" media="print" />
-    <link rel="shortcut icon" href="img/favicon/book.png" type="image/x-icon" />
     <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+      rel="shortcut icon"
+      href="assets/favicon/book.png"
+      type="image/x-icon"
     />
   </head>
-  <body>
-    <header>
-      <h1>Meus Estudos</h1>
-    </header>
+  <body onresize="mudouJanela()">
     <nav>
-      <div class="nav_buttons">
-        <a href="https://jlbbarco.github.io/">Home</a>
-      </div>
-      <button id="nav-links-button" aria-label="Menu" onclick="navLinks()">
-        <i class="material-symbols-outlined burger-icon">menu</i>
-      </button>
-      <div class="nav_links">
-        <a href="https://jlbbarco.github.io/contact">Contato</a>
-        <a href="https://github.com/JLBBARCO/study">Repositório</a>
-      </div>
+      <section class="nav_container">
+        <h2>Meus Estudos</h2>
+      </section>
+      <section class="nav_container">
+        <a href="https://jlbbarco.github.io/">
+          <img src="assets/svg/home.svg" alt="Página Inicial" class="icon" />
+        </a>
+        <div class="nav_menu">
+          <button id="nav-links-button" aria-label="Menu" onclick="navLinks()">
+            <img
+              src="assets/svg/menu.svg"
+              alt="Menu Icon"
+              class="burger-icon icon"
+            />
+          </button>
+          <div class="nav_links">
+            <a href="https://jlbbarco.github.io/contact">Contato</a>
+            <a href="https://github.com/JLBBARCO/study">Repositório</a>
+          </div>
+        </div>
+      </section>
     </nav>
     <main>
       <ul class="conteudo">
         <li>
-          <h2 class="cursos">
+          <h3 class="cursos">
             <a href="cursoemvideo/cursoemvideo.html">CursoemVideo</a>
-          </h2>
+          </h3>
           Arquivos criados acompanhando vídeos do canal do YouTube
           <a
             href="https://youtube.com/cursoemvideo"
@@ -43,9 +51,9 @@
           >.
         </li>
         <li>
-          <h2 class="cursos">
+          <h3 class="cursos">
             <a href="colegio_adolpho/colegio_adolpho.html">Colégio Adolpho</a>
-          </h2>
+          </h3>
           Arquivos de estudos de programação e identação digital no Colégio
           Estadual Governador Adolpho de Oliveira Franco
         </li>
