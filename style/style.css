@@ -251,7 +251,7 @@ caption {
 
 thead {
   position: sticky;
-  top: 75px;
+  top: 70px;
   z-index: 1;
   background-color: var(--tabela);
 }

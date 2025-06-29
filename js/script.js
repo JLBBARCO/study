@@ -1,9 +1,16 @@
 var janelaPadrao = 990;
 var janelaPadraoPX = janelaPadrao + "px";
 
+// Nome do repositório no GitHub Pages (ajuste para o seu repositório)
+const nomeRepositorio = "study";
+
 // Caminho relativo do arquivo HTML atual em relação à raiz do site
-const caminhoHTML = window.location.pathname.replace(/^\//, "");
-// Exemplo de saída: "index.html", "pasta1/arquivo.html", "pasta1/pasta2/arquivo.html"
+let caminhoHTML = window.location.pathname.replace(/^\//, "");
+
+// Se estiver rodando no GitHub Pages, remova o nome do repositório do início do caminho
+if (caminhoHTML.startsWith(nomeRepositorio + "/")) {
+  caminhoHTML = caminhoHTML.substring(nomeRepositorio.length + 1);
+}
 
 // Se quiser apenas o diretório do arquivo HTML:
 const diretorioHTML = caminhoHTML.substring(
@@ -33,7 +40,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const burgerIcon = document.querySelector(".burger-icon");
 
   if (navLinksButton && navLinks && burgerIcon) {
-    navLinksButton.addEventListener("click", () => {
+    navLinksButton.addEventListener("click", (event) => {
+      event.stopPropagation();
       if (navLinks.style.display === "flex") {
         navLinks.style.display = "none";
         burgerIcon.src = `${caminhoRelativoAteRaiz}assets/svg/menu.svg`;
@@ -46,11 +54,10 @@ document.addEventListener("DOMContentLoaded", () => {
     // Fecha o menu ao clicar fora dele (mobile)
     document.addEventListener("click", (event) => {
       if (
-        navLinks.style.display === "contents" &&
+        navLinks.style.display === "flex" &&
         !navLinks.contains(event.target) &&
         event.target !== navLinksButton &&
-        !navLinksButton.contains(event.target) &&
-        burgerIcon.src.endsWith("close.svg")
+        !navLinksButton.contains(event.target)
       ) {
         navLinks.style.display = "none";
         burgerIcon.src = `${caminhoRelativoAteRaiz}assets/svg/menu.svg`;
