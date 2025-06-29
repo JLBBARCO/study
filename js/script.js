@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Fecha o menu ao clicar fora dele (mobile)
     document.addEventListener("click", (event) => {
       if (
-        navLinks.style.display === "flex" &&
+        navLinks.style.display === "contents" &&
         !navLinks.contains(event.target) &&
         event.target !== navLinksButton &&
         !navLinksButton.contains(event.target) &&
@@ -91,8 +91,18 @@ document.addEventListener("DOMContentLoaded", () => {
           </button>
         </div>
       </div>
-      &copy; ${ano}<br>
-      Site criado por José Luiz B Barco
+      <div class="container_footer">
+        <div class="card_footer">
+          <h2>Projeto de Estudos</h2>
+          <p>
+            Projeto realizado para estudos de programação, com possibilidade de uso de qualquer pessoa.
+          </p>
+        </div>
+        <div class="card_footer"></div>
+      </div>
+      <p class="copyright">
+        &copy; ${ano}. Todos os direitos de uso liberados.
+      </p>
     `;
   }
 
@@ -106,7 +116,7 @@ function mudouJanela() {
   const burgerIcon = document.querySelector(".burger-icon");
   if (!itens || !burgerIcon) return;
   if (window.innerWidth >= janelaPadrao) {
-    itens.style.display = "flex";
+    itens.style.display = "contents";
     burgerIcon.src = `${caminhoRelativoAteRaiz}assets/svg/menu.svg`;
   } else {
     itens.style.display = "none";

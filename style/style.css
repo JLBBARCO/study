@@ -202,8 +202,6 @@ nav button:hover {
 main {
   padding: 50px;
   margin: auto;
-  min-width: 250px;
-  max-width: 750px;
   background-color: var(--fundo);
   box-shadow: var(--shadow);
 }
@@ -299,6 +297,12 @@ div.resultado ol {
 
 div.resultado img {
   width: 100%;
+  max-width: 500px;
+  height: auto;
+}
+
+.resultado table {
+  font-size: 0.8em;
 }
 
 .code {
@@ -390,13 +394,31 @@ footer div {
   height: auto;
 }
 
+.container_footer {
+  display: flex;
+  text-align: justify;
+}
+
+.card_footer {
+  flex: auto;
+}
+
+.copyright {
+  padding-top: 10px;
+  border-top: 1px solid var(--cor-body);
+  margin: 10px 25px;
+}
+
 @media screen and (min-width: 990px) {
   body {
     background-color: var(--cor-body);
   }
 
-  /* Barra de Navegação */
+  .resultado table {
+    font-size: 1em;
+  }
 
+  /* Barra de Navegação */
   nav {
     justify-content: space-between;
     display: flex;
