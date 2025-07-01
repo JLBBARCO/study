@@ -28,6 +28,7 @@ a {
   color: var(--text-color);
   text-decoration: none;
   padding: 10px;
+  border-radius: 10px;
 }
 
 a:hover {
@@ -43,35 +44,83 @@ nav {
   display: flex;
 }
 
+menu button {
+  background-color: var(--first-color);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+menu button:hover {
+  background-color: var(--second-color);
+}
+
+.links {
+  display: none;
+  justify-content: space-around;
+  width: 100%;
+}
+
 main {
-  padding: 20px;
   background-color: var(--second-color);
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   margin: auto;
+  width: 100%;
 }
 
-.estandes {
+section {
+  padding: 25px;
+  max-width: 990px;
+  min-height: 75vh;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
   text-align: justify;
+  margin: 0 auto;
 }
 
-.estandes div {
+section div {
   border-radius: 10px;
   padding: 20px;
   margin: 10px;
 }
 
-.estandes div a {
+section div a {
   float: right;
+  padding: 0;
+}
+
+.logo-link {
+  width: 75px;
+  margin: 10px;
+}
+
+.logo {
+  max-width: 100%;
+}
+
+img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+.reference {
+  font-size: 0.8em;
+  display: block;
+}
+
+section div p {
+  margin: 10px;
+  color: var(--text-color);
 }
 
 footer {
   background-color: var(--backgroung-footer);
   color: white;
   text-align: center;
-  padding: 10px;
+  padding: 25px;
   width: 100%;
 }
 
@@ -114,4 +163,32 @@ footer {
 }
 
 @media (min-width: 990px) {
+  menu button {
+    display: none;
+  }
+
+  .logo-link {
+    width: 300px;
+  }
+
+  .links {
+    display: flex;
+  }
+
+  section div {
+    display: flex;
+  }
+
+  a img {
+    width: 100%;
+  }
+
+  section div img {
+    max-width: 50%;
+    height: auto;
+  }
+
+  section div p {
+    margin: 25px;
+  }
 }
