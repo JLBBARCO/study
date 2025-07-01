@@ -1,23 +1,28 @@
+var janelaPadrao = 990;
+
 function resize() {
   const itens = document.querySelector(".links");
   const burgerIcon = document.querySelector(".burger-icon");
   if (!itens || !burgerIcon) return;
   if (window.innerWidth >= janelaPadrao) {
-    itens.style.display = "contents";
-    burgerIcon.src = `${caminhoRelativoAteRaiz}assets/svg/menu.svg`;
+    itens.style.display = "flex";
+    burgerIcon.src = "../../../../assets/svg/close.svg";
   } else {
     itens.style.display = "none";
-    burgerIcon.src = `${caminhoRelativoAteRaiz}assets/svg/menu.svg`;
+    burgerIcon.src = `../../../../assets/svg/menu.svg`;
   }
 }
 
 function menuToggle() {
   const menu = document.querySelector(".links");
+  const icon = document.querySelector(".burger-icon");
 
   if (menu.style.display === "none" || menu.style.display === "") {
     menu.style.display = "flex";
+    icon.src = "../../../../assets/svg/close.svg";
   } else {
     menu.style.display = "none";
+    icon.src = "../../../../assets/svg/menu.svg";
   }
 }
 

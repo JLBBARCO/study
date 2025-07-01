@@ -42,6 +42,8 @@ nav {
   text-align: center;
   justify-content: space-between;
   display: flex;
+  position: fixed;
+  width: 100%;
 }
 
 menu button {
@@ -57,9 +59,14 @@ menu button:hover {
 }
 
 .links {
+  top: auto;
   display: none;
-  justify-content: space-around;
   width: 100%;
+  padding: 10px;
+  position: fixed;
+  right: 0;
+  background-color: var(--first-color);
+  flex-direction: column;
 }
 
 main {
@@ -67,9 +74,13 @@ main {
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   margin: auto;
   width: 100%;
+  padding: 100px 10px 10px;
 }
 
 section {
+  background-color: var(--background-color);
+  border-left: 5px solid var(--third-color);
+  border-radius: 10px;
   padding: 25px;
   max-width: 990px;
   min-height: 75vh;
@@ -77,7 +88,7 @@ section {
   flex-wrap: wrap;
   justify-content: space-around;
   text-align: justify;
-  margin: 0 auto;
+  margin: 25px auto;
 }
 
 section div {
@@ -171,8 +182,25 @@ footer {
     width: 300px;
   }
 
-  .links {
+  nav {
+    background-color: var(--first-color);
+    padding: 25px;
+    text-align: center;
+    justify-content: space-between;
     display: flex;
+    position: fixed;
+    width: 100%;
+  }
+
+  .links {
+    top: auto;
+    display: flex;
+    width: 100%;
+    padding: 0;
+    position: unset;
+    right: 0;
+    background-color: var(--first-color);
+    flex-direction: row;
   }
 
   section div {
