@@ -6,6 +6,8 @@ Links of pages:
 
 - [Initial Page](https://jlbbarco.github.io/study/index.html)
 
+  - [My Projects](https://jlbbarco.github.io/study/meus_projetos/meus_projetos.html)
+
   - [Video Course](https://jlbbarco.github.io/study/cursoemvideo/cursoemvideo.html)
 
     - [HTML5 & CSS3](https://jlbbarco.github.io/study/cursoemvideo/html-css/html-css.html)
