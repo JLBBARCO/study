@@ -40,3 +40,29 @@ class usuário:
             self.livros_emprestados.remove(livro)
             return f"Livro devolvido com sucesso!"
         return f"Você não possui o livro '{livro.titulo}'."
+
+    def listar_livros_emprestados(self):
+        if not self.livros_emprestados:
+            return 'Nenhum livro emprestado'
+        return '\n'.join(str(livro) for livro in self.livros_emprestados)
+
+    def __str__ (self):
+        return f"Usuário: {self.nome} (ID: {self.id_usuário})"
+
+class Biblioteca:
+    def __init__(self):
+        self.catálogo = list()
+        self.usuários = list()
+
+    def adicionar_livro(self, livro):
+        self.catálogo.append(livro)
+
+    def registrar_usuário(self, usuário):
+        self.usuário.append(usuário)
+
+    def buscar_livro(self, título_ou_autor):
+        resultados = list()
+        for livro in self.catálogo:
+            if (título_ou_autor.lower() in livro.título.lower() or título_ou_autor.lower() in livro.autor.lower()):
+                resultados.append(livro)
+        return resultados
