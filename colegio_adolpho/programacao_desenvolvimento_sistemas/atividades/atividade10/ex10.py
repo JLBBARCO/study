@@ -1,23 +1,23 @@
 # Desenvolvido por José Luiz B Barco
 
 class Livro:
-    def __init__(self, titulo, autor, isbn, copias_disponíveis=1):
+    def __init__(self, titulo, autor, isbn, cópias_disponíveis=1):
         self.titulo = titulo
         self.autor = autor
         self.isbn = isbn
-        self.copias_disponíveis = copias_disponíveis
+        self.cópias_disponíveis = cópias_disponíveis
         
-    def copias_disponíveis(self):
-        return self.copias_disponíveis
+    def cópias_disponíveis(self):
+        return self.cópias_disponíveis
 
     def emprestar(self):
-        if self.copias_disponíveis > 0:
-            self.copias_disponíveis -= 1
+        if self.cópias_disponíveis > 0:
+            self.cópias_disponíveis -= 1
             return True
         return False
 
     def devolver(self):
-        self.copias_disponíveis += 1
+        self.cópias_disponíveis += 1
 
     def __str__(self):
         return f"'{self.titulo}' por {self.autor} (ISBN: {self.isbn})"
@@ -68,7 +68,7 @@ class Biblioteca:
         return resultados
 
     def relatório_disponibilidade(self):
-        return "\n".join(f"{livro} - Disponíveis: {livro.cópias_disponíveis}" for livro in self.catálogo)
+        return "\n".join(f"{livro} - Disponíveis: {Livro.cópias_disponíveis}" for livro in self.catálogo)
 
 livro1 = Livro('Cinco Minutos', 'José de Alencar', '978-8525407337', 3)
 livro2 = Livro('Capitães de Areia', 'Jorge Amado', '978-8535914061', 1)
@@ -85,3 +85,10 @@ print(aluno.emprestar_livro(livro1))
 print(professor.emprestar_livro(livro1))
 print(aluno.emprestar_livro(livro2))
 print(professor.emprestar_livro(livro2))
+
+print('\n--- Livros de Saulo ---')
+print(aluno.listar_livros_emprestados())
+
+print(aluno.devolver_livro(livro1))
+print('\n--- Disponibilidade após Devolução ---')
+print(biblioteca.relatório_disponibilidade())
