@@ -22,10 +22,10 @@ class Livro:
     def __str__(self):
         return f"'{self.titulo}' por {self.autor} (ISBN: {self.isbn})"
 
-class usuário:
-    def __init__(self, nome, id_usuário):
+class Usuário:
+    def __init__(self, nome, id_Usuário):
         self.nome = nome
-        self.id_usuário = id_usuário
+        self.id_Usuário = id_Usuário
         self.livros_emprestados = list()
 
     def emprestar_livro(self, livro):
@@ -47,18 +47,18 @@ class usuário:
         return '\n'.join(str(livro) for livro in self.livros_emprestados)
 
     def __str__ (self):
-        return f"Usuário: {self.nome} (ID: {self.id_usuário})"
+        return f"Usuário: {self.nome} (ID: {self.id_Usuário})"
 
 class Biblioteca:
     def __init__(self):
         self.catálogo = list()
-        self.usuários = list()
+        self.Usuários = list()
 
     def adicionar_livro(self, livro):
         self.catálogo.append(livro)
 
-    def registrar_usuário(self, usuário):
-        self.usuário.append(usuário)
+    def registrar_usuário(self, Usuário):
+        self.Usuários.append(Usuário)
 
     def buscar_livro(self, título_ou_autor):
         resultados = list()
@@ -66,3 +66,22 @@ class Biblioteca:
             if (título_ou_autor.lower() in livro.título.lower() or título_ou_autor.lower() in livro.autor.lower()):
                 resultados.append(livro)
         return resultados
+
+    def relatório_disponibilidade(self):
+        return "\n".join(f"{livro} - Disponíveis: {livro.cópias_disponíveis}" for livro in self.catálogo)
+
+livro1 = Livro('Cinco Minutos', 'José de Alencar', '978-8525407337', 3)
+livro2 = Livro('Capitães de Areia', 'Jorge Amado', '978-8535914061', 1)
+aluno = Usuário('Saulo Santos', '2023001')
+professor = Usuário('Sebastião Silva', '2023002')
+
+biblioteca = Biblioteca()
+biblioteca.adicionar_livro(livro1)
+biblioteca.adicionar_livro(livro2)
+biblioteca.registrar_usuário(aluno)
+biblioteca.registrar_usuário(professor)
+
+print(aluno.emprestar_livro(livro1))
+print(professor.emprestar_livro(livro1))
+print(aluno.emprestar_livro(livro2))
+print(professor.emprestar_livro(livro2))
