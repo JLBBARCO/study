@@ -2,37 +2,37 @@ var janelaPadrao = 990;
 var janelaPadraoPX = janelaPadrao + "px";
 
 // Nome do repositório no GitHub Pages (ajuste para o seu repositório)
-const nomeRepositorio = "study";
+const nomeRepositório = "study";
 
 // Caminho relativo do arquivo HTML atual em relação à raiz do site
 let caminhoHTML = window.location.pathname.replace(/^\//, "");
 
 // Se estiver rodando no GitHub Pages, remova o nome do repositório do início do caminho
-if (caminhoHTML.startsWith(nomeRepositorio + "/")) {
-  caminhoHTML = caminhoHTML.substring(nomeRepositorio.length + 1);
+if (caminhoHTML.startsWith(nomeRepositório + "/")) {
+  caminhoHTML = caminhoHTML.substring(nomeRepositório.length + 1);
 }
 
 // Se quiser apenas o diretório do arquivo HTML:
-const diretorioHTML = caminhoHTML.substring(
+const diretórioHTML = caminhoHTML.substring(
   0,
   caminhoHTML.lastIndexOf("/") + 1
 );
 
 // Conta quantas pastas existem no caminho (ignorando o arquivo)
 const pastas =
-  diretorioHTML === "" ? [] : diretorioHTML.split("/").filter(Boolean);
+  diretórioHTML === "" ? [] : diretórioHTML.split("/").filter(Boolean);
 
 // Gera a string com "../" para cada pasta
 const caminhoRelativoAteRaiz = pastas.map(() => "../").join("");
 
 // Para debug:
 console.log("Caminho do HTML:", caminhoHTML);
-console.log("Diretório do HTML:", diretorioHTML);
+console.log("Diretório do HTML:", diretórioHTML);
 console.log("Quantidade de pastas:", pastas.length);
 console.log("Caminho relativo até a raiz:", caminhoRelativoAteRaiz);
 
 document.addEventListener("DOMContentLoaded", () => {
-  // --- Menu Hamburguer (mobile) ---
+  // --- Menu hambúrguer (mobile) ---
   const navLinksButton = document.getElementById("nav-links-button");
   const navLinks =
     document.querySelector(".nav_links") ||
@@ -105,7 +105,20 @@ document.addEventListener("DOMContentLoaded", () => {
             Projeto realizado para estudos de programação, com possibilidade de uso de qualquer pessoa.
           </p>
         </div>
-        <div class="card_footer"></div>
+        <div class="card_footer">
+          <h2>Links Rápidos</h2>
+          <ul>
+            <li><a href="https://jlbbarco.github.io/study/">Página Inicial</a></li>
+            <li><a href="https://github.com/jlbbarco/study">Repositório</a></li>
+            </ul>
+          </div>
+          <div class="card_footer">
+            <h2>Recursos</h2>
+            <ul>
+              <li><a href="https://jlbbarco.github.io/">Portfólio</a></li>
+              <li><a href="https://jlbbarco.github.io/contacto/">Contato</a></li>
+            </ul>
+          </div>
       </div>
       <p class="copyright">
         &copy; ${ano}. Todos os direitos de uso liberados.
