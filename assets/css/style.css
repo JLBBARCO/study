@@ -3,11 +3,11 @@
 
 @font-face {
   font-family: "Sour Gummy";
-  src: url(../assets/fonts/Sour_Gummy/SourGummy.ttf) format("truetype");
+  src: url(../fonts/Sour_Gummy/SourGummy.ttf) format("truetype");
 }
 @font-face {
   font-family: "Aldrich";
-  src: url(../assets/fonts/Aldrich/Aldrich-Regular.ttf) format("truetype");
+  src: url(../fonts/Aldrich/Aldrich-Regular.ttf) format("truetype");
 }
 
 /* estilização base */

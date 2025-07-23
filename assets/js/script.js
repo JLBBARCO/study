@@ -116,7 +116,7 @@ document.addEventListener("DOMContentLoaded", () => {
             <h2>Recursos</h2>
             <ul>
               <li><a href="https://jlbbarco.github.io/">Portfólio</a></li>
-              <li><a href="https://jlbbarco.github.io/contacto/">Contato</a></li>
+              <li><a href="https://jlbbarco.github.io/contact/">Contato</a></li>
             </ul>
           </div>
       </div>
