@@ -1,5 +1,5 @@
 '''
-Distribuição de frequência
+Distribuição de Frequência
 Realizado por José Luiz B Barco
 '''
 
@@ -22,10 +22,7 @@ bins = list(range(min_cm, max_cm, 10))
 labels = [f'{bins[i]} | {bins[i + 1] - 1}cm' for i in range(len(bins) - 1)]
 categorias = pd.cut(dados['ALTURA_CM'], bins=bins, right=False, labels=labels)
 
-tabela_frequência = (categorias.value_counts()
-                     .sort_index()
-                     .reset_index()
-                     .rename(columns={'ALTURA_CM': 'Intervalos', 'count': 'Frequência'}))
+tabela_frequência = (categorias.value_counts().sort_index().reset_index().rename(columns={'ALTURA_CM': 'Intervalos', 'count': 'Frequência'}))
 tabela_frequência['Porcentagem'] = (tabela_frequência['Frequência'] / len(dados)) * 100
 tabela_frequência['Porcentagem'] = tabela_frequência['Porcentagem'].round(1).astype(str) + '%'
 tabela_frequência = tabela_frequência[tabela_frequência['Frequência'] > 0]
