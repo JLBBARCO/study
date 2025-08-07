@@ -199,9 +199,14 @@ main {
 
 #menuLateral {
   display: none;
-  width: 250px;
   margin: 0;
   background-color: var(--destaque);
+  padding: 50px;
+}
+
+#Container {
+  width: 75%;
+  display: block;
 }
 
 main p {
