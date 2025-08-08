@@ -24,10 +24,20 @@ Links of pages:
 
   - [Adolpho HighSchool](https://jlbbarco.github.io/study/colegio_adolpho/colegio_adolpho.html)
 
-    - [Front-end Programming](https://jlbbarco.github.io/study/colegio_adolpho/programacao_front-end/programacao_front-end.html)
+    - [Projects](https://jlbbarco.github.io/study/colegio_adolpho/projetos/projetos.html)
 
-    - [Developer Systems Programing](https://jlbbarco.github.io/study/colegio_adolpho/programacao_desenvolvimento_sistemas/programacao_desenvolvimento_sistemas.html)
+    - [Extracurricular Classes](https://jlbbarco.github.io/study/colegio_adolpho/aulas_extracurriculares/aulas_extracurriculares.html)
 
-    - [Data Science](https://jlbbarco.github.io/study/colegio_adolpho/ciencias_dados/ciencias_dados.html)
+      - [Robotics](https://jlbbarco.github.io/study/colegio_adolpho/aulas_extracurriculares/robotica/robotica.html)
 
-    - [Back-end Programing](https://jlbbarco.github.io/study/colegio_adolpho/programacao_back-end/programacao_back-end.html)
+    - [Second Year](https://jlbbarco.github.io/study/colegio_adolpho/2_serie/2_serie.html)
+
+      - [Front-end Programming](https://jlbbarco.github.io/study/colegio_adolpho/programacao_front-end/programacao_front-end.html)
+
+    - [Third Year](https://jlbbarco.github.io/study/colegio_adolpho/3_serie/3_serie.html)
+
+      - [Developer Systems Programing](https://jlbbarco.github.io/study/colegio_adolpho/programacao_desenvolvimento_sistemas/programacao_desenvolvimento_sistemas.html)
+
+      - [Data Science](https://jlbbarco.github.io/study/colegio_adolpho/ciencias_dados/ciencias_dados.html)
+
+      - [Back-end Programing](https://jlbbarco.github.io/study/colegio_adolpho/programacao_back-end/programacao_back-end.html)

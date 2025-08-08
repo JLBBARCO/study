@@ -89,9 +89,20 @@ document.addEventListener("DOMContentLoaded", () => {
             <li><a href="${caminhoRelativoAteRaiz}colegio_adolpho/colegio_adolpho.html">Colégio Adolpho</a></li>
               <ul>
                 <li><a href="${caminhoRelativoAteRaiz}colegio_adolpho/aulas_extracurriculares/aulas_extracurriculares.html">Aulas Extracurriculares</a></li>
+                <ul>
+                  <li><a href="${caminhoRelativoAteRaiz}colegio_adolpho/aulas_extracurriculares/robotica/robotica.html">Robótica</a></li>
+                </ul>
                 <li><a href="${caminhoRelativoAteRaiz}colegio_adolpho/projetos/projetos.html">Projetos</a></li>
                 <li><a href="${caminhoRelativoAteRaiz}colegio_adolpho/2_serie/2_serie.html">2ª Série</a></li>
+                <ul>
+                  <li><a href="${caminhoRelativoAteRaiz}colegio_adolpho/2_serie/programacao_front-end/programacao_front-end.html">Programação Front-End</a></li>
+                </ul>
                 <li><a href="${caminhoRelativoAteRaiz}colegio_adolpho/3_serie/3_serie.html">3ª Série</a></li>
+                <ul>
+                  <li><a href="${caminhoRelativoAteRaiz}colegio_adolpho/3_serie/programacao_desenvolvimento_sistemas/programacao_desenvolvimento_sistemas.html">Programação no Desenvolvimento de Sistemas</a></li>
+                  <li><a href="${caminhoRelativoAteRaiz}colegio_adolpho/3_serie/ciencias_dados/ciencias_dados.html">Ciências de Dados</a></li>
+                  <li><a href="${caminhoRelativoAteRaiz}colegio_adolpho/3_serie/programacao_back-end/programacao_back-end.html">Programação Back-End</a></li>
+                </ul>
               </ul>
           </ul>
     </ul>

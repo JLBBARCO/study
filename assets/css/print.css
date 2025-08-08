@@ -1,40 +1,48 @@
 @charset "UTF-8";
 
+/* CSS otimizado para impressão */
 :root {
   --background-color: #fff;
-  --text-color: black;
+  --text-color: #000;
   --font-family: "Courier New", Courier, monospace;
-  --border: 1px solid black;
+  --border: 1px solid #000;
   --border-radius: 10px;
 }
 
-* {
-  margin: 10px;
-  padding: 10px;
-  background-color: var(--background-color);
-  color: var(--text-color);
+body {
+  background: var(--background-color) !important;
+  color: var(--text-color) !important;
   font-family: var(--font-family);
-  line-height: 1.5em;
+  font-size: 12pt;
+  margin: 0;
+  padding: 0;
 }
 
 header,
-footer {
-  display: none;
+footer,
+nav,
+menu,
+button,
+.icon,
+.burger-icon {
+  display: none !important;
 }
 
 a {
-  text-decoration: none;
   color: var(--text-color);
+  text-decoration: underline;
+  word-break: break-all;
 }
 
 table {
   border-collapse: collapse;
+  width: 100%;
 }
 
 th,
 td {
   border: var(--border);
-  padding: 15px;
+  padding: 8px;
 }
 
 .resultado,
@@ -42,4 +50,19 @@ td {
 .codigo {
   border: var(--border);
   border-radius: var(--border-radius);
+  background: none !important;
+  color: var(--text-color) !important;
+  page-break-inside: avoid;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: auto;
+  page-break-inside: avoid;
+}
+
+@page {
+  margin: 1.5cm;
 }

@@ -76,26 +76,26 @@ h6 {
 }
 
 h1 {
-  font-size: 2.5em;
+  font-size: 2em;
 }
 
 h2 {
-  font-size: 2em;
-  margin: 0 1em;
-}
-
-h3 {
   font-size: 1.5em;
   margin: 0 1em;
 }
 
-h4 {
+h3 {
   font-size: 1em;
   margin: 0 1em;
 }
 
-h5 {
+h4 {
   font-size: 0.8em;
+  margin: 0 1em;
+}
+
+h5 {
+  font-size: 0.7em;
   margin: 0 1em;
 }
 
@@ -108,6 +108,7 @@ h6 {
 header {
   display: flex;
   width: 100%;
+  height: auto;
   padding: 10px 25px;
   position: sticky;
   top: 0;
@@ -205,7 +206,6 @@ main {
 }
 
 #Container {
-  width: 75%;
   display: block;
 }
 
@@ -420,6 +420,30 @@ footer div {
     background-color: var(--cor-body);
   }
 
+  h1 {
+    font-size: 2.5em;
+  }
+
+  h2 {
+    font-size: 2em;
+  }
+
+  h3 {
+    font-size: 1.5em;
+  }
+
+  h4 {
+    font-size: 1em;
+  }
+
+  h5 {
+    font-size: 0.8em;
+  }
+
+  h6 {
+    font-size: 0.5em;
+  }
+
   .resultado table {
     font-size: 1em;
   }
@@ -462,5 +486,9 @@ footer div {
 
   #menuLateral {
     display: block;
+  }
+
+  #Container {
+    width: 75%;
   }
 }
