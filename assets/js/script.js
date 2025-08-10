@@ -25,13 +25,17 @@ const pastas =
 // Gera a string com "../" para cada pasta
 const caminhoRelativoAteRaiz = pastas.map(() => "../").join("");
 
-// Para debug:
-console.log("Caminho do HTML:", caminhoHTML);
-console.log("Diretório do HTML:", diretórioHTML);
-console.log("Quantidade de pastas:", pastas.length);
-console.log("Caminho relativo até a raiz:", caminhoRelativoAteRaiz);
-
 document.addEventListener("DOMContentLoaded", () => {
+  // Título
+  const header = document.querySelector("header");
+  if (header) {
+    const title = document.querySelector("title").innerHTML;
+    document.querySelector("nav").innerHTML = `
+      <h2>${title}</h2>
+    `;
+    console.log("Título da página:", title);
+  }
+
   // --- Menu hambúrguer (mobile) ---
   const navLinksButton = document.getElementById("nav-links-button");
   const navLinks =
@@ -78,26 +82,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const data = new Date();
     const ano = data.getFullYear();
     footer.innerHTML = `
-      <div id="accessibility">
-        <button
-          id="accessibility-button"
-          aria-label="Acessibilidade"
-          onclick="accessibilityButton()"
-        >
-          <img src="${caminhoRelativoAteRaiz}assets/svg/accessibility.svg" alt="SVG de acessibilidade" class="icon" />
-        </button>
-        <div id="accessibility-options" style="display:none;">
-          <button id="increase-font" onclick="increaseFont()">
-            <img src="${caminhoRelativoAteRaiz}assets/svg/increase_font.svg" alt="SVG de aumentar fonte" class="icon" />
-          </button>
-          <button id="decrease-font" onclick="decreaseFont()">
-            <img src="${caminhoRelativoAteRaiz}assets/svg/decrease_font.svg" alt="SVG de diminuir fonte" class="icon" />
-          </button>
-          <button id="reset-font" onclick="resetFont()">
-            <img src="${caminhoRelativoAteRaiz}assets/svg/format_clear.svg" alt="SVG de resetar fonte" class="icon" />
-          </button>
-        </div>
-      </div>
       <div class="container_footer">
         <div class="card_footer">
           <h2>Projeto de Estudos</h2>
