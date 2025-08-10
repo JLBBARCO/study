@@ -190,23 +190,10 @@ header button:hover {
 /* Conteúdo */
 
 main {
-  display: flex;
   padding: 50px;
-  flex-direction: row;
   margin: auto;
   background-color: var(--fundo);
   box-shadow: var(--shadow);
-}
-
-#menuLateral {
-  display: none;
-  margin: 0;
-  background-color: var(--destaque);
-  padding: 50px;
-}
-
-#Container {
-  display: block;
 }
 
 main p {
@@ -478,17 +465,5 @@ footer div {
 
   .container_footer {
     flex-direction: row;
-  }
-
-  main {
-    padding: 0;
-  }
-
-  #menuLateral {
-    display: block;
-  }
-
-  #Container {
-    width: 75%;
   }
 }

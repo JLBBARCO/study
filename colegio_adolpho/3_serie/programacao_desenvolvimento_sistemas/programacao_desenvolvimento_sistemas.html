@@ -57,313 +57,303 @@
       </menu>
     </header>
     <main>
-      <menu id="menuLateral"></menu>
-      <section id="Container">
-        <table id="avaliacoes">
-          <caption>
-            <h2>Avaliações</h2>
-          </caption>
-          <thead>
-            <tr>
-              <th>Aulas</th>
-              <th>Descrição</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="num">
-                <a
-                  href="https://github.com/JLBBARCO/study/tree/main/colegio_adolpho/programacao_desenvolvimento_sistemas/atividades/atividade01"
-                >
-                  01
-                </a>
-              </td>
-              <td>Introdução à linguagem python</td>
-            </tr>
-            <tr>
-              <td class="num">
-                <a
-                  href="https://github.com/JLBBARCO/study/tree/main/colegio_adolpho/programacao_desenvolvimento_sistemas/atividades/atividade02"
-                >
-                  02
-                </a>
-              </td>
-              <td>Verifica se o número é par ou ímpar</td>
-            </tr>
-            <tr>
-              <td class="num">
-                <a
-                  href="https://github.com/JLBBARCO/study/tree/main/colegio_adolpho/programacao_desenvolvimento_sistemas/atividades/atividade03"
-                >
-                  03
-                </a>
-              </td>
-              <td>
-                <strong>Sistema de caixa eletrônico simplificado</strong><br />
-                <strong>Objetivo</strong>: Criar um programa em Python que
-                simule as operações básicas de um caixa eletrônico, usando
-                estruturas de repetição e decisão vistas em sala de aula.<br />
-                <strong>Requisitos do sistema</strong>:<br />
-                <ul>
-                  <li>
-                    O programa deve ter um menu interativo que repete até o
-                    usuário escolher sair.
-                  </li>
-                  <li>
-                    Operações disponíveis: Consultar saldo, Depositar valor,
-                    Sacar valor, Extrato (últimas transações), Sair.
-                  </li>
-                  <li>Limitar saques diários (ex.: R$500,00 por dia).</li>
-                  <li>Limitar valor máximo por saque (ex.: R$500,00).</li>
-                  <li>Armazenar transações e mostrar tudo no estrato.</li>
-                </ul>
-                <strong>Sua tarefa</strong>:<br />
-                <ul>
-                  <li>
-                    Implementar a lógica de cada operação (depósito, saque,
-                    etc.).
-                  </li>
-                  <li>
-                    Validar entradas (ex.: não permitir depósito negativo).
-                  </li>
-                  <li>
-                    Garantir que o número de saques não ultrapasse
-                    LIMITE_SAQUES.
-                  </li>
-                  <li>
-                    Formatar o extrato para mostrar operações em ordem
-                    cronológica.
-                  </li>
-                </ul>
-              </td>
-            </tr>
-            <tr>
-              <td class="num">
-                <a
-                  href="https://github.com/JLBBARCO/study/tree/main/colegio_adolpho/programacao_desenvolvimento_sistemas/atividades/atividade04"
-                >
-                  04
-                </a>
-              </td>
-              <td>
-                <strong>Jogo de adivinhação</strong>
-                <br />
-                <strong>Objetivo: </strong>Criar um jogo em que o jogador tenta
-                adivinhar um número aleatório gerado pelo computador, com dicas
-                e um sistema de pontuação.
-                <br />
-                <strong>Requisitos do sistema:</strong>
-                <br />
-                <ul>
-                  <li>O programa gera um número aleatório entre 1 e 100.</li>
-                  <li>
-                    O jogador tem um número limitado de tentativas (ex: 10).
-                  </li>
-                  <li>
-                    A cada palpite, o programa informa se o número correto é
-                    maior ou menor.
-                  </li>
-                  <li>Se o jogador acertar, o programa mostra:</li>
-                  <ul>
-                    <li>Quantas tentativas foram usadas.</li>
-                    <li>
-                      Uma pontuação baseada no número de tentativas (ex:
-                      pontuação = (11 tentativas) * 10).
-                    </li>
-                  </ul>
-                  <li>
-                    No final, perguntar se o jogador quer jogar novamente.
-                  </li>
-                  <li>
-                    Se o jogador errar todas as tentativas, revelar o número
-                    correto.
-                  </li>
-                </ul>
-                <br />
-                <strong>Desafio (Ponto extra):</strong>
-                <ul>
-                  <li>
-                    Adicionar um sistema de recorde (maior pontuação salva em
-                    uma variável).
-                  </li>
-                </ul>
-              </td>
-            </tr>
-            <tr>
-              <td class="num">
-                <a
-                  href="https://github.com/JLBBARCO/study/tree/main/colegio_adolpho/programacao_desenvolvimento_sistemas/atividades/atividade05"
-                >
-                  05
-                </a>
-              </td>
-              <td>
-                <p>
-                  <strong>Compilado</strong><br />
-                  Atividades passadas no caderno, que agora estão em arquivos
-                  Python.
-                </p>
-              </td>
-            </tr>
-            <tr>
-              <td class="num">
-                <a
-                  href="https://github.com/JLBBARCO/study/tree/main/colegio_adolpho/programacao_desenvolvimento_sistemas/atividades/atividade06"
-                >
-                  06
-                </a>
-              </td>
-              <td>
-                Responda as seguintes perguntas (sempre que possível mostre um
-                exemplo de código que corrobora sua resposta):
-                <ol>
-                  <li>
-                    O que acontece se tentarmos escrever &lt; write() &gt; em um
-                    arquivo aberto apenas para leitura &lt; "r" &gt;?
-                  </li>
-                  <li>
-                    O que acontece se tentarmos ler &lt; read() &gt; um arquivo
-                    aberto no modo "w" (escrita)?
-                  </li>
-                  <li>
-                    Qual a diferença entre os modos "w" e "a" ao abrir um
-                    arquivo? Quando cada um é útil?
-                  </li>
-                  <li>
-                    O que acontece se abrirmos um arquivo inexistente no modo
-                    "r"? E no modo "w"?
-                  </li>
-                  <li>
-                    Por que é importante fechar um arquivo após usá-lo &lt;
-                    arquivo.close() &gt;? O que pode acontecer se não fizermos
-                    isso?
-                  </li>
-                  <li>
-                    Como substituir uma linha específica de um arquivo (ex.:
-                    alterar a 3ª linha)?
-                  </li>
-                  <h4>DESAFIO</h4>
-                  <li>
-                    Como contar quantas vezes uma palavra aparece em um arquivo?
-                  </li>
-                </ol>
-              </td>
-            </tr>
-            <tr>
-              <td class="num">
-                <a
-                  href="https://github.com/JLBBARCO/study/tree/main/colegio_adolpho/programacao_desenvolvimento_sistemas/atividades/atividade07"
-                >
-                  07
-                </a>
-              </td>
-            </tr>
-            <tr>
-              <td class="num">
-                <a
-                  href="https://github.com/JLBBARCO/study/tree/main/colegio_adolpho/programacao_desenvolvimento_sistemas/atividades/atividade08"
-                >
-                  08
-                </a>
-              </td>
-              <td>
-                <strong>Controle de Estoque</strong>
-                É necessário:
-                <ul>
-                  <li>Completar as operações definidas no arquivo.</li>
-                  <li>Salvar o estoque em um arquivo .txt</li>
-                  <li>
-                    Salvar o histórico de movimentações em um outro arquivo .txt
-                  </li>
-                  <li>
-                    Permitir o usuário escolher salvar qualquer um dos
-                    relatórios em um arquivo .txt
-                  </li>
-                </ul>
-              </td>
-            </tr>
-            <tr>
-              <td class="num">
-                <a
-                  href="https://github.com/JLBBARCO/study/tree/main/colegio_adolpho/programacao_desenvolvimento_sistemas/atividades/atividade09"
-                >
-                  09
-                </a>
-              </td>
-              <td>Jogo da Forca</td>
-            </tr>
-            <tr>
-              <td class="num">
-                <a
-                  href="https://github.com/JLBBARCO/study/tree/main/colegio_adolpho/programacao_desenvolvimento_sistemas/atividades/atividade10"
-                >
-                  10
-                </a>
-              </td>
-              <td>Classes</td>
-            </tr>
-          </tbody>
-        </table>
-        <table id="recuperacoes">
-          <caption>
-            <h2>Recuperações</h2>
-          </caption>
-          <thead>
-            <th>Recuperação</th>
+      <table id="avaliacoes">
+        <caption>
+          <h2>Avaliações</h2>
+        </caption>
+        <thead>
+          <tr>
+            <th>Aulas</th>
             <th>Descrição</th>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="num">
-                <a
-                  href="https://github.com/JLBBARCO/study/tree/main/colegio_adolpho/programacao_desenvolvimento_sistemas/recuperacoes/recuperacao01/"
-                >
-                  01
-                </a>
-              </td>
-              <td>
-                <strong>Sistema simplificado de biblioteca</strong><br />
-                <strong>Objetivo:</strong> Criar um programa em Python que
-                simule as operações básicas de uma biblioteca, sem usuários
-                específicos.
-                <br />
-                <strong>Requisitos do sistema:</strong>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="num">
+              <a
+                href="https://github.com/JLBBARCO/study/tree/main/colegio_adolpho/programacao_desenvolvimento_sistemas/atividades/atividade01"
+              >
+                01
+              </a>
+            </td>
+            <td>Introdução à linguagem python</td>
+          </tr>
+          <tr>
+            <td class="num">
+              <a
+                href="https://github.com/JLBBARCO/study/tree/main/colegio_adolpho/programacao_desenvolvimento_sistemas/atividades/atividade02"
+              >
+                02
+              </a>
+            </td>
+            <td>Verifica se o número é par ou ímpar</td>
+          </tr>
+          <tr>
+            <td class="num">
+              <a
+                href="https://github.com/JLBBARCO/study/tree/main/colegio_adolpho/programacao_desenvolvimento_sistemas/atividades/atividade03"
+              >
+                03
+              </a>
+            </td>
+            <td>
+              <strong>Sistema de caixa eletrônico simplificado</strong><br />
+              <strong>Objetivo</strong>: Criar um programa em Python que simule
+              as operações básicas de um caixa eletrônico, usando estruturas de
+              repetição e decisão vistas em sala de aula.<br />
+              <strong>Requisitos do sistema</strong>:<br />
+              <ul>
+                <li>
+                  O programa deve ter um menu interativo que repete até o
+                  usuário escolher sair.
+                </li>
+                <li>
+                  Operações disponíveis: Consultar saldo, Depositar valor, Sacar
+                  valor, Extrato (últimas transações), Sair.
+                </li>
+                <li>Limitar saques diários (ex.: R$500,00 por dia).</li>
+                <li>Limitar valor máximo por saque (ex.: R$500,00).</li>
+                <li>Armazenar transações e mostrar tudo no estrato.</li>
+              </ul>
+              <strong>Sua tarefa</strong>:<br />
+              <ul>
+                <li>
+                  Implementar a lógica de cada operação (depósito, saque, etc.).
+                </li>
+                <li>Validar entradas (ex.: não permitir depósito negativo).</li>
+                <li>
+                  Garantir que o número de saques não ultrapasse LIMITE_SAQUES.
+                </li>
+                <li>
+                  Formatar o extrato para mostrar operações em ordem
+                  cronológica.
+                </li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <td class="num">
+              <a
+                href="https://github.com/JLBBARCO/study/tree/main/colegio_adolpho/programacao_desenvolvimento_sistemas/atividades/atividade04"
+              >
+                04
+              </a>
+            </td>
+            <td>
+              <strong>Jogo de adivinhação</strong>
+              <br />
+              <strong>Objetivo: </strong>Criar um jogo em que o jogador tenta
+              adivinhar um número aleatório gerado pelo computador, com dicas e
+              um sistema de pontuação.
+              <br />
+              <strong>Requisitos do sistema:</strong>
+              <br />
+              <ul>
+                <li>O programa gera um número aleatório entre 1 e 100.</li>
+                <li>
+                  O jogador tem um número limitado de tentativas (ex: 10).
+                </li>
+                <li>
+                  A cada palpite, o programa informa se o número correto é maior
+                  ou menor.
+                </li>
+                <li>Se o jogador acertar, o programa mostra:</li>
                 <ul>
+                  <li>Quantas tentativas foram usadas.</li>
                   <li>
-                    O programa deve ter um menu interativo que repete até o
-                    usuário escolher sair.
-                  </li>
-                  <li>
-                    Operações disponíveis: adicionar livro, emprestar livro,
-                    devolver livro, listar livros e Sair.
-                  </li>
-                  <li>Controlar status dos livros (disponível/emprestado)</li>
-                  <li>Armazenar histórico de empréstimos.</li>
-                </ul>
-                <strong>Sua tarefa:</strong>
-                <ul>
-                  <li>Implementar a lógica de cada operação.</li>
-                  <li>Validar entradas.</li>
-                  <li>
-                    Armazenar (persistir) um log das operações realizadas ou
-                    armazenar em um arquivo, todos os livros adicionados na
-                    biblioteca.
+                    Uma pontuação baseada no número de tentativas (ex: pontuação
+                    = (11 tentativas) * 10).
                   </li>
                 </ul>
-                <strong>Desafio:</strong>
-                <ul>
-                  <li>
-                    Refaça toda a lógica do programa, considerando que existem
-                    usuários específicos, portanto é necessário criar função
-                    para cadastro dos usuário e um usuário só pode emprestar um
-                    livro ao mesmo tempo.
-                  </li>
-                </ul>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </section>
+                <li>No final, perguntar se o jogador quer jogar novamente.</li>
+                <li>
+                  Se o jogador errar todas as tentativas, revelar o número
+                  correto.
+                </li>
+              </ul>
+              <br />
+              <strong>Desafio (Ponto extra):</strong>
+              <ul>
+                <li>
+                  Adicionar um sistema de recorde (maior pontuação salva em uma
+                  variável).
+                </li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <td class="num">
+              <a
+                href="https://github.com/JLBBARCO/study/tree/main/colegio_adolpho/programacao_desenvolvimento_sistemas/atividades/atividade05"
+              >
+                05
+              </a>
+            </td>
+            <td>
+              <p>
+                <strong>Compilado</strong><br />
+                Atividades passadas no caderno, que agora estão em arquivos
+                Python.
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td class="num">
+              <a
+                href="https://github.com/JLBBARCO/study/tree/main/colegio_adolpho/programacao_desenvolvimento_sistemas/atividades/atividade06"
+              >
+                06
+              </a>
+            </td>
+            <td>
+              Responda as seguintes perguntas (sempre que possível mostre um
+              exemplo de código que corrobora sua resposta):
+              <ol>
+                <li>
+                  O que acontece se tentarmos escrever &lt; write() &gt; em um
+                  arquivo aberto apenas para leitura &lt; "r" &gt;?
+                </li>
+                <li>
+                  O que acontece se tentarmos ler &lt; read() &gt; um arquivo
+                  aberto no modo "w" (escrita)?
+                </li>
+                <li>
+                  Qual a diferença entre os modos "w" e "a" ao abrir um arquivo?
+                  Quando cada um é útil?
+                </li>
+                <li>
+                  O que acontece se abrirmos um arquivo inexistente no modo "r"?
+                  E no modo "w"?
+                </li>
+                <li>
+                  Por que é importante fechar um arquivo após usá-lo &lt;
+                  arquivo.close() &gt;? O que pode acontecer se não fizermos
+                  isso?
+                </li>
+                <li>
+                  Como substituir uma linha específica de um arquivo (ex.:
+                  alterar a 3ª linha)?
+                </li>
+                <h4>DESAFIO</h4>
+                <li>
+                  Como contar quantas vezes uma palavra aparece em um arquivo?
+                </li>
+              </ol>
+            </td>
+          </tr>
+          <tr>
+            <td class="num">
+              <a
+                href="https://github.com/JLBBARCO/study/tree/main/colegio_adolpho/programacao_desenvolvimento_sistemas/atividades/atividade07"
+              >
+                07
+              </a>
+            </td>
+          </tr>
+          <tr>
+            <td class="num">
+              <a
+                href="https://github.com/JLBBARCO/study/tree/main/colegio_adolpho/programacao_desenvolvimento_sistemas/atividades/atividade08"
+              >
+                08
+              </a>
+            </td>
+            <td>
+              <strong>Controle de Estoque</strong>
+              É necessário:
+              <ul>
+                <li>Completar as operações definidas no arquivo.</li>
+                <li>Salvar o estoque em um arquivo .txt</li>
+                <li>
+                  Salvar o histórico de movimentações em um outro arquivo .txt
+                </li>
+                <li>
+                  Permitir o usuário escolher salvar qualquer um dos relatórios
+                  em um arquivo .txt
+                </li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <td class="num">
+              <a
+                href="https://github.com/JLBBARCO/study/tree/main/colegio_adolpho/programacao_desenvolvimento_sistemas/atividades/atividade09"
+              >
+                09
+              </a>
+            </td>
+            <td>Jogo da Forca</td>
+          </tr>
+          <tr>
+            <td class="num">
+              <a
+                href="https://github.com/JLBBARCO/study/tree/main/colegio_adolpho/programacao_desenvolvimento_sistemas/atividades/atividade10"
+              >
+                10
+              </a>
+            </td>
+            <td>Classes</td>
+          </tr>
+        </tbody>
+      </table>
+      <table id="recuperacoes">
+        <caption>
+          <h2>Recuperações</h2>
+        </caption>
+        <thead>
+          <th>Recuperação</th>
+          <th>Descrição</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="num">
+              <a
+                href="https://github.com/JLBBARCO/study/tree/main/colegio_adolpho/programacao_desenvolvimento_sistemas/recuperacoes/recuperacao01/"
+              >
+                01
+              </a>
+            </td>
+            <td>
+              <strong>Sistema simplificado de biblioteca</strong><br />
+              <strong>Objetivo:</strong> Criar um programa em Python que simule
+              as operações básicas de uma biblioteca, sem usuários específicos.
+              <br />
+              <strong>Requisitos do sistema:</strong>
+              <ul>
+                <li>
+                  O programa deve ter um menu interativo que repete até o
+                  usuário escolher sair.
+                </li>
+                <li>
+                  Operações disponíveis: adicionar livro, emprestar livro,
+                  devolver livro, listar livros e Sair.
+                </li>
+                <li>Controlar status dos livros (disponível/emprestado)</li>
+                <li>Armazenar histórico de empréstimos.</li>
+              </ul>
+              <strong>Sua tarefa:</strong>
+              <ul>
+                <li>Implementar a lógica de cada operação.</li>
+                <li>Validar entradas.</li>
+                <li>
+                  Armazenar (persistir) um log das operações realizadas ou
+                  armazenar em um arquivo, todos os livros adicionados na
+                  biblioteca.
+                </li>
+              </ul>
+              <strong>Desafio:</strong>
+              <ul>
+                <li>
+                  Refaça toda a lógica do programa, considerando que existem
+                  usuários específicos, portanto é necessário criar função para
+                  cadastro dos usuário e um usuário só pode emprestar um livro
+                  ao mesmo tempo.
+                </li>
+              </ul>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </main>
     <footer></footer>
     <script src="../../../assets/js/script.js"></script>

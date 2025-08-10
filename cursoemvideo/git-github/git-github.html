@@ -49,229 +49,220 @@
       </menu>
     </header>
     <main>
-      <menu id="menuLateral"></menu>
-      <section id="Container">
-        <section id="git">
-          <h2>Git</h2>
-          <h3>Comandos do git</h3>
-          <h3>Como entrar em uma branch específica?</h3>
-          <p>
-            Para alternar entre branches, basta usar git checkout
-            &lt;nome-do-<strong>branch</strong>&gt;. Caso precise listar todos
-            os nomes de branches, só usar git <strong>branch</strong> antes.
-          </p>
-          <h3>Como entrar em uma branch no git?</h3>
-          <p>Uso: branch atuais</p>
-          <p>
-            Supondo que o repositório em que você está trabalhando contenha
-            ramificações preexistentes, você pode alternar entre elas usando o
-            comando git checkout. Para descobrir quais ramificações estão
-            disponíveis e o nome da ramificação atual, execute git branch.
-          </p>
-          <h3>Como ir para outra branch?</h3>
-          <p>
-            Para trocar o branch atual simplesmente use o comando git switch.
-          </p>
-          <h3>Como dar pull de uma branch específica?</h3>
-          <p>
-            Em <a href="https://github.com" class="externo">GitHub</a>, acesse a
-            página principal do repositório. No menu "Branch", escolha o branch
-            que contém seus commits. Acima da lista de arquivos, na faixa
-            amarela, clique em Comparação e solicitação de pull para criar uma
-            solicitação de pull para o branch associado.
-          </p>
-          <h3>Como escolher a branch?</h3>
-          <p>
-            Para mudar para uma outra branch basta usar o comando checkout,
-            passando o nome da branch. Se você adicionar -b, uma nova branch
-            será criada.
-          </p>
-          <h3>
-            Como Navegar Entre Branches no Git (git branch e git checkout)
-          </h3>
-          <h3>Como ver em qual branch estou?</h3>
-          <p>
-            Você pode ver isso facilmente executando um simples somando git log
-            que mostra para onde os ponteiros do branch estão apontando.
-          </p>
-          <h3>Como mudar a branch padrão no git?</h3>
-          <p>Alterar o branch-padrão</p>
-          <ol>
-            <li>
-              No <a href="https://github.com" class="externo">GitHub</a>,
-              navegue até a página principal do repositório.
-            </li>
-            <li>Abaixo do nome do repositório, clique em Configurações. ...</li>
-            <li>
-              Em "Branch padrão", clique em à direita do nome do branch padrão.
-            </li>
-            <li>
-              Selecione o menu suspenso do branch e clique no nome do branch.
-            </li>
-            <li>Clique em Atualizar.</li>
-          </ol>
-          <h3>Como dar push na branch?</h3>
-          <p>
-            Para efetuar push para seu repositório remoto, clique no botão Push
-            (seta para cima) ou selecione Push no menu Git.
-          </p>
-          <h3>O que o git push faz?</h3>
-          <p>
-            O comando git push é usado para gravar em um repositório remoto.
-          </p>
-          <h3>O que o git pull faz?</h3>
-          <p>
-            O comando git pull é usado para buscar e baixar conteúdo de
-            repositórios remotos e fazer a atualização imediata ao repositório
-            local para que os conteúdos sejam iguais. Fazer o merge de
-            alterações upstream remotas no repositório local é algo comum em
-            fluxos de trabalho de colaboração baseados em Git.
-          </p>
-          <h3>O que o git checkout faz?</h3>
-          <p>git checkout</p>
-          <p>
-            O objetivo dele é fazer a pessoa programadora mudar de branch. Você
-            pode usar o "git branch" para saber quais existem e depois trocar de
-            uma para outra. É importante destacar que é preciso fazer um
-            checkout para a master branch quando queremos captar as mudanças de
-            outra ramificação.
-          </p>
-          <h3>Como trocar de branch sem dar commit?</h3>
-          <p>
-            Você pode passar a opção -f ou --force com o comando git checkout
-            para forçar o Git a alterar as branches, mesmo que você telha
-            alterações que não passaram por staging (em outras palavras, o
-            índice da árvore de trabalho difere de HEAD). Basicamente, essa
-            opção pode ser usada para descartar alterações locais.
-          </p>
-          <h3>Como juntar duas branches?</h3>
-          <p>
-            Para fazer merge de branches localmente, use git checkout para
-            alternar para o branch no qual você quer que o merge aconteça. Esse
-            branch é geralmente o main. Em seguida, use git merge e especifique
-            o nome do outro branch para colocar nesse branch.
-          </p>
-          <h3>Como mudar para outra branch?</h3>
-          <p>
-            Para trazer as alterações de outras branches para a branch atual,
-            podemos utilizar o comando git merge. O git merge combina as
-            alterações de uma branch específica na branch atual. Iremos
-            substituir &lt;nome-da-outra-branch&gt; pelo nome da branch que
-            contém as alterações que desejamos incorporar na branch atual.
-          </p>
-          <h3>Como voltar para uma branch?</h3>
-          <p>
-            Você pode usar o Git reset para reverter um branch para seu estado
-            em commit anterior. O comando reset do Git pode ser usado com vários
-            sinalizadores: O sinalizador --hard informa ao Git para redefinir o
-            branch para o commit especificado e descartar todas as alterações
-            subsequentes.
-          </p>
-          <h3>Como ver todas as branches git?</h3>
-          <p>
-            Para listar todos os branches no repositório, você pode usar o
-            comando git branch sem argumentos.
-          </p>
-          <h3>Como forçar o git push?</h3>
-          <p>
-            Para forçar um envio para apenas um ramo, use um + na frente do
-            refspec que será enviado (git push origin + master para forçar um
-            envio para o ramo master por exemplo).
-          </p>
-          <h3>O que é commit e push?</h3>
-          <p>
-            O "Commit" salva os arquivos do repositório em um pacote, e o "push"
-            salva esse pacote no servidor.
-          </p>
-          <h3>O que o git remote faz?</h3>
-          <p>
-            O comando git remote set -url altera uma URL do repositório remoto
-            existente. O comando git remote set -url usa dois argumentos: Um
-            nome remote existente.
-          </p>
-          <h3>Como puxar uma branch?</h3>
-          <p>Puxar para o seu branch local a partir do remoto</p>
-          <p>
-            No GitHub Desktop, use o menu suspenso Branch Atual e selecione o
-            branch local que deseja atualizar. Para efetuar pull de commits do
-            branch remoto, clique em Efetuar pull da origem ou em Efetuar pull
-            da origem com troca de base.
-          </p>
-          <h3>Qual o comando do git push?</h3>
-          <p>git push -u origin [nomedabranch]</p>
-          <p>
-            Como falado acima, este comando é utilizado quando queremos enviar a
-            branch que criamos para o repositório remoto. Isso criará um "elo"
-            entre o seu repositório local e o repositório remoto.
-          </p>
-          <h3>Como abrir uma branch remota?</h3>
-          <p>Aqui está o que você deve fazer:</p>
-          <ol>
-            <li>
-              Faça o fetch de todas as branches remotas. git fetch origin. ...
-            </li>
-            <li>
-              Liste as branches disponíveis para o checkout. Para ver as
-              branches disponíveis para checkout, execute o comando abaixo: git
-              branch -a. ...
-            </li>
-            <li>Faça o pull das alterações de uma branch remota.</li>
-          </ol>
-          <h3>O que é branch main?</h3>
-          <p>
-            No contexto do controle de versão de software, uma "branch"
-            (ramificação) no Git é uma linha de desenvolvimento independente que
-            permite que você trabalhe em um conjunto de alterações separado do
-            código principal (normalmente chamado de "branch principal" ou
-            "branch mestre", que muitas vezes é chamado de "main")
-          </p>
-          <h3>Como verificar branch atual?</h3>
-          <p>
-            Para saber a lista que existem no seu repositório, basta rodar git
-            branch no seu repositório, que se assemelha ao comando git branch
-            --list.
-          </p>
-          <h3>O que o comando git log faz?</h3>
-          <p>
-            O comando git lof exibe instantâneos que receberam commit. Ele
-            permite que você liste e filtre o histórico do projeto e pesquise
-            alterações específicas. Embora o git status permita que o diretório
-            de trabalho e a área de staging sejam inspecionados, o git log
-            funciona apenas com o histórico que recebeu commit.
-          </p>
-        </section>
-        <aside id="downloads">
-          <h3>Download</h3>
-          <ul>
-            <li>
-              <a
-                href="https://git-scm.com/downloads"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="externo"
-                >Git</a
-              >
-              <p>Gerencia repositórios locais.</p>
-            </li>
-            <li>
-              <a
-                href="http://"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="externo"
-                >GitHub Desktop</a
-              >
-              <p>Programa que possibilita a gestão dos repositórios.</p>
-            </li>
-          </ul>
-          <h3>Windows</h3>
-          <p>
-            Se estiver em Windows pode executar
-            <code>winget install GitHub.GitHubDesktop</code> para o GitHub
-            Desktop no Windows PowerShell como <strong>Administrador</strong>.
-          </p>
-        </aside>
+      <section id="git">
+        <h2>Git</h2>
+        <h3>Comandos do git</h3>
+        <h3>Como entrar em uma branch específica?</h3>
+        <p>
+          Para alternar entre branches, basta usar git checkout
+          &lt;nome-do-<strong>branch</strong>&gt;. Caso precise listar todos os
+          nomes de branches, só usar git <strong>branch</strong> antes.
+        </p>
+        <h3>Como entrar em uma branch no git?</h3>
+        <p>Uso: branch atuais</p>
+        <p>
+          Supondo que o repositório em que você está trabalhando contenha
+          ramificações preexistentes, você pode alternar entre elas usando o
+          comando git checkout. Para descobrir quais ramificações estão
+          disponíveis e o nome da ramificação atual, execute git branch.
+        </p>
+        <h3>Como ir para outra branch?</h3>
+        <p>Para trocar o branch atual simplesmente use o comando git switch.</p>
+        <h3>Como dar pull de uma branch específica?</h3>
+        <p>
+          Em <a href="https://github.com" class="externo">GitHub</a>, acesse a
+          página principal do repositório. No menu "Branch", escolha o branch
+          que contém seus commits. Acima da lista de arquivos, na faixa amarela,
+          clique em Comparação e solicitação de pull para criar uma solicitação
+          de pull para o branch associado.
+        </p>
+        <h3>Como escolher a branch?</h3>
+        <p>
+          Para mudar para uma outra branch basta usar o comando checkout,
+          passando o nome da branch. Se você adicionar -b, uma nova branch será
+          criada.
+        </p>
+        <h3>Como Navegar Entre Branches no Git (git branch e git checkout)</h3>
+        <h3>Como ver em qual branch estou?</h3>
+        <p>
+          Você pode ver isso facilmente executando um simples somando git log
+          que mostra para onde os ponteiros do branch estão apontando.
+        </p>
+        <h3>Como mudar a branch padrão no git?</h3>
+        <p>Alterar o branch-padrão</p>
+        <ol>
+          <li>
+            No <a href="https://github.com" class="externo">GitHub</a>, navegue
+            até a página principal do repositório.
+          </li>
+          <li>Abaixo do nome do repositório, clique em Configurações. ...</li>
+          <li>
+            Em "Branch padrão", clique em à direita do nome do branch padrão.
+          </li>
+          <li>
+            Selecione o menu suspenso do branch e clique no nome do branch.
+          </li>
+          <li>Clique em Atualizar.</li>
+        </ol>
+        <h3>Como dar push na branch?</h3>
+        <p>
+          Para efetuar push para seu repositório remoto, clique no botão Push
+          (seta para cima) ou selecione Push no menu Git.
+        </p>
+        <h3>O que o git push faz?</h3>
+        <p>O comando git push é usado para gravar em um repositório remoto.</p>
+        <h3>O que o git pull faz?</h3>
+        <p>
+          O comando git pull é usado para buscar e baixar conteúdo de
+          repositórios remotos e fazer a atualização imediata ao repositório
+          local para que os conteúdos sejam iguais. Fazer o merge de alterações
+          upstream remotas no repositório local é algo comum em fluxos de
+          trabalho de colaboração baseados em Git.
+        </p>
+        <h3>O que o git checkout faz?</h3>
+        <p>git checkout</p>
+        <p>
+          O objetivo dele é fazer a pessoa programadora mudar de branch. Você
+          pode usar o "git branch" para saber quais existem e depois trocar de
+          uma para outra. É importante destacar que é preciso fazer um checkout
+          para a master branch quando queremos captar as mudanças de outra
+          ramificação.
+        </p>
+        <h3>Como trocar de branch sem dar commit?</h3>
+        <p>
+          Você pode passar a opção -f ou --force com o comando git checkout para
+          forçar o Git a alterar as branches, mesmo que você telha alterações
+          que não passaram por staging (em outras palavras, o índice da árvore
+          de trabalho difere de HEAD). Basicamente, essa opção pode ser usada
+          para descartar alterações locais.
+        </p>
+        <h3>Como juntar duas branches?</h3>
+        <p>
+          Para fazer merge de branches localmente, use git checkout para
+          alternar para o branch no qual você quer que o merge aconteça. Esse
+          branch é geralmente o main. Em seguida, use git merge e especifique o
+          nome do outro branch para colocar nesse branch.
+        </p>
+        <h3>Como mudar para outra branch?</h3>
+        <p>
+          Para trazer as alterações de outras branches para a branch atual,
+          podemos utilizar o comando git merge. O git merge combina as
+          alterações de uma branch específica na branch atual. Iremos substituir
+          &lt;nome-da-outra-branch&gt; pelo nome da branch que contém as
+          alterações que desejamos incorporar na branch atual.
+        </p>
+        <h3>Como voltar para uma branch?</h3>
+        <p>
+          Você pode usar o Git reset para reverter um branch para seu estado em
+          commit anterior. O comando reset do Git pode ser usado com vários
+          sinalizadores: O sinalizador --hard informa ao Git para redefinir o
+          branch para o commit especificado e descartar todas as alterações
+          subsequentes.
+        </p>
+        <h3>Como ver todas as branches git?</h3>
+        <p>
+          Para listar todos os branches no repositório, você pode usar o comando
+          git branch sem argumentos.
+        </p>
+        <h3>Como forçar o git push?</h3>
+        <p>
+          Para forçar um envio para apenas um ramo, use um + na frente do
+          refspec que será enviado (git push origin + master para forçar um
+          envio para o ramo master por exemplo).
+        </p>
+        <h3>O que é commit e push?</h3>
+        <p>
+          O "Commit" salva os arquivos do repositório em um pacote, e o "push"
+          salva esse pacote no servidor.
+        </p>
+        <h3>O que o git remote faz?</h3>
+        <p>
+          O comando git remote set -url altera uma URL do repositório remoto
+          existente. O comando git remote set -url usa dois argumentos: Um nome
+          remote existente.
+        </p>
+        <h3>Como puxar uma branch?</h3>
+        <p>Puxar para o seu branch local a partir do remoto</p>
+        <p>
+          No GitHub Desktop, use o menu suspenso Branch Atual e selecione o
+          branch local que deseja atualizar. Para efetuar pull de commits do
+          branch remoto, clique em Efetuar pull da origem ou em Efetuar pull da
+          origem com troca de base.
+        </p>
+        <h3>Qual o comando do git push?</h3>
+        <p>git push -u origin [nomedabranch]</p>
+        <p>
+          Como falado acima, este comando é utilizado quando queremos enviar a
+          branch que criamos para o repositório remoto. Isso criará um "elo"
+          entre o seu repositório local e o repositório remoto.
+        </p>
+        <h3>Como abrir uma branch remota?</h3>
+        <p>Aqui está o que você deve fazer:</p>
+        <ol>
+          <li>
+            Faça o fetch de todas as branches remotas. git fetch origin. ...
+          </li>
+          <li>
+            Liste as branches disponíveis para o checkout. Para ver as branches
+            disponíveis para checkout, execute o comando abaixo: git branch -a.
+            ...
+          </li>
+          <li>Faça o pull das alterações de uma branch remota.</li>
+        </ol>
+        <h3>O que é branch main?</h3>
+        <p>
+          No contexto do controle de versão de software, uma "branch"
+          (ramificação) no Git é uma linha de desenvolvimento independente que
+          permite que você trabalhe em um conjunto de alterações separado do
+          código principal (normalmente chamado de "branch principal" ou "branch
+          mestre", que muitas vezes é chamado de "main")
+        </p>
+        <h3>Como verificar branch atual?</h3>
+        <p>
+          Para saber a lista que existem no seu repositório, basta rodar git
+          branch no seu repositório, que se assemelha ao comando git branch
+          --list.
+        </p>
+        <h3>O que o comando git log faz?</h3>
+        <p>
+          O comando git lof exibe instantâneos que receberam commit. Ele permite
+          que você liste e filtre o histórico do projeto e pesquise alterações
+          específicas. Embora o git status permita que o diretório de trabalho e
+          a área de staging sejam inspecionados, o git log funciona apenas com o
+          histórico que recebeu commit.
+        </p>
       </section>
+      <aside id="downloads">
+        <h3>Download</h3>
+        <ul>
+          <li>
+            <a
+              href="https://git-scm.com/downloads"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="externo"
+              >Git</a
+            >
+            <p>Gerencia repositórios locais.</p>
+          </li>
+          <li>
+            <a
+              href="http://"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="externo"
+              >GitHub Desktop</a
+            >
+            <p>Programa que possibilita a gestão dos repositórios.</p>
+          </li>
+        </ul>
+        <h3>Windows</h3>
+        <p>
+          Se estiver em Windows pode executar
+          <code>winget install GitHub.GitHubDesktop</code> para o GitHub Desktop
+          no Windows PowerShell como <strong>Administrador</strong>.
+        </p>
+      </aside>
     </main>
     <footer></footer>
     <script src="../../assets/js/script.js"></script>

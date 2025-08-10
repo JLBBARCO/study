@@ -72,42 +72,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Menu Lateral
-  document.getElementById("menuLateral").innerHTML = `
-    <ul>
-        <li><a href="${caminhoRelativoAteRaiz}index.html">Início</a></li>
-          <ul>
-            <li><a href="https://jlbbarco.github.io">Portfólio</a></li>
-            <li><a href="${caminhoRelativoAteRaiz}meus_projetos/meus_projetos.html">Meus Projetos</a></li>
-            <li><a href="${caminhoRelativoAteRaiz}cursoemvideo/cursoemvideo.html">Curso em Vídeo</a></li>
-              <ul>
-                <li><a href="${caminhoRelativoAteRaiz}cursoemvideo/html-css/html-css.html">HTML & CSS</a></li>
-                <li><a href="${caminhoRelativoAteRaiz}cursoemvideo/git-github/git-github.html">Git & GitHub</a></li>
-                <li><a href="${caminhoRelativoAteRaiz}cursoemvideo/javascript/javascript.html">JavaScript</a></li>
-                <li><a href="${caminhoRelativoAteRaiz}cursoemvideo/python/python.html">Python</a></li>
-              </ul>
-            <li><a href="${caminhoRelativoAteRaiz}colegio_adolpho/colegio_adolpho.html">Colégio Adolpho</a></li>
-              <ul>
-                <li><a href="${caminhoRelativoAteRaiz}colegio_adolpho/aulas_extracurriculares/aulas_extracurriculares.html">Aulas Extracurriculares</a></li>
-                <ul>
-                  <li><a href="${caminhoRelativoAteRaiz}colegio_adolpho/aulas_extracurriculares/robotica/robotica.html">Robótica</a></li>
-                </ul>
-                <li><a href="${caminhoRelativoAteRaiz}colegio_adolpho/projetos/projetos.html">Projetos</a></li>
-                <li><a href="${caminhoRelativoAteRaiz}colegio_adolpho/2_serie/2_serie.html">2ª Série</a></li>
-                <ul>
-                  <li><a href="${caminhoRelativoAteRaiz}colegio_adolpho/2_serie/programacao_front-end/programacao_front-end.html">Programação Front-End</a></li>
-                </ul>
-                <li><a href="${caminhoRelativoAteRaiz}colegio_adolpho/3_serie/3_serie.html">3ª Série</a></li>
-                <ul>
-                  <li><a href="${caminhoRelativoAteRaiz}colegio_adolpho/3_serie/programacao_desenvolvimento_sistemas/programacao_desenvolvimento_sistemas.html">Programação no Desenvolvimento de Sistemas</a></li>
-                  <li><a href="${caminhoRelativoAteRaiz}colegio_adolpho/3_serie/ciencias_dados/ciencias_dados.html">Ciências de Dados</a></li>
-                  <li><a href="${caminhoRelativoAteRaiz}colegio_adolpho/3_serie/programacao_back-end/programacao_back-end.html">Programação Back-End</a></li>
-                </ul>
-              </ul>
-          </ul>
-    </ul>
-  `;
-
   // --- Rodapé dinâmico ---
   const footer = document.querySelector("footer");
   if (footer) {
