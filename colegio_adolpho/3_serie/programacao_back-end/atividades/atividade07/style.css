@@ -29,3 +29,7 @@
   padding: 10px;
   width: 100%;
 }
+
+.desativa {
+  display: none;
+}
