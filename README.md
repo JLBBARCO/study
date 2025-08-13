@@ -32,12 +32,12 @@ Links of pages:
 
     - [Second Year](https://jlbbarco.github.io/study/colegio_adolpho/2_serie/2_serie.html)
 
-      - [Front-end Programming](https://jlbbarco.github.io/study/colegio_adolpho/programacao_front-end/programacao_front-end.html)
+      - [Front-end Programming](https://jlbbarco.github.io/study/colegio_adolpho/2_serie/programacao_front-end/programacao_front-end.html)
 
     - [Third Year](https://jlbbarco.github.io/study/colegio_adolpho/3_serie/3_serie.html)
 
-      - [Developer Systems Programing](https://jlbbarco.github.io/study/colegio_adolpho/programacao_desenvolvimento_sistemas/programacao_desenvolvimento_sistemas.html)
+      - [Developer Systems Programing](https://jlbbarco.github.io/study/colegio_adolpho/3_serie/programacao_desenvolvimento_sistemas/programacao_desenvolvimento_sistemas.html)
 
-      - [Data Science](https://jlbbarco.github.io/study/colegio_adolpho/ciencias_dados/ciencias_dados.html)
+      - [Data Science](https://jlbbarco.github.io/study/colegio_adolpho/3_serie/ciencias_dados/ciencias_dados.html)
 
-      - [Back-end Programing](https://jlbbarco.github.io/study/colegio_adolpho/programacao_back-end/programacao_back-end.html)
+      - [Back-end Programing](https://jlbbarco.github.io/study/colegio_adolpho/3_serie/programacao_back-end/programacao_back-end.html)
