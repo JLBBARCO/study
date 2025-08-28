@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Elementos DOM</title>
+  </head>
+  <body>
+    <h1>Elementos DOM</h1>
+    <ol id="lista">
+      <li class="item">Primeiro item</li>
+      <li class="item">Segundo item</li>
+      <li class="item">Terceiro item</li>
+    </ol>
+
+    <ul id="frutas">
+      <li class="item">Uva</li>
+      <li class="item">Maçã</li>
+      <li class="item">Kiwi</li>
+    </ul>
+    <script>
+      const title = document.getElementsByTagName("h1");
+      title[0].innerHTML = "Manipulação do DOM";
+
+      const item = document.getElementsByClassName("item");
+      item[1].innerHTML = "Item alterado";
+      item[3].innerHTML = "Melancia";
+
+      const lista = document.getElementById("lista");
+      lista.style.border = "1px solid black";
+    </script>
+  </body>
+</html>
