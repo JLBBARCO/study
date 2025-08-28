@@ -18,16 +18,27 @@
       <li class="item">Maçã</li>
       <li class="item">Kiwi</li>
     </ul>
-    <script>
-      const title = document.getElementsByTagName("h1");
-      title[0].innerHTML = "Manipulação do DOM";
 
-      const item = document.getElementsByClassName("item");
-      item[1].innerHTML = "Item alterado";
-      item[3].innerHTML = "Melancia";
+    <div
+      class="center"
+      style="display: flex; flex-direction: column; align-items: center"
+    >
+      <img
+        src="mustang1967.webp"
+        alt="Ford Mustang"
+        id="imagem"
+        style="width: 250px; border-radius: 10px; border: 1px solid black"
+      />
 
-      const lista = document.getElementById("lista");
-      lista.style.border = "1px solid black";
-    </script>
+      <p
+        id="elementoX"
+        style="width: 250px; text-align: justify; padding: 10px"
+      >
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque voluptate
+        minus ad repellendus id magni voluptas ab non, fugiat sapiente maiores
+        dolorum ex soluta provident quas quo perspiciatis, placeat error.
+      </p>
+    </div>
+    <script src="script.js"></script>
   </body>
 </html>
