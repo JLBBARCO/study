@@ -1,0 +1,24 @@
+import customtkinter as ctk
+
+class App (ctk.CTk):
+    def __init__(self):
+        super().__init__()
+        self.frame1 = ctk.CTkScrollableFrame(self, width=200, height=200)
+        self.frame1.grid(row=0, column=0, padx=20, pady=20)
+
+        frase = 'Que Mundo Bonito!\n'*50
+
+        self.texto = ctk.CTkLabel(self.frame1, text=frase)
+        self.texto.grid(row=0, column=0, padx=25, pady=25)
+
+        self.frame2 = ctk.CTkScrollableFrame(self, width=200, height=200)
+        self.frame2.grid(row=1, column=1, padx=20, pady=20)
+
+        self.button = ctk.CTkButton(self.frame1, text='Um Botão', command=self.button_click)
+        self.button.grid(row=1, column=0)
+
+    def button_click(self):
+        print('O botão foi pressionado')
+
+app = App()
+app.mainloop()
