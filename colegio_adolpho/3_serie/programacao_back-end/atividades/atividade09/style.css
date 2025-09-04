@@ -17,7 +17,6 @@ main {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 100px;
   min-height: 50vh;
 }
 
@@ -28,12 +27,19 @@ main {
 
 /* ** Container */
 .container {
-  width: 50%;
-  height: auto;
   display: flex;
-  flex-direction: column;
+  width: 75%;
+  height: auto;
+  flex: auto;
+  flex-wrap: wrap;
+  flex-direction: row;
   justify-content: space-around;
   align-items: center;
+}
+
+.card {
+  max-width: 450px;
+  margin: 25px;
 }
 
 img {
@@ -48,11 +54,16 @@ img {
   display: none;
   min-width: 250px;
   border-radius: 10px;
+  padding: 10px;
   align-items: center;
   text-align: center;
   color: #fff;
   background-color: #99999999;
   transform: translate(0, -170px);
+}
+
+.ativado {
+  display: block;
 }
 
 /* ** Footer */
