@@ -7,12 +7,14 @@ body {
   padding: 0;
   box-sizing: border-box;
   background-color: #fff;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 img {
   width: 100%;
 }
 
+/* * Principal */
 main {
   display: flex;
   flex-direction: column;
@@ -20,12 +22,10 @@ main {
   align-items: center;
 }
 
-/* * Texto explicativo */
 .texto {
   text-align: center;
 }
 
-/* * Container */
 .container {
   display: flex;
   width: 75%;
