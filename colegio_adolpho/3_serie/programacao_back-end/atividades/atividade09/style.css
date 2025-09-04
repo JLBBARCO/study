@@ -1,0 +1,67 @@
+/* ** Tag para o CSS entender letras do alfabeto brasileiro */
+@charset "UTF-8";
+
+/* ** Configurações padrão */
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+img {
+  width: 100%;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 100px;
+  min-height: 50vh;
+}
+
+/* ** Texto explicativo */
+.texto {
+  text-align: center;
+}
+
+/* ** Container */
+.container {
+  width: 50%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+img {
+  min-width: 250px;
+  height: auto;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.info {
+  display: none;
+  min-width: 250px;
+  border-radius: 10px;
+  align-items: center;
+  text-align: center;
+  color: #fff;
+  background-color: #99999999;
+  transform: translate(0, -170px);
+}
+
+/* ** Footer */
+footer {
+  width: 100%;
+  height: 50px;
+  background-color: #000;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
