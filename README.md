@@ -36,8 +36,8 @@ Links of pages:
 
     - [Third Year](https://jlbbarco.github.io/study/colegio_adolpho/3_serie/3_serie.html)
 
-      - [Developer Systems Programing](https://jlbbarco.github.io/study/colegio_adolpho/3_serie/programacao_desenvolvimento_sistemas/programacao_desenvolvimento_sistemas.html)
+      - [Developer Systems programming](https://jlbbarco.github.io/study/colegio_adolpho/3_serie/programacao_desenvolvimento_sistemas/programacao_desenvolvimento_sistemas.html)
 
       - [Data Science](https://jlbbarco.github.io/study/colegio_adolpho/3_serie/ciencias_dados/ciencias_dados.html)
 
-      - [Back-end Programing](https://jlbbarco.github.io/study/colegio_adolpho/3_serie/programacao_back-end/programacao_back-end.html)
+      - [Back-end programming](https://jlbbarco.github.io/study/colegio_adolpho/3_serie/programacao_back-end/programacao_back-end.html)
