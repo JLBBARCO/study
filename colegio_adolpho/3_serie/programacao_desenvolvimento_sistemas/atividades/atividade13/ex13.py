@@ -14,6 +14,9 @@ class App (ctk.CTk):
         self.frame2 = ctk.CTkScrollableFrame(self, width=200, height=200)
         self.frame2.grid(row=1, column=1, padx=20, pady=20)
 
+        self.texto2 = ctk.CTkLabel(self.frame2, text='')
+        self.texto2.grid(row=0, column=0, padx=25, pady=25)
+
         self.button = ctk.CTkButton(self, text='Um Botão', command=self.button_click)
         self.button.grid(row=2, column=0)
 
@@ -26,7 +29,7 @@ class App (ctk.CTk):
         diálogo = ctk.CTkInputDialog(text='Digite sua idade: ', title='Janela de entrada')
         print(f'Sua idade é: {diálogo.get_input()}')
 
-        self.texto.configure(text=dados)
+        self.texto2.configure(text=dados)
 
 app = App()
 app.mainloop()
