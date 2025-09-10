@@ -6,19 +6,13 @@ class App (ctk.CTk):
         self.frame1 = ctk.CTkScrollableFrame(self, width=200, height=200)
         self.frame1.grid(row=0, column=0, padx=20, pady=20)
 
-        frase = 'Que Mundo Bonito!\n'*50
+        frase = 'Dying Light\n'*50
 
         self.texto = ctk.CTkLabel(self.frame1, text=frase)
         self.texto.grid(row=0, column=0, padx=25, pady=25)
 
-        self.frame2 = ctk.CTkScrollableFrame(self, width=200, height=200)
-        self.frame2.grid(row=1, column=1, padx=20, pady=20)
-
-        self.texto2 = ctk.CTkLabel(self.frame2, text='')
-        self.texto2.grid(row=0, column=0, padx=25, pady=25)
-
-        self.frame3 = ctk.CTkScrollableFrame(self, width=200, height=200)
-        self.frame3.grid(row=1, column=0, padx=20, pady=20)
+        self.frame3 = ctk.CTkFrame(self, width=200, height=200)
+        self.frame3.grid(row=0, column=1, padx=20, pady=20)
 
         self.card3 = ctk.CTkLabel(self.frame3, text='')
         self.card3.grid(row=0, column=0, padx=25, pady=25)
@@ -37,9 +31,17 @@ class App (ctk.CTk):
         idade = int(idade)
         print(f'Sua idade é: {idade}')
 
+        self.frame2 = ctk.CTkFrame(self, width=200, height=200)
+        self.frame2.grid(row=1, column=1, padx=20, pady=20)
+
+        self.texto2 = ctk.CTkLabel(self.frame2, text='')
+        self.texto2.grid(row=0, column=0, padx=25, pady=25)
+
         self.texto2.configure(text=f'Olá, {nome}\nVocê tem {idade} anos!')
 
-        self.entrada.delete(0, ctk.END)
+        self.entrada.delete(0, 'end')
+        self.entrada.configure(state='disabled')
+        self.button.configure(state='disabled')
 
 app = App()
 app.mainloop()
