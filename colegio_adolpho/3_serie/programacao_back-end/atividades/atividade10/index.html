@@ -4,10 +4,17 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cookies</title>
-    <link rel="stylesheet" href="style.css" />
   </head>
-  <body>
-    <p id="texto">Olá</p>
+  <body onload="checkCookie()">
+    <p id="textoExibe"></p>
+    <button id="botaoExibe">Exibir Cookies</button>
+    <input type="text" id="nomeCookie" placeholder="Digite o nome do cookie" />
+    <input
+      type="text"
+      id="conteúdoCookie"
+      placeholder="Digite o conteúdo do cookie"
+    />
+    <button id="criarCookie">Criar Cookie</button>
     <script src="script.js"></script>
   </body>
 </html>
