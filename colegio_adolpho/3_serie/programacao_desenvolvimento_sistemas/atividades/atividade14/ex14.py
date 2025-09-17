@@ -80,27 +80,31 @@ class App(customtkinter.CTk):
             label.destroy()
         self.alunos_labels.clear()
 
-        dados_ordenados = sorted(zip(self.nomes, self.notas), key=lambda x: x[1], reverse=True)
+        if self.nomes:
+            dados_ordenados = sorted(zip(self.nomes, self.notas), key=lambda x: x[1], reverse=True)
+            maior_nota = dados_ordenados[0][1]
 
-        maior_nota = dados_ordenados[0][1] if dados_ordenados else 0
+            for nome, nota in dados_ordenados:
+                cor = "green" if nota == maior_nota else "white"
+                aluno_label = customtkinter.CTkLabel(self.framePrint, text=f'{nome} | {nota}', text_color=cor)
+                aluno_label.pack(pady=5)
+                self.alunos_labels.append(aluno_label)
 
-        for nome, nota in dados_ordenados:
-            cor = "green" if nota == maior_nota else "white"
-            aluno_label = customtkinter.CTkLabel(self.framePrint, text=f'{nome} | {nota}', text_color=cor)
-            aluno_label.pack(pady=5)
-            self.alunos_labels.append(aluno_label)
+            # * Atualiza nota mínima
+            nomeMínimo, notaMínima = dados_ordenados[-1]
+            self.labelMínima.configure(text=f'{nomeMínimo} possui a menor nota: {notaMínima}')
 
-        # * Atualiza nota mínima
-        nomeMínimo, notaMínima = dados_ordenados[-1]
-        self.labelMínima.configure(text=f'{nomeMínimo} possui a menor nota: {notaMínima}')
+            # * Atualiza nota máxima
+            nomeMáximo, notaMáximo = dados_ordenados[0]
+            self.labelMáxima.configure(text=f'{nomeMáximo} possui a maior nota: {notaMáximo}')
 
-        # * Atualiza nota máxima
-        nomeMáximo, notaMáximo = dados_ordenados[0]
-        self.labelMáxima.configure(text=f'{nomeMáximo} possui a maior nota: {notaMáximo}')
-
-        # * Atualiza média
-        media = sum(self.notas) / len(self.notas)
-        self.labelMedia.configure(text=f'Média das notas: {media:.2f}')
+            # * Atualiza média
+            media = sum(self.notas) / len(self.notas)
+            self.labelMedia.configure(text=f'Média das notas: {media:.2f}')
+        else:
+            self.labelMínima.configure(text='')
+            self.labelMáxima.configure(text='')
+            self.labelMedia.configure(text='Média das notas: 0.00')
 
         # * Limpa campos
         self.entradaNome.delete(0, 'end')
