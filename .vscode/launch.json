@@ -5,6 +5,13 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "type": "java",
+      "name": "MeuPrimeiroApp",
+      "request": "launch",
+      "mainClass": "MeuPrimeiroApp",
+      "projectName": "study_3b1d1d3a"
+    },
+    {
       "type": "chrome",
       "request": "launch",
       "name": "Launch Chrome against localhost",
@@ -16,7 +23,7 @@
       "name": "Launch Microsoft Edge",
       "request": "launch",
       "runtimeArgs": ["--remote-debugging-port=9222"],
-      "url": "c:\\Users\\josel\\.vscode\\extensions\\ms-edgedevtools.vscode-edge-devtools-2.1.9\\out\\startpage\\index.html", // Provide your project's url to finish configuring
+      "url": "c:\\Users\\josel\\.vscode\\extensions\\ms-edgedevtools.vscode-edge-devtools-2.1.9\\out\\startpage\\index.html",
       "presentation": {
         "hidden": true
       }
@@ -26,7 +33,7 @@
       "name": "Launch Microsoft Edge in headless mode",
       "request": "launch",
       "runtimeArgs": ["--headless", "--remote-debugging-port=9222"],
-      "url": "c:\\Users\\josel\\.vscode\\extensions\\ms-edgedevtools.vscode-edge-devtools-2.1.9\\out\\startpage\\index.html", // Provide your project's url to finish configuring
+      "url": "c:\\Users\\josel\\.vscode\\extensions\\ms-edgedevtools.vscode-edge-devtools-2.1.9\\out\\startpage\\index.html",
       "presentation": {
         "hidden": true
       }
@@ -35,7 +42,7 @@
       "type": "vscode-edge-devtools.debug",
       "name": "Open Edge DevTools",
       "request": "attach",
-      "url": "c:\\Users\\josel\\.vscode\\extensions\\ms-edgedevtools.vscode-edge-devtools-2.1.9\\out\\startpage\\index.html", // Provide your project's url to finish configuring
+      "url": "c:\\Users\\josel\\.vscode\\extensions\\ms-edgedevtools.vscode-edge-devtools-2.1.9\\out\\startpage\\index.html",
       "presentation": {
         "hidden": true
       }

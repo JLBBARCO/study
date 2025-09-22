@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flexible Box</title>
+    <style>
+      div.container {
+        background-color: lightsalmon;
+        display: flex;
+        flex-flow: row nowrap;
+      }
+
+      /* 
+        Flex-basis: Define o tamanho inicial do item antes de o espaço extra ser distribuído.
+        Pode ser definido em px, em, %, auto (padrão), etc.
+        Se o valor for auto, o tamanho do item será baseado no seu conteúdo.
+        Se o valor for 0, o item não terá tamanho inicial e todo o espaço será distribuído com base na propriedade flex-grow.
+        Se o valor for um tamanho específico (ex: 150px), o item terá esse tamanho inicial antes de o espaço extra ser distribuído.
+        Se o flex-wrap estiver ativado, o flex-basis também pode influenciar a quebra de linha dos itens.
+      */
+
+      div.item {
+        background-color: lightblue;
+        border: 1px solid black;
+        text-align: center;
+        flex-basis: 150px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="item">A</div>
+      <div class="item">Outro conteúdo</div>
+      <div class="item">C</div>
+      <div class="item">Conteúdo um pouco maior</div>
+      <div class="item">E</div>
+      <div class="item">Conteúdo maior ainda, que vai ocupar mais espaço</div>
+      <div class="item">G</div>
+    </div>
+  </body>
+</html>
