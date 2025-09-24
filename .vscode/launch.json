@@ -5,8 +5,15 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "type": "python",
+      "request": "launch",
+      "name": "Python: Current File",
+      "program": "${file}",
+      "console": "integratedTerminal"
+    },
+    {
       "type": "java",
-      "name": "MeuPrimeiroApp",
+      "name": "Java: Launch Current File",
       "request": "launch",
       "mainClass": "MeuPrimeiroApp",
       "projectName": "study_3b1d1d3a"
