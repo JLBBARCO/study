@@ -15,9 +15,54 @@
   <body onresize="mudouJanela()">
     <header>
       <nav></nav>
-      <menu></menu>
+      <menu>
+        <a href="../../index.html">
+          <img
+            src="../../assets/svg/home.svg"
+            alt="Página Inicial"
+            class="icon"
+          />
+        </a>
+        <a href="../cursoemvideo.html">
+          <img
+            src="../../assets/svg/arrow_back.svg"
+            alt="Voltar"
+            class="icon"
+          />
+        </a>
+        <div class="nav_menu">
+          <button
+            id="nav-links-button"
+            type="button"
+            alt="Menu"
+            onclick="navLinks()"
+          >
+            <img
+              src="../../assets/svg/menu.svg"
+              alt="Menu"
+              class="burger-icon icon"
+            />
+          </button>
+          <div class="nav_links">
+            <a href="#atividades">Atividades</a>
+          </div>
+        </div>
+      </menu>
     </header>
-    <main></main>
+    <main>
+      <table id="atividades">
+        <caption>
+          <h2>Atividades das Aulas</h2>
+        </caption>
+        <thead>
+          <tr>
+            <th>Aulas</th>
+            <th>Descrição</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </main>
     <footer></footer>
     <script src="../../assets/js/script.js"></script>
   </body>
