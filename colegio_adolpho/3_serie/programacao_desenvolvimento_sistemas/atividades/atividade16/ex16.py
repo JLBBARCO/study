@@ -20,4 +20,13 @@ meuCursor = conexão.cursor()
 if conexão.is_connected():
     print('Conexão bem sucedida!')
 
-meuCursor.execute('CREATE TABLE pessoas (nome VARCHAR(60), idade INT)')
+# ! meuCursor.execute('CREATE TABLE pessoas (nome VARCHAR(60), idade INT)')
+
+sql = 'INSERT INTO pessoas (nome, idade) VALUES (%s, %s)'
+val = [
+    ('Antonio', 76),
+    ('Sebastião', 84)
+]
+
+meuCursor.executemany(sql, val)
+conexão.commit()
