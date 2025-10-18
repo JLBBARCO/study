@@ -1,5 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const caminhoRelativo = obterCaminhoRelativo();
+  const caminhoRelativo =
+    typeof obterCaminhoRelativo === "function" ? obterCaminhoRelativo() : "";
+
   const iconStorage = caminhoRelativo + "assets/svg/";
   const icons = [
     {
@@ -28,9 +30,31 @@ document.addEventListener("DOMContentLoaded", () => {
       alt: "Ícone de Menu",
     },
   ];
+
   icons.forEach((icon) => {
-    document.querySelectorAll(
-      "span." + icon.className
-    ).innerHTML = `<img src="${icon.src}" alt="${icon.alt}" class="icon>`;
+    // Seleciona qualquer elemento que possua a classe (mais flexível que só span)
+    const elements = document.querySelectorAll("." + icon.className);
+    if (elements && elements.length) {
+      elements.forEach((el) => {
+        const tag = el.tagName.toLowerCase();
+        if (tag === "span") {
+          // insere a imagem dentro do span correspondente
+          el.innerHTML = `<img src="${icon.src}" alt="${icon.alt}" class="icon">`;
+        } else if (tag === "img") {
+          el.src = icon.src;
+          if (icon.alt) el.alt = icon.alt;
+        } else if (tag === "i" || tag === "button" || tag === "a") {
+          // permite ícones em botões, links, etc.
+          el.innerHTML = `<img src="${icon.src}" alt="${icon.alt}" class="icon">`;
+        } else {
+          // fallback: define atributo src/href se aplicável
+          try {
+            el.setAttribute("src", icon.src);
+          } catch (e) {
+            // ignore
+          }
+        }
+      });
+    }
   });
 });
