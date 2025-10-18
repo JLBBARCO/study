@@ -1,31 +1,46 @@
-var janelaPadrao = 990;
-var janelaPadraoPX = janelaPadrao + "px";
+function obterCaminhoRelativo() {
+  // Nome do repositório no GitHub Pages (ajuste para o seu repositório)
+  const nomeRepositório = "study";
 
-// Nome do repositório no GitHub Pages (ajuste para o seu repositório)
-const nomeRepositório = "study";
+  // Caminho relativo do arquivo HTML atual em relação à raiz do site
+  let caminhoHTML = window.location.pathname.replace(/^\//, "");
 
-// Caminho relativo do arquivo HTML atual em relação à raiz do site
-let caminhoHTML = window.location.pathname.replace(/^\//, "");
+  // Se estiver rodando no GitHub Pages, remova o nome do repositório do início do caminho
+  if (caminhoHTML.startsWith(nomeRepositório + "/")) {
+    caminhoHTML = caminhoHTML.substring(nomeRepositório.length + 1);
+  }
 
-// Se estiver rodando no GitHub Pages, remova o nome do repositório do início do caminho
-if (caminhoHTML.startsWith(nomeRepositório + "/")) {
-  caminhoHTML = caminhoHTML.substring(nomeRepositório.length + 1);
+  // Se quiser apenas o diretório do arquivo HTML:
+  const diretórioHTML = caminhoHTML.substring(
+    0,
+    caminhoHTML.lastIndexOf("/") + 1
+  );
+
+  // Conta quantas pastas existem no caminho (ignorando o arquivo)
+  const pastas =
+    diretórioHTML === "" ? [] : diretórioHTML.split("/").filter(Boolean);
+
+  // Gera a string com "../" para cada pasta
+  const caminhoRelativoAteRaiz = pastas.map(() => "../").join("");
+
+  return caminhoRelativoAteRaiz;
 }
 
-// Se quiser apenas o diretório do arquivo HTML:
-const diretórioHTML = caminhoHTML.substring(
-  0,
-  caminhoHTML.lastIndexOf("/") + 1
-);
-
-// Conta quantas pastas existem no caminho (ignorando o arquivo)
-const pastas =
-  diretórioHTML === "" ? [] : diretórioHTML.split("/").filter(Boolean);
-
-// Gera a string com "../" para cada pasta
-const caminhoRelativoAteRaiz = pastas.map(() => "../").join("");
-
 document.addEventListener("DOMContentLoaded", () => {
+  // Setar configs salvas em Cookies
+  const cookies = document.cookie.split("; ").reduce((acc, cookie) => {
+    const [name, value] = cookie.split("=");
+    acc[name] = value;
+    return acc;
+  }, {});
+
+  if (cookies.fontSize) {
+    document.querySelector("body").style.fontSize = cookies.fontSize + "px";
+  }
+
+  // Obter o caminho relativo até a raiz do site
+  const caminhoRelativo = obterCaminhoRelativo();
+
   // Título
   const header = document.querySelector("header");
   if (header) {
@@ -33,7 +48,6 @@ document.addEventListener("DOMContentLoaded", () => {
     document.querySelector("nav").innerHTML = `
       <h2>${title}</h2>
     `;
-    console.log("Título da página:", title);
   }
 
   // --- Menu hambúrguer (mobile) ---
@@ -48,10 +62,10 @@ document.addEventListener("DOMContentLoaded", () => {
       event.stopPropagation();
       if (navLinks.style.display === "flex") {
         navLinks.style.display = "none";
-        burgerIcon.src = `${caminhoRelativoAteRaiz}assets/svg/menu.svg`;
+        burgerIcon.src = `${caminhoRelativo}assets/svg/menu.svg`;
       } else {
         navLinks.style.display = "flex";
-        burgerIcon.src = `${caminhoRelativoAteRaiz}assets/svg/close.svg`;
+        burgerIcon.src = `${caminhoRelativo}assets/svg/close.svg`;
       }
     });
 
@@ -64,14 +78,14 @@ document.addEventListener("DOMContentLoaded", () => {
         !navLinksButton.contains(event.target)
       ) {
         navLinks.style.display = "none";
-        burgerIcon.src = `${caminhoRelativoAteRaiz}assets/svg/menu.svg`;
+        burgerIcon.src = `${caminhoRelativo}assets/svg/menu.svg`;
       }
     });
 
     document.querySelectorAll(".nav_links a").forEach((link) => {
       link.addEventListener("click", () => {
         navLinks.style.display = "none";
-        burgerIcon.src = `${caminhoRelativoAteRaiz}assets/svg/menu.svg`;
+        burgerIcon.src = `${caminhoRelativo}assets/svg/menu.svg`;
       });
     });
   }
@@ -110,21 +124,23 @@ document.addEventListener("DOMContentLoaded", () => {
     `;
   }
 
-  // Aplica o tamanho da fonte salvo ao carregar a página
-  aplicarFonteSalva();
+  // * Testes
+  console.log("Caminho relativo até a raiz:", caminhoRelativo); // Imprime no console o caminho relativo do site
+  console.log("Tamanho da fonte:" + cookies.fontSize); // Imprime no console o tamanho da fonte salvo nos cookies
 });
 
 // Responsividade do menu ao redimensionar a janela
 function mudouJanela() {
+  const caminhoRelativo = obterCaminhoRelativo();
   const itens = document.querySelector(".nav_links");
   const burgerIcon = document.querySelector(".burger-icon");
   if (!itens || !burgerIcon) return;
-  if (window.innerWidth >= janelaPadrao) {
+  if (window.innerWidth >= "990px") {
     itens.style.display = "contents";
-    burgerIcon.src = `${caminhoRelativoAteRaiz}assets/svg/menu.svg`;
+    burgerIcon.src = `${caminhoRelativo}assets/svg/menu.svg`;
   } else {
     itens.style.display = "none";
-    burgerIcon.src = `${caminhoRelativoAteRaiz}assets/svg/menu.svg`;
+    burgerIcon.src = `${caminhoRelativo}assets/svg/menu.svg`;
   }
 }
 
@@ -135,21 +151,12 @@ function accessibilityButton() {
   options.style.display = options.style.display === "flex" ? "none" : "flex";
 }
 
-function aplicarFonteSalva() {
-  var tamanhoSalvo = localStorage.getItem("tamanhoFonte");
-  if (tamanhoSalvo) {
-    document.querySelector("body").style.fontSize = tamanhoSalvo + "px";
-  } else {
-    document.querySelector("body").style.fontSize = "1em";
-  }
-}
-
 function increaseFont() {
   var body = document.querySelector("body");
   var currentSize = window.getComputedStyle(body).fontSize;
   var newSize = parseFloat(currentSize) * 1.2;
   body.style.fontSize = newSize + "px";
-  localStorage.setItem("tamanhoFonte", newSize);
+  document.cookie = `fontSize=${newSize}; path=/;`;
 }
 
 function decreaseFont() {
@@ -157,12 +164,11 @@ function decreaseFont() {
   var currentSize = window.getComputedStyle(body).fontSize;
   var newSize = parseFloat(currentSize) / 1.2;
   body.style.fontSize = newSize + "px";
-  localStorage.setItem("tamanhoFonte", newSize);
+  document.cookie = `fontSize=${newSize}; path=/;`;
 }
 
 function resetFont() {
   var body = document.querySelector("body");
   body.style.fontSize = "1em"; // Tamanho padrão
-  localStorage.removeItem("tamanhoFonte");
-  aplicarFonteSalva();
+  document.cookie = `fontSize=; path=/;`;
 }

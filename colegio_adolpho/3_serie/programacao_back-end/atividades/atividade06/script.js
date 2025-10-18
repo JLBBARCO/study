@@ -4,7 +4,7 @@ function resize() {
   const itens = document.querySelector(".links");
   const burgerIcon = document.querySelector(".burger-icon");
   if (!itens || !burgerIcon) return;
-  if (window.innerWidth >= janelaPadrao) {
+  if (window.innerWidth >= "janelaPadrao") {
     itens.style.display = "flex";
     burgerIcon.src = "../../../../assets/svg/close.svg";
   } else {
