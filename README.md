@@ -28,10 +28,6 @@ Links of pages:
 
     - [Projects](https://jlbbarco.github.io/study/colegio_adolpho/projetos/projetos.html)
 
-    - [Extracurricular Classes](https://jlbbarco.github.io/study/colegio_adolpho/aulas_extracurriculares/aulas_extracurriculares.html)
-
-      - [Robotics](https://jlbbarco.github.io/study/colegio_adolpho/aulas_extracurriculares/robotica/robotica.html)
-
     - [Second Year](https://jlbbarco.github.io/study/colegio_adolpho/2_serie/2_serie.html)
 
       - [Front-end Programming](https://jlbbarco.github.io/study/colegio_adolpho/2_serie/programacao_front-end/programacao_front-end.html)
