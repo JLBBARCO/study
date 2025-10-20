@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const caminhoRelativo =
     typeof obterCaminhoRelativo === "function" ? obterCaminhoRelativo() : "";
 
-  const iconStorage = caminhoRelativo + "assets/svg/";
+  const iconStorage = caminhoRelativo + "assets/icon/";
   const icons = [
     {
       className: "iconHome",
