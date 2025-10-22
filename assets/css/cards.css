@@ -1,0 +1,31 @@
+@charset 'UTF-8';
+
+:root {
+  --fundo: #387bd8;
+  --destaque: #011327;
+  --interativo: #0e3c55;
+  --shadow: 0px 7px 7px #0000006b;
+  --borda_padrão: 2px solid #999;
+}
+
+/* Conteúdo principal */
+section.container {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
+  align-items: stretch;
+}
+
+div.card {
+  width: 25vw;
+  padding: 25px;
+  margin: 25px;
+  border: 1px solid black;
+  border-radius: 10px;
+  text-align: center;
+  background-color: var(--interativo);
+}
+
+div.card:hover {
+  transform: translateY(-5px);
+}

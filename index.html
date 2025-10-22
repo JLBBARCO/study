@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Meus Estudos</title>
     <link rel="stylesheet" href="assets/css/style.css" media="screen" />
+    <link rel="stylesheet" href="assets/css/cards.css" media="screen" />
     <link rel="stylesheet" href="assets/css/print.css" media="print" />
     <link rel="shortcut icon" type="image/x-icon" class="Book" />
   </head>
@@ -17,44 +18,95 @@
             <span class="iconMenu burger-icon icon"></span>
           </button>
           <div class="nav_links">
-            <a href="https://jlbbarco.github.io/contact">Contato</a>
-            <a href="https://github.com/JLBBARCO/study">Repositório</a>
+            <a href="#home">Início</a>
+            <a href="#portfolio">Portfólio</a>
+            <a href="#projetos">Projetos</a>
+            <a href="#cursos">Cursos</a>
           </div>
         </div>
       </menu>
     </header>
     <main>
-      <ul class="conteudo">
-        <li>
-          <h3><a href="https://portfoliojlbbarco.vercel.app/">Portfólio</a></h3>
-          Meu portfólio pessoal, onde apresento meus principais projetos e
-          habilidades em programação e desenvolvimento web.
-        </li>
-        <li>
-          <h3>
-            <a href="meus_projetos/meus_projetos.html">Meus Projetos</a>
-          </h3>
-          Lista de projetos que desenvolvi, com links para os repositórios no
-          GitHub
-        </li>
-        <li>
-          <h3 class="cursos">
-            <a href="cursoemvideo/cursoemvideo.html">CursoemVideo</a>
-          </h3>
-          Arquivos criados acompanhando vídeos do site
-          <a href="https://cursoemvideo.com" target="_blank" class="externo">
-            Curso em Video </a
-          >.
-        </li>
-        <li>
-          <h3 class="cursos">
-            <a href="colegio_adolpho/colegio_adolpho.html">Colégio Adolpho</a>
-          </h3>
-          Arquivos de estudos de programação e identação digital no Colégio
-          Estadual Governador Adolpho de Oliveira Franco
-        </li>
-      </ul>
+      <section id="home">
+        <h1>Bem-vindo ao Meu Repositório de Estudos</h1>
+        <p>
+          Uma coleção organizada dos meus projetos, anotações e materiais
+          desenvolvidos durante minha jornada de aprendizado em programação.
+        </p>
+        <a href="#cards">Explorar Conteúdo</a>
+      </section>
+      <section id="cards" class="container">
+        <div id="portfolio" class="card">
+          <span class="icon_card work"></span>
+          <h3>Portfólio</h3>
+          <p>
+            Meu portfólio pessoal, onde apresento meus principais projetos e
+            habilidades em programação e desenvolvimento web.
+          </p>
+          <a href="https://portfoliojlbbarco.vercel.app/" class="linkButtonCard"
+            >Ver Portfólio</a
+          >
+        </div>
+        <div id="projetos" class="card">
+          <span class="icon_card tags"></span>
+          <h3>Meus Projetos</h3>
+          <p>
+            Lista de projetos que desenvolvi, com links para os repositórios no
+            GitHub
+          </p>
+          <a href="meus_projetos/meus_projetos.html" class="linkButtonCard"
+            >Ver Projetos</a
+          >
+        </div>
+        <article id="cursos">
+          <div class="card">
+            <span class="icon_card camera"></span>
+            <h3>CursoemVideo</h3>
+            <p>
+              Arquivos criados acompanhando vídeos do site
+              <a
+                href="https://cursoemvideo.com"
+                target="_blank"
+                class="externo"
+              >
+                Curso em Video </a
+              >.
+            </p>
+            <a href="cursoemvideo/cursoemvideo.html" class="linkButtonCard"
+              >Ver Conteúdo</a
+            >
+          </div>
+          <div class="card">
+            <span class="icon_card school"></span>
+            <h3>Colégio Adolpho</h3>
+            <p>
+              Arquivos de estudos de programação e identação digital no Colégio
+              Estadual Governador Adolpho de Oliveira Franco
+            </p>
+            <a
+              href="colegio_adolpho/colegio_adolpho.html"
+              class="linkButtonCard"
+              >Ver Conteúdo</a
+            >
+          </div>
+        </article>
+      </section>
     </main>
+    <aside>
+      <h2>Sobre Este Projeto</h2>
+      <p>
+        Este repositório de estudos foi criado como um espaço dedicado ao
+        conhecimento e a prática, refletindo meu compromisso contínuo com o
+        aprimoramento e a inovação. Aqui você encontrará uma coleção organizada
+        dos meus projetos, anotações e materiais desenvolvidos durante minha
+        jornada de aprendizado.
+      </p>
+      <p>
+        O objetivo não é apenas documentar meu progresso, mas também
+        compartilhar conhecimento e servir como referência para outros
+        estudantes e desenvolvedores interessados em programação.
+      </p>
+    </aside>
     <footer></footer>
     <script src="assets/js/script.js"></script>
     <script src="assets/js/favicon.js"></script>
