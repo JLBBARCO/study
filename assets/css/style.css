@@ -84,72 +84,6 @@ header button:hover {
   background-color: var(--interativo);
 }
 
-/* Conteúdo Principal */
-main {
-  background-color: var(--destaque);
-}
-
-main section {
-  min-height: 50vh;
-  padding: 10%;
-}
-
-main section:nth-child(odd) {
-  background-color: var(--fundo);
-}
-
-main p {
-  text-align: justify;
-}
-
-section#home {
-  display: flex;
-  flex-flow: column nowrap;
-  justify-content: center;
-  align-items: center;
-}
-
-section#home a {
-  margin: 25px;
-  padding: 25px;
-  border-radius: 8px;
-  background-color: var(--interativo);
-}
-
-section#home a:hover {
-  border: var(--borda_padrão);
-  text-decoration: none;
-  transform: translatey(-5px);
-}
-
-main .icon {
-  font-size: 4rem;
-  margin: 15px;
-  width: 1em;
-  height: 1em;
-}
-
-/* Rodapé */
-footer {
-  padding: 5%;
-  background-color: var(--destaque);
-}
-
-footer .container_footer {
-  display: flex;
-  flex: auto;
-  flex-flow: row wrap;
-  justify-content: space-between;
-  align-items: center;
-}
-
-footer .copyright {
-  text-align: center;
-  margin-top: 5%;
-  padding-top: 5%;
-  border-top: var(--borda_padrão);
-}
-
 /* Estilos do menu mobile */
 .nav_menu {
   position: relative;
@@ -211,6 +145,78 @@ footer .copyright {
 /* Classe para controlar a visibilidade do menu */
 .nav_links.active {
   display: flex;
+}
+
+/* Conteúdo Principal */
+main {
+  background-color: var(--destaque);
+}
+
+main section {
+  min-height: 50vh;
+  padding: 10%;
+}
+
+main section:nth-child(odd) {
+  background-color: var(--fundo);
+}
+
+main p {
+  text-align: justify;
+}
+
+section#home {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+}
+
+section#home a {
+  margin: 25px;
+  padding: 25px;
+  border-radius: 8px;
+  background-color: var(--interativo);
+}
+
+section#home a:hover {
+  border: var(--borda_padrão);
+  text-decoration: none;
+  transform: translatey(-5px);
+}
+
+main .icon {
+  font-size: 4rem;
+  margin: 15px;
+  width: 1em;
+  height: 1em;
+}
+
+/* Conteúdos extras */
+aside {
+  padding: 5%;
+  background-color: var(--fundo);
+}
+
+/* Rodapé */
+footer {
+  padding: 5%;
+  background-color: var(--destaque);
+}
+
+footer .container_footer {
+  display: flex;
+  flex: auto;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+footer .copyright {
+  text-align: center;
+  margin-top: 5%;
+  padding-top: 5%;
+  border-top: var(--borda_padrão);
 }
 
 @media (min-width: 990px) {
