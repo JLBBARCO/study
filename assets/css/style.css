@@ -84,10 +84,6 @@ header button:hover {
   background-color: var(--interativo);
 }
 
-div.nav_links {
-  display: none;
-}
-
 /* Conteúdo Principal */
 main {
   background-color: var(--destaque);
@@ -154,8 +150,88 @@ footer .copyright {
   border-top: var(--borda_padrão);
 }
 
+/* Estilos do menu mobile */
+.nav_menu {
+  position: relative;
+  z-index: 1000;
+}
+
+.nav_links {
+  display: none;
+  flex-direction: column;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: var(--destaque);
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  min-width: 200px;
+}
+
+/* Importante: esta classe controla a visibilidade */
+.nav_links.active {
+  display: flex !important;
+}
+
+/* Estilo dos links dentro do menu */
+.nav_links a {
+  padding: 0.5rem 1rem;
+  white-space: nowrap;
+  width: 100%;
+  text-align: left;
+}
+
+/* Estilo do botão do menu */
+.burger-icon {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+}
+
+.burger-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.burger-icon.iconClose {
+  transform: rotate(90deg); /* Adiciona uma rotação para animação */
+}
+
+/* Garante que o ícone seja visível */
+.burger-icon.iconMenu img,
+.burger-icon.iconClose img {
+  display: block;
+}
+
+/* Classe para controlar a visibilidade do menu */
+.nav_links.active {
+  display: flex;
+}
+
 @media (min-width: 990px) {
   body {
     font-size: 1rem;
+  }
+
+  button#nav-links-button {
+    display: none;
+  }
+
+  div.nav_links {
+    position: static;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-evenly;
+    padding: 0;
+    box-shadow: none;
+  }
+
+  div.nav_links a {
+    margin: 10px;
   }
 }

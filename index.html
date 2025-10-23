@@ -9,21 +9,29 @@
     <link rel="stylesheet" href="assets/css/print.css" media="print" />
     <link rel="shortcut icon" type="image/x-icon" class="Book" />
   </head>
-  <body onresize="mudouJanela()">
+  <body>
     <header>
-      <nav></nav>
-      <menu>
+      <nav aria-label="Navegação principal"></nav>
+      <nav aria-label="Menu de navegação">
         <div class="nav_menu">
-          <button id="nav-links-button" aria-label="Menu" onclick="navLinks()">
-            <span class="iconMenu burger-icon icon"></span>
+          <button
+            id="nav-links-button"
+            aria-label="Abrir/Fechar menu de navegação"
+            aria-expanded="false"
+            aria-controls="nav-links"
+          >
+            <span class="burger-icon icon iconMenu" aria-hidden="true">
+              <img src="assets/icon/menu.svg" alt="Ícone de Menu" />
+            </span>
           </button>
-          <div class="nav_links">
-            <a href="#home">Início</a>
-            <a href="#portfolio">Portfólio</a>
-            <a href="#projetos">Projetos</a>
+          <div id="nav-links" class="nav_links" role="menu">
+            <a href="#home" role="menuitem">Início</a>
+            <a href="#portfolio" role="menuitem">Portfólio</a>
+            <a href="#projetos" role="menuitem">Projetos</a>
+            <a href="#sobre" role="menuitem">Sobre o Projeto</a>
           </div>
         </div>
-      </menu>
+      </nav>
     </header>
     <main>
       <section id="home">
@@ -62,7 +70,12 @@
           <h2>CursoemVideo</h2>
           <p>
             Arquivos criados acompanhando vídeos do site
-            <a href="https://cursoemvideo.com" target="_blank" class="externo">
+            <a
+              href="https://cursoemvideo.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="externo"
+            >
               Curso em Video </a
             >.
           </p>
@@ -82,7 +95,7 @@
           >
         </div>
       </section>
-      <section>
+      <section id="sobre">
         <h1>Sobre Este Projeto</h1>
         <p>
           Este repositório de estudos foi criado como um espaço dedicado ao
@@ -99,8 +112,7 @@
       </section>
     </main>
     <footer></footer>
-    <script src="assets/js/script.js"></script>
-    <script src="assets/js/favicon.js"></script>
     <script src="assets/js/icon.js"></script>
+    <script src="assets/js/script.js"></script>
   </body>
 </html>

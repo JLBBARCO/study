@@ -1,8 +1,14 @@
 document.addEventListener("DOMContentLoaded", () => {
+  // Adicionar log para debug
+  console.log("Carregando ícones...");
+
   const caminhoRelativo =
     typeof obterCaminhoRelativo === "function" ? obterCaminhoRelativo() : "";
+  console.log("Caminho relativo:", caminhoRelativo);
 
   const iconStorage = caminhoRelativo + "assets/icon/";
+  console.log("Pasta de ícones:", iconStorage);
+
   const icons = [
     {
       className: "iconHome",
@@ -52,6 +58,7 @@ document.addEventListener("DOMContentLoaded", () => {
   ];
 
   icons.forEach((icon) => {
+    console.log(`Verificando ícone: ${icon.className}, caminho: ${icon.src}`);
     // Seleciona qualquer elemento que possua a classe (mais flexível que só span)
     const elements = document.querySelectorAll("." + icon.className);
     if (elements && elements.length) {
@@ -59,13 +66,13 @@ document.addEventListener("DOMContentLoaded", () => {
         const tag = el.tagName.toLowerCase();
         if (tag === "span") {
           // insere a imagem dentro do span correspondente
-          el.innerHTML = `<img src="${icon.src}" alt="${icon.alt}" class="icon">`;
+          el.innerHTML = `<img src="${icon.src}" alt="${icon.alt}" class="icon ${icon.className}">`;
         } else if (tag === "img") {
           el.src = icon.src;
           if (icon.alt) el.alt = icon.alt;
         } else if (tag === "i" || tag === "button" || tag === "a") {
           // permite ícones em botões, links, etc.
-          el.innerHTML = `<img src="${icon.src}" alt="${icon.alt}" class="icon">`;
+          el.innerHTML = `<img src="${icon.src}" alt="${icon.alt}" class="icon ${icon.className}">`;
         } else {
           // fallback: define atributo src/href se aplicável
           try {
