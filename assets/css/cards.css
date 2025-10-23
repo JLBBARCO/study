@@ -13,11 +13,11 @@ section.container {
   display: flex;
   flex-flow: row wrap;
   justify-content: space-evenly;
-  align-items: stretch;
 }
 
 div.card {
-  width: 25vw;
+  flex: auto;
+  max-width: 400px;
   padding: 25px;
   margin: 25px;
   border: 1px solid black;
@@ -28,4 +28,17 @@ div.card {
 
 div.card:hover {
   transform: translateY(-5px);
+}
+
+div.card p {
+  text-align: justify;
+}
+
+div.card a.linkButtonCard {
+  display: block;
+  margin-top: 15px;
+  padding: 10px;
+  border: var(--borda_padrão);
+  border-radius: 5px;
+  background-color: var(--destaque);
 }

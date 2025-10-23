@@ -12,14 +12,13 @@
 /* estilização base */
 
 :root {
-  --fundo: #387bd8;
-  --destaque: #011327;
+  --destaque: #387bd8;
+  --fundo: #011327;
   --interativo: #0e3c55;
   --texto: #fff;
   --cor-body: #333;
   --shadow: 0px 7px 7px #0000006b;
-  /* --borda_padrão: 2px solid var(--detalhes); */
-  /* --borda_traçada: 2px dashed var(--detalhes); */
+  --borda_padrão: 2px solid var(--texto);
   --fonte01: Arial, Helvetica, sans-serif;
   --fonte02: "Sour Gummy", serif;
   --fonte03: "Aldrich", sans-serif;
@@ -28,13 +27,17 @@
 * {
   margin: 0;
   padding: 0;
-  font-size: 1em;
   box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   font-size: 0.8rem;
   font-family: var(--fonte01);
+  line-height: 1.6rem;
   color: var(--texto);
   background-color: var(--cor-body);
 }
@@ -45,8 +48,7 @@ a {
 }
 
 a:hover {
-  text-decoration: underline var(--destaque);
-  transition-duration: 0.5s;
+  text-decoration: underline;
 }
 
 h1,
@@ -55,7 +57,9 @@ h3,
 h4,
 h5,
 h6 {
+  padding: 10px;
   font-family: var(--fonte02);
+  text-align: center;
 }
 
 /* Cabeçalho */
@@ -65,6 +69,18 @@ header {
   justify-content: space-between;
   width: 100%;
   padding: 25px;
+  background-color: var(--destaque);
+}
+
+header button {
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  background-color: var(--destaque);
+}
+
+header button:hover {
+  border: var(--borda_padrão);
   background-color: var(--interativo);
 }
 
@@ -77,21 +93,65 @@ main {
   background-color: var(--destaque);
 }
 
-section {
+main section {
   min-height: 50vh;
-  padding: 25px;
+  padding: 10%;
 }
 
-section:nth-child(odd) {
+main section:nth-child(odd) {
   background-color: var(--fundo);
 }
 
+main p {
+  text-align: justify;
+}
+
 section#home {
-  text-align: center;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
 }
 
 section#home a {
   margin: 25px;
+  padding: 25px;
+  border-radius: 8px;
+  background-color: var(--interativo);
+}
+
+section#home a:hover {
+  border: var(--borda_padrão);
+  text-decoration: none;
+  transform: translatey(-5px);
+}
+
+main .icon {
+  font-size: 4rem;
+  margin: 15px;
+  width: 1em;
+  height: 1em;
+}
+
+/* Rodapé */
+footer {
+  padding: 5%;
+  background-color: var(--destaque);
+}
+
+footer .container_footer {
+  display: flex;
+  flex: auto;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+footer .copyright {
+  text-align: center;
+  margin-top: 5%;
+  padding-top: 5%;
+  border-top: var(--borda_padrão);
 }
 
 @media (min-width: 990px) {

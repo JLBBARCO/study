@@ -29,6 +29,26 @@ document.addEventListener("DOMContentLoaded", () => {
       src: `${iconStorage}menu.svg`,
       alt: "Ícone de Menu",
     },
+    {
+      className: "work",
+      src: `${iconStorage}work_bag.svg`,
+      alt: "Ícone de Trabalho",
+    },
+    {
+      className: "code_icon",
+      src: `${iconStorage}code_icon.svg`,
+      alt: "Ícone de Código",
+    },
+    {
+      className: "camera",
+      src: `${iconStorage}video-camera_icon.svg`,
+      alt: "Ícone de Câmera",
+    },
+    {
+      className: "school",
+      src: `${iconStorage}university_graduate_hat.svg`,
+      alt: "Ícone de Escola",
+    },
   ];
 
   icons.forEach((icon) => {
