@@ -55,6 +55,42 @@ document.addEventListener("DOMContentLoaded", () => {
       src: `${iconStorage}university_graduate_hat.svg`,
       alt: "Ícone de Escola",
     },
+    { className: "html5", src: `${iconStorage}html5.svg`, alt: "Ícone HTML5" },
+    {
+      className: "github",
+      src: `${iconStorage}github.svg`,
+      alt: "Ícone GitHub",
+    },
+    {
+      className: "javascript",
+      src: `${iconStorage}javascript.svg`,
+      alt: "Ícone JavaScript",
+    },
+    {
+      className: "python",
+      src: `${iconStorage}python.svg`,
+      alt: "Ícone Python",
+    },
+    {
+      className: "php",
+      src: `${iconStorage}php.svg`,
+      alt: "Ícone PHP",
+    },
+    {
+      className: "java",
+      src: `${iconStorage}java.svg`,
+      alt: "Ícone Java",
+    },
+    {
+      className: "mysql",
+      src: `${iconStorage}mysql.svg`,
+      alt: "Ícone MySQL",
+    },
+    {
+      className: "arduino",
+      src: `${iconStorage}arduino.svg`,
+      alt: "Ícone Arduino",
+    },
   ];
 
   icons.forEach((icon) => {

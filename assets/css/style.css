@@ -17,6 +17,7 @@
   --interativo: #0e3c55;
   --texto: #fff;
   --cor-body: #333;
+  --footer: #0c1927;
   --shadow: 0px 7px 7px #0000006b;
   --borda_padrão: 2px solid var(--texto);
   --fonte01: Arial, Helvetica, sans-serif;
@@ -49,6 +50,22 @@ a {
 
 a:hover {
   text-decoration: underline;
+}
+
+a.externo {
+  position: relative;
+  background-color: none;
+  border: none;
+}
+
+a.externo:hover {
+  text-decoration: underline;
+  border: none;
+}
+
+a.externo::after {
+  content: " 🔗";
+  font-size: 0.8rem;
 }
 
 h1,
@@ -91,16 +108,18 @@ header button:hover {
 }
 
 .nav_links {
-  display: none;
-  flex-direction: column;
   position: absolute;
   top: 100%;
   right: 0;
-  background-color: var(--destaque);
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
   padding: 1rem;
-  border-radius: 8px;
-  box-shadow: var(--shadow);
   min-width: 200px;
+  border-radius: 8px;
+  background-color: var(--destaque);
+  box-shadow: var(--shadow);
 }
 
 /* Importante: esta classe controla a visibilidade */
@@ -113,7 +132,7 @@ header button:hover {
   padding: 0.5rem 1rem;
   white-space: nowrap;
   width: 100%;
-  text-align: left;
+  text-align: center;
 }
 
 /* Estilo do botão do menu */
@@ -153,6 +172,9 @@ main {
 }
 
 main section {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
   min-height: 50vh;
   padding: 10%;
 }
@@ -172,17 +194,29 @@ section#home {
   align-items: center;
 }
 
-section#home a {
+article.container-link-home {
+  display: flex;
+  flex-direction: row;
+}
+
+section#home a.linkHome {
   margin: 25px;
   padding: 25px;
   border-radius: 8px;
   background-color: var(--interativo);
 }
 
-section#home a:hover {
+section#home a.linkHome:hover {
   border: var(--borda_padrão);
   text-decoration: none;
   transform: translatey(-5px);
+}
+
+main .container {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
 }
 
 main .icon {
@@ -201,7 +235,7 @@ aside {
 /* Rodapé */
 footer {
   padding: 5%;
-  background-color: var(--destaque);
+  background-color: var(--footer);
 }
 
 footer .container_footer {
@@ -239,5 +273,10 @@ footer .copyright {
 
   div.nav_links a {
     margin: 10px;
+  }
+
+  main section {
+    flex-flow: row wrap;
+    justify-content: space-around;
   }
 }

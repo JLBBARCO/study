@@ -9,15 +9,17 @@
 }
 
 /* Conteúdo principal */
-section.container {
+main .container {
   display: flex;
   flex-flow: row wrap;
   justify-content: space-evenly;
 }
 
 div.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   flex: auto;
-  max-width: 400px;
   padding: 25px;
   margin: 25px;
   border: 1px solid black;
@@ -41,4 +43,15 @@ div.card a.linkButtonCard {
   border: var(--borda_padrão);
   border-radius: 5px;
   background-color: var(--destaque);
+}
+
+@media (min-width: 990px) {
+  main .container {
+    flex-flow: row wrap;
+    justify-content: space-around;
+  }
+
+  div.card p {
+    max-width: 25vw;
+  }
 }

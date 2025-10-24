@@ -175,15 +175,11 @@ function initializeNavigation() {
 
     // Alternar o ícone dinamicamente
     if (isExpanded) {
-      burgerImg.src = "assets/icon/menu.svg"; // Ícone de menu
+      burgerImg.src = `${obterCaminhoRelativo()}/assets/icon/menu.svg`; // Ícone de menu
       burgerImg.alt = "Ícone de Menu";
-      burgerIcon.classList.remove("iconClose");
-      burgerIcon.classList.add("iconMenu");
     } else {
-      burgerImg.src = "assets/icon/close.svg"; // Ícone de fechar
+      burgerImg.src = `${obterCaminhoRelativo()}/assets/icon/close.svg`; // Ícone de fechar
       burgerImg.alt = "Ícone de Fechar";
-      burgerIcon.classList.remove("iconMenu");
-      burgerIcon.classList.add("iconClose");
     }
 
     // Atualiza aria-expanded
@@ -203,10 +199,8 @@ function initializeNavigation() {
       !navLinks.contains(event.target)
     ) {
       navLinks.classList.remove("active");
-      burgerImg.src = "assets/icon/menu.svg"; // Volta para o ícone de menu
+      burgerImg.src = `${obterCaminhoRelativo()}/assets/icon/menu.svg`; // Volta para o ícone de menu
       burgerImg.alt = "Ícone de Menu";
-      burgerIcon.classList.remove("iconClose");
-      burgerIcon.classList.add("iconMenu");
       navLinksButton.setAttribute("aria-expanded", "false");
     }
   });
