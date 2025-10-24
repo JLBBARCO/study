@@ -9,45 +9,71 @@
       href="../../../assets/css/style.css"
       media="screen"
     />
+    <link
+      rel="stylesheet"
+      href="../../../assets/css/cards.css"
+      media="screen"
+    />
     <link rel="stylesheet" href="../../../assets/css/print.css" media="print" />
     <link rel="shortcut icon" type="image/x-icon" class="GraphicDesign" />
   </head>
   <body>
     <header>
-      <nav></nav>
-      <menu>
-        <a href="../../../index.html">
-          <span class="iconHome icon"></span>
-        </a>
-        <a href="../3_serie.html">
-          <span class="iconArrowBack icon"></span>
-        </a>
-      </menu>
+      <nav aria-label="Navegação principal"></nav>
+      <nav aria-label="Menu de navegação">
+        <div class="nav_menu">
+          <button
+            id="nav-links-button"
+            aria-label="Abrir/Fechar menu de navegação"
+            aria-expanded="false"
+            aria-controls="nav-links"
+          >
+            <span class="burger-icon icon iconMenu" aria-hidden="true">
+              <img src="assets/icon/menu.svg" alt="Ícone de Menu" />
+            </span>
+          </button>
+          <div id="nav-links" class="nav_links" role="menu">
+            <a href="../../../index.html">
+              <span class="iconHome icon"></span>
+            </a>
+            <a href="../3_serie.html">
+              <span class="iconArrowBack icon"></span>
+            </a>
+            <a href="#home" role="menuitem">Início</a>
+            <a href="#atividades" role="menuitem">Atividades</a>
+          </div>
+        </div>
+      </nav>
     </header>
     <main>
-      <table>
-        <thead>
-          <tr>
-            <th>Aula</th>
-            <td>Descrição</td>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="num">
+      <section id="home">
+        <h1>Computação Gráfica</h1>
+        <p>Atividades e avaliações das aulas de Computação Gráfica</p>
+        <article class="container-link-home">
+          <a href="#atividades" class="linkHome">Explorar Atividades</a>
+        </article>
+      </section>
+      <section id="atividades">
+        <h2>Atividades</h2>
+        <article class="container">
+          <div class="card">
+            <h2>01</h2>
+            <p>Utilizando o GIMP para manipular imagens e camadas</p>
+            <article class="buttonCard">
               <a
                 href="https://github.com/JLBBARCO/study/tree/main/colegio_adolpho/3_serie/computacao_grafica/atividades/atividade01"
-                >01</a
+                class="linkButtonCard"
               >
-            </td>
-            <td>Utilizando o GIMP para manipular imagens e camadas</td>
-          </tr>
-        </tbody>
-      </table>
+                Ver Código
+              </a>
+            </article>
+          </div>
+        </article>
+      </section>
     </main>
     <footer></footer>
-    <script src="../../../assets/js/script.js"></script>
     <script src="../../../assets/js/favicon.js"></script>
     <script src="../../../assets/js/icon.js"></script>
+    <script src="../../../assets/js/script.js"></script>
   </body>
 </html>
