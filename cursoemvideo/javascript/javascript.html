@@ -5,165 +5,178 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>JavaScript</title>
     <link rel="stylesheet" href="../../assets/css/style.css" media="screen" />
+    <link rel="stylesheet" href="../../assets/css/cards.css" media="screen" />
     <link rel="stylesheet" href="../../assets/css/print.css" media="print" />
     <link rel="shortcut icon" type="image/x-icon" class="JavaScript" />
   </head>
-  <body onresize="mudouJanela()">
+  <body>
     <header>
-      <nav></nav>
-      <menu>
-        <a href="../../index.html">
-          <span class="iconHome icon"></span>
-        </a>
-        <a href="../cursoemvideo.html">
-          <span class="iconArrowBack icon"></span>
-        </a>
+      <nav aria-label="Navegação principal"></nav>
+      <nav aria-label="Menu de navegação">
         <div class="nav_menu">
           <button
-            id="navLinksButton"
-            type="button"
-            alt="Menu"
-            onclick="navLinks()"
+            id="nav-links-button"
+            aria-label="Abrir/Fechar menu de navegação"
+            aria-expanded="false"
+            aria-controls="nav-links"
           >
-            <span class="iconMenu burger-icon icon"></span>
+            <span class="burger-icon icon iconMenu" aria-hidden="true">
+              <img src="assets/icon/menu.svg" alt="Ícone de Menu" />
+            </span>
           </button>
-          <div class="nav_links">
-            <a href="#atividades">Atividades</a>
+          <div id="nav-links" class="nav_links" role="menu">
+            <a href="../../index.html">
+              <span class="iconHome icon"></span>
+            </a>
+            <a href="../cursoemvideo.html">
+              <span class="iconArrowBack icon"></span>
+            </a>
+            <a href="#home" role="menuitem">Início</a>
+            <a href="#aulas" role="menuitem">Aulas</a>
           </div>
         </div>
-      </menu>
+      </nav>
     </header>
     <main>
-      <table id="atividades">
-        <caption>
-          <h2>Atividades das Aulas</h2>
-        </caption>
-        <thead>
-          <tr>
-            <th>Aulas</th>
-            <th>Descrição</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="num">
-              <a
-                href="https://github.com/JLBBARCO/study/tree/main/cursoemvideo/javascript/aula04"
-                >04</a
-              >
-            </td>
-            <td>Criando seu primeiro script</td>
-          </tr>
-          <tr>
-            <td class="num">
-              <a
-                href="https://github.com/JLBBARCO/study/tree/main/cursoemvideo/javascript/aula06"
-                >06</a
-              >
-            </td>
-            <td>Tratamento de dados</td>
-          </tr>
-          <tr>
-            <td class="num">
-              <a
-                href="https://github.com/JLBBARCO/study/tree/main/cursoemvideo/javascript/aula09"
-                >09</a
-              >
-            </td>
-            <td>Introdução ao DOM</td>
-          </tr>
-          <tr>
-            <td class="num">
-              <a
-                href="https://github.com/JLBBARCO/study/tree/main/cursoemvideo/javascript/aula11"
-                >11</a
-              >
-            </td>
-            <td>Condições (Parte 1)</td>
-          </tr>
-          <tr>
-            <td class="num">
-              <a
-                href="https://github.com/JLBBARCO/study/tree/main/cursoemvideo/javascript/aula12"
-                >12</a
-              >
-            </td>
-            <td>Condições (Parte 2)</td>
-          </tr>
-          <tr>
-            <td class="num">
-              <a
-                href="https://github.com/JLBBARCO/study/tree/main/cursoemvideo/javascript/aula12ex"
-                >12ex</a
-              >
-            </td>
-            <td>Exercícios JavaScript (Parte 1, 2 & 3)</td>
-          </tr>
-          <tr>
-            <td class="num">
-              <a
-                href="https://github.com/JLBBARCO/study/tree/main/cursoemvideo/javascript/aula13"
-                >13</a
-              >
-            </td>
-            <td>Repetições (Parte 1)</td>
-          </tr>
-          <tr>
-            <td class="num">
-              <a
-                href="https://github.com/JLBBARCO/study/tree/main/cursoemvideo/javascript/aula14"
-                >14</a
-              >
-            </td>
-            <td>Repetições (Parte 2)</td>
-          </tr>
-          <tr>
-            <td class="num">
-              <a
-                href="https://github.com/JLBBARCO/study/tree/main/cursoemvideo/javascript/aula14ex"
-                >14ex</a
-              >
-            </td>
-            <td>Exercícios JavaScript (Parte 4, 5 & 6)</td>
-          </tr>
-          <tr>
-            <td class="num">
-              <a
-                href="https://github.com/JLBBARCO/study/tree/main/cursoemvideo/javascript/aula15"
-                >15</a
-              >
-            </td>
-            <td>Variáveis Compostas</td>
-          </tr>
-          <tr>
-            <td class="num">
-              <a
-                href="https://github.com/JLBBARCO/study/tree/main/cursoemvideo/javascript/aula16"
-                >16</a
-              >
-            </td>
-            <td>Funções</td>
-          </tr>
-          <tr>
-            <td class="num">
-              <a
-                href="https://github.com/JLBBARCO/study/tree/main/cursoemvideo/javascript/aula16ex"
-                >16ex</a
-              >
-            </td>
-            <td>Exercícios JavaScript (Parte 7 & 8)</td>
-          </tr>
-          <tr>
-            <td class="num">
-              <a
-                href="https://github.com/JLBBARCO/study/tree/main/cursoemvideo/javascript/aula17"
-                >17</a
-              >
-            </td>
-            <td>Próximos Passos</td>
-          </tr>
-        </tbody>
-      </table>
+      <section id="home">
+        <h1>JavaScript</h1>
+        <p>
+          Estudos sobre JavaScript ou também conhecido como EcmaScript
+          acompanhando os vídeos do site
+          <a
+            href="http://cursoemvideo.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="externo"
+            >CursoemVideo</a
+          >
+        </p>
+        <article class="container-link-home">
+          <a href="#aulas" class="linkHome">Explorar Aulas</a>
+        </article>
+      </section>
+      <section id="aulas">
+        <h1>Aulas</h1>
+        <article class="container">
+          <div class="card">
+            <h2>4</h2>
+            <p>Criando seu primeiro script</p>
+            <a
+              href="https://github.com/JLBBARCO/study/tree/main/cursoemvideo/javascript/aula04"
+              class="linkButtonCard"
+              >Ver Código</a
+            >
+          </div>
+          <div class="card">
+            <h2>6</h2>
+            <p>Tratamento de dados</p>
+            <a
+              href="https://github.com/JLBBARCO/study/tree/main/cursoemvideo/javascript/aula06"
+              class="linkButtonCard"
+              >Ver Código</a
+            >
+          </div>
+          <div class="card">
+            <h2>9</h2>
+            <p>Introdução ao DOM</p>
+            <a
+              href="https://github.com/JLBBARCO/study/tree/main/cursoemvideo/javascript/aula09"
+              class="linkButtonCard"
+              >Ver Código</a
+            >
+          </div>
+          <div class="card">
+            <h2>11</h2>
+            <p>Condições (Parte 1)</p>
+            <a
+              href="https://github.com/JLBBARCO/study/tree/main/cursoemvideo/javascript/aula11"
+              class="linkButtonCard"
+              >Ver Código</a
+            >
+          </div>
+          <div class="card">
+            <h2>12</h2>
+            <p>Condições (Parte 2)</p>
+            <a
+              href="https://github.com/JLBBARCO/study/tree/main/cursoemvideo/javascript/aula12"
+              class="linkButtonCard"
+              >Ver Código</a
+            >
+          </div>
+          <div class="card">
+            <h2>12 Ex</h2>
+            <p>Exercícios JavaScript (Parte 1, 2 & 3)</p>
+            <a
+              href="https://github.com/JLBBARCO/study/tree/main/cursoemvideo/javascript/aula12ex"
+              class="linkButtonCard"
+              >Ver Código</a
+            >
+          </div>
+          <div class="card">
+            <h2>13</h2>
+            <p>Repetições (Parte 1)</p>
+            <a
+              href="https://github.com/JLBBARCO/study/tree/main/cursoemvideo/javascript/aula13"
+              class="linkButtonCard"
+              >Ver Código</a
+            >
+          </div>
+          <div class="card">
+            <h2>14</h2>
+            <p>Repetições (Parte 2)</p>
+            <a
+              href="https://github.com/JLBBARCO/study/tree/main/cursoemvideo/javascript/aula14"
+              class="linkButtonCard"
+              >Ver Código</a
+            >
+          </div>
+          <div class="card">
+            <h2>14 Ex</h2>
+            <p>Exercícios JavaScript (Parte 4, 5 & 6)</p>
+            <a
+              href="https://github.com/JLBBARCO/study/tree/main/cursoemvideo/javascript/aula14ex"
+              class="linkButtonCard"
+              >Ver Código</a
+            >
+          </div>
+          <div class="card">
+            <h2>15</h2>
+            <p>Variáveis Compostas</p>
+            <a
+              href="https://github.com/JLBBARCO/study/tree/main/cursoemvideo/javascript/aula15"
+              class="linkButtonCard"
+              >Ver Código</a
+            >
+          </div>
+          <div class="card">
+            <h2>16</h2>
+            <p>Funções</p>
+            <a
+              href="https://github.com/JLBBARCO/study/tree/main/cursoemvideo/javascript/aula16"
+              class="linkButtonCard"
+              >Ver Código</a
+            >
+          </div>
+          <div class="card">
+            <h2>16 Ex</h2>
+            <p>Exercícios JavaScript (Parte 7, & 8)</p>
+            <a
+              href="https://github.com/JLBBARCO/study/tree/main/cursoemvideo/javascript/aula16ex"
+              class="linkButtonCard"
+              >Ver Código</a
+            >
+          </div>
+          <div class="card">
+            <h2>17</h2>
+            <p>Próximos Passos</p>
+            <a
+              href="https://github.com/JLBBARCO/study/tree/main/cursoemvideo/javascript/aula17"
+              class="linkButtonCard"
+              >Ver Código</a
+            >
+          </div>
+        </article>
+      </section>
     </main>
     <footer></footer>
     <script src="../../assets/js/script.js"></script>
