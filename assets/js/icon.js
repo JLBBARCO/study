@@ -91,6 +91,11 @@ document.addEventListener("DOMContentLoaded", () => {
       src: `${iconStorage}arduino.svg`,
       alt: "Ícone Arduino",
     },
+    {
+      className: "graphic_design",
+      src: `${iconStorage}graphic_design.svg`,
+      alt: "Ícone Design Gráfico",
+    },
   ];
 
   icons.forEach((icon) => {

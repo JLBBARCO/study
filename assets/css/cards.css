@@ -58,6 +58,7 @@ div.card a.linkButtonCard {
     justify-content: space-around;
   }
 
+  div.card h2,
   div.card p {
     max-width: 25vw;
   }
