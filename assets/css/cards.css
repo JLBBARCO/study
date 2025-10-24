@@ -59,7 +59,10 @@ div.card a.linkButtonCard {
   }
 
   div.card h2,
-  div.card p {
+  div.card p,
+  div.card ul,
+  div.card li,
+  div.card article.buttonCard {
     max-width: 25vw;
   }
 }
