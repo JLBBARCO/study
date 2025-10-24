@@ -9,6 +9,11 @@
       href="../../../assets/css/style.css"
       media="screen"
     />
+    <link
+      rel="stylesheet"
+      href="../../../assets/css/cards.css"
+      media="screen"
+    />
     <link rel="stylesheet" href="../../../assets/css/print.css" media="print" />
     <link
       rel="shortcut icon"
@@ -18,235 +23,147 @@
   </head>
   <body>
     <header>
-      <nav></nav>
-      <menu>
-        <a href="../../../index.html">
-          <span class="iconHome icon"></span>
-        </a>
-        <a href="../3_serie.html">
-          <span class="iconArrowBack icon"></span>
-        </a>
+      <nav aria-label="Navegação principal"></nav>
+      <nav aria-label="Menu de navegação">
         <div class="nav_menu">
           <button
-            id="navLinksButton"
-            type="button"
-            aria-label="Menu"
-            onclick="navLinks()"
+            id="nav-links-button"
+            aria-label="Abrir/Fechar menu de navegação"
+            aria-expanded="false"
+            aria-controls="nav-links"
           >
-          <span class="iconMenu burger-icon icon"></span>
+            <span class="burger-icon icon iconMenu" aria-hidden="true">
+              <img src="assets/icon/menu.svg" alt="Ícone de Menu" />
+            </span>
           </button>
-          <div class="nav_links">
-            <a href="#avaliacoes">Avaliações</a>
-            <a href="#recuperacoes">Recuperações</a>
+          <div id="nav-links" class="nav_links" role="menu">
+            <a href="../../../index.html">
+              <span class="iconHome icon"></span>
+            </a>
+            <a href="../3_serie.html">
+              <span class="iconArrowBack icon"></span>
+            </a>
+            <a href="#home" role="menuitem">Início</a>
+            <a href="#avaliacoes" role="menuitem">Avaliações</a>
+            <a href="#recuperacoes" role="menuitem">Recuperações</a>
           </div>
         </div>
-      </menu>
+      </nav>
     </header>
     <main>
-      <table id="avaliacoes">
-        <caption>
-          <h2>Avaliações</h2>
-        </caption>
-        <thead>
-          <tr>
-            <th>Aulas</th>
-            <th>Descrição</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="num">
+      <section id="home"><h1>3ª Série</h1>
+        <p>Conteúdo e atividades da 3ª série do colégio</p>
+        <article class="container-link-home">
+          <a href="#avaliacoes" class="linkHome">Explorar Avaliações</a>
+          <a href="#recuperacoes" class="linkHome">Explorar Recuperações</a>
+        </article></section>
+      <section id="avaliacoes">
+        <h2>Avaliações</h2>
+        <article class="container">
+          <div class="card">
+            <h2>01</h2>
+            <p>Introdução à linguagem Python</p>
+            <article class="buttonCard">
               <a
                 href="https://github.com/JLBBARCO/study/tree/main/colegio_adolpho/3_serie/programacao_desenvolvimento_sistemas/atividades/atividade01"
+                class="linkButtonCard"
               >
-                01
+                Ver Código
               </a>
-            </td>
-            <td>Introdução à linguagem python</td>
-          </tr>
-          <tr>
-            <td class="num">
+            </article>
+          </div>
+          <div class="card">
+            <h2>02</h2>
+            <p>Verifica se o número é par ou ímpar</p>
+            <article class="buttonCard">
               <a
                 href="https://github.com/JLBBARCO/study/tree/main/colegio_adolpho/3_serie/programacao_desenvolvimento_sistemas/atividades/atividade02"
+                class="linkButtonCard"
               >
-                02
+                Ver Código
               </a>
-            </td>
-            <td>Verifica se o número é par ou ímpar</td>
-          </tr>
-          <tr>
-            <td class="num">
+            </article>
+          </div>
+          <div class="card">
+            <h2>03</h2>
+            <p>
+              <strong>Sistema de caixa eletrônico simplificado</strong><br />
+              <strong>Objetivo</strong>: Criar um programa em Python que simule as
+              operações básicas de um caixa eletrônico, usando estruturas de repetição
+              e decisão vistas em sala de aula.
+            </p>
+            <article class="buttonCard">
               <a
                 href="https://github.com/JLBBARCO/study/tree/main/colegio_adolpho/3_serie/programacao_desenvolvimento_sistemas/atividades/atividade03"
+                class="linkButtonCard"
               >
-                03
+                Ver Código
               </a>
-            </td>
-            <td>
-              <strong>Sistema de caixa eletrônico simplificado</strong><br />
-              <strong>Objetivo</strong>: Criar um programa em Python que simule
-              as operações básicas de um caixa eletrônico, usando estruturas de
-              repetição e decisão vistas em sala de aula.<br />
-              <strong>Requisitos do sistema</strong>:<br />
-              <ul>
-                <li>
-                  O programa deve ter um menu interativo que repete até o
-                  usuário escolher sair.
-                </li>
-                <li>
-                  Operações disponíveis: Consultar saldo, Depositar valor, Sacar
-                  valor, Extrato (últimas transações), Sair.
-                </li>
-                <li>Limitar saques diários (ex.: R$500,00 por dia).</li>
-                <li>Limitar valor máximo por saque (ex.: R$500,00).</li>
-                <li>Armazenar transações e mostrar tudo no estrato.</li>
-              </ul>
-              <strong>Sua tarefa</strong>:<br />
-              <ul>
-                <li>
-                  Implementar a lógica de cada operação (depósito, saque, etc.).
-                </li>
-                <li>Validar entradas (ex.: não permitir depósito negativo).</li>
-                <li>
-                  Garantir que o número de saques não ultrapasse LIMITE_SAQUES.
-                </li>
-                <li>
-                  Formatar o extrato para mostrar operações em ordem
-                  cronológica.
-                </li>
-              </ul>
-            </td>
-          </tr>
-          <tr>
-            <td class="num">
+            </article>
+          </div>
+          <div class="card">
+            <h2>04</h2>
+            <p>
+              <strong>Jogo de adivinhação</strong><br />
+              <strong>Objetivo:</strong> Criar um jogo em que o jogador tenta adivinhar
+              um número aleatório gerado pelo computador, com dicas e um sistema de
+              pontuação.
+            </p>
+            <article class="buttonCard">
               <a
                 href="https://github.com/JLBBARCO/study/tree/main/colegio_adolpho/3_serie/programacao_desenvolvimento_sistemas/atividades/atividade04"
+                class="linkButtonCard"
               >
-                04
+                Ver Código
               </a>
-            </td>
-            <td>
-              <strong>Jogo de adivinhação</strong>
-              <br />
-              <strong>Objetivo: </strong>Criar um jogo em que o jogador tenta
-              adivinhar um número aleatório gerado pelo computador, com dicas e
-              um sistema de pontuação.
-              <br />
-              <strong>Requisitos do sistema:</strong>
-              <br />
-              <ul>
-                <li>O programa gera um número aleatório entre 1 e 100.</li>
-                <li>
-                  O jogador tem um número limitado de tentativas (ex: 10).
-                </li>
-                <li>
-                  A cada palpite, o programa informa se o número correto é maior
-                  ou menor.
-                </li>
-                <li>Se o jogador acertar, o programa mostra:</li>
-                <ul>
-                  <li>Quantas tentativas foram usadas.</li>
-                  <li>
-                    Uma pontuação baseada no número de tentativas (ex: pontuação
-                    = (11 tentativas) * 10).
-                  </li>
-                </ul>
-                <li>No final, perguntar se o jogador quer jogar novamente.</li>
-                <li>
-                  Se o jogador errar todas as tentativas, revelar o número
-                  correto.
-                </li>
-              </ul>
-              <br />
-              <strong>Desafio (Ponto extra):</strong>
-              <ul>
-                <li>
-                  Adicionar um sistema de recorde (maior pontuação salva em uma
-                  variável).
-                </li>
-              </ul>
-            </td>
-          </tr>
-          <tr>
-            <td class="num">
+            </article>
+          </div>
+          <div class="card">
+            <h2>05</h2>
+            <p>
+              <strong>Compilado</strong><br />
+              Atividades passadas no caderno, que agora estão em arquivos Python.
+            </p>
+            <article class="buttonCard">
               <a
                 href="https://github.com/JLBBARCO/study/tree/main/colegio_adolpho/3_serie/programacao_desenvolvimento_sistemas/atividades/atividade05"
+                class="linkButtonCard"
               >
-                05
+                Ver Código
               </a>
-            </td>
-            <td>
-              <p>
-                <strong>Compilado</strong><br />
-                Atividades passadas no caderno, que agora estão em arquivos
-                Python.
-              </p>
-            </td>
-          </tr>
-          <tr>
-            <td class="num">
+            </article>
+          </div>
+          <div class="card">
+            <h2>06</h2>
+            <p>
+              Responda as seguintes perguntas (sempre que possível mostre um exemplo de
+              código que corrobora sua resposta):
+            </p>
+            <article class="buttonCard">
               <a
                 href="https://github.com/JLBBARCO/study/tree/main/colegio_adolpho/3_serie/programacao_desenvolvimento_sistemas/atividades/atividade06"
+                class="linkButtonCard"
               >
-                06
+                Ver Código
               </a>
-            </td>
-            <td>
-              Responda as seguintes perguntas (sempre que possível mostre um
-              exemplo de código que corrobora sua resposta):
-              <ol>
-                <li>
-                  O que acontece se tentarmos escrever &lt; write() &gt; em um
-                  arquivo aberto apenas para leitura &lt; "r" &gt;?
-                </li>
-                <li>
-                  O que acontece se tentarmos ler &lt; read() &gt; um arquivo
-                  aberto no modo "w" (escrita)?
-                </li>
-                <li>
-                  Qual a diferença entre os modos "w" e "a" ao abrir um arquivo?
-                  Quando cada um é útil?
-                </li>
-                <li>
-                  O que acontece se abrirmos um arquivo inexistente no modo "r"?
-                  E no modo "w"?
-                </li>
-                <li>
-                  Por que é importante fechar um arquivo após usá-lo &lt;
-                  arquivo.close() &gt;? O que pode acontecer se não fizermos
-                  isso?
-                </li>
-                <li>
-                  Como substituir uma linha específica de um arquivo (ex.:
-                  alterar a 3ª linha)?
-                </li>
-                <h4>DESAFIO</h4>
-                <li>
-                  Como contar quantas vezes uma palavra aparece em um arquivo?
-                </li>
-              </ol>
-            </td>
-          </tr>
-          <tr>
-            <td class="num">
+            </article>
+          </div>
+          <div class="card">
+            <h2>07</h2>
+            <p>Print Sequencial</p>
+            <article class="buttonCard">
               <a
                 href="https://github.com/JLBBARCO/study/tree/main/colegio_adolpho/3_serie/programacao_desenvolvimento_sistemas/atividades/atividade07"
+                class="linkButtonCard"
               >
-                07
+                Ver Código
               </a>
-            </td>
-            <td>Print Sequencial</td>
-          </tr>
-          <tr>
-            <td class="num">
-              <a
-                href="https://github.com/JLBBARCO/study/tree/main/colegio_adolpho/3_serie/programacao_desenvolvimento_sistemas/atividades/atividade08"
-              >
-                08
-              </a>
-            </td>
-            <td>
-              <strong>Controle de Estoque</strong>
+            </article>
+          </div>
+          <div class="card">
+            <h2>08</h2>
+            <p>
+              <strong>Controle de Estoque</strong><br />
               É necessário:
               <ul>
                 <li>Completar as operações definidas no arquivo.</li>
@@ -255,190 +172,44 @@
                   Salvar o histórico de movimentações em um outro arquivo .txt
                 </li>
                 <li>
-                  Permitir o usuário escolher salvar qualquer um dos relatórios
-                  em um arquivo .txt
+                  Permitir o usuário escolher salvar qualquer um dos relatórios em um
+                  arquivo .txt
                 </li>
               </ul>
-            </td>
-          </tr>
-          <tr>
-            <td class="num">
+            </p>
+            <article class="buttonCard">
               <a
-                href="https://github.com/JLBBARCO/study/tree/main/colegio_adolpho/3_serie/programacao_desenvolvimento_sistemas/atividades/atividade09"
+                href="https://github.com/JLBBARCO/study/tree/main/colegio_adolpho/3_serie/programacao_desenvolvimento_sistemas/atividades/atividade08"
+                class="linkButtonCard"
               >
-                09
+                Ver Código
               </a>
-            </td>
-            <td>Jogo da Forca</td>
-          </tr>
-          <tr>
-            <td class="num">
-              <a
-                href="https://github.com/JLBBARCO/study/tree/main/colegio_adolpho/3_serie/programacao_desenvolvimento_sistemas/atividades/atividade10"
-              >
-                10
-              </a>
-            </td>
-            <td>Classes</td>
-          </tr>
-          <tr>
-            <td class="num">
-              <a
-                href="https://github.com/JLBBARCO/study/tree/main/colegio_adolpho/3_serie/programacao_desenvolvimento_sistemas/atividades/atividade12"
-              >
-                12
-              </a>
-            </td>
-            <td>Busca Linear</td>
-          </tr>
-          <tr>
-            <td class="num">
-              <a
-                href="https://github.com/JLBBARCO/study/tree/main/colegio_adolpho/3_serie/programacao_desenvolvimento_sistemas/atividades/atividade13"
-              >
-                13
-              </a>
-            </td>
-            <td>Primeiros passos: CTkinter</td>
-          </tr>
-          <tr>
-            <td class="num">
-              <a
-                href="https://github.com/JLBBARCO/study/tree/main/colegio_adolpho/3_serie/programacao_desenvolvimento_sistemas/atividades/atividade14"
-                >14</a
-              >
-            </td>
-            <td>
-              <h2>Customtkinter: Frames, entradas e botões</h2>
-              <p>
-                <strong>Objetivo: </strong>Criar um aplicativo em Python com
-                interface gráfica utilizando a biblioteca customtkinter,
-                utilizando os conceitos de frame, input e botão.
-              </p>
-              <p><strong>Requisitos da interface:</strong></p>
-              <p>
-                <strong>EXERCÍCIO 1:</strong>
-                <br />
-                <ul>
-                  <li>Adicionar um frame com um Label, onde será exibido o nome dos alunos e as suas notas.</li>
-                  <li>Adicionar uma entrada, para digitar o nome do aluno</li>
-                  <li>Adicionar uma entrada, para digitar a nota do aluno</li>
-                  <li>Adicionar um botão, o qual quando acionado deve exibir o nome e a nota</li>
-                </ul>
-              </p>
-              <p>
-                <strong>EXERCÍCIO 2:</strong>
-                <ul>
-                  <li>Adicionar um outro frame</li>
-                  <li>Ao clicar no botão, este outro frame deve exibir a média simples das notas dos alunos, o nome e a nota do aluno com menor nota e do aluno com maior nota</li>
-                </ul>
-              </p>
-              <p>
-                <strong>EXERCÍCIO 3:</strong>
-                <ul>
-                  <li>Adicionar uma janela de confirmação que a operação de inclusão de um novo aluno foi bem-sucedida</li>
-                </ul>
-              </p>
-              <p>
-                <strong>Desafio:</strong>
-                <ul>
-                  <li>Adicionar uma janela de avisos quando o usuário não tiver digitado nenhum nome ou nota ou já tiver digitado um aluno com o mesmo nome</li>
-                </ul>
-              </p>
-            </td>
-          </tr>
-          <tr>
-            <td class="num"><a href="https://github.com/JLBBARCO/study/tree/main/colegio_adolpho/3_serie/programacao_desenvolvimento_sistemas/atividades/atividade15">15</a></td>
-            <td>Acesse a <a href="https://customtkinter.tomschimansky.com/documentation/" target="_blank" rel="noopener noreferrer">documentação do Customtkinter</a>. Crie um programa funcional, com um Widget não visto em sala.</td>
-          </tr>
-          <tr>
-            <td class="num"><a href="https://github.com/JLBBARCO/study/tree/main/colegio_adolpho/3_serie/programacao_desenvolvimento_sistemas/atividades/atividade16">16</a></td>
-            <td>MySQL</td>
-          </tr>
-          <tr>
-            <td class="num">
-              <a href="https://github.com/JLBBARCO/study/tree/main/colegio_adolpho/3_serie/programacao_desenvolvimento_sistemas/atividades/atividade17">17</a>
-            </td>
-            <td>
-              <h2>Último exercício de SQL</h2>
-              <p>
-                <strong>Exercício 1</strong><br>
-                Utilizando código Python e SQL, crie as duas tabelas vistas em sala e adicione os dados de exemplo, além de criar mais duas linhas de dados - fictícias. Lembre-se, sempre, de fechar as conexões abertas.
-              </p>
-              <p>
-                <strong>Exercício 2</strong><br>
-                Considerando as duas tabelas criadas, realize uma consulta SQL que retorne todas as linhas das tabelas e exiba cada uma. Lembre-se, sempre, de fechar as conexões abertas.
-              </p>
-              <p>
-                <strong>Exercício 3</strong><br>
-                Crie uma consulta SQL, que retorna informação das duas tabelas, para isso será necessário usar algum Join.
-                <ul>
-                  <li>Pode pesquisar em mecanismos de busca, porém não utilize inteligência artificial para responder, nem auxílio.</li>
-                  <li>O exemplo em anexo pode ser utilizado a vontade.</li>
-                </ul>
-              </p>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <table id="recuperacoes">
-        <caption>
-          <h2>Recuperações</h2>
-        </caption>
-        <thead>
-          <th>Recuperação</th>
-          <th>Descrição</th>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="num">
-              <a
-                href="https://github.com/JLBBARCO/study/tree/main/colegio_adolpho/3_serie/programacao_desenvolvimento_sistemas/recuperacoes/recuperacao01/"
-              >
-                01
-              </a>
-            </td>
-            <td>
+            </article>
+          </div>
+        </article>
+      </section>
+
+      <section id="recuperacoes">
+        <h2>Recuperações</h2>
+        <article class="container">
+          <div class="card">
+            <h2>01</h2>
+            <p>
               <strong>Sistema simplificado de biblioteca</strong><br />
-              <strong>Objetivo:</strong> Criar um programa em Python que simule
-              as operações básicas de uma biblioteca, sem usuários específicos.
-              <br />
-              <strong>Requisitos do sistema:</strong>
-              <ul>
-                <li>
-                  O programa deve ter um menu interativo que repete até o
-                  usuário escolher sair.
-                </li>
-                <li>
-                  Operações disponíveis: adicionar livro, emprestar livro,
-                  devolver livro, listar livros e Sair.
-                </li>
-                <li>Controlar status dos livros (disponível/emprestado)</li>
-                <li>Armazenar histórico de empréstimos.</li>
-              </ul>
-              <strong>Sua tarefa:</strong>
-              <ul>
-                <li>Implementar a lógica de cada operação.</li>
-                <li>Validar entradas.</li>
-                <li>
-                  Armazenar (persistir) um log das operações realizadas ou
-                  armazenar em um arquivo, todos os livros adicionados na
-                  biblioteca.
-                </li>
-              </ul>
-              <strong>Desafio:</strong>
-              <ul>
-                <li>
-                  Refaça toda a lógica do programa, considerando que existem
-                  usuários específicos, portanto é necessário criar função para
-                  cadastro dos usuário e um usuário só pode emprestar um livro
-                  ao mesmo tempo.
-                </li>
-              </ul>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+              <strong>Objetivo:</strong> Criar um programa em Python que simule as
+              operações básicas de uma biblioteca, sem usuários específicos.
+            </p>
+            <article class="buttonCard">
+              <a
+                href="https://github.com/JLBBARCO/study/tree/main/colegio_adolpho/3_serie/programacao_desenvolvimento_sistemas/recuperacoes/recuperacao01"
+                class="linkButtonCard"
+              >
+                Ver Código
+              </a>
+            </article>
+          </div>
+        </article>
+      </section>
       <aside>
         <h3>Erros</h3>
         <p>
