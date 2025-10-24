@@ -36,9 +36,16 @@ div.card p {
   text-align: justify;
 }
 
+div.card article.buttonCard {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+}
+
 div.card a.linkButtonCard {
   display: block;
-  margin-top: 15px;
+  margin: 15px;
   padding: 10px;
   border: var(--borda_padrão);
   border-radius: 5px;
