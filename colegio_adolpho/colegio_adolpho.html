@@ -5,37 +5,78 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Colégio Adolpho</title>
     <link rel="stylesheet" href="../assets/css/style.css" media="screen" />
+    <link rel="stylesheet" href="../assets/css/cards.css" media="screen" />
     <link rel="stylesheet" href="../assets/css/print.css" media="print" />
     <link rel="shortcut icon" type="image/x-icon" class="ColégioAdolpho" />
   </head>
   <body>
     <header>
-      <nav></nav>
-      <menu>
-        <a href="../index.html">
-          <span class="iconHome icon"></span>
-        </a>
-      </menu>
+      <nav aria-label="Navegação principal"></nav>
+      <nav aria-label="Menu de navegação">
+        <div class="nav_menu">
+          <button
+            id="nav-links-button"
+            aria-label="Abrir/Fechar menu de navegação"
+            aria-expanded="false"
+            aria-controls="nav-links"
+          >
+            <span class="burger-icon icon iconMenu" aria-hidden="true">
+              <img src="assets/icon/menu.svg" alt="Ícone de Menu" />
+            </span>
+          </button>
+          <div id="nav-links" class="nav_links" role="menu">
+            <a href="../../index.html">
+              <span class="iconHome icon"></span>
+            </a>
+            <a href="#home" role="menuitem">Início</a>
+            <a href="#series" role="menuitem">Séries</a>
+          </div>
+        </div>
+      </nav>
     </header>
     <main>
-      <ul>
-        <li>
-          <h3><a href="projetos/projetos.html">Projetos</a></h3>
-          Projetos desenvolvidos pelos alunos em diversas áreas do conhecimento.
-        </li>
-        <li>
-          <h3><a href="2_serie/2_serie.html">2ª Série</a></h3>
-          Conteúdo e atividades da 2ª série do colégio.
-        </li>
-        <li>
-          <h3><a href="3_serie/3_serie.html">3ª Série</a></h3>
-          Conteúdo e atividades da 3ª série do colégio.
-        </li>
-      </ul>
+      <section id="home">
+        <h1>Colégio Adolpho</h1>
+        <p>
+          Arquivos de estudos de programação e identação digital no Colégio
+          Estadual Governador Adolpho de Oliveira Franco
+        </p>
+        <article class="container-link-home">
+          <a href="#conteudo" class="linkHome">Explorar Conteúdo</a>
+        </article>
+      </section>
+      <section id="conteudo">
+        <article class="container">
+          <div class="card">
+            <h2>Projetos</h2>
+            <p>
+              Projetos desenvolvidos pelos alunos em diversas áreas do
+              conhecimento
+            </p>
+            <a href="projetos/projetos.html" class="linkButtonCard"
+              >Ver Conteúdo</a
+            >
+          </div>
+          <div class="card">
+            <h2>2ª Série</h2>
+            <p>Conteúdo e atividades da 2ª série do colégio</p>
+            <a href="2_serie/2_serie.html" class="linkButtonCard"
+              >Ver Conteúdo</a
+            >
+          </div>
+          <div class="card">
+            <h2>3ª Série</h2>
+            <p>Conteúdo e atividades da 3ª série do colégio</p>
+            <a href="3_serie/3_serie.html" class="linkButtonCard"
+              >Ver Conteúdo</a
+            >
+          </div>
+        </article>
+      </section>
     </main>
     <footer></footer>
-    <script src="../assets/js/script.js"></script>
     <script src="../assets/js/favicon.js"></script>
     <script src="../assets/js/icon.js"></script>
+    <script src="../assets/js/script.js"></script>
   </body>
 </html>
