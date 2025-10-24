@@ -274,9 +274,4 @@ footer .copyright {
   div.nav_links a {
     margin: 10px;
   }
-
-  main section {
-    flex-flow: row wrap;
-    justify-content: space-around;
-  }
 }
