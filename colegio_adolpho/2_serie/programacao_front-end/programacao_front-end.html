@@ -9,190 +9,193 @@
       href="../../../assets/css/style.css"
       media="screen"
     />
+    <link
+      rel="stylesheet"
+      href="../../../assets/css/cards.css"
+      media="screen"
+    />
     <link rel="stylesheet" href="../../../assets/css/print.css" media="print" />
     <link rel="shortcut icon" type="image/x-icon" class="HTML5" />
   </head>
   <body>
     <header>
-      <nav></nav>
-      <menu>
-        <a href="../../../index.html">
-          <span class="iconHome icon"></span>
-        </a>
-        <a href="../../colegio_adolpho.html">
-          <span class="iconArrowBack icon"></span>
-        </a>
+      <nav aria-label="Navegação principal"></nav>
+      <nav aria-label="Menu de navegação">
         <div class="nav_menu">
-          <button id="navLinksButton" type="button" aria-label="Menu">
-            <span class="iconMenu burger-icon icon"></span>
+          <button
+            id="nav-links-button"
+            aria-label="Abrir/Fechar menu de navegação"
+            aria-expanded="false"
+            aria-controls="nav-links"
+          >
+            <span class="burger-icon icon iconMenu" aria-hidden="true">
+              <img src="assets/icon/menu.svg" alt="Ícone de Menu" />
+            </span>
           </button>
-          <div class="nav_links">
-            <a href="#atividades">Atividades</a>
-            <a href="#avaliacoes">Avaliações</a>
+          <div id="nav-links" class="nav_links" role="menu">
+            <a href="../../../index.html">
+              <span class="iconHome icon"></span>
+            </a>
+            <a href="../2_serie.html">
+              <span class="iconArrowBack icon"></span>
+            </a>
+            <a href="#home" role="menuitem">Início</a>
+            <a href="#atividades" role="menuitem">Atividades</a>
+            <a href="#avaliacoes" role="menuitem">Avaliações</a>
           </div>
         </div>
-      </menu>
+      </nav>
     </header>
     <main>
+      <section id="home">
+        <h1>Programação Front-end</h1>
+        <p>Atividades e avaliações das aulas de Front-end</p>
+        <article class="container-link-home">
+          <a href="#atividades" class="linkHome">Explorar Atividades</a>
+          <a href="#avaliacoes" class="linkHome">Explorar Avaliações</a>
+        </article>
+      </section>
       <section id="atividades">
-        <table>
-          <caption>
-            <h2>Atividades</h2>
-          </caption>
-          <thead>
-            <tr>
-              <th>Aulas</th>
-              <th>Descrição</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="num">
-                <a
-                  href="https://github.com/JLBBARCO/study/tree/main/colegio_adolpho/2_serie/programacao_front-end/atividade/atividade01"
-                  rel="noopener noreferrer"
-                  >01</a
-                >
-              </td>
-              <td>
-                <a href="atividade/atividade01/index.html"
-                  >Introdução a HTML e CSS</a
-                >
-              </td>
-            </tr>
-            <tr>
-              <td class="num">
-                <a
-                  href="https://github.com/JLBBARCO/study/tree/main/colegio_adolpho/2_serie/programacao_front-end/atividade/atividade02"
-                  rel="noopener noreferrer"
-                  >02</a
-                >
-              </td>
-              <td>
-                <a href="atividade/atividade02/index.html">Testes com CSS</a>
-              </td>
-            </tr>
-            <tr>
-              <td class="num">
-                <a
-                  href="https://github.com/JLBBARCO/study/tree/main/colegio_adolpho/2_serie/programacao_front-end/atividade/atividade04"
-                  rel="noopener noreferrer"
-                  >04</a
-                >
-              </td>
-              <td>
-                <a href="atividade/atividade04/index.html"
-                  >Testes com CSS parte 2</a
-                >
-              </td>
-            </tr>
-            <tr>
-              <td class="num">
-                <a
-                  href="https://github.com/JLBBARCO/study/tree/main/colegio_adolpho/2_serie/programacao_front-end/atividade/atividade07"
-                  rel="noopener noreferrer"
-                  >07</a
-                >
-              </td>
-              <td><a href="atividade/atividade07/index.html">Rótulos</a></td>
-            </tr>
-            <tr>
-              <td class="num">
-                <a
-                  href="https://github.com/JLBBARCO/study/tree/main/colegio_adolpho/2_serie/programacao_front-end/atividade/atividade08"
-                  rel="noopener noreferrer"
-                  >08</a
-                >
-              </td>
-              <td>
-                <a href="atividade/atividade08/index.html"
-                  >Formatação de um formulário</a
-                >
-              </td>
-            </tr>
-            <tr>
-              <td class="num">
-                <a
-                  href="https://github.com/JLBBARCO/study/tree/main/colegio_adolpho/2_serie/programacao_front-end/atividade/atividade09"
-                  rel="noopener noreferrer"
-                  >09</a
-                >
-              </td>
-              <td><a href="atividade/atividade09/index.html">Tabelas</a></td>
-            </tr>
-            <tr>
-              <td class="num">
-                <a
-                  href="https://github.com/JLBBARCO/study/tree/main/colegio_adolpho/2_serie/programacao_front-end/atividade/atividade10"
-                  rel="noopener noreferrer"
-                  >10</a
-                >
-              </td>
-              <td>
-                <a href="atividade/atividade10/primeiroForm.html"
-                  >Primeiro formulário</a
-                >
-              </td>
-            </tr>
-            <tr>
-              <td class="num">
-                <a
-                  href="https://github.com/JLBBARCO/study/tree/main/colegio_adolpho/2_serie/programacao_front-end/atividade/atividade11"
-                  rel="noopener noreferrer"
-                  >11</a
-                >
-              </td>
-              <td>
-                <a href="atividade/atividade11/index.html"
-                  >Formulário de cadastro de lista de presentes</a
-                >
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        <h1>Atividades</h1>
+        <article class="container">
+          <div class="card">
+            <h2>1</h2>
+            <p>Introdução ao HTML e CSS</p>
+            <article class="container-link-home">
+              <a
+                href="https://github.com/JLBBARCO/study/tree/main/colegio_adolpho/2_serie/programacao_front-end/atividade/atividade01"
+                class="linkButtonCard"
+                >Ver Código</a
+              ><a href="atividade/atividade01/index.html" class="linkButtonCard"
+                >Ver Site</a
+              >
+            </article>
+          </div>
+          <div class="card">
+            <h2>2</h2>
+            <p>Testes com CSS</p>
+            <article class="container-link-home">
+              <a
+                href="https://github.com/JLBBARCO/study/tree/main/colegio_adolpho/2_serie/programacao_front-end/atividade/atividade02"
+                class="linkButtonCard"
+                >Ver Código</a
+              ><a href="atividade/atividade02/index.html" class="linkButtonCard"
+                >Ver Site</a
+              >
+            </article>
+          </div>
+          <div class="card">
+            <h2>4</h2>
+            <p>Testes com CSS parte 2</p>
+            <article class="container-link-home">
+              <a
+                href="https://github.com/JLBBARCO/study/tree/main/colegio_adolpho/2_serie/programacao_front-end/atividade/atividade04"
+                class="linkButtonCard"
+                >Ver Código</a
+              ><a href="atividade/atividade04/index.html" class="linkButtonCard"
+                >Ver Site</a
+              >
+            </article>
+          </div>
+          <div class="card">
+            <h2>7</h2>
+            <p>Rótulos</p>
+            <article class="container-link-home">
+              <a
+                href="https://github.com/JLBBARCO/study/tree/main/colegio_adolpho/2_serie/programacao_front-end/atividade/atividade07"
+                class="linkButtonCard"
+                >Ver Código</a
+              ><a href="atividade/atividade07/index.html" class="linkButtonCard"
+                >Ver Site</a
+              >
+            </article>
+          </div>
+          <div class="card">
+            <h2>8</h2>
+            <p>Formatação de um formulário</p>
+            <article class="container-link-home">
+              <a
+                href="https://github.com/JLBBARCO/study/tree/main/colegio_adolpho/2_serie/programacao_front-end/atividade/atividade08"
+                class="linkButtonCard"
+                >Ver Código</a
+              ><a href="atividade/atividade08/index.html" class="linkButtonCard"
+                >Ver Site</a
+              >
+            </article>
+          </div>
+          <div class="card">
+            <h2>9</h2>
+            <p>Tabelas</p>
+            <article class="container-link-home">
+              <a
+                href="https://github.com/JLBBARCO/study/tree/main/colegio_adolpho/2_serie/programacao_front-end/atividade/atividade09"
+                class="linkButtonCard"
+                >Ver Código</a
+              ><a href="atividade/atividade09/index.html" class="linkButtonCard"
+                >Ver Site</a
+              >
+            </article>
+          </div>
+          <div class="card">
+            <h2>10</h2>
+            <p>Primeiro formulário</p>
+            <article class="container-link-home">
+              <a
+                href="https://github.com/JLBBARCO/study/tree/main/colegio_adolpho/2_serie/programacao_front-end/atividade/atividade10"
+                class="linkButtonCard"
+                >Ver Código</a
+              ><a
+                href="atividade/atividade10/primeiroForm.html"
+                class="linkButtonCard"
+                >Ver Site</a
+              >
+            </article>
+          </div>
+          <div class="card">
+            <h2>11</h2>
+            <p>Formulário de cadastro de lista de presentes</p>
+            <article class="container-link-home">
+              <a
+                href="https://github.com/JLBBARCO/study/tree/main/colegio_adolpho/2_serie/programacao_front-end/atividade/atividade11"
+                class="linkButtonCard"
+                >Ver Código</a
+              ><a href="atividade/atividade11/index.html" class="linkButtonCard"
+                >Ver Site</a
+              >
+            </article>
+          </div>
+        </article>
       </section>
       <section id="avaliacoes">
-        <table>
-          <caption>
-            <h2>Avaliações</h2>
-          </caption>
-          <thead>
-            <tr>
-              <th>Avaliação</th>
-              <th>Descrição</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="num">
-                <a
-                  href="https://github.com/JLBBARCO/study/tree/main/colegio_adolpho/2_serie/programacao_front-end/avaliacao/avaliacao1"
-                  rel="noopener noreferrer"
-                  >1</a
-                >
-              </td>
-              <td>
-                <a href="avaliacao/avaliacao1/index.html"
-                  >Tabela responsiva sobre vários jogos</a
-                >
-              </td>
-            </tr>
-            <tr>
-              <td class="num">
-                <a
-                  href="https://github.com/JLBBARCO/study/tree/main/colegio_adolpho/2_serie/programacao_front-end/avaliacao/avaliacao2"
-                  rel="noopener noreferrer"
-                  >2</a
-                >
-              </td>
-              <td>
-                <a href="avaliacao/avaliacao2/index.html"
-                  >Tabela responsiva sobre o jogo Destiny 2</a
-                >
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        <h1>Avaliações</h1>
+        <article class="container">
+          <div class="card">
+            <h2>1</h2>
+            <p>Tabela responsiva sobre vários jogos</p>
+            <article class="buttonCard">
+              <a
+                href="https://github.com/JLBBARCO/study/tree/main/colegio_adolpho/2_serie/programacao_front-end/avaliacao/avaliacao1"
+                class="linkButtonCard"
+                >Ver Código</a
+              ><a href="avaliacao/avaliacao1/index.html" class="linkButtonCard"
+                >Ver Site</a
+              >
+            </article>
+          </div>
+          <div class="card">
+            <h2>2</h2>
+            <p>Tabela responsiva sobre o jogo Destiny 2</p>
+            <article class="buttonCard">
+              <a
+                href="https://github.com/JLBBARCO/study/tree/main/colegio_adolpho/2_serie/programacao_front-end/avaliacao/avaliacao2"
+                class="linkButtonCard"
+                >Ver Código</a
+              ><a href="avaliacao/avaliacao2/index.html" class="linkButtonCard"
+                >Ver Site</a
+              >
+            </article>
+          </div>
+        </article>
       </section>
     </main>
     <footer></footer>

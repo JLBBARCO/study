@@ -5,38 +5,62 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>2ª Série</title>
     <link rel="stylesheet" href="../../assets/css/style.css" media="screen" />
+    <link rel="stylesheet" href="../../assets/css/cards.css" media="screen" />
     <link rel="stylesheet" href="../../assets/css/print.css" media="print" />
     <link rel="shortcut icon" type="image/x-icon" class="ColégioAdolpho" />
   </head>
   <body>
     <header>
-      <nav>
-        <h2>2ª Série</h2>
+      <nav aria-label="Navegação principal"></nav>
+      <nav aria-label="Menu de navegação">
+        <div class="nav_menu">
+          <button
+            id="nav-links-button"
+            aria-label="Abrir/Fechar menu de navegação"
+            aria-expanded="false"
+            aria-controls="nav-links"
+          >
+            <span class="burger-icon icon iconMenu" aria-hidden="true">
+              <img src="assets/icon/menu.svg" alt="Ícone de Menu" />
+            </span>
+          </button>
+          <div id="nav-links" class="nav_links" role="menu">
+            <a href="../../index.html">
+              <span class="iconHome icon"></span>
+            </a>
+            <a href="../colegio_adolpho.html">
+              <span class="iconArrowBack icon"></span>
+            </a>
+            <a href="#home" role="menuitem">Início</a>
+            <a href="#materias" role="menuitem">Matérias</a>
+          </div>
+        </div>
       </nav>
-      <menu>
-        <a href="../../index.html">
-          <span class="iconHome icon"></span>
-        </a>
-        <a href="../colegio_adolpho.html">
-          <span class="iconArrowBack icon"></span>
-        </a>
-      </menu>
     </header>
     <main>
-      <ul>
-        <li>
-          <h3>
-            <a href="programacao_front-end/programacao_front-end.html"
-              >Programação Front-end</a
-            >
-          </h3>
-          Atividades e avaliações das aulas de Front-end.
-        </li>
-      </ul>
+      <section id="home">
+        <h1>2ª Série</h1>
+        <p>Conteúdo e atividades da 2ª série do colégio</p>
+        <article class="container-link-home">
+          <a href="#materias" class="linkHome">Explorar Matérias</a>
+        </article>
+      </section>
+      <section id="materias">
+        <div class="card">
+          <span class="icon_card html5"></span>
+          <h2>Programação Front-end</h2>
+          <p>Atividades e avaliações das aulas de Front-end</p>
+          <a
+            href="programacao_front-end/programacao_front-end.html"
+            class="linkButtonCard"
+            >Ver Conteúdo</a
+          >
+        </div>
+      </section>
     </main>
     <footer></footer>
-    <script src="../../assets/js/script.js"></script>
     <script src="../../assets/js/favicon.js"></script>
     <script src="../../assets/js/icon.js"></script>
+    <script src="../../assets/js/script.js"></script>
   </body>
 </html>

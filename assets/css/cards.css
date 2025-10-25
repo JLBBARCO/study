@@ -20,7 +20,6 @@ div.card {
   flex-direction: column;
   align-items: center;
   flex: auto;
-  padding: 25px;
   margin: 25px;
   border: 1px solid black;
   border-radius: 10px;
@@ -30,6 +29,13 @@ div.card {
 
 div.card:hover {
   transform: translateY(-5px);
+}
+
+div.card img {
+  width: 25vw;
+  height: auto;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
 
 div.card p {
@@ -63,6 +69,7 @@ div.card a.linkButtonCard {
   div.card ul,
   div.card li,
   div.card article.buttonCard {
+    margin: 15px;
     max-width: 25vw;
   }
 }
