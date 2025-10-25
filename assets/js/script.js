@@ -120,14 +120,14 @@ if (footer) {
       <div class="card_footer">
         <h2>Links Rápidos</h2>
         <ul>
-          <li><a href="#home">Página Inicial</a></li>
-          <li><a href="https://github.com/jlbbarco/study">Repositório</a></li>
+          <li><a href="#home">Início</a></li>
+          <li><a href="https://study-jlbbarco.vercel.app">Repositório</a></li>
           </ul>
         </div>
         <div class="card_footer">
           <h2>Recursos</h2>
           <ul>
-            <li><a href="https://jlbbarco.github.io/">Portfólio</a></li>
+            <li><a href="https://portfolio-jlbbarco.vercel.app">Portfólio</a></li>
             <li><a href="https://github.com/JLBBARCO">GitHub</a></li>
           </ul>
         </div>
