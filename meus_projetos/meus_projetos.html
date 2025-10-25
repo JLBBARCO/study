@@ -5,65 +5,98 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Meus Projetos</title>
     <link rel="stylesheet" href="../assets/css/style.css" media="screen" />
+    <link rel="stylesheet" href="../assets/css/cards.css" media="screen" />
     <link rel="stylesheet" href="../assets/css/print.css" media="print" />
-    <link rel="shortcut icon" type="image/x-icon" class="Book">
+    <link rel="shortcut icon" type="image/x-icon" class="Book" />
   </head>
   <body>
     <header>
-      <nav>
-      </nav>
-      <menu>
-        <a href="../index.html">
-          <span class="iconHome icon"></span>
-        </a>
+      <nav aria-label="Navegação principal"></nav>
+      <nav aria-label="Menu de navegação">
         <div class="nav_menu">
-          <button id="nav-links-button" aria-label="Menu" onclick="navLinks()">
-            <span class="iconMenu burger-icon icon"></span>
+          <button
+            id="nav-links-button"
+            aria-label="Abrir/Fechar menu de navegação"
+            aria-expanded="false"
+            aria-controls="nav-links"
+          >
+            <span class="burger-icon icon iconMenu" aria-hidden="true">
+              <img src="assets/icon/menu.svg" alt="Ícone de Menu" />
+            </span>
           </button>
-          <div class="nav_links">
-            <a href="https://jlbbarco.github.io/contact">Contato</a>
-            <a href="https://github.com/JLBBARCO/study">Repositório</a>
+          <div id="nav-links" class="nav_links" role="menu">
+            <a href="../index.html">
+              <span class="iconHome icon"></span>
+            </a>
+            <a href="#home" role="menuitem">Início</a>
+            <a href="#projetos" role="menuitem">Projetos</a>
           </div>
         </div>
-      </menu>
+      </nav>
     </header>
     <main>
-        <ul class="conteudo">
-          <li>
-            <h3>
-              <a href="https://jlbbarco.github.io/passwords_generator" >
-                Gerador de Senhas
-              </a>
-            </h3>
-            Gerador de senhas alfanuméricas e alfanuméricas com caracteres
-            especiais.
-          </li>
-          <li>
-            <h3>
-              <a href="http://jlbbarco.github.io/unit_converter" >
-                Conversor de Unidades
-              </a>
-            </h3>
-            Converte várias unidades de medida que são fixas.
-          </li>
-          <li>
-            <h3>
-              <a href="https://jlbbarco.github.io/random_generator" >
-                Gerador Aleatório
-              </a>
-            </h3>
-            Gerador de Nomes e números aleatórios.
-          </li>
-          <li>
-            <h3><a href="https://jlbbarco.github.io/receipt-generator" >Gerador de Recibos</a></h3>
-          </li>
-          Gerador de recibos simples, onde é possível adicionar o nome do cliente, o valor e a data.
-          </li>
-        </ul>
+      <section id="home">
+        <h1>Meus Projetos</h1>
+        <p>
+          Uma coleção organizada dos meus projetos, anotações e materiais
+          desenvolvidos durante minha jornada de aprendizado em programação.
+        </p>
+        <article class="container-link-home">
+          <a href="#projetos" class="linkHome">Explorar Projetos</a>
+        </article>
+      </section>
+      <section id="projetos">
+        <article class="container">
+          <div class="card">
+            <h2>Gerador de Senhas</h2>
+            <p>
+              Gerador de senhas alfanuméricas e alfanuméricas com caracteres
+              especiais.
+            </p>
+            <a
+              href="https://jlbbarco.github.io/passwords_generator"
+              class="linkButtonCard"
+              >Ver Código</a
+            >
+          </div>
+          <div class="card">
+            <h2>Conversor de Unidades</h2>
+            <p>
+              Converte várias unidades de medida que contenham fórmulas fixas.
+            </p>
+            <a
+              href="https://jlbbarco.github.io/unit_converter"
+              class="linkButtonCard"
+              >Ver código</a
+            >
+          </div>
+          <div class="card">
+            <h2>Gerador Aleatório</h2>
+            <p>Gerador de nomes e números aleatórios</p>
+            <a
+              href="https://jlbbarco.github.io/random_generator"
+              class="linkButtonCard"
+              >Ver Código</a
+            >
+          </div>
+          <div class="card">
+            <h2>Gerador de Recibos</h2>
+            <p>
+              Gerador de recibos simples, onde é possível adicionar o nome do
+              cliente, o valor e a data de validade
+            </p>
+            <a
+              href="https://jlbbarco.github.io/receipt-generator"
+              class="linkButtonCard"
+              >Ver Site</a
+            >
+          </div>
+        </article>
+      </section>
     </main>
     <footer></footer>
-    <script src="../assets/js/script.js"></script>
     <script src="../assets/js/favicon.js"></script>
     <script src="../assets/js/icon.js"></script>
+    <script src="../assets/js/script.js"></script>
   </body>
 </html>

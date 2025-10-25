@@ -5,50 +5,103 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Curso em Vídeo</title>
     <link rel="stylesheet" href="../assets/css/style.css" media="screen" />
+    <link rel="stylesheet" href="../assets/css/cards.css" media="screen" />
     <link rel="stylesheet" href="../assets/css/print.css" media="print" />
     <link rel="shortcut icon" type="image/x-icon" class="CursoemVideo" />
   </head>
-  <body onresize="mudouJanela()">
+  <body>
     <header>
-      <nav></nav>
-      <menu>
-        <a href="../index.html">
-          <span class="iconHome icon"></span>
-        </a>
-        <div class="nav_menu"></div>
-      </menu>
+      <nav aria-label="Navegação principal"></nav>
+      <nav aria-label="Menu de navegação">
+        <div class="nav_menu">
+          <button
+            id="nav-links-button"
+            aria-label="Abrir/Fechar menu de navegação"
+            aria-expanded="false"
+            aria-controls="nav-links"
+          >
+            <span class="burger-icon icon iconMenu" aria-hidden="true">
+              <img src="assets/icon/menu.svg" alt="Ícone de Menu" />
+            </span>
+          </button>
+          <div id="nav-links" class="nav_links" role="menu">
+            <a href="../index.html">
+              <span class="iconHome icon"></span>
+            </a>
+            <a href="#home" role="menuitem">Início</a>
+            <a href="#cursos" role="menuitem">Cursos</a>
+          </div>
+        </div>
+      </nav>
     </header>
     <main>
-      <ul class="conteudo">
-        <li>
-          <h3><a href="html-css/html-css.html">HTML5 & CSS3</a></h3>
-          Estudos sobre HTML5 e CSS3
-        </li>
-        <li>
-          <h3><a href="git-github/git-github.html">Git & GitHub</a></h3>
-          Estudos sobre Git e GitHub
-        </li>
-        <li>
-          <h3><a href="javascript/javascript.html">JavaScript</a></h3>
-          Estudos sobre JavaScript ou também conhecido como EcmaScript
-        </li>
-        <li>
-          <h3><a href="python/python.html">Python</a></h3>
-          Estudos sobre Python
-        </li>
-        <li>
-          <h3><a href="php/php.html">PHP</a></h3>
-          Estudos sobre PHP
-        </li>
-        <li>
-          <h3><a href="java/java.html">Java</a></h3>
-          Estudos sobre Java
-        </li>
-      </ul>
+      <section id="home">
+        <h1>CursoemVideo</h1>
+        <p>
+          Arquivos criados acompanhando vídeos do site
+          <a
+            href="http://cursoemvideo.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="externo"
+            >CursoemVideo</a
+          >, com a finalidade de aprender, treinar e relembrar códigos dos
+          cursos.
+        </p>
+        <article class="container-link-home">
+          <a href="#cursos" class="linkHome">Explorar Cursos</a>
+        </article>
+      </section>
+      <section id="cursos">
+        <article class="container">
+          <div class="card">
+            <span class="html5"></span>
+            <h2>HTML5 & CSS3</h2>
+            <p>Estudos sobre HTML5 e CSS3</p>
+            <a href="html-css/html-css.html" class="linkButtonCard"
+              >Ver Curso</a
+            >
+          </div>
+          <div class="card">
+            <span class="github"></span>
+            <h2>Git & GitHub</h2>
+            <p>Estudos sobre Git e GitHub</p>
+            <a href="git-github/git-github.html" class="linkButtonCard"
+              >Ver Curso</a
+            >
+          </div>
+          <div class="card">
+            <span class="javascript"></span>
+            <h2>JavaScript</h2>
+            <p>Estudos sobre JavaScript ou também conhecido como EcmaScript</p>
+            <a href="javascript/javascript.html" class="linkButtonCard"
+              >Ver Curso</a
+            >
+          </div>
+          <div class="card">
+            <span class="python"></span>
+            <h2>Python</h2>
+            <p>Estudos sobre Python</p>
+            <a href="python/python.html" class="linkButtonCard">Ver Curso</a>
+          </div>
+          <div class="card">
+            <span class="php"></span>
+            <h2>PHP</h2>
+            <p>Estudos sobre PHP</p>
+            <a href="php/php.html" class="linkButtonCard">Ver Curso</a>
+          </div>
+          <div class="card">
+            <span class="java"></span>
+            <h2>Java</h2>
+            <p>Estudos sobre Java</p>
+            <a href="java/java.html" class="linkButtonCard">Ver Curso</a>
+          </div>
+        </article>
+      </section>
     </main>
     <footer></footer>
-    <script src="../assets/js/script.js"></script>
     <script src="../assets/js/favicon.js"></script>
     <script src="../assets/js/icon.js"></script>
+    <script src="../assets/js/script.js"></script>
   </body>
 </html>

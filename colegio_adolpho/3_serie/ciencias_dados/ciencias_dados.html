@@ -9,77 +9,72 @@
       href="../../../assets/css/style.css"
       media="screen"
     />
+    <link
+      rel="stylesheet"
+      href="../../../assets/css/cards.css"
+      media="screen"
+    />
     <link rel="stylesheet" href="../../../assets/css/print.css" media="print" />
     <link rel="shortcut icon" type="image/x-icon" class="Python" />
   </head>
   <body>
     <header>
-      <nav></nav>
-      <menu>
-        <a href="../../../index.html">
-          <span class="iconHome icon"></span>
-        </a>
-        <a href="../3_serie.html">
-          <span class="iconArrowBack icon"></span>
-        </a>
+      <nav aria-label="Navegação principal"></nav>
+      <nav aria-label="Menu de navegação">
         <div class="nav_menu">
           <button
             id="nav-links-button"
-            type="button"
-            aria-label="Menu"
-            onclick="navLinks()"
+            aria-label="Abrir/Fechar menu de navegação"
+            aria-expanded="false"
+            aria-controls="nav-links"
           >
-            <span class="iconMenu burger-icon icon"></span>
+            <span class="burger-icon icon iconMenu" aria-hidden="true">
+              <img src="assets/icon/menu.svg" alt="Ícone de Menu" />
+            </span>
           </button>
-          <div class="nav_links">
-            <a href="#atividades">Atividades</a>
+          <div id="nav-links" class="nav_links" role="menu">
+            <a href="../../../index.html">
+              <span class="iconHome icon"></span>
+            </a>
+            <a href="../3_serie.html">
+              <span class="iconArrowBack icon"></span>
+            </a>
+            <a href="#home" role="menuitem">Início</a>
+            <a href="#atividades" role="menuitem">Atividades</a>
           </div>
         </div>
-      </menu>
+      </nav>
     </header>
     <main>
+      <section id="home">
+        <h1>Ciências de Dados</h1>
+        <p>Atividades e avaliações das aulas de Ciências de Dados</p>
+        <article class="container-link-home">
+          <a href="#atividades" class="linkHome">Explorar Atividades</a>
+        </article>
+      </section>
       <section id="atividades">
-        <table>
-          <caption>
-            <h2>Atividades</h2>
-          </caption>
-          <thead>
-            <tr>
-              <th>Aulas</th>
-              <th>Descrição</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="num">
-                <a
-                  href="https://github.com/JLBBARCO/study/tree/main/colegio_adolpho/3_serie/ciencias_dados/atividades/atividade01"
-                >
-                  01
-                </a>
-              </td>
-              <td>Bibliotecas</td>
-            </tr>
-            <tr>
-              <td class="num">
-                <a
-                  href="https://github.com/JLBBARCO/study/tree/main/colegio_adolpho/3_serie/ciencias_dados/atividades/atividade02"
-                >
-                  02
-                </a>
-              </td>
-              <td>Introdução ao CSV (Comma-separated values)</td>
-            </tr>
-            <tr>
-              <td class="num">
-                <a
-                  href="https://github.com/JLBBARCO/study/tree/main/colegio_adolpho/3_serie/ciencias_dados/atividades/atividade03"
-                >
-                  03
-                </a>
-              </td>
-              <td>
-                Encontre um repositório - a escolha do tema é livre.
+        <div class="card">
+          <h2>1</h2>
+          <p>Bibliotecas</p>
+          <article class="buttonCard">
+            <a
+              href="https://github.com/JLBBARCO/study/tree/main/colegio_adolpho/3_serie/ciencias_dados/atividades/atividade01"
+              class="linkButtonCard"
+              >Ver Atividade</a
+            >
+          </article>
+        </div>
+        <div class="card">
+          <h2>2</h2>
+          <p>Introdução ao CSV (Comma-separated values)</p>
+          <article class="buttonCard">
+            <a href="https://github.com/JLBBARCO/study/tree/main/colegio_adolpho/3_serie/ciencias_dados/atividades/atividade02" class="linkButtonCard">Ver Atividade</a>
+          </article>
+        </div>
+        <div class="card">
+          <h2>3</h2>
+          <p>Encontre um repositório - a escolha do tema é livre.
                 <br />
                 <ul>
                   <li>Faça o download do arquivo .css.</li>
@@ -102,29 +97,22 @@
                   <li>
                     Salve o DataFrame resultante de uma das funções utilizadas
                   </li>
-                </ul>
-              </td>
-            </tr>
-            <tr>
-              <td class="num">
-                <a
-                  href="https://github.com/JLBBARCO/study/tree/main/colegio_adolpho/3_serie/ciencias_dados/atividades/atividade04"
-                >
-                  04
-                </a>
-              </td>
-              <td>Utilizando a biblioteca Matplotlib</td>
-            </tr>
-            <tr>
-              <td class="num">
-                <a
-                  href="https://github.com/JLBBARCO/study/tree/main/colegio_adolpho/3_serie/ciencias_dados/atividades/atividade05"
-                >
-                  05
-                </a>
-              </td>
-              <td>
-                Considere os seguintes dados: meses = ['Jan', 'Fev', 'Mar',
+                </ul></p>
+          <article class="buttonCard">
+            <a href="https://github.com/JLBBARCO/study/tree/main/colegio_adolpho/3_serie/ciencias_dados/atividades/atividade03" class="linkButtonCard">Ver Atividade</a>
+          </article>
+        </div>
+        <div class="card">
+          <h2>4</h2>
+          <p>Utilizando a biblioteca Matplotlib</p>
+          <article class="buttonCard">
+            <a href="https://github.com/JLBBARCO/study/tree/main/colegio_adolpho/3_serie/ciencias_dados/atividades/atividade04" class="linkButtonCard">Ver Atividade</a>
+          </article>
+        </div>
+        <div class="card">
+          <h2>5</h2>
+          <p>
+            Considere os seguintes dados: meses = ['Jan', 'Fev', 'Mar',
                 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez']
                 vendas = [120, 150, 130, 170, 200, 240, 260, 250, 230, 210, 190,
                 220] Em um arquivo .py, escreva o código Python que:
@@ -152,43 +140,34 @@
                     resposta.
                   </li>
                 </ul>
-              </td>
-            </tr>
-            <tr>
-              <td class="num">
-                <a
-                  href="https://github.com/JLBBARCO/study/tree/main/colegio_adolpho/3_serie/ciencias_dados/atividades/atividade06"
-                >
-                  06
-                </a>
-              </td>
-              <td>
-                <strong>Alturas</strong><br />
+              </p>
+          <article class="buttonCard">
+            <a href="https://github.com/JLBBARCO/study/tree/main/colegio_adolpho/3_serie/ciencias_dados/atividades/atividade05" class="linkButtonCard">Ver Atividade</a>
+          </article>
+        </div>
+        <div class="card">
+          <h2>6</h2>
+          <p><strong>Alturas</strong><br />
                 Limpe e reordene os dados a fim de criar um gráfico para
-                visualização do tamanho dos alunos do 3°B.
-              </td>
-            </tr>
-            <tr>
-              <td class="num">
-                <a
-                  href="https://github.com/JLBBARCO/study/tree/main/colegio_adolpho/3_serie/ciencias_dados/atividades/atividade08"
-                >
-                  08
-                </a>
-              </td>
-              <td>Machine Learning</td>
-            </tr>
-            <tr>
-              <td class="num">
-                <a
-                  href="https://github.com/JLBBARCO/study/tree/main/colegio_adolpho/3_serie/ciencias_dados/atividades/atividade09"
-                  >09</a
-                >
-              </td>
-              <td>Medidas Separatrizes</td>
-            </tr>
-          </tbody>
-        </table>
+                visualização do tamanho dos alunos do 3°B</p>
+          <article class="buttonCard">
+            <a href="https://github.com/JLBBARCO/study/tree/main/colegio_adolpho/3_serie/ciencias_dados/atividades/atividade06" class="linkButtonCard">Ver Atividade</a>
+          </article>
+        </div>
+        <div class="card">
+          <h2>8</h2>
+          <p>Machine Learning</p>
+          <article class="buttonCard">
+            <a href="https://github.com/JLBBARCO/study/tree/main/colegio_adolpho/3_serie/ciencias_dados/atividades/atividade08" class="linkButtonCard">Ver Atividade</a>
+          </article>
+        </div>
+        <div class="card">
+          <h2>9</h2>
+          <p>Medidas Separatrizes</p>
+          <article class="buttonCard">
+            <a href="https://github.com/JLBBARCO/study/tree/main/colegio_adolpho/3_serie/ciencias_dados/atividades/atividade09" class="linkButtonCard">Ver Atividade</a>
+          </article>
+        </div>
       </section>
       <aside>
         <h3>Erros</h3>
@@ -204,8 +183,8 @@
       </aside>
     </main>
     <footer></footer>
-    <script src="../../../assets/js/script.js"></script>
     <script src="../../../assets/js/favicon.js"></script>
     <script src="../../../assets/js/icon.js"></script>
+    <script src="../../../assets/js/script.js"></script>
   </body>
 </html>
