@@ -233,13 +233,6 @@ main .container {
   align-items: center;
 }
 
-main .icon {
-  font-size: 4rem;
-  margin: 15px;
-  width: 1em;
-  height: 1em;
-}
-
 /* Conteúdos extras */
 aside {
   padding: 5%;

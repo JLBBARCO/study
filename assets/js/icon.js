@@ -96,6 +96,11 @@ document.addEventListener("DOMContentLoaded", () => {
       src: `${iconStorage}graphic_design.svg`,
       alt: "Ícone Design Gráfico",
     },
+    {
+      className: "document_folder",
+      src: `${iconStorage}document_folder.svg`,
+      alt: "Ícone Documento/Pasta",
+    },
   ];
 
   icons.forEach((icon) => {
