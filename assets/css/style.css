@@ -5,8 +5,8 @@
   src: url(../fonts/Sour_Gummy/SourGummy.ttf) format("truetype");
 }
 @font-face {
-  font-family: "Aldrich";
-  src: url(../fonts/Aldrich/Aldrich-Regular.ttf) format("truetype");
+  font-family: "Tektur";
+  src: url(../fonts/Tektur/Tektur-VariableFont.ttf) format("truetype");
 }
 
 /* estilização base */
@@ -20,9 +20,8 @@
   --footer: #0c1927;
   --shadow: 0px 7px 7px #0000006b;
   --borda_padrão: 2px solid var(--texto);
-  --fonte01: Arial, Helvetica, sans-serif;
+  --fonte01: "Tektur", sans-serif;
   --fonte02: "Sour Gummy", serif;
-  --fonte03: "Aldrich", sans-serif;
 }
 
 * {
@@ -77,6 +76,21 @@ h6 {
   padding: 10px;
   font-family: var(--fonte02);
   text-align: center;
+}
+
+h1 {
+  font-size: 2em;
+}
+h2 {
+  font-size: 1.5em;
+}
+h3 {
+  font-size: 1em;
+}
+h4,
+h5,
+h6 {
+  font-size: 0.8em;
 }
 
 /* Cabeçalho */

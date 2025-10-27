@@ -21,6 +21,7 @@ div.card {
   align-items: center;
   flex: auto;
   margin: 25px;
+  padding: 25px;
   border: 1px solid black;
   border-radius: 10px;
   text-align: center;
@@ -76,7 +77,6 @@ div.card a.linkButtonCard {
   div.card ul,
   div.card li,
   div.card article.buttonCard {
-    margin: 15px;
     max-width: 25vw;
   }
 }
