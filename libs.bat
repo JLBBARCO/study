@@ -1,8 +1,7 @@
 pip install customtkinter
 pip install mysql-connector-python
-npm install expo-cli
-python -m pip install pyinstaller
-python -m pip install pandas
-python -m pip install matplotlib
-python -m pip install seaborn
-python -m pip install scikit-learn
+pip install pyinstaller
+pip install pandas
+pip install matplotlib
+pip install seaborn
+pip install scikit-learn
