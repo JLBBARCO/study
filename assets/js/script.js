@@ -32,6 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
     initializeNavigation();
     initializeSmoothScroll();
     initializeCookies();
+    wrapCardLinks();
     initializeFooter();
   } catch (error) {
     console.error("Erro na inicialização:", error);
@@ -242,4 +243,29 @@ function resetFont() {
   body.style.fontSize = ""; // remove estilo inline e volta ao padrão do CSS
   // remove cookie
   document.cookie = "fontSize=; path=/; max-age=0";
+}
+
+// Envolve links que sejam filhos diretos de `.card` dentro de um `article.buttonCard`.
+// Isso evita mover links inline dentro de parágrafos e corrige páginas que
+// possuem âncoras diretas nos cards sem precisar editar todos os HTMLs.
+function wrapCardLinks() {
+  try {
+    document.querySelectorAll(".card").forEach((card) => {
+      // Seleciona apenas âncoras que sejam filhos diretos do .card
+      const directAnchors = Array.from(card.querySelectorAll(":scope > a"));
+      if (directAnchors.length === 0) return;
+
+      // Cria o wrapper apenas se necessário
+      const wrapper = document.createElement("article");
+      wrapper.className = "buttonCard";
+
+      directAnchors.forEach((a) => wrapper.appendChild(a));
+
+      // Anexa o wrapper ao final do card
+      card.appendChild(wrapper);
+    });
+    console.log("wrapCardLinks: links diretos em .card foram agrupados.");
+  } catch (e) {
+    console.error("wrapCardLinks erro:", e);
+  }
 }

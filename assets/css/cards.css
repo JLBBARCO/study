@@ -21,7 +21,6 @@ div.card {
   align-items: center;
   flex: auto;
   margin: 25px;
-  padding: 25px;
   border: 1px solid black;
   border-radius: 10px;
   text-align: center;
@@ -40,13 +39,14 @@ div.card img.icon {
 }
 
 div.card img {
-  width: 25vw;
+  width: 100%;
   height: auto;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
 }
 
 div.card p {
+  margin: 25px;
   text-align: justify;
 }
 
@@ -57,7 +57,7 @@ div.card article.buttonCard {
   align-items: center;
 }
 
-div.card a.linkButtonCard {
+div.card article.buttonCard a {
   display: block;
   margin: 15px;
   padding: 10px;
