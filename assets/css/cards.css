@@ -31,11 +31,12 @@ div.card:hover {
   transform: translateY(-5px);
 }
 
-div.card img.icon {
+div.card .icon {
   font-size: 6rem;
   margin: 15px;
   width: 1em;
   height: 1em;
+  color: var(--texto);
 }
 
 div.card img {

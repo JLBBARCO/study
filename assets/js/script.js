@@ -37,6 +37,12 @@ document.addEventListener("DOMContentLoaded", () => {
   } catch (error) {
     console.error("Erro na inicialização:", error);
   }
+
+  const head = document.querySelector("head");
+  const script = document.createElement("script");
+  script.src = "https://kit.fontawesome.com/4a1e49a1ca.js";
+  script.crossOrigin = "anonymous";
+  head.appendChild(script);
 });
 
 function initializeSmoothScroll() {

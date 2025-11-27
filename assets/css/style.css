@@ -12,11 +12,18 @@
 /* estilização base */
 
 :root {
-  --destaque: #387bd8;
   --fundo: #011327;
+  --destaque: #387bd8;
   --interativo: #0e3c55;
   --texto: #fff;
   --cor-body: #333;
+  --gradiente: linear-gradient(45deg, #011327 0%, #0e3c55 50%, #387bd8 100%);
+  --gradiente-inverso: linear-gradient(
+    45deg,
+    #387bd8 0%,
+    #0e3c55 50%,
+    #011327 100%
+  );
   --footer: #0c1927;
   --shadow: 0px 7px 7px #0000006b;
   --borda_padrão: 2px solid var(--texto);
@@ -53,7 +60,7 @@ a:hover {
 
 a.externo {
   position: relative;
-  background-color: none;
+  background-color: transparent;
   border: none;
 }
 
@@ -98,8 +105,12 @@ header {
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
   width: 100%;
-  padding: 25px;
+  padding: 10px 25px;
   background-color: var(--destaque);
 }
 
@@ -181,20 +192,19 @@ header button:hover {
 }
 
 /* Conteúdo Principal */
-main {
-  background-color: var(--destaque);
-}
-
 main section {
   display: flex;
   flex-flow: column nowrap;
   justify-content: center;
   min-height: 50vh;
   padding: 10%;
+  background: var(--gradiente);
+  background-attachment: fixed;
 }
 
 main section:nth-child(odd) {
-  background-color: var(--fundo);
+  background: var(--gradiente-inverso);
+  background-attachment: fixed;
 }
 
 main p {
@@ -223,7 +233,7 @@ section#home a.linkHome {
 section#home a.linkHome:hover {
   border: var(--borda_padrão);
   text-decoration: none;
-  transform: translatey(-5px);
+  transform: translateY(-5px);
 }
 
 main .container {
