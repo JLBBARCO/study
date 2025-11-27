@@ -1,4 +1,4 @@
-@charset 'UTF-8';
+@charset "UTF-8";
 
 :root {
   --fundo: #387bd8;
@@ -36,7 +36,6 @@ div.card .icon {
   margin: 15px;
   width: 1em;
   height: 1em;
-  color: var(--texto);
 }
 
 div.card img {

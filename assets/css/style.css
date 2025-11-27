@@ -18,12 +18,6 @@
   --texto: #fff;
   --cor-body: #333;
   --gradiente: linear-gradient(45deg, #011327 0%, #0e3c55 50%, #387bd8 100%);
-  --gradiente-inverso: linear-gradient(
-    45deg,
-    #387bd8 0%,
-    #0e3c55 50%,
-    #011327 100%
-  );
   --footer: #0c1927;
   --shadow: 0px 7px 7px #0000006b;
   --borda_padrão: 2px solid var(--texto);
@@ -100,6 +94,11 @@ h6 {
   font-size: 1em;
 }
 
+.icon {
+  transition: all 0.3s;
+  color: var(--texto);
+}
+
 /* Cabeçalho */
 header {
   display: flex;
@@ -124,6 +123,12 @@ header button {
 header button:hover {
   border: var(--borda_padrão);
   background-color: var(--interativo);
+}
+
+header button:active {
+  #menuIcon {
+    transform: rotateZ(-90deg);
+  }
 }
 
 /* Estilos do menu mobile */
@@ -160,32 +165,6 @@ header button:hover {
   text-align: center;
 }
 
-/* Estilo do botão do menu */
-.burger-icon {
-  width: 24px;
-  height: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: transform 0.3s ease;
-}
-
-.burger-icon img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-
-.burger-icon.iconClose {
-  transform: rotate(90deg); /* Adiciona uma rotação para animação */
-}
-
-/* Garante que o ícone seja visível */
-.burger-icon.iconMenu img,
-.burger-icon.iconClose img {
-  display: block;
-}
-
 /* Classe para controlar a visibilidade do menu */
 .nav_links.active {
   display: flex;
@@ -199,11 +178,6 @@ main section {
   min-height: 50vh;
   padding: 10%;
   background: var(--gradiente);
-  background-attachment: fixed;
-}
-
-main section:nth-child(odd) {
-  background: var(--gradiente-inverso);
   background-attachment: fixed;
 }
 

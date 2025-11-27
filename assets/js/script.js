@@ -42,6 +42,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const script = document.createElement("script");
   script.src = "https://kit.fontawesome.com/4a1e49a1ca.js";
   script.crossOrigin = "anonymous";
+  script.onload = () => {
+    console.log("Font Awesome carregado com sucesso");
+    initializeFontAwesome();
+  };
   head.appendChild(script);
 });
 
@@ -112,37 +116,39 @@ if (header && nav) {
 }
 
 // --- Rodapé dinâmico ---
-const footer = document.querySelector("footer");
-if (footer) {
-  const data = new Date();
-  const ano = data.getFullYear();
-  footer.innerHTML = `
-    <div class="container_footer">
-      <div class="card_footer">
-        <h2>Projeto de Estudos</h2>
-        <p>
-          Projeto realizado para estudos de programação, com possibilidade de uso de qualquer pessoa.
-        </p>
-      </div>
-      <div class="card_footer">
-        <h2>Links Rápidos</h2>
-        <ul>
-          <li><a href="#home">Início</a></li>
-          <li><a href="https://github.com/jlbbarco/study">Repositório</a></li>
-          </ul>
+function initializeFooter() {
+  const footer = document.querySelector("footer");
+  if (footer) {
+    const data = new Date();
+    const ano = data.getFullYear();
+    footer.innerHTML = `
+      <div class="container_footer">
+        <div class="card_footer">
+          <h2>Projeto de Estudos</h2>
+          <p>
+            Projeto realizado para estudos de programação, com possibilidade de uso de qualquer pessoa.
+          </p>
         </div>
         <div class="card_footer">
-          <h2>Recursos</h2>
+          <h2>Links Rápidos</h2>
           <ul>
-            <li><a href="https://portfolio-jlbbarco.vercel.app">Portfólio</a></li>
-            <li><a href="https://github.com/JLBBARCO">GitHub</a></li>
-          </ul>
-        </div>
-    </div>
-    <p class="copyright">
-      &copy; ${ano}. Todos os direitos de uso liberados.
-    </p>
-  `;
+            <li><a href="#home">Início</a></li>
+            <li><a href="https://github.com/jlbbarco/study">Repositório</a></li>
+            </ul>
+          </div>
+          <div class="card_footer">
+            <h2>Recursos</h2>
+            <ul>
+              <li><a href="https://portfolio-jlbbarco.vercel.app">Portfólio</a></li>
+              <li><a href="https://github.com/JLBBARCO">GitHub</a></li>
+            </ul>
+          </div>
+      </div>
+      <p class="copyright">
+        &copy; ${ano}. Todos os direitos de uso liberados.
+      </p>
+    `;
+  }
 }
 
 // Responsividade do menu ao redimensionar a janela
@@ -163,10 +169,9 @@ function initializeNavigation() {
 
   const navLinksButton = document.getElementById("nav-links-button");
   const navLinks = document.querySelector(".nav_links");
-  const burgerIcon = document.querySelector(".burger-icon");
-  const burgerImg = burgerIcon.querySelector("img"); // Seleciona a imagem dentro do span
+  const menuIcon = document.getElementById("menuIcon");
 
-  if (!navLinksButton || !navLinks || !burgerIcon || !burgerImg) {
+  if (!navLinksButton || !navLinks) {
     console.error("Elementos do menu não encontrados");
     return;
   }
@@ -182,11 +187,13 @@ function initializeNavigation() {
 
     // Alternar o ícone dinamicamente
     if (isExpanded) {
-      burgerImg.src = `${obterCaminhoRelativo()}/assets/icon/menu.svg`; // Ícone de menu
-      burgerImg.alt = "Ícone de Menu";
+      // Menu está aberto, vai fechar - mostrar ícone de menu (bars)
+      menuIcon.classList.remove("fa-xmark");
+      menuIcon.classList.add("fa-bars");
     } else {
-      burgerImg.src = `${obterCaminhoRelativo()}/assets/icon/close.svg`; // Ícone de fechar
-      burgerImg.alt = "Ícone de Fechar";
+      // Menu está fechado, vai abrir - mostrar ícone de fechar (xmark)
+      menuIcon.classList.remove("fa-bars");
+      menuIcon.classList.add("fa-xmark");
     }
 
     // Atualiza aria-expanded
@@ -195,7 +202,7 @@ function initializeNavigation() {
     // Log para debug
     console.log("Menu clicked:", {
       isExpanded: !isExpanded,
-      iconSrc: burgerImg.src,
+      menuVisível: navLinks.classList.contains("active"),
     });
   });
 
@@ -206,8 +213,8 @@ function initializeNavigation() {
       !navLinks.contains(event.target)
     ) {
       navLinks.classList.remove("active");
-      burgerImg.src = `${obterCaminhoRelativo()}/assets/icon/menu.svg`; // Volta para o ícone de menu
-      burgerImg.alt = "Ícone de Menu";
+      menuIcon.classList.remove("fa-xmark");
+      menuIcon.classList.add("fa-bars");
       navLinksButton.setAttribute("aria-expanded", "false");
     }
   });
@@ -274,4 +281,16 @@ function wrapCardLinks() {
   } catch (e) {
     console.error("wrapCardLinks erro:", e);
   }
+}
+
+// Função auxiliar para reinicializar Font Awesome
+function initializeFontAwesome() {
+  if (window.FontAwesome) {
+    window.FontAwesome.config.autoReplaceSvg = "nest";
+  }
+}
+
+// Função auxiliar para inicializar cookies
+function initializeCookies() {
+  // Lógica de cookies já está implementada no escopo global
 }
