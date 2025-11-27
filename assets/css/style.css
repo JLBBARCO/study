@@ -16,7 +16,6 @@
   --destaque: #387bd8;
   --interativo: #0e3c55;
   --texto: #fff;
-  --cor-body: #333;
   --gradiente: linear-gradient(45deg, #011327 0%, #0e3c55 50%, #387bd8 100%);
   --footer: #0c1927;
   --shadow: 0px 7px 7px #0000006b;
@@ -40,7 +39,8 @@ body {
   font-family: var(--fonte01);
   line-height: 1.6rem;
   color: var(--texto);
-  background-color: var(--cor-body);
+  background: var(--gradiente);
+  background-attachment: fixed;
 }
 
 a {
@@ -177,8 +177,7 @@ main section {
   justify-content: center;
   min-height: 50vh;
   padding: 10%;
-  background: var(--gradiente);
-  background-attachment: fixed;
+  background: none;
 }
 
 main p {
@@ -220,7 +219,7 @@ main .container {
 /* Conteúdos extras */
 aside {
   padding: 5%;
-  background-color: var(--fundo);
+  background: none;
 }
 
 /* Rodapé */
