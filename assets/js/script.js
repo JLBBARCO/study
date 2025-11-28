@@ -139,7 +139,7 @@ function initializeFooter() {
           <div class="card_footer">
             <h2>Recursos</h2>
             <ul>
-              <li><a href="https://portfolio-jlbbarco.vercel.app">Portfólio</a></li>
+              <li><a href="https://jlbbarco.github.io/portfolio">Portfólio</a></li>
               <li><a href="https://github.com/JLBBARCO">GitHub</a></li>
             </ul>
           </div>

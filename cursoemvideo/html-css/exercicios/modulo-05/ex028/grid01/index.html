@@ -8,23 +8,31 @@
       div.container {
         border: 3px solid #00f;
         height: 250px;
+
         display: grid;
         grid-template-columns: auto auto auto;
         grid-template-rows: auto auto auto;
         gap: 10px;
+
+        align-items: normal;
+        justify-items: normal;
+        align-content: normal;
+        justify-content: normal;
         /*
             grid-template-columns: cada valor indica uma coluna. Ou seja, a cada valor sep por space, indica que ele criará e dará valor a uma nova coluna
             grid-template-rows: é a mesma coisa, mas para linhas
             gap: espaço entre linhas e colunas
+
+            align-itens: alinha cada item verticalmente dentro de seu espaço
+            justify-itens: alinha cada item horizontalmente dentro de seu espaço
+            align-content: alinha o conteúdo como um todo verticalmente dentro de seu espaço
+            justify-content: alinha o conteúdo como um todo horizontalmente dentro de seu espaço
         */
       }
 
       div.item {
         border: 3px solid #f00;
         padding: 5px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
       }
     </style>
   </head>
