@@ -1,112 +1,101 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Curso em Vídeo</title>
-    <link rel="stylesheet" href="../assets/css/style.css" media="screen" />
-    <link rel="stylesheet" href="../assets/css/cards.css" media="screen" />
-    <link
-      rel="shortcut icon"
-      href="../assets/favicon/cursoemvideo-256.ico"
-      type="image/x-icon"
-    />
-    <script src="../assets/js/script.js"></script>
-  </head>
-  <body>
-    <header>
-      <nav aria-label="Navegação principal"></nav>
-      <nav aria-label="Menu de navegação">
-        <div class="nav_menu">
-          <button
-            id="nav-links-button"
-            aria-label="Abrir/Fechar menu de navegação"
-            aria-expanded="false"
-            aria-controls="nav-links"
-          >
-            <i id="menuIcon" class="icon fa-solid fa-bars fa-2x"></i>
-          </button>
-          <div id="nav-links" class="nav_links" role="menu">
-            <a href="../index.html">
-              <i class="icon fa-solid fa-home fa-2x"></i>
-            </a>
-            <a href="#home" role="menuitem">Início</a>
-            <a href="#cursos" role="menuitem">Cursos</a>
-          </div>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Curso em Vídeo</title>
+  <link rel="stylesheet" href="../assets/css/style.css" media="screen" />
+  <link rel="stylesheet" href="../assets/css/cards.css" media="screen" />
+  <link rel="shortcut icon" href="../assets/favicon/cursoemvideo-256.ico" type="image/x-icon" />
+  <script src="../assets/js/script.js"></script>
+</head>
+
+<body>
+  <header>
+    <nav>
+      <div class="nav_menu">
+        <button id="nav-links-button" aria-label="Abrir/Fechar menu de navegação" aria-expanded="false"
+          aria-controls="nav-links">
+          <i id="menuIcon" class="icon fa-solid fa-bars fa-2x"></i>
+        </button>
+        <div id="nav-links" class="nav_links" role="menu">
+          <a href="../index.html">
+            <i class="icon fa-solid fa-home fa-2x"></i>
+          </a>
+          <a href="#cursos" role="menuitem">Cursos</a>
         </div>
-      </nav>
-    </header>
-    <main>
-      <section id="home">
-        <h1>CursoemVideo</h1>
-        <p>
-          Arquivos criados acompanhando vídeos do site
-          <a
-            href="http://cursoemvideo.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="externo"
-            >CursoemVideo</a
-          >, com a finalidade de aprender, treinar e relembrar códigos dos
-          cursos.
-        </p>
-        <article class="container-link-home">
-          <a href="#cursos" class="linkHome">Explorar Cursos</a>
-        </article>
-      </section>
-      <section id="cursos">
-        <article class="container">
-          <div class="card">
-            <i class="icon fa-brands fa-html5 fa-3x"></i>
-            <h2>HTML5 & CSS3</h2>
-            <p>Estudos sobre HTML5 e CSS3</p>
-            <article class="buttonCard">
-              <a href="html-css/html-css.html">Ver Curso</a>
-            </article>
-          </div>
-          <div class="card">
-            <i class="icon fa-brands fa-github fa-3x"></i>
-            <h2>Git & GitHub</h2>
-            <p>Estudos sobre Git e GitHub</p>
-            <article class="buttonCard">
-              <a href="git-github/git-github.html">Ver Curso</a>
-            </article>
-          </div>
-          <div class="card">
-            <i class="icon fa-brands fa-js fa-3x"></i>
-            <h2>JavaScript</h2>
-            <p>Estudos sobre JavaScript ou também conhecido como EcmaScript</p>
-            <article class="buttonCard">
-              <a href="javascript/javascript.html">Ver Curso</a>
-            </article>
-          </div>
-          <div class="card">
-            <i class="icon fa-brands fa-python fa-3x"></i>
-            <h2>Python</h2>
-            <p>Estudos sobre Python</p>
-            <article class="buttonCard">
-              <a href="python/python.html">Ver Curso</a>
-            </article>
-          </div>
-          <div class="card">
-            <i class="icon fa-brands fa-php fa-3x"></i>
-            <h2>PHP</h2>
-            <p>Estudos sobre PHP</p>
-            <article class="buttonCard">
-              <a href="php/php.html">Ver Curso</a>
-            </article>
-          </div>
-          <div class="card">
-            <i class="icon fa-brands fa-java fa-3x"></i>
-            <h2>Java</h2>
-            <p>Estudos sobre Java</p>
-            <article class="buttonCard">
-              <a href="java/java.html">Ver Curso</a>
-            </article>
-          </div>
-        </article>
-      </section>
-    </main>
-    <footer></footer>
-  </body>
+      </div>
+    </nav>
+  </header>
+  <main>
+    <section id="home">
+      <h1>CursoemVideo</h1>
+      <p>
+        Arquivos criados acompanhando vídeos do site
+        <a href="http://cursoemvideo.com" target="_blank" rel="noopener noreferrer" class="externo">CursoemVideo</a>,
+        com a finalidade de aprender, treinar e relembrar códigos dos
+        cursos.
+      </p>
+      <article class="container-link-home">
+        <a href="#cursos" class="linkHome">Explorar Cursos</a>
+      </article>
+    </section>
+    <section id="cursos">
+      <article class="section"></article>
+      <article class="container">
+        <div class="card">
+          <i class="icon fa-brands fa-html5 fa-3x"></i>
+          <h2>HTML5 & CSS3</h2>
+          <p>Estudos sobre HTML5 e CSS3</p>
+          <article class="buttonCard">
+            <a href="html-css/html-css.html">Ver Curso</a>
+          </article>
+        </div>
+        <div class="card">
+          <i class="icon fa-brands fa-github fa-3x"></i>
+          <h2>Git & GitHub</h2>
+          <p>Estudos sobre Git e GitHub</p>
+          <article class="buttonCard">
+            <a href="git-github/git-github.html">Ver Curso</a>
+          </article>
+        </div>
+        <div class="card">
+          <i class="icon fa-brands fa-js fa-3x"></i>
+          <h2>JavaScript</h2>
+          <p>Estudos sobre JavaScript ou também conhecido como EcmaScript</p>
+          <article class="buttonCard">
+            <a href="javascript/javascript.html">Ver Curso</a>
+          </article>
+        </div>
+        <div class="card">
+          <i class="icon fa-brands fa-python fa-3x"></i>
+          <h2>Python</h2>
+          <p>Estudos sobre Python</p>
+          <article class="buttonCard">
+            <a href="python/python.html">Ver Curso</a>
+          </article>
+        </div>
+        <div class="card">
+          <i class="icon fa-brands fa-php fa-3x"></i>
+          <h2>PHP</h2>
+          <p>Estudos sobre PHP</p>
+          <article class="buttonCard">
+            <a href="php/php.html">Ver Curso</a>
+          </article>
+        </div>
+        <div class="card">
+          <i class="icon fa-brands fa-java fa-3x"></i>
+          <h2>Java</h2>
+          <p>Estudos sobre Java</p>
+          <article class="buttonCard">
+            <a href="java/java.html">Ver Curso</a>
+          </article>
+        </div>
+      </article>
+    </section>
+  </main>
+  <footer></footer>
+</body>
+
 </html>

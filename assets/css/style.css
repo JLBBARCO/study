@@ -131,6 +131,14 @@ header button:active {
   }
 }
 
+/* nav title inserido via JS */
+header nav .nav-title {
+  margin: 0;
+  font-size: 1rem;
+  color: var(--texto);
+  font-weight: 600;
+}
+
 /* Estilos do menu mobile */
 .nav_menu {
   position: relative;
@@ -178,6 +186,12 @@ main section {
   min-height: 50vh;
   padding: 10%;
   background: none;
+}
+
+/* Espaçamento e bloco semântico para sections com cards */
+article.section {
+  display: block;
+  margin: 1.5rem 0;
 }
 
 main p {

@@ -47,6 +47,24 @@ document.addEventListener("DOMContentLoaded", () => {
     initializeFontAwesome();
   };
   head.appendChild(script);
+
+  // Título no nav (se existir)
+  const header = document.querySelector("header");
+  if (header) {
+    const titleEl = document.querySelector("title");
+    const title = titleEl ? titleEl.textContent : document.title;
+
+    // Insere o título de forma segura (sem substituir conteúdo existente)
+    const nav = document.createElement("nav");
+    header.insertBefore(nav, header.firstChild);
+    const linkHome = document.createElement("a");
+    linkHome.href = "#home";
+    const heading = document.createElement("h2");
+    heading.textContent = title;
+    heading.className = "nav-title";
+    linkHome.appendChild(heading);
+    nav.appendChild(linkHome);
+  }
 });
 
 function initializeSmoothScroll() {
@@ -80,8 +98,6 @@ const debounce = (func, wait) => {
   };
 };
 
-window.addEventListener("resize", debounce(mudouJanela, 250));
-
 // Setar configs salvas em Cookies
 const cookies = document.cookie
   ? document.cookie.split("; ").reduce((acc, cookie) => {
@@ -104,15 +120,6 @@ if (cookies.fontSize) {
       ? fontValue
       : `${fontValue}px`;
   }
-}
-
-// Título no nav (se existir)
-const header = document.querySelector("header");
-const nav = document.querySelector("nav");
-if (header && nav) {
-  const titleEl = document.querySelector("title");
-  const title = titleEl ? titleEl.textContent : document.title;
-  nav.innerHTML = `<h2>${title}</h2>`;
 }
 
 // --- Rodapé dinâmico ---
@@ -185,19 +192,19 @@ function initializeNavigation() {
     const isExpanded = navLinks.classList.contains("active");
     navLinks.classList.toggle("active");
 
-    // Alternar o ícone dinamicamente
-    if (isExpanded) {
-      // Menu está aberto, vai fechar - mostrar ícone de menu (bars)
-      menuIcon.classList.remove("fa-xmark");
-      menuIcon.classList.add("fa-bars");
-    } else {
-      // Menu está fechado, vai abrir - mostrar ícone de fechar (xmark)
-      menuIcon.classList.remove("fa-bars");
-      menuIcon.classList.add("fa-xmark");
+    // Alternar o ícone dinamicamente (verifica existência do ícone)
+    if (menuIcon) {
+      if (isExpanded) {
+        menuIcon.classList.remove("fa-xmark");
+        menuIcon.classList.add("fa-bars");
+      } else {
+        menuIcon.classList.remove("fa-bars");
+        menuIcon.classList.add("fa-xmark");
+      }
     }
 
-    // Atualiza aria-expanded
-    navLinksButton.setAttribute("aria-expanded", !isExpanded);
+    // Atualiza aria-expanded (usar string)
+    navLinksButton.setAttribute("aria-expanded", (!isExpanded).toString());
 
     // Log para debug
     console.log("Menu clicked:", {
@@ -213,8 +220,22 @@ function initializeNavigation() {
       !navLinks.contains(event.target)
     ) {
       navLinks.classList.remove("active");
-      menuIcon.classList.remove("fa-xmark");
-      menuIcon.classList.add("fa-bars");
+      if (menuIcon) {
+        menuIcon.classList.remove("fa-xmark");
+        menuIcon.classList.add("fa-bars");
+      }
+      navLinksButton.setAttribute("aria-expanded", "false");
+    }
+  });
+
+  // Permitir fechar menu com Esc para maior acessibilidade
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      navLinks.classList.remove("active");
+      if (menuIcon) {
+        menuIcon.classList.remove("fa-xmark");
+        menuIcon.classList.add("fa-bars");
+      }
       navLinksButton.setAttribute("aria-expanded", "false");
     }
   });

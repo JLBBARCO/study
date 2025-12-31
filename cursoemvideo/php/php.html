@@ -1,98 +1,78 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>PHP</title>
-    <link rel="stylesheet" href="../../assets/css/style.css" media="screen" />
-    <link rel="stylesheet" href="../../assets/css/cards.css" media="screen" />
-    <link
-      rel="shortcut icon"
-      href="../../assets/favicon/php-256.ico"
-      type="image/x-icon"
-    />
-    <script src="../../assets/js/script.js"></script>
-  </head>
-  <body>
-    <header>
-      <nav aria-label="Navegação principal"></nav>
-      <nav aria-label="Menu de navegação">
-        <div class="nav_menu">
-          <button
-            id="nav-links-button"
-            aria-label="Abrir/Fechar menu de navegação"
-            aria-expanded="false"
-            aria-controls="nav-links"
-          >
-            <i id="menuIcon" class="icon fa-solid fa-bars fa-2x"></i>
-          </button>
-          <div id="nav-links" class="nav_links" role="menu">
-            <a href="../../index.html">
-              <i class="icon fa-solid fa-home fa-2x"></i>
-            </a>
-            <a href="../cursoemvideo.html">
-              <i class="icon fa-solid fa-arrow-left fa-2x"></i>
-            </a>
-            <a href="#home" role="menuitem">Início</a>
-            <a href="#aulas" role="menuitem">Aulas</a>
-          </div>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PHP</title>
+  <link rel="stylesheet" href="../../assets/css/style.css" media="screen" />
+  <link rel="stylesheet" href="../../assets/css/cards.css" media="screen" />
+  <link rel="shortcut icon" href="../../assets/favicon/php-256.ico" type="image/x-icon" />
+  <script src="../../assets/js/script.js"></script>
+</head>
+
+<body>
+  <header>
+    <nav>
+      <div class="nav_menu">
+        <button id="nav-links-button" aria-label="Abrir/Fechar menu de navegação" aria-expanded="false"
+          aria-controls="nav-links">
+          <i id="menuIcon" class="icon fa-solid fa-bars fa-2x"></i>
+        </button>
+        <div id="nav-links" class="nav_links" role="menu">
+          <a href="../../index.html">
+            <i class="icon fa-solid fa-home fa-2x"></i>
+          </a>
+          <a href="../cursoemvideo.html">
+            <i class="icon fa-solid fa-arrow-left fa-2x"></i>
+          </a>
+          <a href="#aulas" role="menuitem">Aulas</a>
         </div>
-      </nav>
-    </header>
-    <main>
-      <section id="home">
-        <h1>PHP</h1>
-        <p>
-          Estudos sobre PHP acompanhando os vídeos do site
-          <a
-            href="http://cursoemvideo.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="externo"
-            >CursoemVideo</a
-          >, com a finalidade de aprender, treinar e relembrar códigos dos
-          cursos.
-        </p>
-        <article class="container-link-home">
-          <a href="#aulas" class="linkHome">Explorar Aulas</a>
-        </article>
-      </section>
-      <section id="aulas">
-        <h1>Aulas</h1>
-        <article class="container">
-          <div class="card">
-            <h2>0</h2>
-            <p>Primeiro programa em PHP</p>
-            <article class="buttonCard">
-              <a
-                href="https://github.com/JLBBARCO/study/tree/main/cursoemvideo/php/ex000"
-                >Ver código</a
-              >
-            </article>
-          </div>
-          <div class="card">
-            <h2>1</h2>
-            <p>Dados do Servidor</p>
-            <article class="buttonCard">
-              <a
-                href="https://github.com/JLBBARCO/study/tree/main/cursoemvideo/php/ex001"
-                >Ver código</a
-              >
-            </article>
-          </div>
-          <div class="card">
-            <h2>2</h2>
-            <p>O PHP por dentro</p>
-            <article class="buttonCard">
-              <a
-                href="https://github.com/JLBBARCO/study/tree/main/cursoemvideo/php/ex002"
-                >Ver código</a
-              >
-            </article>
-          </div>
-        </article>
-      </section>
-    </main>
-    <footer></footer>
-  </body>
+      </div>
+    </nav>
+  </header>
+  <main>
+    <section id="home">
+      <h1>PHP</h1>
+      <p>
+        Estudos sobre PHP acompanhando os vídeos do site
+        <a href="http://cursoemvideo.com" target="_blank" rel="noopener noreferrer" class="externo">CursoemVideo</a>,
+        com a finalidade de aprender, treinar e relembrar códigos dos
+        cursos.
+      </p>
+      <article class="container-link-home">
+        <a href="#aulas" class="linkHome">Explorar Aulas</a>
+      </article>
+    </section>
+    <section id="aulas">
+      <h2>Aulas</h2>
+      <article class="section"></article>
+      <article class="container">
+        <div class="card">
+          <h2>0</h2>
+          <p>Primeiro programa em PHP</p>
+          <article class="buttonCard">
+            <a href="https://github.com/JLBBARCO/study/tree/main/cursoemvideo/php/ex000">Ver código</a>
+          </article>
+        </div>
+        <div class="card">
+          <h2>1</h2>
+          <p>Dados do Servidor</p>
+          <article class="buttonCard">
+            <a href="https://github.com/JLBBARCO/study/tree/main/cursoemvideo/php/ex001">Ver código</a>
+          </article>
+        </div>
+        <div class="card">
+          <h2>2</h2>
+          <p>O PHP por dentro</p>
+          <article class="buttonCard">
+            <a href="https://github.com/JLBBARCO/study/tree/main/cursoemvideo/php/ex002">Ver código</a>
+          </article>
+        </div>
+      </article>
+    </section>
+  </main>
+  <footer></footer>
+</body>
+
 </html>

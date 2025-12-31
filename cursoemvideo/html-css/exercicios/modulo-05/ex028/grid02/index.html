@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Grid Layout na prática</title>
+  <style>
+    div.container {
+      border: 3px solid #00f;
+      height: 250px;
+
+      display: grid;
+      grid-template: repeat(3, auto) / repeat(3, auto);
+      gap: 10px;
+
+      place-items: start center;
+      place-content: space-between end;
+      /*
+            grid-template-columns: cada valor indica uma coluna. Ou seja, a cada valor sep por space, indica que ele criará e dará valor a uma nova coluna
+            grid-template-rows: é a mesma coisa, mas para linhas
+            gap: espaço entre linhas e colunas
+
+            align-itens: alinha cada item verticalmente dentro de seu espaço
+            justify-itens: alinha cada item horizontalmente dentro de seu espaço
+            align-content: alinha o conteúdo como um todo verticalmente dentro de seu espaço
+            justify-content: alinha o conteúdo como um todo horizontalmente dentro de seu espaço
+        */
+    }
+
+    div.item {
+      border: 3px solid #f00;
+      padding: 5px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="item">1</div>
+    <div class="item">2</div>
+    <div class="item">3</div>
+    <div class="item">4</div>
+    <div class="item">5</div>
+    <div class="item">6</div>
+    <div class="item">7</div>
+    <div class="item">8</div>
+  </div>
+</body>
+
+</html>

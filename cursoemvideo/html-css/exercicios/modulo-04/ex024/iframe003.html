@@ -1,33 +1,52 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Uso de iframe</title>
     <style>
-        body{
+        body {
             font-family: Arial, Helvetica, sans-serif;
         }
 
-        iframe#tela{
+        iframe#tela {
             width: 95vw;
             height: 400px;
             border: 2px solid black;
         }
     </style>
 </head>
+
 <body>
     <h1>Faça uma escolha</h1>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio ab molestiae architecto, accusamus cum, ullam pariatur mollitia iusto error enim eligendi libero magni repudiandae voluptates quae minima quisquam, blanditiis quia!</p>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio ab molestiae architecto, accusamus cum, ullam
+        pariatur mollitia iusto error enim eligendi libero magni repudiandae voluptates quae minima quisquam, blanditiis
+        quia!</p>
 
     <ul>
         <li><a href="paginas-extras/pag001.html" target="frame">Primeira página</a></li>
         <li><a href="paginas-extras/pag002.html" target="frame">Segunda página</a></li>
         <li><a href="paginas-extras/pag003.html" target="frame">Terceira página</a></li>
     </ul>
-    
-    <p><span>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iusto, veniam? Repudiandae quas dolor, quidem quia, alias praesentium est nesciunt, tenetur magnam exercitationem eaque fugiat iure iusto. Delectus, est! Magnam, consectetur.</span><span>Ratione, animi quis quaerat dolore aliquam impedit perspiciatis neque amet illum ex nulla voluptates quibusdam cupiditate ab possimus architecto ipsum. Repudiandae rem maiores error quod modi, ipsa reprehenderit commodi odit.</span><span>Quam, eum! Iusto, expedita maxime, iste iure, quisquam voluptatum nesciunt sapiente dolores quidem fuga dolorum libero corrupti harum suscipit dolor enim sunt omnis consectetur consequuntur tempore itaque illum. Ab, reprehenderit?</span></p>
-    <iframe srcdoc="<h1>Escolha uma das opções acima</h1><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis quibusdam ullam, id error natus mollitia corrupti aliquam dicta blanditiis quo architecto, nam repellat nulla ex fugit temporibus corporis distinctio. Cum?</p><img src='imagens/cursoemvideo.png'>" id="tela" name="frame"><p class="erro">Infelizmente seu navegador não é compatível com isso.</p></iframe>
-    <p><span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit aperiam voluptatem possimus alias adipisci necessitatibus accusamus obcaecati sit laboriosam vitae dolor voluptatum, id nam. Quas praesentium ipsam natus! A, libero?</span><span>Odit aut perferendis maiores architecto nostrum esse, error corporis ipsa facere! Repellat accusamus explicabo dicta id culpa consequuntur iure libero placeat saepe quia perferendis, officia ratione atque corporis recusandae repellendus?</span></p>
+
+    <p><span>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iusto, veniam? Repudiandae quas dolor, quidem
+            quia, alias praesentium est nesciunt, tenetur magnam exercitationem eaque fugiat iure iusto. Delectus, est!
+            Magnam, consectetur.</span><span>Ratione, animi quis quaerat dolore aliquam impedit perspiciatis neque amet
+            illum ex nulla voluptates quibusdam cupiditate ab possimus architecto ipsum. Repudiandae rem maiores error
+            quod modi, ipsa reprehenderit commodi odit.</span><span>Quam, eum! Iusto, expedita maxime, iste iure,
+            quisquam voluptatum nesciunt sapiente dolores quidem fuga dolorum libero corrupti harum suscipit dolor enim
+            sunt omnis consectetur consequuntur tempore itaque illum. Ab, reprehenderit?</span></p>
+    <iframe
+        srcdoc="<h1>Escolha uma das opções acima</h1><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis quibusdam ullam, id error natus mollitia corrupti aliquam dicta blanditiis quo architecto, nam repellat nulla ex fugit temporibus corporis distinctio. Cum?</p><img src='imagens/cursoemvideo.png' alt='Logo CursoemVideo'>"
+        id="tela" name="frame">
+        <p class="erro">Infelizmente seu navegador não é compatível com isso.</p>
+    </iframe>
+    <p><span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit aperiam voluptatem possimus alias
+            adipisci necessitatibus accusamus obcaecati sit laboriosam vitae dolor voluptatum, id nam. Quas praesentium
+            ipsam natus! A, libero?</span><span>Odit aut perferendis maiores architecto nostrum esse, error corporis
+            ipsa facere! Repellat accusamus explicabo dicta id culpa consequuntur iure libero placeat saepe quia
+            perferendis, officia ratione atque corporis recusandae repellendus?</span></p>
 </body>
+
 </html>
