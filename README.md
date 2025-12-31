@@ -42,6 +42,6 @@ Links of pages:
 
       - [Graphics Computation](https://jlbbarco.github.io/study/colegio_adolpho/3_serie/computacao_grafica/computacao_grafica.html)
 
-  - [Hashtag Programming](hashtag_programacao/hashtag_programacao.html)
+  - [Hashtag Programming](https://jlbbarco.github.io/study/hashtag_programacao/hashtag_programacao.html)
 
-    - [React](hashtag_programacao/react/react.html)
+    - [React](https://jlbbarco.github.io/study/hashtag_programacao/react/react.html)
