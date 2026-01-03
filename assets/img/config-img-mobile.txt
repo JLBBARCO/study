@@ -1,0 +1,2 @@
+As imagens tiveram uma redução de 50% na dimensão.
+Elas tiveram o nível de compressão reduzido para 5.
