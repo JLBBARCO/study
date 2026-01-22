@@ -96,6 +96,11 @@ section#ficha h1 {
   text-align: center;
 }
 
+section#ficha p {
+  text-align: justify;
+  margin-bottom: 15px;
+}
+
 div#social {
   display: flex;
   justify-content: center;
@@ -265,6 +270,21 @@ footer a:hover {
 }
 
 @media screen and (min-width: 768px) {
+  main {
+    grid-template-columns: auto 300px 1fr auto;
+  }
+
+  section#ficha {
+    grid-column: 2 / 3;
+    height: fit-content;
+    position: sticky;
+    top: 65px;
+  }
+
+  section#detalhes {
+    grid-column: 3 / 4;
+  }
+
   #skill-container {
     grid-template-columns: 1fr 1fr;
   }
