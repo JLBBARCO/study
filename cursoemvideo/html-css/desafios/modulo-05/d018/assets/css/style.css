@@ -23,11 +23,21 @@
   --fundo-card: #fff;
 }
 
+body.escuro {
+  --fundo-principal: #121212;
+  --texto: #eee;
+  --texto-inverso: #121212;
+  --destaque: #006bad;
+  --destaque-inverso: #28779e;
+  --fundo-card: #1e1e1e;
+}
+
 body {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   line-height: 1.5em;
   background-color: var(--fundo-principal);
   color: var(--texto);
+  transition: all 0.3s;
 }
 
 header {
@@ -271,7 +281,7 @@ footer a:hover {
 
 @media screen and (min-width: 768px) {
   main {
-    grid-template-columns: auto 300px 1fr auto;
+    grid-template-columns: auto 1fr 3fr auto;
   }
 
   section#ficha {
