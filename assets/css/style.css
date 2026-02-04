@@ -4,6 +4,7 @@
   font-family: "Sour Gummy";
   src: url(../fonts/Sour_Gummy/SourGummy.ttf) format("truetype");
 }
+
 @font-face {
   font-family: "Tektur";
   src: url(../fonts/Tektur/Tektur-VariableFont.ttf) format("truetype");
@@ -82,12 +83,15 @@ h6 {
 h1 {
   font-size: 2em;
 }
+
 h2 {
   font-size: 1.5em;
 }
+
 h3 {
   font-size: 1.2em;
 }
+
 h4,
 h5,
 h6 {
@@ -95,6 +99,7 @@ h6 {
 }
 
 .icon {
+  font-size: 2em;
   transition: all 0.3s;
   color: var(--texto);
 }
