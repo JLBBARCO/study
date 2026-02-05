@@ -19,20 +19,20 @@ Links of pages:
 
     - [Java](https://jlbbarco.github.io/study/cursoemvideo/java/java.html)
 
-  - [Adolpho HighSchool](https://jlbbarco.github.io/study/colegio_adolpho/colegio_adolpho.html)
-    - [Projects](https://jlbbarco.github.io/study/colegio_adolpho/projetos/projetos.html)
+  - [Adolpho HighSchool](https://jlbbarco.github.io/study/colegio-adolpho/colegio-adolpho.html)
+    - [Projects](https://jlbbarco.github.io/study/colegio-adolpho/projetos/projetos.html)
 
-    - [Second Year](https://jlbbarco.github.io/study/colegio_adolpho/2_serie/2_serie.html)
-      - [Front-end Programming](https://jlbbarco.github.io/study/colegio_adolpho/2_serie/programacao_front-end/programacao_front-end.html)
+    - [Second Year](https://jlbbarco.github.io/study/colegio-adolpho/2-serie/2-serie.html)
+      - [Front-end Programming](https://jlbbarco.github.io/study/colegio-adolpho/2-serie/programacao-front-end/programacao-front-end.html)
 
-    - [Third Year](https://jlbbarco.github.io/study/colegio_adolpho/3_serie/3_serie.html)
-      - [Developer Systems programming](https://jlbbarco.github.io/study/colegio_adolpho/3_serie/programacao_desenvolvimento_sistemas/programacao_desenvolvimento_sistemas.html)
+    - [Third Year](https://jlbbarco.github.io/study/colegio-adolpho/3-serie/3-serie.html)
+      - [Developer Systems programming](https://jlbbarco.github.io/study/colegio-adolpho/3-serie/programacao_desenvolvimento_sistemas/programacao_desenvolvimento_sistemas.html)
 
-      - [Data Science](https://jlbbarco.github.io/study/colegio_adolpho/3_serie/ciencias_dados/ciencias_dados.html)
+      - [Data Science](https://jlbbarco.github.io/study/colegio-adolpho/3-serie/ciencias-dados/ciencias-dados.html)
 
-      - [Back-end programming](https://jlbbarco.github.io/study/colegio_adolpho/3_serie/programacao_back-end/programacao_back-end.html)
+      - [Back-end programming](https://jlbbarco.github.io/study/colegio-adolpho/3-serie/programacao-back-end/programacao-back-end.html)
 
-      - [Graphics Computation](https://jlbbarco.github.io/study/colegio_adolpho/3_serie/computacao_grafica/computacao_grafica.html)
+      - [Graphics Computation](https://jlbbarco.github.io/study/colegio-adolpho/3-serie/computacao-grafica/computacao-grafica.html)
 
-  - [Hashtag Programming](https://jlbbarco.github.io/study/hashtag_programacao/hashtag_programacao.html)
-    - [React](https://jlbbarco.github.io/study/hashtag_programacao/react/react.html)
+  - [Hashtag Programming](https://jlbbarco.github.io/study/hashtag-programacao/hashtag-programacao.html)
+    - [React](https://jlbbarco.github.io/study/hashtag-programacao/react/react.html)

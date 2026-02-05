@@ -8,3 +8,4 @@ ENV/
 build/
 dist/
 .vscode/
+node_modules/

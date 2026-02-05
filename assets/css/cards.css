@@ -40,8 +40,6 @@ div.card:hover {
 div.card .icon {
   font-size: 6rem;
   margin: 15px;
-  width: 1em;
-  height: 1em;
 }
 
 div.card img {
