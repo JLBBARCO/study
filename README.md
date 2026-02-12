@@ -19,6 +19,8 @@ Links of pages:
 
     - [Java](https://jlbbarco.github.io/study/cursoemvideo/java/java.html)
 
+    - [Algorithm](https://jlbbarco.github.io/study/cursoemvideo/algoritmo/algoritmo.html)
+
   - [Adolpho HighSchool](https://jlbbarco.github.io/study/colegio-adolpho/colegio-adolpho.html)
     - [Projects](https://jlbbarco.github.io/study/colegio-adolpho/projetos/projetos.html)
 
@@ -36,3 +38,8 @@ Links of pages:
 
   - [Hashtag Programming](https://jlbbarco.github.io/study/hashtag-programacao/hashtag-programacao.html)
     - [React](https://jlbbarco.github.io/study/hashtag-programacao/react/react.html)
+
+    - [JavaScript](https://jlbbarco.github.io/study/hashtag-programacao/javascript/javascript.html)
+
+  - [Bradesco Foundation](https://jlbbarco.github.io/study/fundacao-bradesco/fundacao-bradesco.html)
+    - [Web Applications](https://jlbbarco.github.io/study/fundacao-bradesco/aplicacoes-web/aplicacoes-web.html)
