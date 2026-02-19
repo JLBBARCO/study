@@ -23,6 +23,7 @@
   --borda_padrão: 2px solid var(--texto);
   --fonte01: "Tektur", sans-serif;
   --fonte02: "Sour Gummy", serif;
+  --header-size: 80px;
 }
 
 * {
@@ -42,6 +43,7 @@ body {
   color: var(--texto);
   background: var(--gradiente);
   background-attachment: fixed;
+  overflow-x: hidden;
 }
 
 a {
@@ -113,7 +115,8 @@ header {
   position: sticky;
   top: 0;
   z-index: 1000;
-  width: 100%;
+  width: 100dvw;
+  height: var(--header-size);
   padding: 10px 25px;
   background-color: var(--destaque);
 }
@@ -123,6 +126,7 @@ header button {
   border: none;
   border-radius: 8px;
   background-color: var(--destaque);
+  cursor: pointer;
 }
 
 header button:hover {
@@ -136,8 +140,12 @@ header button:active {
   }
 }
 
+nav {
+  width: 100%;
+}
+
 /* nav title inserido via JS */
-header nav .nav-title {
+.nav-title {
   margin: 0;
   font-size: 1rem;
   color: var(--texto);
@@ -163,6 +171,7 @@ header nav .nav-title {
   border-radius: 8px;
   background-color: var(--destaque);
   box-shadow: var(--shadow);
+  overflow: auto;
 }
 
 /* Importante: esta classe controla a visibilidade */
@@ -191,6 +200,11 @@ main section {
   min-height: 50vh;
   padding: 10%;
   background: none;
+  scroll-margin: var(--header-size);
+}
+
+main section p {
+  text-align: center;
 }
 
 /* Espaçamento e bloco semântico para sections com cards */
@@ -203,26 +217,21 @@ main p {
   text-align: justify;
 }
 
-section#home {
+section#Home {
   display: flex;
   flex-flow: column nowrap;
   justify-content: center;
   align-items: center;
 }
 
-article.container-link-home {
-  display: flex;
-  flex-direction: row;
-}
-
-section#home a.linkHome {
+section#Home a.linkHome {
   margin: 25px;
   padding: 25px;
   border-radius: 8px;
   background-color: var(--interativo);
 }
 
-section#home a.linkHome:hover {
+section#Home a.linkHome:hover {
   border: var(--borda_padrão);
   text-decoration: none;
   transform: translateY(-5px);
@@ -267,20 +276,22 @@ footer .copyright {
     font-size: 1rem;
   }
 
-  button#nav-links-button {
+  #nav-links-button {
     display: none;
   }
 
-  div.nav_links {
+  .nav_links {
     position: static;
     display: flex;
-    flex-flow: row nowrap;
+    flex-direction: row;
     justify-content: space-evenly;
+    align-items: center;
+    max-width: 100%;
     padding: 0;
     box-shadow: none;
   }
 
-  div.nav_links a {
+  .nav_links a {
     margin: 10px;
   }
 }

@@ -1,31 +1,3 @@
-function obterCaminhoRelativo() {
-  // Nome do repositório no GitHub Pages (ajuste para o seu repositório)
-  const nomeRepositorio = "study";
-
-  // Caminho relativo do arquivo HTML atual em relação à raiz do site
-  let caminhoHTML = window.location.pathname.replace(/^\//, "");
-
-  // Se estiver rodando no GitHub Pages, remova o nome do repositório do início do caminho
-  if (caminhoHTML.startsWith(nomeRepositorio + "/")) {
-    caminhoHTML = caminhoHTML.substring(nomeRepositorio.length + 1);
-  }
-
-  // Se quiser apenas o diretório do arquivo HTML:
-  const diretorioHTML = caminhoHTML.substring(
-    0,
-    caminhoHTML.lastIndexOf("/") + 1
-  );
-
-  // Conta quantas pastas existem no caminho (ignorando o arquivo)
-  const pastas =
-    diretorioHTML === "" ? [] : diretorioHTML.split("/").filter(Boolean);
-
-  // Gera a string com "../" para cada pasta
-  const caminhoRelativoAteRaiz = pastas.map(() => "../").join("");
-
-  return caminhoRelativoAteRaiz;
-}
-
 document.addEventListener("DOMContentLoaded", () => {
   try {
     console.log("DOM carregado, inicializando...");
@@ -48,24 +20,53 @@ document.addEventListener("DOMContentLoaded", () => {
   };
   head.appendChild(script);
 
-  // Título no nav (se existir)
-  const header = document.querySelector("header");
-  if (header) {
-    const titleEl = document.querySelector("title");
-    const title = titleEl ? titleEl.textContent : document.title;
+  title();
+  navButtons();
 
-    // Insere o título de forma segura (sem substituir conteúdo existente)
-    const nav = document.createElement("nav");
-    header.insertBefore(nav, header.firstChild);
-    const linkHome = document.createElement("a");
-    linkHome.href = "#home";
-    const heading = document.createElement("h2");
-    heading.textContent = title;
-    heading.className = "nav-title";
-    linkHome.appendChild(heading);
-    nav.appendChild(linkHome);
+  const favicon = document.querySelector('link[rel="shortcut icon"]');
+  if (!favicon) {
+    const head = document.querySelector("head");
+    const faviconCreated = document.createElement("link");
+    faviconCreated.rel = "shortcut icon";
+    faviconCreated.href = `${obterCaminhoRelativo()}src/assets/favicon/book-96.ico`;
   }
 });
+
+function obterCaminhoRelativo() {
+  // Nome do repositório no GitHub Pages (ajuste para o seu repositório)
+  const nomeRepositorio = "study";
+
+  // Caminho relativo do arquivo HTML atual em relação à raiz do site
+  let caminhoHTML = window.location.pathname.replace(/^\//, "");
+
+  // Se estiver rodando no GitHub Pages, remova o nome do repositório do início do caminho
+  if (caminhoHTML.startsWith(nomeRepositorio + "/")) {
+    caminhoHTML = caminhoHTML.substring(nomeRepositorio.length + 1);
+  }
+
+  // Se quiser apenas o diretório do arquivo HTML:
+  const diretorioHTML = caminhoHTML.substring(
+    0,
+    caminhoHTML.lastIndexOf("/") + 1,
+  );
+
+  // Conta quantas pastas existem no caminho (ignorando o arquivo)
+  const pastas =
+    diretorioHTML === "" ? [] : diretorioHTML.split("/").filter(Boolean);
+
+  // Gera a string com "../" para cada pasta
+  const caminhoRelativoAteRaiz = pastas.map(() => "../").join("");
+
+  return caminhoRelativoAteRaiz;
+}
+
+function pastaAnterior() {
+  const path = window.location.pathname;
+  const pats = path.split("/");
+  const parentFolder = pats[pats.length - 3];
+
+  return parentFolder;
+}
 
 function initializeSmoothScroll() {
   document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
@@ -139,7 +140,7 @@ function initializeFooter() {
         <div class="card_footer">
           <h2>Links Rápidos</h2>
           <ul>
-            <li><a href="#home">Início</a></li>
+            <li><a href="#Home">Início</a></li>
             <li><a href="https://github.com/jlbbarco/study">Repositório</a></li>
             </ul>
           </div>
@@ -314,4 +315,74 @@ function initializeFontAwesome() {
 // Função auxiliar para inicializar cookies
 function initializeCookies() {
   // Lógica de cookies já está implementada no escopo global
+}
+
+function title() {
+  // Título no nav (se existir)
+  const titleHome = document.querySelector("section#Home>h1");
+  if (titleHome) {
+    const title = titleHome.innerHTML;
+
+    const titlePg = document.querySelector("title");
+    if (!titlePg) {
+      titlePg = document.head.innerHTML = "<title></title>";
+    }
+    titlePg.innerHTML = title;
+
+    // Insere o título de forma segura (sem substituir conteúdo existente)
+    const nav = document.createElement("nav");
+    const header = document.querySelector("header");
+    header.insertBefore(nav, header.firstChild);
+    const linkHome = document.createElement("a");
+    linkHome.href = "#Home";
+    const heading = document.createElement("h2");
+    heading.textContent = title;
+    heading.className = "nav-title";
+    linkHome.appendChild(heading);
+    nav.appendChild(linkHome);
+  }
+}
+
+function navButtons() {
+  const navLinks = document.getElementById("nav-links");
+  const caminhoHome = obterCaminhoRelativo();
+  const caminhoPastaAnterior = pastaAnterior();
+
+  if (caminhoHome) {
+    const link = document.createElement("a");
+    link.href = caminhoHome;
+
+    const icon = document.createElement("i");
+    icon.classList = "fa-solid fa-home icon";
+    link.append(icon);
+
+    navLinks.appendChild(link);
+  }
+
+  if (caminhoPastaAnterior) {
+    const link = document.createElement("a");
+    link.href = `../${caminhoPastaAnterior}.html`;
+
+    const icon = document.createElement("i");
+    icon.classList = "fa-solid fa-arrow-left icon";
+    link.append(icon);
+
+    navLinks.appendChild(link);
+  }
+
+  const containers = document.querySelectorAll("main>section");
+
+  containers.forEach((container) => {
+    const containerId = container.id;
+
+    if (containerId == "Home") {
+    } else {
+      const link = document.createElement("a");
+      link.href = `#${containerId}`;
+      link.role = "menuitem";
+      link.innerHTML = containerId;
+
+      navLinks.appendChild(link);
+    }
+  });
 }
