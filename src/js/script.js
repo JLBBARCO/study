@@ -1,11 +1,15 @@
 document.addEventListener("DOMContentLoaded", () => {
   try {
     console.log("DOM carregado, inicializando...");
+    // Recupera título da página (se existir) e cria o header antes de inicializar o menu
+    const titleHomeEarly = document.querySelector("section#Home>h1");
+    const titleText = titleHomeEarly ? titleHomeEarly.innerHTML : undefined;
+    navBar(titleText);
     initializeNavigation();
     initializeSmoothScroll();
     initializeCookies();
     wrapCardLinks();
-    initializeFooter();
+    // footer element will be created and inicializado após ajustes
   } catch (error) {
     console.error("Erro na inicialização:", error);
   }
@@ -20,17 +24,110 @@ document.addEventListener("DOMContentLoaded", () => {
   };
   head.appendChild(script);
 
-  title();
-  navButtons();
-
   const favicon = document.querySelector('link[rel="shortcut icon"]');
   if (!favicon) {
-    const head = document.querySelector("head");
     const faviconCreated = document.createElement("link");
     faviconCreated.rel = "shortcut icon";
+    faviconCreated.type = "image/x-icon";
     faviconCreated.href = `${obterCaminhoRelativo()}src/assets/favicon/book-96.ico`;
+    head.appendChild(faviconCreated);
+  }
+
+  // Garantir criação do footer e em seguida popular seu conteúdo
+  footer();
+  initializeFooter();
+
+  const titleHome = document.querySelector("section#Home>h1");
+  if (titleHome) {
+    const title = titleHome.innerHTML;
+
+    let titlePg = document.querySelector("title");
+    if (!titlePg) {
+      titlePg = document.createElement("title");
+      document.head.appendChild(titlePg);
+    }
+    titlePg.innerHTML = title;
+
+    // navBar já foi criado no início; não recriar aqui
   }
 });
+
+function navBar(title) {
+  // Se já houver um header, não criar outro
+  if (document.querySelector("header")) return;
+  const header = document.createElement("header");
+
+  // Cria o título de navegação dinamicamente
+  const navTitle = document.createElement("nav");
+  navTitle.className = "nav-title";
+  const linkingHome = document.createElement("a");
+  linkingHome.href = "#Home";
+  const heading = document.createElement("h2");
+  heading.textContent = title || "Título do Site";
+  linkingHome.appendChild(heading);
+  navTitle.appendChild(linkingHome);
+  header.appendChild(navTitle);
+
+  // Cria o botão de menu para telas menores
+  const navLinksButton = document.createElement("button");
+  navLinksButton.id = "nav-links-button";
+  navLinksButton.setAttribute("aria-label", "Toggle navigation menu");
+  navLinksButton.setAttribute("aria-expanded", "false");
+  navLinksButton.setAttribute("aria-controls", "navLinks");
+  const menuIcon = document.createElement("i");
+  menuIcon.id = "menuIcon";
+  menuIcon.className = "fa-solid fa-bars icon";
+  navLinksButton.appendChild(menuIcon);
+  header.appendChild(navLinksButton);
+
+  // Cria o container para os links de navegação
+  const navLinks = document.createElement("nav");
+  navLinks.className = "nav_links";
+  navLinks.id = "navLinks";
+  const caminhoHome = obterCaminhoRelativo();
+  const caminhoPastaAnterior = pastaAnterior();
+
+  if (caminhoHome) {
+    const link = document.createElement("a");
+    link.href = caminhoHome;
+    const icon = document.createElement("i");
+    icon.className = "fa-solid fa-home icon";
+    link.append(icon);
+    navLinks.appendChild(link);
+  }
+
+  if (caminhoPastaAnterior) {
+    const link = document.createElement("a");
+    link.href = `../${caminhoPastaAnterior}.html`;
+    const icon = document.createElement("i");
+    icon.className = "fa-solid fa-arrow-left icon";
+    link.append(icon);
+    navLinks.appendChild(link);
+  }
+
+  const containers = document.querySelectorAll("main>section");
+
+  containers.forEach((container) => {
+    const containerId = container.id;
+    if (containerId && containerId !== "Home") {
+      const link = document.createElement("a");
+      link.href = `#${containerId}`;
+      link.role = "menuitem";
+      link.innerHTML = containerId;
+      navLinks.appendChild(link);
+    }
+  });
+
+  header.appendChild(navLinks);
+
+  // Insere o header no início do body de forma segura (sem substituir conteúdo existente)
+  document.querySelector("body").prepend(header);
+}
+
+function footer() {
+  const footer = document.createElement("footer");
+  document.querySelector("body").appendChild(footer);
+}
 
 function obterCaminhoRelativo() {
   // Nome do repositório no GitHub Pages (ajuste para o seu repositório)
@@ -315,74 +412,4 @@ function initializeFontAwesome() {
 // Função auxiliar para inicializar cookies
 function initializeCookies() {
   // Lógica de cookies já está implementada no escopo global
-}
-
-function title() {
-  // Título no nav (se existir)
-  const titleHome = document.querySelector("section#Home>h1");
-  if (titleHome) {
-    const title = titleHome.innerHTML;
-
-    const titlePg = document.querySelector("title");
-    if (!titlePg) {
-      titlePg = document.head.innerHTML = "<title></title>";
-    }
-    titlePg.innerHTML = title;
-
-    // Insere o título de forma segura (sem substituir conteúdo existente)
-    const nav = document.createElement("nav");
-    const header = document.querySelector("header");
-    header.insertBefore(nav, header.firstChild);
-    const linkHome = document.createElement("a");
-    linkHome.href = "#Home";
-    const heading = document.createElement("h2");
-    heading.textContent = title;
-    heading.className = "nav-title";
-    linkHome.appendChild(heading);
-    nav.appendChild(linkHome);
-  }
-}
-
-function navButtons() {
-  const navLinks = document.getElementById("nav-links");
-  const caminhoHome = obterCaminhoRelativo();
-  const caminhoPastaAnterior = pastaAnterior();
-
-  if (caminhoHome) {
-    const link = document.createElement("a");
-    link.href = caminhoHome;
-
-    const icon = document.createElement("i");
-    icon.classList = "fa-solid fa-home icon";
-    link.append(icon);
-
-    navLinks.appendChild(link);
-  }
-
-  if (caminhoPastaAnterior) {
-    const link = document.createElement("a");
-    link.href = `../${caminhoPastaAnterior}.html`;
-
-    const icon = document.createElement("i");
-    icon.classList = "fa-solid fa-arrow-left icon";
-    link.append(icon);
-
-    navLinks.appendChild(link);
-  }
-
-  const containers = document.querySelectorAll("main>section");
-
-  containers.forEach((container) => {
-    const containerId = container.id;
-
-    if (containerId == "Home") {
-    } else {
-      const link = document.createElement("a");
-      link.href = `#${containerId}`;
-      link.role = "menuitem";
-      link.innerHTML = containerId;
-
-      navLinks.appendChild(link);
-    }
-  });
 }

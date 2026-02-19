@@ -141,7 +141,7 @@ header button:active {
 }
 
 nav {
-  width: 100%;
+  width: auto;
 }
 
 /* nav title inserido via JS */
