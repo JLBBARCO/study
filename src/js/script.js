@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const faviconCreated = document.createElement("link");
     faviconCreated.rel = "shortcut icon";
     faviconCreated.type = "image/x-icon";
-    faviconCreated.href = `${obterCaminhoRelativo()}src/assets/favicon/book-96.ico`;
+    faviconCreated.href = `${obterCaminhoRelativo()}https://icons8.com/icon/42763/book`;
     head.appendChild(faviconCreated);
   }
 
