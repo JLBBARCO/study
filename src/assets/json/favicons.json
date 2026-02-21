@@ -1,0 +1,19 @@
+{
+  "favicons": {
+    "book": "https://icons8.com/icon/42763/book",
+    "html5": "https://icons8.com/icon/20909/html-5",
+    "javascript": "https://img.icons8.com/?size=100&id=108784&format=png&color=000000",
+    "markdown": "https://img.icons8.com/?size=100&id=21812&format=png&color=000000",
+    "github": "https://img.icons8.com/?size=100&id=3tC9EQumUAuq&format=png&color=000000",
+    "python": "https://img.icons8.com/?size=100&id=13441&format=png&color=000000",
+    "php": "https://img.icons8.com/?size=100&id=fAMVO_fuoOuC&format=png&color=000000",
+    "java": "https://img.icons8.com/?size=100&id=13679&format=png&color=000000",
+    "workflow": "https://img.icons8.com/?size=100&id=12817&format=png&color=000000",
+    "colegioadolpho": "src/assets/favicon/colegio-adolpho-256.ico",
+    "cursoemvideo": "https://www.cursoemvideo.com/wp-content/uploads/2019/08/cropped-cursoemvideo-logo-32x32.png",
+    "bradesco": "https://www.ev.org.br/dist/static/favicon/favicon-32x32.png",
+    "react": "https://img.icons8.com/?size=100&id=wPohyHO_qO1a&format=png&color=000000",
+    "hashtagprogramacao": "https://www.hashtagtreinamentos.com/wp-content/uploads/2019/02/favicon.png",
+    "unicesumar": "https://inscricoes.unicesumar.edu.br/assets/images/features/seo/icon/favicon.ico"
+  }
+}

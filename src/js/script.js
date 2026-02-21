@@ -1,9 +1,10 @@
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
   try {
     console.log("DOM carregado, inicializando...");
     // Recupera título da página (se existir) e cria o header antes de inicializar o menu
     const titleHomeEarly = document.querySelector("section#Home>h1");
     const titleText = titleHomeEarly ? titleHomeEarly.innerHTML : undefined;
+    await insertFavicon();
     navBar(titleText);
     initializeNavigation();
     initializeSmoothScroll();
@@ -24,15 +25,6 @@ document.addEventListener("DOMContentLoaded", () => {
   };
   head.appendChild(script);
 
-  const favicon = document.querySelector('link[rel="shortcut icon"]');
-  if (!favicon) {
-    const faviconCreated = document.createElement("link");
-    faviconCreated.rel = "shortcut icon";
-    faviconCreated.type = "image/x-icon";
-    faviconCreated.href = `${obterCaminhoRelativo()}https://icons8.com/icon/42763/book`;
-    head.appendChild(faviconCreated);
-  }
-
   // Garantir criação do footer e em seguida popular seu conteúdo
   footer();
   initializeFooter();
@@ -51,6 +43,110 @@ document.addEventListener("DOMContentLoaded", () => {
     // navBar já foi criado no início; não recriar aqui
   }
 });
+
+function insertFavicon() {
+  const body = document.querySelector("body");
+  if (!body) {
+    console.error("Body element not found");
+    return Promise.reject(new Error("Body element not found"));
+  }
+
+  const head = document.querySelector("head");
+  if (!head) {
+    console.error("Head element not found");
+    return Promise.reject(new Error("Head element not found"));
+  }
+
+  const whatFavicon = body.ariaLabel || "book";
+  console.log(`[Favicon] aria-label detectado: "${whatFavicon}"`);
+
+  const caminhoRelativo = obterCaminhoRelativo();
+  console.log(`[Favicon] Caminho relativo calculado: "${caminhoRelativo}"`);
+
+  // Tenta múltiplos caminhos possíveis para o arquivo de favicons
+  const caminhosPossiveis = [
+    caminhoRelativo + "src/assets/json/favicons.json",
+    "src/assets/json/favicons.json",
+    "../src/assets/json/favicons.json",
+    "../../src/assets/json/favicons.json",
+    "../../../src/assets/json/favicons.json",
+    "../../../../src/assets/json/favicons.json",
+  ];
+
+  function tentarCarregarFavicon(indice) {
+    if (indice >= caminhosPossiveis.length) {
+      console.error("[Favicon] Nenhum caminho funcionou, usando fallback");
+      return Promise.reject(new Error("Favicons file not found"));
+    }
+
+    const caminho = caminhosPossiveis[indice];
+    console.log(`[Favicon] Tentativa ${indice + 1}: ${caminho}`);
+
+    return fetch(caminho)
+      .then((res) => {
+        if (res.ok) {
+          console.log(`[Favicon] ✓ Arquivo encontrado em: ${caminho}`);
+          return res.json();
+        }
+        console.log(`[Favicon] ✗ Status ${res.status} em: ${caminho}`);
+        return tentarCarregarFavicon(indice + 1);
+      })
+      .catch((err) => {
+        console.log(`[Favicon] ✗ Erro ao buscar ${caminho}:`, err.message);
+        return tentarCarregarFavicon(indice + 1);
+      });
+  }
+
+  return tentarCarregarFavicon(0)
+    .then((data) => {
+      console.log("[Favicon] Arquivo de favicons carregado com sucesso");
+
+      const link = document.createElement("link");
+      link.rel = "shortcut icon";
+      link.type = "image/x-icon";
+
+      // Procura pela chave do aria-label no JSON
+      let faviconUrl = null;
+
+      if (data.favicons[whatFavicon]) {
+        faviconUrl = data.favicons[whatFavicon];
+        console.log(`[Favicon] Encontrado favicon para "${whatFavicon}"`);
+      } else if (whatFavicon !== "book" && data.favicons.book) {
+        // Se não encontrar a chave específica, usa o padrão "book"
+        faviconUrl = data.favicons.book;
+        console.log(
+          `[Favicon] Chave "${whatFavicon}" não encontrada, usando fallback "book"`,
+        );
+      } else {
+        faviconUrl = "src/assets/favicon/default.ico";
+        console.log(
+          `[Favicon] Nenhuma chave encontrada, usando fallback padrão`,
+        );
+      }
+
+      // Define o href do favicon
+      if (faviconUrl.startsWith("http")) {
+        link.href = faviconUrl;
+        console.log(`[Favicon] URL absoluta detectada: ${faviconUrl}`);
+      } else {
+        link.href = caminhoRelativo + faviconUrl;
+        console.log(`[Favicon] URL relativa convertida: ${link.href}`);
+      }
+
+      head.appendChild(link);
+      console.log(`[Favicon] ✓ Favicon definido com sucesso: ${link.href}`);
+    })
+    .catch((error) => {
+      console.error("[Favicon] Erro ao carregar favicons:", error);
+      // Fallback: adiciona um favicon padrão
+      const link = document.createElement("link");
+      link.rel = "shortcut icon";
+      link.type = "image/x-icon";
+      link.href = caminhoRelativo + "src/assets/favicon/default.ico";
+      head.appendChild(link);
+      console.log(`[Favicon] Favicon fallback definido: ${link.href}`);
+    });
+}
 
 function navBar(title) {
   // Se já houver um header, não criar outro
@@ -96,9 +192,10 @@ function navBar(title) {
     navLinks.appendChild(link);
   }
 
-  if (caminhoPastaAnterior) {
+  if (caminhoPastaAnterior && caminhoPastaAnterior.trim() !== "") {
     const link = document.createElement("a");
-    link.href = `../${caminhoPastaAnterior}.html`;
+    link.href = `../${caminhoPastaAnterior}/${caminhoPastaAnterior}.html`;
+    link.title = "Voltar para pasta anterior";
     const icon = document.createElement("i");
     icon.className = "fa-solid fa-arrow-left icon";
     link.append(icon);
@@ -113,7 +210,7 @@ function navBar(title) {
       const link = document.createElement("a");
       link.href = `#${containerId}`;
       link.role = "menuitem";
-      link.innerHTML = containerId;
+      link.textContent = containerId; // Usar textContent em vez de innerHTML para evitar XSS
       navLinks.appendChild(link);
     }
   });
@@ -121,22 +218,30 @@ function navBar(title) {
   header.appendChild(navLinks);
 
   // Insere o header no início do body de forma segura (sem substituir conteúdo existente)
-  document.querySelector("body").prepend(header);
+  const body = document.querySelector("body");
+  if (body) {
+    body.prepend(header);
+  } else {
+    console.error("Body element not found, cannot insert header");
+  }
 }
 
 function footer() {
-  const footer = document.createElement("footer");
-  document.querySelector("body").appendChild(footer);
+  const footerElement = document.createElement("footer");
+  const body = document.querySelector("body");
+  if (body) {
+    body.appendChild(footerElement);
+  } else {
+    console.error("Body element not found, cannot append footer");
+  }
 }
 
 function obterCaminhoRelativo() {
-  // Nome do repositório no GitHub Pages (ajuste para o seu repositório)
   const nomeRepositorio = "study";
 
   // Caminho relativo do arquivo HTML atual em relação à raiz do site
   let caminhoHTML = window.location.pathname.replace(/^\//, "");
 
-  // Se estiver rodando no GitHub Pages, remova o nome do repositório do início do caminho
   if (caminhoHTML.startsWith(nomeRepositorio + "/")) {
     caminhoHTML = caminhoHTML.substring(nomeRepositorio.length + 1);
   }
@@ -159,10 +264,15 @@ function obterCaminhoRelativo() {
 
 function pastaAnterior() {
   const path = window.location.pathname;
-  const pats = path.split("/");
-  const parentFolder = pats[pats.length - 3];
+  const paths = path.split("/").filter(Boolean); // Remove strings vazias
 
-  return parentFolder;
+  // Retorna a penúltima pasta (a anterior ao arquivo atual)
+  // Se não houver suficientes elementos, retorna string vazia
+  if (paths.length >= 2) {
+    return paths[paths.length - 2];
+  }
+
+  return "";
 }
 
 function initializeSmoothScroll() {
@@ -239,15 +349,15 @@ function initializeFooter() {
           <ul>
             <li><a href="#Home">Início</a></li>
             <li><a href="https://github.com/jlbbarco/study">Repositório</a></li>
-            </ul>
-          </div>
-          <div class="card_footer">
-            <h2>Recursos</h2>
-            <ul>
-              <li><a href="https://jlbbarco.github.io/portfolio">Portfólio</a></li>
-              <li><a href="https://github.com/JLBBARCO">GitHub</a></li>
-            </ul>
-          </div>
+          </ul>
+        </div>
+        <div class="card_footer">
+          <h2>Recursos</h2>
+          <ul>
+            <li><a href="https://jlbbarco.github.io/portfolio">Portfólio</a></li>
+            <li><a href="https://github.com/JLBBARCO">GitHub</a></li>
+          </ul>
+        </div>
       </div>
       <p class="copyright">
         &copy; ${ano}. Todos os direitos de uso liberados.
@@ -266,9 +376,6 @@ function mudouJanela() {
   }
 }
 
-// Adicione o listener de resize com debounce
-window.addEventListener("resize", debounce(mudouJanela, 250));
-
 function initializeNavigation() {
   console.log("Inicializando navegação...");
 
@@ -283,6 +390,9 @@ function initializeNavigation() {
 
   // Inicializar estado do botão
   navLinksButton.setAttribute("aria-expanded", "false");
+
+  // Adicionar listener de resize com debounce
+  window.addEventListener("resize", debounce(mudouJanela, 250));
 
   navLinksButton.addEventListener("click", function (event) {
     event.preventDefault();
