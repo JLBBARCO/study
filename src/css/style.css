@@ -224,14 +224,21 @@ section#Home {
   align-items: center;
 }
 
-section#Home a.linkHome {
+section#Home article.buttonCard {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+section#Home article.buttonCard a {
   margin: 25px;
   padding: 25px;
   border-radius: 8px;
-  background-color: var(--interativo);
+  background-color: var(--destaque);
 }
 
-section#Home a.linkHome:hover {
+section#Home article.buttonCard a:hover {
   border: var(--borda_padrão);
   text-decoration: none;
   transform: translateY(-5px);

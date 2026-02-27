@@ -71,6 +71,8 @@ function insertFavicon() {
     "../../src/assets/json/favicons.json",
     "../../../src/assets/json/favicons.json",
     "../../../../src/assets/json/favicons.json",
+    "../../../../../src/assets/json/favicons.json",
+    "../../../../../../src/assets/json/favicons.json",
   ];
 
   function tentarCarregarFavicon(indice) {
@@ -181,7 +183,8 @@ function navBar(title) {
   navLinks.className = "nav_links";
   navLinks.id = "navLinks";
   const caminhoHome = obterCaminhoRelativo();
-  const caminhoPastaAnterior = pastaAnterior();
+  // caminhoPastaAnterior agora retorna objeto {folder,prefix}
+  const pai = pastaAnterior();
 
   if (caminhoHome) {
     const link = document.createElement("a");
@@ -192,9 +195,10 @@ function navBar(title) {
     navLinks.appendChild(link);
   }
 
-  if (caminhoPastaAnterior && caminhoPastaAnterior.trim() !== "") {
+  // exibe seta se houver prefixo para subir (evita mostrar na raiz)
+  if (pai.prefix) {
     const link = document.createElement("a");
-    link.href = `../${caminhoPastaAnterior}/${caminhoPastaAnterior}.html`;
+    link.href = pai.folder ? `${pai.folder}.html` : pai.prefix;
     link.title = "Voltar para pasta anterior";
     const icon = document.createElement("i");
     icon.className = "fa-solid fa-arrow-left icon";
@@ -206,6 +210,7 @@ function navBar(title) {
 
   containers.forEach((container) => {
     const containerId = container.id;
+    // não adiciona âncora para a seção inicial, já temos título vinculando Home
     if (containerId && containerId !== "Home") {
       const link = document.createElement("a");
       link.href = `#${containerId}`;
@@ -263,16 +268,38 @@ function obterCaminhoRelativo() {
 }
 
 function pastaAnterior() {
-  const path = window.location.pathname;
-  const paths = path.split("/").filter(Boolean); // Remove strings vazias
+  // Retorna objeto com prefixo relativo e nome da pasta anterior (se houver).
+  // prefix -> caminho para subir até a pasta anterior (termina com '/').
+  // folder -> nome da pasta anterior, apropriado para acrescentar ".html".
+  const raw = window.location.pathname.replace(/\/$/, ""); // remove slash final
+  const parts = raw.split("/").filter(Boolean);
 
-  // Retorna a penúltima pasta (a anterior ao arquivo atual)
-  // Se não houver suficientes elementos, retorna string vazia
-  if (paths.length >= 2) {
-    return paths[paths.length - 2];
+  // sem segmentos suficientes, nenhum link
+  if (parts.length < 2) {
+    return { folder: "", prefix: "" };
   }
 
-  return "";
+  const fileName = parts[parts.length - 1];
+
+  // Se estamos na raiz do repositório (ex: /study/index.html), não exibimos seta
+  if (parts.length === 2 && /index\.html?$/.test(fileName)) {
+    return { folder: "", prefix: "" };
+  }
+
+  // nome da pasta imediatamente acima do arquivo
+  const parentFolder = parts.length >= 2 ? parts[parts.length - 2] : "";
+
+  // prefixo básico de subir até a pasta que contém o arquivo
+  const levelsUp = parts.length - 1;
+  const prefix = "../".repeat(levelsUp);
+
+  // se o arquivo atual tem o mesmo nome da pasta (ex: /pasta/pasta.html),
+  // não tente construir "../pasta.html"; deixe apenas o prefixo
+  if (fileName === `${parentFolder}.html`) {
+    return { folder: "", prefix };
+  }
+
+  return { folder: parentFolder, prefix };
 }
 
 function initializeSmoothScroll() {
