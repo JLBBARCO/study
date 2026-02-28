@@ -1,4 +1,4 @@
-arquivo = 'colegio-adolpho/programacao_desenvolvimento_sistemas/atividades/atividade06/arquivo.txt'
+arquivo = 'colegio-adolpho/programacao-desenvolvimento-sistemas/atividades/atividade06/arquivo.txt'
 def escritaEmLeitor():
     """
     Função que escreve em um arquivo de texto especificado.

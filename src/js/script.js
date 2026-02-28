@@ -42,6 +42,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // navBar já foi criado no início; não recriar aqui
   }
+
+  paths();
 });
 
 function insertFavicon() {
@@ -159,7 +161,7 @@ function navBar(title) {
   const navTitle = document.createElement("nav");
   navTitle.className = "nav-title";
   const linkingHome = document.createElement("a");
-  linkingHome.href = "#Home";
+  linkingHome.href = "https://jlbbarco.github.io/study/";
   const heading = document.createElement("h2");
   heading.textContent = title || "Título do Site";
   linkingHome.appendChild(heading);
@@ -182,36 +184,13 @@ function navBar(title) {
   const navLinks = document.createElement("nav");
   navLinks.className = "nav_links";
   navLinks.id = "navLinks";
-  const caminhoHome = obterCaminhoRelativo();
-  // caminhoPastaAnterior agora retorna objeto {folder,prefix}
-  const pai = pastaAnterior();
-
-  if (caminhoHome) {
-    const link = document.createElement("a");
-    link.href = caminhoHome;
-    const icon = document.createElement("i");
-    icon.className = "fa-solid fa-home icon";
-    link.append(icon);
-    navLinks.appendChild(link);
-  }
-
-  // exibe seta se houver prefixo para subir (evita mostrar na raiz)
-  if (pai.prefix) {
-    const link = document.createElement("a");
-    link.href = pai.folder ? `${pai.folder}.html` : pai.prefix;
-    link.title = "Voltar para pasta anterior";
-    const icon = document.createElement("i");
-    icon.className = "fa-solid fa-arrow-left icon";
-    link.append(icon);
-    navLinks.appendChild(link);
-  }
 
   const containers = document.querySelectorAll("main>section");
 
   containers.forEach((container) => {
     const containerId = container.id;
     // não adiciona âncora para a seção inicial, já temos título vinculando Home
-    if (containerId && containerId !== "Home") {
+    if (containerId && containerId) {
       const link = document.createElement("a");
       link.href = `#${containerId}`;
       link.role = "menuitem";
@@ -265,41 +244,6 @@ function obterCaminhoRelativo() {
   const caminhoRelativoAteRaiz = pastas.map(() => "../").join("");
 
   return caminhoRelativoAteRaiz;
-}
-
-function pastaAnterior() {
-  // Retorna objeto com prefixo relativo e nome da pasta anterior (se houver).
-  // prefix -> caminho para subir até a pasta anterior (termina com '/').
-  // folder -> nome da pasta anterior, apropriado para acrescentar ".html".
-  const raw = window.location.pathname.replace(/\/$/, ""); // remove slash final
-  const parts = raw.split("/").filter(Boolean);
-
-  // sem segmentos suficientes, nenhum link
-  if (parts.length < 2) {
-    return { folder: "", prefix: "" };
-  }
-
-  const fileName = parts[parts.length - 1];
-
-  // Se estamos na raiz do repositório (ex: /study/index.html), não exibimos seta
-  if (parts.length === 2 && /index\.html?$/.test(fileName)) {
-    return { folder: "", prefix: "" };
-  }
-
-  // nome da pasta imediatamente acima do arquivo
-  const parentFolder = parts.length >= 2 ? parts[parts.length - 2] : "";
-
-  // prefixo básico de subir até a pasta que contém o arquivo
-  const levelsUp = parts.length - 1;
-  const prefix = "../".repeat(levelsUp);
-
-  // se o arquivo atual tem o mesmo nome da pasta (ex: /pasta/pasta.html),
-  // não tente construir "../pasta.html"; deixe apenas o prefixo
-  if (fileName === `${parentFolder}.html`) {
-    return { folder: "", prefix };
-  }
-
-  return { folder: parentFolder, prefix };
 }
 
 function initializeSmoothScroll() {
@@ -549,4 +493,23 @@ function initializeFontAwesome() {
 // Função auxiliar para inicializar cookies
 function initializeCookies() {
   // Lógica de cookies já está implementada no escopo global
+}
+
+function paths() {
+  const main = document.querySelector("main");
+  const caminhoRelativo = obterCaminhoRelativo();
+  const rootPaths = document.createElement("div");
+  rootPaths.className = "root-paths";
+
+  rootPathsItems = [];
+  const pathParts = window.location.pathname.split("/").filter(Boolean);
+  let accumulatedPath = caminhoRelativo;
+  rootPathsItems.push(`<a href="${caminhoRelativo}">home</a>`);
+  pathParts.forEach((part) => {
+    accumulatedPath += part + "/";
+    rootPathsItems.push(`<a href="${accumulatedPath}">${part}</a>`);
+  });
+  rootPaths.innerHTML = rootPathsItems.join(" > ");
+
+  main.prepend(rootPaths);
 }
