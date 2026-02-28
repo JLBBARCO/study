@@ -206,6 +206,7 @@ nav {
 .root-paths a {
   box-shadow: var(--shadow);
   padding: 5px 10px;
+  margin: 5px;
   border-radius: 8px;
   background-color: var(--interativo);
 }

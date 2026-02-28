@@ -509,7 +509,7 @@ function paths() {
     accumulatedPath += part + "/";
     rootPathsItems.push(`<a href="${accumulatedPath}">${part}</a>`);
   });
-  rootPaths.innerHTML = rootPathsItems.join(" > ");
+  rootPaths.innerHTML = rootPathsItems.join(" &gt; ");
 
   main.prepend(rootPaths);
 }
