@@ -1,10 +1,13 @@
 document.addEventListener("DOMContentLoaded", async () => {
   try {
     console.log("DOM carregado, inicializando...");
+    await carregarContextoServidor();
     // Recupera título da página (se existir) e cria o header antes de inicializar o menu
     const titleHomeEarly = document.querySelector("section#Home>h1");
     const titleText = titleHomeEarly ? titleHomeEarly.innerHTML : undefined;
     await insertFavicon();
+    await insertJS();
+    insertCSS();
     navBar(titleText);
     initializeNavigation();
     initializeSmoothScroll();
@@ -44,7 +47,107 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   paths();
+  pathNames();
 });
+
+let siteContextCache = null;
+
+function getCurrentSiteContext() {
+  return siteContextCache;
+}
+
+window.getCurrentSiteContext = getCurrentSiteContext;
+
+function isOfflineContextEnabled() {
+  const queryOffline = new URLSearchParams(window.location.search).get(
+    "offline",
+  );
+  if (queryOffline === "1" || queryOffline === "true") {
+    return true;
+  }
+
+  const bodyOffline = document.body?.dataset?.offlineContext;
+  if (bodyOffline === "1" || bodyOffline === "true") {
+    return true;
+  }
+
+  try {
+    return localStorage.getItem("study_offline_context") === "1";
+  } catch {
+    return false;
+  }
+}
+
+function buildLocalSiteContext() {
+  const relativeRootPath = obterCaminhoRelativoLocal();
+  return {
+    relativeRootPath,
+    pathParts: extrairPathPartsLocal(),
+    faviconHref: `${relativeRootPath}src/assets/favicon/default.ico`,
+  };
+}
+
+function setOfflineContextMode(enabled) {
+  try {
+    if (enabled) {
+      localStorage.setItem("study_offline_context", "1");
+    } else {
+      localStorage.removeItem("study_offline_context");
+    }
+  } catch (error) {
+    console.warn(
+      "Não foi possível persistir modo offline no localStorage.",
+      error,
+    );
+  }
+}
+
+window.setOfflineContextMode = setOfflineContextMode;
+
+async function carregarContextoServidor() {
+  if (siteContextCache) return siteContextCache;
+
+  if (isOfflineContextEnabled()) {
+    siteContextCache = buildLocalSiteContext();
+    return siteContextCache;
+  }
+
+  const bodyLabel = document.body?.ariaLabel || "book";
+  const params = new URLSearchParams({
+    pathname: window.location.pathname,
+    bodyLabel,
+  });
+
+  try {
+    const response = await fetch(`/api/site-context?${params.toString()}`);
+    if (!response.ok) {
+      throw new Error(
+        `Falha ao carregar contexto do servidor: ${response.status}`,
+      );
+    }
+
+    const context = await response.json();
+    siteContextCache = context;
+    return context;
+  } catch (error) {
+    console.warn(
+      "Não foi possível carregar contexto no servidor. Usando fallback local.",
+      error,
+    );
+    siteContextCache = buildLocalSiteContext();
+    return siteContextCache;
+  }
+}
+
+function extrairPathPartsLocal() {
+  const nomeRepositorio = "study";
+  const pathIgnore = ["index.html"];
+
+  return window.location.pathname
+    .split("/")
+    .filter(Boolean)
+    .filter((part) => !pathIgnore.includes(part) && part !== nomeRepositorio);
+}
 
 function insertFavicon() {
   const body = document.querySelector("body");
@@ -59,191 +162,88 @@ function insertFavicon() {
     return Promise.reject(new Error("Head element not found"));
   }
 
-  const whatFavicon = body.ariaLabel || "book";
-  console.log(`[Favicon] aria-label detectado: "${whatFavicon}"`);
+  const context = getCurrentSiteContext();
+  const fallbackPath = `${obterCaminhoRelativoLocal()}src/assets/favicon/default.ico`;
+  const faviconHref = context?.faviconHref || fallbackPath;
+
+  const link = document.createElement("link");
+  link.rel = "shortcut icon";
+  link.type = "image/x-icon";
+  link.href = faviconHref;
+
+  head.appendChild(link);
+  console.log(`[Favicon] ✓ Favicon definido com sucesso: ${link.href}`);
+  return Promise.resolve();
+}
+
+function insertJS() {
+  const head = document.querySelector("head");
+  if (!head) {
+    console.error("Head element not found");
+    return Promise.reject(new Error("Head element not found"));
+  }
 
   const caminhoRelativo = obterCaminhoRelativo();
-  console.log(`[Favicon] Caminho relativo calculado: "${caminhoRelativo}"`);
+  const jsFiles = ["header.js", "accessibility.js", "footer.js", "paths.js"];
 
-  // Tenta múltiplos caminhos possíveis para o arquivo de favicons
-  const caminhosPossiveis = [
-    caminhoRelativo + "src/assets/json/favicons.json",
-    "src/assets/json/favicons.json",
-    "../src/assets/json/favicons.json",
-    "../../src/assets/json/favicons.json",
-    "../../../src/assets/json/favicons.json",
-    "../../../../src/assets/json/favicons.json",
-    "../../../../../src/assets/json/favicons.json",
-    "../../../../../../src/assets/json/favicons.json",
+  function carregarScript(fileName) {
+    const scriptSrc = caminhoRelativo + "src/js/" + fileName;
+    const existingScript = document.querySelector(`script[src="${scriptSrc}"]`);
+
+    if (existingScript) {
+      return Promise.resolve();
+    }
+
+    return new Promise((resolve, reject) => {
+      const script = document.createElement("script");
+      script.src = scriptSrc;
+      script.onload = () => {
+        console.log(`[JavaScript] ${fileName} carregado com sucesso`);
+        resolve();
+      };
+      script.onerror = () => {
+        const error = new Error(
+          `[JavaScript] Erro ao carregar ${fileName} em: ${script.src}`,
+        );
+        console.error(error.message);
+        reject(error);
+      };
+      head.appendChild(script);
+    });
+  }
+
+  return jsFiles.reduce(
+    (promise, fileName) => promise.then(() => carregarScript(fileName)),
+    Promise.resolve(),
+  );
+}
+
+function insertCSS() {
+  const head = document.querySelector("head");
+  if (!head) {
+    console.error("Head element not found");
+    return;
+  }
+
+  const caminhoRelativo = obterCaminhoRelativo();
+  const cssFiles = [
+    { fileName: "style.css", media: "screen" },
+    { fileName: "cards.css", media: "screen" },
   ];
 
-  function tentarCarregarFavicon(indice) {
-    if (indice >= caminhosPossiveis.length) {
-      console.error("[Favicon] Nenhum caminho funcionou, usando fallback");
-      return Promise.reject(new Error("Favicons file not found"));
-    }
-
-    const caminho = caminhosPossiveis[indice];
-    console.log(`[Favicon] Tentativa ${indice + 1}: ${caminho}`);
-
-    return fetch(caminho)
-      .then((res) => {
-        if (res.ok) {
-          console.log(`[Favicon] ✓ Arquivo encontrado em: ${caminho}`);
-          return res.json();
-        }
-        console.log(`[Favicon] ✗ Status ${res.status} em: ${caminho}`);
-        return tentarCarregarFavicon(indice + 1);
-      })
-      .catch((err) => {
-        console.log(`[Favicon] ✗ Erro ao buscar ${caminho}:`, err.message);
-        return tentarCarregarFavicon(indice + 1);
-      });
-  }
-
-  return tentarCarregarFavicon(0)
-    .then((data) => {
-      console.log("[Favicon] Arquivo de favicons carregado com sucesso");
-
-      const link = document.createElement("link");
-      link.rel = "shortcut icon";
-      link.type = "image/x-icon";
-
-      // Procura pela chave do aria-label no JSON
-      let faviconUrl = null;
-
-      if (data.favicons[whatFavicon]) {
-        faviconUrl = data.favicons[whatFavicon];
-        console.log(`[Favicon] Encontrado favicon para "${whatFavicon}"`);
-      } else if (whatFavicon !== "book" && data.favicons.book) {
-        // Se não encontrar a chave específica, usa o padrão "book"
-        faviconUrl = data.favicons.book;
-        console.log(
-          `[Favicon] Chave "${whatFavicon}" não encontrada, usando fallback "book"`,
-        );
-      } else {
-        faviconUrl = "src/assets/favicon/default.ico";
-        console.log(
-          `[Favicon] Nenhuma chave encontrada, usando fallback padrão`,
-        );
-      }
-
-      // Define o href do favicon
-      if (faviconUrl.startsWith("http")) {
-        link.href = faviconUrl;
-        console.log(`[Favicon] URL absoluta detectada: ${faviconUrl}`);
-      } else {
-        link.href = caminhoRelativo + faviconUrl;
-        console.log(`[Favicon] URL relativa convertida: ${link.href}`);
-      }
-
-      head.appendChild(link);
-      console.log(`[Favicon] ✓ Favicon definido com sucesso: ${link.href}`);
-    })
-    .catch((error) => {
-      console.error("[Favicon] Erro ao carregar favicons:", error);
-      // Fallback: adiciona um favicon padrão
-      const link = document.createElement("link");
-      link.rel = "shortcut icon";
-      link.type = "image/x-icon";
-      link.href = caminhoRelativo + "src/assets/favicon/default.ico";
-      head.appendChild(link);
-      console.log(`[Favicon] Favicon fallback definido: ${link.href}`);
-    });
-}
-
-function navBar(title) {
-  // Se já houver um header, não criar outro
-  if (document.querySelector("header")) return;
-  const header = document.createElement("header");
-
-  // Cria o título de navegação dinamicamente
-  const navTitle = document.createElement("nav");
-  navTitle.className = "nav-title";
-  const linkingHome = document.createElement("a");
-  linkingHome.href = "https://jlbbarco.github.io/study/";
-  const heading = document.createElement("h2");
-  heading.textContent = title || "Título do Site";
-  linkingHome.appendChild(heading);
-  navTitle.appendChild(linkingHome);
-  header.appendChild(navTitle);
-
-  // Cria o botão de menu para telas menores
-  const navLinksButton = document.createElement("button");
-  navLinksButton.id = "nav-links-button";
-  navLinksButton.setAttribute("aria-label", "Toggle navigation menu");
-  navLinksButton.setAttribute("aria-expanded", "false");
-  navLinksButton.setAttribute("aria-controls", "navLinks");
-  const menuIcon = document.createElement("i");
-  menuIcon.id = "menuIcon";
-  menuIcon.className = "fa-solid fa-bars icon";
-  navLinksButton.appendChild(menuIcon);
-  header.appendChild(navLinksButton);
-
-  // Cria o container para os links de navegação
-  const navLinks = document.createElement("nav");
-  navLinks.className = "nav_links";
-  navLinks.id = "navLinks";
-
-  const containers = document.querySelectorAll("main>section");
-
-  containers.forEach((container) => {
-    const containerId = container.id;
-    // não adiciona âncora para a seção inicial, já temos título vinculando Home
-    if (containerId && containerId) {
-      const link = document.createElement("a");
-      link.href = `#${containerId}`;
-      link.role = "menuitem";
-      link.textContent = containerId; // Usar textContent em vez de innerHTML para evitar XSS
-      navLinks.appendChild(link);
-    }
+  cssFiles.forEach(({ fileName, media }) => {
+    const link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.href = caminhoRelativo + "src/css/" + fileName;
+    link.media = media;
+    link.onload = () => {
+      console.log(`[CSS] ${fileName} carregado com sucesso`);
+    };
+    link.onerror = () => {
+      console.error(`[CSS] Erro ao carregar ${fileName} em: ${link.href}`);
+    };
+    head.appendChild(link);
   });
-
-  header.appendChild(navLinks);
-
-  // Insere o header no início do body de forma segura (sem substituir conteúdo existente)
-  const body = document.querySelector("body");
-  if (body) {
-    body.prepend(header);
-  } else {
-    console.error("Body element not found, cannot insert header");
-  }
-}
-
-function footer() {
-  const footerElement = document.createElement("footer");
-  const body = document.querySelector("body");
-  if (body) {
-    body.appendChild(footerElement);
-  } else {
-    console.error("Body element not found, cannot append footer");
-  }
-}
-
-function obterCaminhoRelativo() {
-  const nomeRepositorio = "study";
-
-  // Caminho relativo do arquivo HTML atual em relação à raiz do site
-  let caminhoHTML = window.location.pathname.replace(/^\//, "");
-
-  if (caminhoHTML.startsWith(nomeRepositorio + "/")) {
-    caminhoHTML = caminhoHTML.substring(nomeRepositorio.length + 1);
-  }
-
-  // Se quiser apenas o diretório do arquivo HTML:
-  const diretorioHTML = caminhoHTML.substring(
-    0,
-    caminhoHTML.lastIndexOf("/") + 1,
-  );
-
-  // Conta quantas pastas existem no caminho (ignorando o arquivo)
-  const pastas =
-    diretorioHTML === "" ? [] : diretorioHTML.split("/").filter(Boolean);
-
-  // Gera a string com "../" para cada pasta
-  const caminhoRelativoAteRaiz = pastas.map(() => "../").join("");
-
-  return caminhoRelativoAteRaiz;
 }
 
 function initializeSmoothScroll() {
@@ -301,163 +301,6 @@ if (cookies.fontSize) {
   }
 }
 
-// --- Rodapé dinâmico ---
-function initializeFooter() {
-  const footer = document.querySelector("footer");
-  if (footer) {
-    const data = new Date();
-    const ano = data.getFullYear();
-    footer.innerHTML = `
-      <div class="container_footer">
-        <div class="card_footer">
-          <h2>Projeto de Estudos</h2>
-          <p>
-            Projeto realizado para estudos de programação, com possibilidade de uso de qualquer pessoa.
-          </p>
-        </div>
-        <div class="card_footer">
-          <h2>Links Rápidos</h2>
-          <ul>
-            <li><a href="#Home">Início</a></li>
-            <li><a href="https://github.com/jlbbarco/study">Repositório</a></li>
-          </ul>
-        </div>
-        <div class="card_footer">
-          <h2>Recursos</h2>
-          <ul>
-            <li><a href="https://jlbbarco.github.io/portfolio">Portfólio</a></li>
-            <li><a href="https://github.com/JLBBARCO">GitHub</a></li>
-          </ul>
-        </div>
-      </div>
-      <p class="copyright">
-        &copy; ${ano}. Todos os direitos de uso liberados.
-      </p>
-    `;
-  }
-}
-
-// Responsividade do menu ao redimensionar a janela
-function mudouJanela() {
-  console.log("Janela redimensionada");
-  const navLinks = document.querySelector(".nav_links");
-
-  if (window.innerWidth >= 990) {
-    navLinks?.classList.remove("active");
-  }
-}
-
-function initializeNavigation() {
-  console.log("Inicializando navegação...");
-
-  const navLinksButton = document.getElementById("nav-links-button");
-  const navLinks = document.querySelector(".nav_links");
-  const menuIcon = document.getElementById("menuIcon");
-
-  if (!navLinksButton || !navLinks) {
-    console.error("Elementos do menu não encontrados");
-    return;
-  }
-
-  // Inicializar estado do botão
-  navLinksButton.setAttribute("aria-expanded", "false");
-
-  // Adicionar listener de resize com debounce
-  window.addEventListener("resize", debounce(mudouJanela, 250));
-
-  navLinksButton.addEventListener("click", function (event) {
-    event.preventDefault();
-
-    const isExpanded = navLinks.classList.contains("active");
-    navLinks.classList.toggle("active");
-
-    // Alternar o ícone dinamicamente (verifica existência do ícone)
-    if (menuIcon) {
-      if (isExpanded) {
-        menuIcon.classList.remove("fa-xmark");
-        menuIcon.classList.add("fa-bars");
-      } else {
-        menuIcon.classList.remove("fa-bars");
-        menuIcon.classList.add("fa-xmark");
-      }
-    }
-
-    // Atualiza aria-expanded (usar string)
-    navLinksButton.setAttribute("aria-expanded", (!isExpanded).toString());
-
-    // Log para debug
-    console.log("Menu clicked:", {
-      isExpanded: !isExpanded,
-      menuVisível: navLinks.classList.contains("active"),
-    });
-  });
-
-  // Fechar menu ao clicar fora
-  document.addEventListener("click", (event) => {
-    if (
-      !navLinksButton.contains(event.target) &&
-      !navLinks.contains(event.target)
-    ) {
-      navLinks.classList.remove("active");
-      if (menuIcon) {
-        menuIcon.classList.remove("fa-xmark");
-        menuIcon.classList.add("fa-bars");
-      }
-      navLinksButton.setAttribute("aria-expanded", "false");
-    }
-  });
-
-  // Permitir fechar menu com Esc para maior acessibilidade
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") {
-      navLinks.classList.remove("active");
-      if (menuIcon) {
-        menuIcon.classList.remove("fa-xmark");
-        menuIcon.classList.add("fa-bars");
-      }
-      navLinksButton.setAttribute("aria-expanded", "false");
-    }
-  });
-}
-
-// Funções de acessibilidade no escopo global
-function accessibilityButton() {
-  var options = document.getElementById("accessibility-options");
-  if (!options) return;
-  options.style.display = options.style.display === "flex" ? "none" : "flex";
-}
-
-function increaseFont() {
-  var body = document.querySelector("body");
-  if (!body) return;
-  var currentSize = window.getComputedStyle(body).fontSize;
-  var newSize = parseFloat(currentSize) * 1.2;
-  body.style.fontSize = newSize + "px";
-  // salva por 1 ano
-  document.cookie = `fontSize=${newSize}px; path=/; max-age=${
-    60 * 60 * 24 * 365
-  }`;
-}
-
-function decreaseFont() {
-  var body = document.querySelector("body");
-  if (!body) return;
-  var currentSize = window.getComputedStyle(body).fontSize;
-  var newSize = parseFloat(currentSize) / 1.2;
-  body.style.fontSize = newSize + "px";
-  document.cookie = `fontSize=${newSize}px; path=/; max-age=${
-    60 * 60 * 24 * 365
-  }`;
-}
-
-function resetFont() {
-  var body = document.querySelector("body");
-  if (!body) return;
-  body.style.fontSize = ""; // remove estilo inline e volta ao padrão do CSS
-  // remove cookie
-  document.cookie = "fontSize=; path=/; max-age=0";
-}
-
 // Envolve links que sejam filhos diretos de `.card` dentro de um `article.buttonCard`.
 // Isso evita mover links inline dentro de parágrafos e corrige páginas que
 // possuem âncoras diretas nos cards sem precisar editar todos os HTMLs.
@@ -495,21 +338,47 @@ function initializeCookies() {
   // Lógica de cookies já está implementada no escopo global
 }
 
-function paths() {
-  const main = document.querySelector("main");
-  const caminhoRelativo = obterCaminhoRelativo();
-  const rootPaths = document.createElement("div");
-  rootPaths.className = "root-paths";
+function obterCaminhoRelativo() {
+  const context = getCurrentSiteContext();
+  if (context?.relativeRootPath !== undefined) {
+    return context.relativeRootPath;
+  }
 
-  rootPathsItems = [];
-  const pathParts = window.location.pathname.split("/").filter(Boolean);
-  let accumulatedPath = caminhoRelativo;
-  rootPathsItems.push(`<a href="${caminhoRelativo}">home</a>`);
-  pathParts.forEach((part) => {
-    accumulatedPath += part + "/";
-    rootPathsItems.push(`<a href="${accumulatedPath}">${part}</a>`);
-  });
-  rootPaths.innerHTML = rootPathsItems.join(" &gt; ");
+  return obterCaminhoRelativoLocal();
+}
 
-  main.prepend(rootPaths);
+function obterCaminhoRelativoLocal() {
+  const nomeRepositorio = "study";
+
+  // Caminho relativo do arquivo HTML atual em relação à raiz do site
+  let caminhoHTML = window.location.pathname.replace(/^\//, "");
+
+  if (caminhoHTML.startsWith(nomeRepositorio + "/")) {
+    caminhoHTML = caminhoHTML.substring(nomeRepositorio.length + 1);
+  }
+
+  // Se quiser apenas o diretório do arquivo HTML:
+  const diretorioHTML = caminhoHTML.substring(
+    0,
+    caminhoHTML.lastIndexOf("/") + 1,
+  );
+
+  // Conta quantas pastas existem no caminho (ignorando o arquivo)
+  const pastas =
+    diretorioHTML === "" ? [] : diretorioHTML.split("/").filter(Boolean);
+
+  // Gera a string com "../" para cada pasta
+  const caminhoRelativoAteRaiz = pastas.map(() => "../").join("");
+
+  return caminhoRelativoAteRaiz;
+}
+
+// Responsividade do menu ao redimensionar a janela
+function mudouJanela() {
+  console.log("Janela redimensionada");
+  const navLinks = document.querySelector(".nav_links");
+
+  if (window.innerWidth >= 990) {
+    navLinks?.classList.remove("active");
+  }
 }

@@ -1,0 +1,7 @@
+customtkinter
+mysql-connector-python
+pyinstaller
+pandas
+matplotlib
+seaborn
+scikit-learn

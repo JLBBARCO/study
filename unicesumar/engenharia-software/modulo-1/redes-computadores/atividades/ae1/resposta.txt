@@ -1,0 +1,30 @@
+As redes PAN (Personal Area Network), por sua natureza de curto alcance e alta conveniência, acabam criando uma falsa sensação de segurança. No entanto, o Bluetooth opera em frequências de rádio que podem ser interceptadas ou exploradas se os mecanismos de defesa não forem aplicados corretamente.
+
+Abaixo, detalho os principais riscos e as formas de mitigação:
+
+Principais Riscos de Segurança em Redes Bluetooth
+1. Vulnerabilidades no Pareamento (Pairing)
+O processo de pareamento é o momento mais crítico. Se os dispositivos utilizam métodos legados ou simplificados, como o "Just Works", eles não possuem autenticação forte.
+
+Bluejacking: O envio de mensagens não solicitadas para dispositivos próximos. Embora seja mais incômodo que perigoso, pode ser usado para phishing.
+
+Bluesnarfing: Um ataque mais grave onde o invasor explora falhas no pareamento para acessar e roubar informações do dispositivo (contatos, fotos, mensagens) sem que o usuário perceba.
+
+2. Ataques de Intercepção (Man-in-the-Middle - MitM)
+Neste cenário, um invasor se posiciona entre dois dispositivos que acreditam estar conectados diretamente um ao outro.
+
+Como funciona: O criminoso intercepta a chave de criptografia durante o estabelecimento da conexão. A partir daí, ele pode monitorar, ler e até alterar os dados que trafegam entre o fone de ouvido e o celular, ou entre um teclado sem fio e um computador, capturando senhas digitadas.
+
+3. Configuração Inadequada e "Modo Visível"
+Muitos usuários mantêm o Bluetooth configurado como "Visível para todos" permanentemente.
+
+Risco: Isso permite que qualquer pessoa em um raio de 10 a 100 metros identifique o modelo do aparelho e a versão do software, facilitando a busca por vulnerabilidades específicas (exploits) conhecidas para aquele hardware.
+
+Práticas Recomendadas para Mitigação
+Para garantir a proteção das informações, a prática mais eficaz e simples é a Gestão de Visibilidade e Conectividade:
+
+Desative a visibilidade: Mantenha o Bluetooth em modo "Oculto" (Non-discoverable) por padrão. Ative a visibilidade apenas durante o breve momento em que estiver pareando um novo dispositivo de confiança.
+
+Desligue quando não estiver em uso: Além de economizar bateria, desativar o Bluetooth em locais públicos (como aeroportos e shoppings) elimina o vetor de ataque.
+
+Atualização de Firmware: Sempre mantenha o sistema operacional e os dispositivos periféricos atualizados, pois fabricantes lançam "patches" constantes para corrigir falhas de segurança recém-descobertas, como a famosa vulnerabilidade BlueBorne.
