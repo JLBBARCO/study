@@ -79,7 +79,10 @@ function resolveStaticPath(requestPath) {
 const server = http.createServer((req, res) => {
   const url = new URL(req.url, `http://localhost:${PORT}`);
 
-  if (url.pathname === "/api/site-context") {
+  if (
+    url.pathname === "/api/site-context" ||
+    url.pathname === "/api/site-context/"
+  ) {
     if (OFFLINE_MODE) {
       sendJson(res, 503, {
         error: "Modo offline ativo",

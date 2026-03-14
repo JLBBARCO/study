@@ -193,12 +193,23 @@ function insertFavicon() {
   const fallbackPath = `${obterCaminhoRelativoLocal()}src/assets/favicon/default.ico`;
   const faviconHref = context?.faviconHref || fallbackPath;
 
-  const link = document.createElement("link");
-  link.rel = "shortcut icon";
-  link.type = "image/x-icon";
+  const existingLinks = Array.from(
+    head.querySelectorAll('link[rel="icon"], link[rel="shortcut icon"]'),
+  );
+  const link = existingLinks[0] || document.createElement("link");
+  const isPngFavicon = /(?:\.png(?:$|\?))|(?:[?&]format=png\b)/i.test(
+    faviconHref,
+  );
+  link.rel = "icon";
+  link.type = isPngFavicon ? "image/png" : "image/x-icon";
   link.href = faviconHref;
 
-  head.appendChild(link);
+  if (!existingLinks.length) {
+    head.appendChild(link);
+  }
+
+  existingLinks.slice(1).forEach((faviconLink) => faviconLink.remove());
+
   console.log(`[Favicon] ✓ Favicon definido com sucesso: ${link.href}`);
   return Promise.resolve();
 }

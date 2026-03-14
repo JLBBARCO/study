@@ -1,12 +1,12 @@
-document.addEventListener("DOMContentLoaded", function () {
-  adSense();
-});
+function adSense(scriptSrc, metaName) {
+  var adScript = document.createElement("script");
+  adScript.async = true;
+  adScript.src = scriptSrc;
+  adScript.setAttribute("crossorigin", "anonymous");
+  document.head.appendChild(adScript);
 
-function adSense() {
-  var ad = document.createElement("script");
-  ad.async = true;
-  ad.src =
-    "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3137007272676866";
-  ad.setAttribute("crossorigin", "anonymous");
-  document.head.appendChild(ad);
+  var adMeta = document.createElement("meta");
+  adMeta.name = "google-adsense-account";
+  adMeta.content = metaName;
+  document.head.appendChild(adMeta);
 }

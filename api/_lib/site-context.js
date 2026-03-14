@@ -41,6 +41,28 @@ function loadFaviconsMap(projectRoot) {
   return data.favicons || {};
 }
 
+function isValidRemoteFaviconUrl(value) {
+  if (typeof value !== "string" || value.length === 0) {
+    return false;
+  }
+
+  try {
+    const parsed = new URL(value);
+    const hostname = parsed.hostname.toLowerCase();
+
+    if (
+      (hostname === "icons8.com" || hostname === "www.icons8.com") &&
+      parsed.pathname.startsWith("/icon/")
+    ) {
+      return false;
+    }
+
+    return true;
+  } catch {
+    return false;
+  }
+}
+
 function buildSiteContext({
   pathname,
   bodyLabel = "book",
@@ -59,9 +81,13 @@ function buildSiteContext({
     const faviconValue = favicons[key] || favicons.book;
 
     if (typeof faviconValue === "string" && faviconValue.length > 0) {
-      faviconHref = faviconValue.startsWith("http")
-        ? faviconValue
-        : `${relativeRootPath}${faviconValue}`;
+      if (faviconValue.startsWith("http")) {
+        if (isValidRemoteFaviconUrl(faviconValue)) {
+          faviconHref = faviconValue;
+        }
+      } else {
+        faviconHref = `${relativeRootPath}${faviconValue}`;
+      }
     }
   } catch (error) {
     // Mantém fallback padrão quando não for possível carregar o JSON.
