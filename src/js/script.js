@@ -13,6 +13,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     initializeSmoothScroll();
     initializeCookies();
     wrapCardLinks();
+    adSense();
     // footer element will be created and inicializado após ajustes
   } catch (error) {
     console.error("Erro na inicialização:", error);
@@ -184,7 +185,13 @@ function insertJS() {
   }
 
   const caminhoRelativo = obterCaminhoRelativo();
-  const jsFiles = ["header.js", "accessibility.js", "footer.js", "paths.js"];
+  const jsFiles = [
+    "header.js",
+    "accessibility.js",
+    "footer.js",
+    "paths.js",
+    "adsense.js",
+  ];
 
   function carregarScript(fileName) {
     const scriptSrc = caminhoRelativo + "src/js/" + fileName;
