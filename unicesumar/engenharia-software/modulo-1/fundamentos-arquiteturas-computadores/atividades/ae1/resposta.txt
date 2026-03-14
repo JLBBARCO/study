@@ -1,18 +1,10 @@
-a) Localização e Interpretação das Instruções
-A UC é responsável pelo ciclo de busca (fetch) e decodificação (decode).
-A UC consulta o registrador chamado Program Counter (PC) para saber o endereço da próxima instrução na memória principal (RAM). Ela comanda a busca dessa instrução e a armazena no Registrador de Instrução (IR).
-Uma vez que a instrução está no IR, o Decodificador da UC analisa o código de operação (opcode). Ele identifica se a tarefa é uma soma, um desvio lógico ou um movimento de dados.
-A UC interage diretamente com a Memória (via barramento de dados) e com os Registradores de Endereço, preparando o terreno para a execução.
+a) Localização e Interpretação das Instruções:
+A UC consulta o Program Counter (PC) para obter o endereço da próxima instrução na memória, busca essa instrução, armazena-a no Registrador de Instrução (IR) e decodifica o opcode para identificar a operação a ser executada. Ela também prepara os registradores de endereço e interage com a memória para facilitar a execução.
 
-b) Emissão de Sinais de Comando
-Após entender o que precisa ser feito, a UC gera sinais elétricos (sinais de controle) que ativam ou desativam partes específicas do hardware.
-Se a instrução for uma soma, a UC envia um sinal de comando para a ULA "abrir" o circuito de adição. Se for uma leitura, ela envia um sinal de controle para a interface de memória.
-A UC atua como um maestro para a ULA e para os Registradores de Dados. Ela define, por exemplo, qual registrador deve colocar seu valor no barramento e qual deve receber o resultado final.
+b) Emissão de Sinais de Comando:
+Com base na instrução decodificada, a UC gera sinais de controle que ativam os componentes necessários, como a ULA para operações matemáticas ou a interface de memória para leituras e escritas. Ela coordena o fluxo de dados entre registradores e barramentos.
 
-c) Sequenciamento das Etapas para a Execução
-A execução de uma única instrução não acontece instantaneamente; ela é dividida em micro-operações que devem ocorrer em uma ordem rígida.
-A UC utiliza o sinal de Clock do sistema para sincronizar essas etapas. Ela garante, por exemplo, que o dado chegue da memória antes que a ULA tente processá-lo. Ela controla o passo a passo: busca -> decodificação -> busca de operandos -> execução -> escrita do resultado (write-back).
-O sequenciador da UC mantém a harmonia entre todos os elementos. Ele impede conflitos de barramento, garantindo que dois componentes não tentem enviar dados simultaneamente, o que causaria erros de processamento.
+c) Sequenciamento das Etapas para a Execução:
+A UC sincroniza as micro-operações que compõem a execução da instrução usando o clock do sistema, garantindo a ordem correta das fases: busca, decodificação, busca de operandos, execução e escrita do resultado. Ela previne conflitos no barramento e mantém a harmonia entre os componentes.
 
-A Unidade de Controle (UC) atua como o "cérebro" dentro do processador, gerenciando o fluxo de dados e garantindo que o hardware saiba exatamente o que fazer a cada ciclo de clock. Sem ela, a ULA e os registradores seriam apenas componentes isolados sem coordenação.
-A UC não realiza cálculos matemáticos (tarefa da ULA) nem armazena dados de longo prazo (tarefa dos registradores/memória), mas ela é o elemento de ligação. Ela diz à ULA o que calcular, aos Registradores onde buscar a informação e à Memória quando enviar novos dados.
+Em resumo, a UC funciona como o "cérebro" do processador, coordenando ações da ULA, dos registradores e da memória, embora não realize cálculos nem armazene dados permanentemente. Sua função essencial é garantir a comunicação e o controle precisos do fluxo de dados e instruções dentro do sistema.

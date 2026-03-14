@@ -1,21 +1,16 @@
-Vulnerabilidades no Pareamento (Pairing)
-O processo de pareamento é o momento mais crítico. Se os dispositivos utilizam métodos legados ou simplificados, como o "Just Works", eles não possuem autenticação forte.
-Bluejacking é o envio de mensagens não solicitadas para dispositivos próximos. Embora seja mais incômodo que perigoso, pode ser usado para phishing.
-Bluesnarfing é um ataque mais grave onde o invasor explora falhas no pareamento para acessar e roubar informações do dispositivo (contatos, fotos, mensagens) sem que o usuário perceba.
+Vulnerabilidades no Pareamento (Pairing):
+O pareamento é o momento mais crítico da conexão Bluetooth. Métodos legados ou simplificados, como "Just Works", não oferecem autenticação forte.
+Bluejacking: envio de mensagens indesejadas; incômodo, mas pode ser usado para phishing.
+Bluesnarfing: ataque mais grave que permite o acesso e roubo de dados (contatos, fotos, mensagens) sem o conhecimento do usuário.
 
-Ataques de Intercepção (Man-in-the-Middle - MitM)
-Neste cenário, um invasor se posiciona entre dois dispositivos que acreditam estar conectados diretamente um ao outro.
-O criminoso intercepta a chave de criptografia durante o estabelecimento da conexão. A partir daí, ele pode monitorar, ler e até alterar os dados que trafegam entre o fone de ouvido e o celular, ou entre um teclado sem fio e um computador, capturando senhas digitadas.
+Ataques de Interceptação (Man-in-the-Middle – MitM):
+O invasor se posiciona entre dois dispositivos que acreditam estar conectados diretamente. Intercepta chaves de criptografia durante o pareamento e pode monitorar, ler e alterar dados transmitidos, como senhas digitadas.
 
-Configuração Inadequada e "Modo Visível"
-Muitos usuários mantêm o Bluetooth configurado como "Visível para todos" permanentemente.
-Isso permite que qualquer pessoa em um raio de 10 a 100 metros identifique o modelo do aparelho e a versão do software, facilitando a busca por vulnerabilidades específicas (exploits) conhecidas para aquele hardware.
+Configuração Inadequada e "Modo Visível":
+Muitos usuários deixam o Bluetooth sempre visível. Isso permite que invasores identifiquem o dispositivo e busquem vulnerabilidades específicas para explorá-las.
 
-Práticas Recomendadas para Mitigação
-Para garantir a proteção das informações, a prática mais eficaz e simples é a Gestão de Visibilidade e Conectividade:
-
-Desative a visibilidade: Mantenha o Bluetooth em modo "Oculto" (Non-discoverable) por padrão. Ative a visibilidade apenas durante o breve momento em que estiver pareando um novo dispositivo de confiança.
-
-Desligue quando não estiver em uso: Além de economizar bateria, desativar o Bluetooth em locais públicos (como aeroportos e shoppings) elimina o vetor de ataque.
-
-Atualização de Firmware: Sempre mantenha o sistema operacional e os dispositivos periféricos atualizados, pois fabricantes lançam "patches" constantes para corrigir falhas de segurança recém-descobertas, como a famosa vulnerabilidade BlueBorne.
+Práticas Recomendadas para Mitigação:
+Mantenha o Bluetooth no modo oculto (non-discoverable) por padrão.
+Ative a visibilidade apenas durante o pareamento com dispositivos confiáveis.
+Desligue o Bluetooth quando não estiver em uso, especialmente em locais públicos.
+Mantenha o firmware e sistema operacional atualizados para corrigir falhas, como a vulnerabilidade BlueBorne.
