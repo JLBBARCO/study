@@ -1,3 +1,7 @@
+document.addEventListener("DOMContentLoaded", function () {
+  adSense();
+});
+
 function adSense() {
   var ad = document.createElement("script");
   ad.async = true;

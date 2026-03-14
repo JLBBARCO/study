@@ -13,7 +13,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     initializeSmoothScroll();
     initializeCookies();
     wrapCardLinks();
-    adSense();
     // footer element will be created and inicializado após ajustes
   } catch (error) {
     console.error("Erro na inicialização:", error);
@@ -79,6 +78,29 @@ function isOfflineContextEnabled() {
   }
 }
 
+function shouldUseServerContext() {
+  const queryParams = new URLSearchParams(window.location.search);
+  const forceServer = queryParams.get("serverContext");
+  if (forceServer === "1" || forceServer === "true") {
+    return true;
+  }
+
+  if (window.location.protocol === "file:") {
+    return false;
+  }
+
+  const hostname = (window.location.hostname || "").toLowerCase();
+  const port = window.location.port || "";
+  const isLocalhost = hostname === "localhost" || hostname === "127.0.0.1";
+
+  // API de contexto local roda no dev-server da aplicação (porta 3000).
+  if (isLocalhost && port && port !== "3000") {
+    return false;
+  }
+
+  return true;
+}
+
 function buildLocalSiteContext() {
   const relativeRootPath = obterCaminhoRelativoLocal();
   return {
@@ -108,7 +130,7 @@ window.setOfflineContextMode = setOfflineContextMode;
 async function carregarContextoServidor() {
   if (siteContextCache) return siteContextCache;
 
-  if (isOfflineContextEnabled()) {
+  if (isOfflineContextEnabled() || !shouldUseServerContext()) {
     siteContextCache = buildLocalSiteContext();
     return siteContextCache;
   }
@@ -121,6 +143,11 @@ async function carregarContextoServidor() {
 
   try {
     const response = await fetch(`/api/site-context?${params.toString()}`);
+    if (response.status === 404 || response.status === 503) {
+      siteContextCache = buildLocalSiteContext();
+      return siteContextCache;
+    }
+
     if (!response.ok) {
       throw new Error(
         `Falha ao carregar contexto do servidor: ${response.status}`,
@@ -133,7 +160,6 @@ async function carregarContextoServidor() {
   } catch (error) {
     console.warn(
       "Não foi possível carregar contexto no servidor. Usando fallback local.",
-      error,
     );
     siteContextCache = buildLocalSiteContext();
     return siteContextCache;
