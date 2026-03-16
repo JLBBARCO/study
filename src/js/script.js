@@ -1,62 +1,300 @@
+const VERCEL_DOMAIN_TOKEN = "vercel.app";
+const DEFAULT_FAVICON_PATH = "src/assets/favicon/default.ico";
+const JS_BASE_PATH = "src/js";
+const CSS_BASE_PATH = "src/css";
+const CRITICAL_JS_FILES = ["header.js", "footer.js", "paths.js"];
+const CRITICAL_CSS_FILES = [
+  { fileName: "style.css", media: "screen" },
+  { fileName: "cards.css", media: "screen" },
+  { fileName: "pc.css", media: "screen and (min-width: 990px)" },
+  { fileName: "cards-pc.css", media: "screen and (min-width: 990px)" },
+];
+const DEFERRED_JS_FILES = ["accessibility.js", "adsense.js"];
+const PRELOADABLE_FONT_ASSETS = [
+  "src/assets/fonts/Tektur/Tektur-VariableFont.ttf",
+  "src/assets/fonts/Sour_Gummy/SourGummy.ttf",
+];
+const PRECONNECT_ORIGINS = [
+  "https://kit.fontawesome.com",
+  "https://ka-f.fontawesome.com",
+];
+const DEFERRED_TASK_TIMEOUT = 1800;
+
 document.addEventListener("DOMContentLoaded", async () => {
   try {
-    console.log("DOM carregado, inicializando...");
     await carregarContextoServidor();
-    // Recupera título da página (se existir) e cria o header antes de inicializar o menu
-    const titleHomeEarly = document.querySelector("section#Home>h1");
-    const titleText = titleHomeEarly ? titleHomeEarly.innerHTML : undefined;
-    await insertFavicon();
-    await insertJS();
-    insertCSS();
-    navBar(titleText);
-    initializeNavigation();
+    await headInsert();
+
+    invokeGlobal("initializeNavigation");
     initializeSmoothScroll();
     initializeCookies();
     wrapCardLinks();
-    // footer element will be created and inicializado após ajustes
+    stabilizeMediaLayout();
+    optimizeImageLoading();
+    updateDocumentTitleFromHome();
+
+    invokeGlobal("footer");
+    invokeGlobal("initializeFooter");
+    invokeGlobal("paths");
+
+    runDeferredTask(() => {
+      if (shouldLoadFontAwesome()) {
+        loadFontAwesome().catch((error) => {
+          console.warn("Falha ao carregar Font Awesome.", error);
+        });
+      }
+
+      invokeGlobal("pathNames");
+      insertJS(DEFERRED_JS_FILES).catch((error) => {
+        console.warn("Falha ao carregar scripts não críticos.", error);
+      });
+    });
   } catch (error) {
     console.error("Erro na inicialização:", error);
   }
-
-  const head = document.querySelector("head");
-  const script = document.createElement("script");
-  script.src = "https://kit.fontawesome.com/4a1e49a1ca.js";
-  script.crossOrigin = "anonymous";
-  script.onload = () => {
-    console.log("Font Awesome carregado com sucesso");
-    initializeFontAwesome();
-  };
-  head.appendChild(script);
-
-  // Garantir criação do footer e em seguida popular seu conteúdo
-  footer();
-  initializeFooter();
-
-  const titleHome = document.querySelector("section#Home>h1");
-  if (titleHome) {
-    const title = titleHome.innerHTML;
-
-    let titlePg = document.querySelector("title");
-    if (!titlePg) {
-      titlePg = document.createElement("title");
-      document.head.appendChild(titlePg);
-    }
-    titlePg.innerHTML = title;
-
-    // navBar já foi criado no início; não recriar aqui
-  }
-
-  paths();
-  pathNames();
 });
 
 let siteContextCache = null;
+
+primeHeadAssets();
 
 function getCurrentSiteContext() {
   return siteContextCache;
 }
 
 window.getCurrentSiteContext = getCurrentSiteContext;
+
+function isVercelHost() {
+  const hostname = (window.location.hostname || "").toLowerCase();
+  return hostname.includes(VERCEL_DOMAIN_TOKEN);
+}
+
+function invokeGlobal(functionName, ...args) {
+  const fn = window[functionName];
+  if (typeof fn === "function") {
+    return fn(...args);
+  }
+
+  return undefined;
+}
+
+function runDeferredTask(task) {
+  if (typeof task !== "function") return;
+
+  if (typeof window.requestIdleCallback === "function") {
+    window.requestIdleCallback(task, { timeout: DEFERRED_TASK_TIMEOUT });
+    return;
+  }
+
+  window.setTimeout(task, 0);
+}
+
+function shouldLoadFontAwesome() {
+  return Boolean(document.querySelector('[class*="fa-"]'));
+}
+
+function insertResourceHints() {
+  const head = document.head;
+  if (!head) return;
+
+  PRECONNECT_ORIGINS.forEach((origin) => {
+    const selector = `link[rel="preconnect"][href="${origin}"], link[rel="dns-prefetch"][href="${origin}"]`;
+    if (head.querySelector(selector)) {
+      return;
+    }
+
+    const preconnect = document.createElement("link");
+    preconnect.rel = "preconnect";
+    preconnect.href = origin;
+    preconnect.crossOrigin = "anonymous";
+    head.appendChild(preconnect);
+
+    const dnsPrefetch = document.createElement("link");
+    dnsPrefetch.rel = "dns-prefetch";
+    dnsPrefetch.href = origin;
+    head.appendChild(dnsPrefetch);
+  });
+
+  PRELOADABLE_FONT_ASSETS.forEach((assetPath) => {
+    const fontFileName = assetPath.split("/").pop();
+    const href = resolveStaticAssetPath(assetPath);
+    if (
+      head.querySelector(`link[data-preload="${fontFileName}"]`) ||
+      head.querySelector(`link[rel="preload"][href="${href}"]`)
+    ) {
+      return;
+    }
+
+    const preload = document.createElement("link");
+    preload.rel = "preload";
+    preload.as = "font";
+    preload.type = "font/ttf";
+    preload.href = href;
+    preload.crossOrigin = "anonymous";
+    preload.dataset.preload = fontFileName;
+    head.appendChild(preload);
+  });
+}
+
+function ensureLayoutShells() {
+  if (!document.body) {
+    return;
+  }
+
+  const existingHeader = document.querySelector("header");
+  if (existingHeader) {
+    return;
+  }
+
+  const headerShell = document.createElement("header");
+  headerShell.dataset.shell = "true";
+  headerShell.setAttribute("aria-hidden", "true");
+  headerShell.className = "app-header-shell";
+  document.body.prepend(headerShell);
+}
+
+function stabilizeMediaLayout() {
+  const images = document.querySelectorAll("img");
+  images.forEach((image, index) => {
+    if (index === 0 && !image.hasAttribute("fetchpriority")) {
+      image.fetchPriority = "high";
+    }
+
+    const applyDimensions = () => {
+      const width = image.naturalWidth || image.width;
+      const height = image.naturalHeight || image.height;
+      if (!width || !height) {
+        return;
+      }
+
+      if (!image.hasAttribute("width")) {
+        image.setAttribute("width", String(width));
+      }
+
+      if (!image.hasAttribute("height")) {
+        image.setAttribute("height", String(height));
+      }
+
+      if (!image.style.aspectRatio) {
+        image.style.aspectRatio = `${width} / ${height}`;
+      }
+    };
+
+    if (image.complete) {
+      applyDimensions();
+      return;
+    }
+
+    image.addEventListener("load", applyDimensions, { once: true });
+  });
+
+  const iframes = document.querySelectorAll("iframe");
+  iframes.forEach((iframe) => {
+    if (!iframe.hasAttribute("loading")) {
+      iframe.loading = "lazy";
+    }
+  });
+}
+
+function optimizeImageLoading() {
+  const images = document.querySelectorAll("img");
+  images.forEach((image, index) => {
+    image.decoding = "async";
+
+    const isInHomeSection = Boolean(image.closest("section#Home"));
+    const shouldPrioritize = index === 0 || isInHomeSection;
+
+    if (!shouldPrioritize && !image.hasAttribute("loading")) {
+      image.loading = "lazy";
+    }
+  });
+}
+
+function primeHeadAssets() {
+  if (!document.head) return;
+
+  insertResourceHints();
+  ensureLayoutShells();
+
+  insertCSS(CRITICAL_CSS_FILES);
+
+  insertFavicon().catch(() => {
+    // Silencia erro inicial; favicon será revalidado durante inicialização.
+  });
+}
+
+function normalizeBasePath(basePath) {
+  if (!basePath) return "";
+  if (basePath === "/") return "/";
+  return basePath.endsWith("/") ? basePath : `${basePath}/`;
+}
+
+function getAssetBasePath() {
+  const context = getCurrentSiteContext();
+  if (typeof context?.assetBasePath === "string" && context.assetBasePath) {
+    return normalizeBasePath(context.assetBasePath);
+  }
+
+  if (isVercelHost()) {
+    return "/";
+  }
+
+  return normalizeBasePath(obterCaminhoRelativoLocal());
+}
+
+function resolveStaticAssetPath(pathFromRoot) {
+  const normalizedRelativePath = String(pathFromRoot || "").replace(/^\/+/, "");
+
+  if (isVercelHost()) {
+    return `/api/asset?path=${encodeURIComponent(normalizedRelativePath)}`;
+  }
+
+  const assetBasePath = getAssetBasePath();
+
+  if (assetBasePath === "/") {
+    return `/${normalizedRelativePath}`;
+  }
+
+  return `${assetBasePath}${normalizedRelativePath}`;
+}
+
+async function loadFontAwesome() {
+  const head = document.head;
+  if (!head) return;
+
+  if (document.querySelector('script[data-origin="fontawesome-kit"]')) {
+    initializeFontAwesome();
+    return;
+  }
+
+  const script = document.createElement("script");
+  script.src = "https://kit.fontawesome.com/4a1e49a1ca.js";
+  script.crossOrigin = "anonymous";
+  script.dataset.origin = "fontawesome-kit";
+
+  await new Promise((resolve, reject) => {
+    script.onload = resolve;
+    script.onerror = reject;
+    head.appendChild(script);
+  });
+
+  initializeFontAwesome();
+}
+
+function updateDocumentTitleFromHome() {
+  const titleHome = document.querySelector("section#Home>h1");
+  if (!titleHome) return;
+
+  const title = titleHome.textContent?.trim() || "Document";
+  let titlePg = document.querySelector("title");
+
+  if (!titlePg) {
+    titlePg = document.createElement("title");
+    document.head.appendChild(titlePg);
+  }
+
+  titlePg.textContent = title;
+}
 
 function isOfflineContextEnabled() {
   const queryOffline = new URLSearchParams(window.location.search).get(
@@ -85,6 +323,10 @@ function shouldUseServerContext() {
     return true;
   }
 
+  if (isVercelHost()) {
+    return true;
+  }
+
   if (window.location.protocol === "file:") {
     return false;
   }
@@ -105,8 +347,10 @@ function buildLocalSiteContext() {
   const relativeRootPath = obterCaminhoRelativoLocal();
   return {
     relativeRootPath,
+    assetBasePath: relativeRootPath,
     pathParts: extrairPathPartsLocal(),
-    faviconHref: `${relativeRootPath}src/assets/favicon/default.ico`,
+    faviconHref: `${relativeRootPath}${DEFAULT_FAVICON_PATH}`,
+    contextSource: "local",
   };
 }
 
@@ -155,7 +399,13 @@ async function carregarContextoServidor() {
     }
 
     const context = await response.json();
-    siteContextCache = context;
+    siteContextCache = {
+      ...context,
+      assetBasePath:
+        typeof context?.assetBasePath === "string" && context.assetBasePath
+          ? context.assetBasePath
+          : context?.relativeRootPath || "/",
+    };
     return context;
   } catch (error) {
     console.warn(
@@ -177,12 +427,6 @@ function extrairPathPartsLocal() {
 }
 
 function insertFavicon() {
-  const body = document.querySelector("body");
-  if (!body) {
-    console.error("Body element not found");
-    return Promise.reject(new Error("Body element not found"));
-  }
-
   const head = document.querySelector("head");
   if (!head) {
     console.error("Head element not found");
@@ -190,7 +434,7 @@ function insertFavicon() {
   }
 
   const context = getCurrentSiteContext();
-  const fallbackPath = `${obterCaminhoRelativoLocal()}src/assets/favicon/default.ico`;
+  const fallbackPath = resolveStaticAssetPath(DEFAULT_FAVICON_PATH);
   const faviconHref = context?.faviconHref || fallbackPath;
 
   const existingLinks = Array.from(
@@ -210,28 +454,22 @@ function insertFavicon() {
 
   existingLinks.slice(1).forEach((faviconLink) => faviconLink.remove());
 
-  console.log(`[Favicon] ✓ Favicon definido com sucesso: ${link.href}`);
   return Promise.resolve();
 }
 
-function insertJS() {
+function insertJS(jsFiles = []) {
   const head = document.querySelector("head");
   if (!head) {
     console.error("Head element not found");
     return Promise.reject(new Error("Head element not found"));
   }
 
-  const caminhoRelativo = obterCaminhoRelativo();
-  const jsFiles = [
-    "header.js",
-    "accessibility.js",
-    "footer.js",
-    "paths.js",
-    "adsense.js",
-  ];
+  if (!Array.isArray(jsFiles) || jsFiles.length === 0) {
+    return Promise.resolve();
+  }
 
   function carregarScript(fileName) {
-    const scriptSrc = caminhoRelativo + "src/js/" + fileName;
+    const scriptSrc = resolveStaticAssetPath(`${JS_BASE_PATH}/${fileName}`);
     const existingScript = document.querySelector(`script[src="${scriptSrc}"]`);
 
     if (existingScript) {
@@ -242,7 +480,6 @@ function insertJS() {
       const script = document.createElement("script");
       script.src = scriptSrc;
       script.onload = () => {
-        console.log(`[JavaScript] ${fileName} carregado com sucesso`);
         resolve();
       };
       script.onerror = () => {
@@ -262,27 +499,27 @@ function insertJS() {
   );
 }
 
-function insertCSS() {
+function insertCSS(cssFiles = []) {
   const head = document.querySelector("head");
   if (!head) {
     console.error("Head element not found");
     return;
   }
 
-  const caminhoRelativo = obterCaminhoRelativo();
-  const cssFiles = [
-    { fileName: "style.css", media: "screen" },
-    { fileName: "cards.css", media: "screen" },
-  ];
-
   cssFiles.forEach(({ fileName, media }) => {
+    const href = resolveStaticAssetPath(`${CSS_BASE_PATH}/${fileName}`);
+    if (
+      document.querySelector(`link[data-css="${fileName}"]`) ||
+      document.querySelector(`link[rel="stylesheet"][href="${href}"]`)
+    ) {
+      return;
+    }
+
     const link = document.createElement("link");
     link.rel = "stylesheet";
-    link.href = caminhoRelativo + "src/css/" + fileName;
+    link.href = href;
     link.media = media;
-    link.onload = () => {
-      console.log(`[CSS] ${fileName} carregado com sucesso`);
-    };
+    link.dataset.css = fileName;
     link.onerror = () => {
       console.error(`[CSS] Erro ao carregar ${fileName} em: ${link.href}`);
     };
@@ -291,19 +528,20 @@ function insertCSS() {
 }
 
 function initializeSmoothScroll() {
-  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-    anchor.addEventListener("click", function (e) {
-      e.preventDefault();
+  document.addEventListener("click", (event) => {
+    const anchor = event.target.closest('a[href^="#"]');
+    if (!anchor) return;
 
-      const targetId = this.getAttribute("href");
-      const targetElement = document.querySelector(targetId);
+    const targetId = anchor.getAttribute("href");
+    if (!targetId || targetId === "#") return;
 
-      if (targetElement) {
-        targetElement.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-        });
-      }
+    const targetElement = document.querySelector(targetId);
+    if (!targetElement) return;
+
+    event.preventDefault();
+    targetElement.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
     });
   });
 }
@@ -364,7 +602,6 @@ function wrapCardLinks() {
       // Anexa o wrapper ao final do card
       card.appendChild(wrapper);
     });
-    console.log("wrapCardLinks: links diretos em .card foram agrupados.");
   } catch (e) {
     console.error("wrapCardLinks erro:", e);
   }
@@ -419,10 +656,18 @@ function obterCaminhoRelativoLocal() {
 
 // Responsividade do menu ao redimensionar a janela
 function mudouJanela() {
-  console.log("Janela redimensionada");
   const navLinks = document.querySelector(".nav_links");
 
   if (window.innerWidth >= 990) {
     navLinks?.classList.remove("active");
   }
+}
+
+async function headInsert() {
+  const titleHomeEarly = document.querySelector("section#Home>h1");
+  const titleText = titleHomeEarly?.textContent?.trim();
+  await insertFavicon();
+  await insertJS(CRITICAL_JS_FILES);
+
+  invokeGlobal("navBar", titleText);
 }

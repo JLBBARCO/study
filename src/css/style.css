@@ -3,11 +3,13 @@
 @font-face {
   font-family: "Sour Gummy";
   src: url(../assets/fonts/Sour_Gummy/SourGummy.ttf) format("truetype");
+  font-display: optional;
 }
 
 @font-face {
   font-family: "Tektur";
   src: url(../assets/fonts/Tektur/Tektur-VariableFont.ttf) format("truetype");
+  font-display: optional;
 }
 
 /* estilização base */
@@ -27,7 +29,7 @@
   --borda_padrão: 2px solid var(--texto);
   --fonte01: "Tektur", sans-serif;
   --fonte02: "Sour Gummy", serif;
-  --header-size: 80px;
+  --header-size: 85px;
 }
 
 * {
@@ -41,6 +43,7 @@ html {
 }
 
 body {
+  display: block;
   font-size: 0.8rem;
   font-family: var(--fonte01);
   line-height: 1.6rem;
@@ -48,6 +51,16 @@ body {
   background: var(--gradiente);
   background-attachment: fixed;
   overflow-x: hidden;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+iframe {
+  max-width: 100%;
 }
 
 a {
@@ -119,15 +132,20 @@ header {
   position: sticky;
   top: 0;
   z-index: 1000;
-  width: 100dvw;
+  width: 100%;
   height: var(--header-size);
   padding: 10px 25px;
   background-color: var(--destaque);
 }
 
+header.app-header-shell,
+header[data-shell="true"] {
+  visibility: hidden;
+}
+
 header button {
   padding: 10px;
-  border: none;
+  border: 2px solid transparent;
   border-radius: 8px;
   background-color: var(--destaque);
   cursor: pointer;
@@ -138,10 +156,15 @@ header button:hover {
   background-color: var(--interativo);
 }
 
-header button:active {
-  #menuIcon {
-    transform: rotateZ(-90deg);
-  }
+header button:active #menuIcon {
+  transform: rotateZ(-90deg);
+}
+
+.menu-icon-glyph {
+  display: inline-block;
+  font-size: 1.5rem;
+  line-height: 1;
+  font-weight: 700;
 }
 
 nav {
@@ -197,6 +220,9 @@ nav {
 }
 
 .root-paths {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
   margin-bottom: 20px;
   padding: 10px;
   color: var(--texto);
@@ -286,6 +312,10 @@ aside {
   background: none;
 }
 
+aside p {
+  text-align: justify;
+}
+
 /* Rodapé */
 footer {
   padding: 5%;
@@ -305,29 +335,4 @@ footer .copyright {
   margin-top: 5%;
   padding-top: 5%;
   border-top: var(--borda_padrão);
-}
-
-@media (min-width: 990px) {
-  body {
-    font-size: 1rem;
-  }
-
-  #nav-links-button {
-    display: none;
-  }
-
-  .nav_links {
-    position: static;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    align-items: center;
-    max-width: 100%;
-    padding: 0;
-    box-shadow: none;
-  }
-
-  .nav_links a {
-    margin: 10px;
-  }
 }

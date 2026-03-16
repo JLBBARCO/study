@@ -6,6 +6,16 @@ function normalizePathname(pathname = "/") {
   return decoded.startsWith("/") ? decoded : `/${decoded}`;
 }
 
+function normalizeHost(host = "") {
+  return String(host || "")
+    .trim()
+    .toLowerCase();
+}
+
+function isVercelHost(host = "") {
+  return normalizeHost(host).includes("vercel.app");
+}
+
 function getDirectoryParts(pathname, repositoryName = "study") {
   const normalized = normalizePathname(pathname).replace(/^\/+/, "");
   let parts = normalized.split("/").filter(Boolean);
@@ -66,13 +76,18 @@ function isValidRemoteFaviconUrl(value) {
 function buildSiteContext({
   pathname,
   bodyLabel = "book",
+  host = "",
   repositoryName = "study",
   projectRoot,
 }) {
   const directoryParts = getDirectoryParts(pathname, repositoryName);
   const relativeRootPath = buildRelativeRootPath(directoryParts);
+  const runningOnVercel = isVercelHost(host);
+  const defaultFaviconPath = "src/assets/favicon/default.ico";
 
-  let faviconHref = `${relativeRootPath}src/assets/favicon/default.ico`;
+  let faviconHref = runningOnVercel
+    ? `/api/asset?path=${encodeURIComponent(defaultFaviconPath)}`
+    : `${relativeRootPath}${defaultFaviconPath}`;
   try {
     const favicons = loadFaviconsMap(projectRoot);
     const key = String(bodyLabel || "book")
@@ -86,7 +101,10 @@ function buildSiteContext({
           faviconHref = faviconValue;
         }
       } else {
-        faviconHref = `${relativeRootPath}${faviconValue}`;
+        const normalizedFaviconPath = faviconValue.replace(/^\/+/, "");
+        faviconHref = runningOnVercel
+          ? `/api/asset?path=${encodeURIComponent(normalizedFaviconPath)}`
+          : `${relativeRootPath}${faviconValue}`;
       }
     }
   } catch (error) {
@@ -95,6 +113,10 @@ function buildSiteContext({
 
   return {
     pathname: normalizePathname(pathname),
+    host: normalizeHost(host),
+    isVercelDeployment: runningOnVercel,
+    contextSource: "api",
+    assetBasePath: runningOnVercel ? "/" : relativeRootPath,
     relativeRootPath,
     pathParts: directoryParts,
     faviconHref,

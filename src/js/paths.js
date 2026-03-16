@@ -40,10 +40,28 @@ function paths() {
   main.prepend(rootPaths);
 }
 
+const BREADCRUMB_CACHE_KEY = "study_breadcrumb_title_cache_v1";
+
+function readBreadcrumbCache() {
+  try {
+    const raw = sessionStorage.getItem(BREADCRUMB_CACHE_KEY);
+    return raw ? JSON.parse(raw) : {};
+  } catch {
+    return {};
+  }
+}
+
+function writeBreadcrumbCache(cache) {
+  try {
+    sessionStorage.setItem(BREADCRUMB_CACHE_KEY, JSON.stringify(cache));
+  } catch {
+    // Ignora falha de cache para não bloquear renderização.
+  }
+}
+
 function pathNames() {
   const pathsBar = document.querySelector(".root-paths");
   if (!pathsBar) {
-    console.error("Paths bar element not found");
     return;
   }
 
@@ -54,7 +72,7 @@ function pathNames() {
     const parser = new DOMParser();
     const documentHtml = parser.parseFromString(htmlText, "text/html");
     const heading = documentHtml.querySelector("section#Home > h1");
-    return heading ? heading.innerHTML.trim() : null;
+    return heading ? heading.textContent.trim() : null;
   }
 
   function normalizeHref(link) {
@@ -65,28 +83,47 @@ function pathNames() {
     return new URL(href, window.location.href).href;
   }
 
+  const titleCache = readBreadcrumbCache();
+
   Promise.all(
     links.map((link, index) => {
       const isLastLink = index === links.length - 1;
+      const normalizedUrl = normalizeHref(link);
 
-      if (isLastLink && currentPageHeading) {
+      const cachedTitle = titleCache[normalizedUrl];
+      if (cachedTitle) {
         return Promise.resolve({
           link,
-          title: currentPageHeading.innerHTML.trim(),
+          title: cachedTitle,
         });
       }
 
-      return fetch(normalizeHref(link))
+      if (isLastLink && currentPageHeading) {
+        const currentTitle = currentPageHeading.textContent.trim();
+        titleCache[normalizedUrl] = currentTitle;
+        return Promise.resolve({
+          link,
+          title: currentTitle,
+        });
+      }
+
+      return fetch(normalizedUrl)
         .then((res) => {
           if (!res.ok) {
             throw new Error(`HTTP error! status: ${res.status}`);
           }
           return res.text();
         })
-        .then((htmlText) => ({
-          link,
-          title: extractTitleFromHtml(htmlText),
-        }))
+        .then((htmlText) => {
+          const title = extractTitleFromHtml(htmlText);
+          if (title) {
+            titleCache[normalizedUrl] = title;
+          }
+          return {
+            link,
+            title,
+          };
+        })
         .catch((error) => {
           console.error("Error loading breadcrumb source page:", error);
           return {
@@ -98,8 +135,10 @@ function pathNames() {
   ).then((items) => {
     items.forEach(({ link, title }) => {
       if (title) {
-        link.innerHTML = title;
+        link.textContent = title;
       }
     });
+
+    writeBreadcrumbCache(titleCache);
   });
 }

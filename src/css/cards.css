@@ -76,19 +76,3 @@ div.card article.buttonCard a:focus-visible {
   outline-offset: 3px;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
-
-@media (min-width: 990px) {
-  main .container {
-    flex-flow: row wrap;
-    justify-content: space-around;
-  }
-
-  div.card h2,
-  div.card h3,
-  div.card p,
-  div.card ul,
-  div.card li,
-  div.card article.buttonCard {
-    max-width: 25vw;
-  }
-}

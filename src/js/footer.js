@@ -1,11 +1,18 @@
 function footer() {
-  const footerElement = document.createElement("footer");
+  let footerElement = document.querySelector("footer");
+  if (footerElement) {
+    return footerElement;
+  }
+
+  footerElement = document.createElement("footer");
   const body = document.querySelector("body");
   if (body) {
     body.appendChild(footerElement);
   } else {
     console.error("Body element not found, cannot append footer");
   }
+
+  return footerElement;
 }
 
 // --- Rodapé dinâmico ---

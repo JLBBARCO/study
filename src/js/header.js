@@ -1,7 +1,16 @@
 function navBar(title) {
-  // Se já houver um header, não criar outro
-  if (document.querySelector("header")) return;
-  const header = document.createElement("header");
+  let header = document.querySelector("header");
+  if (header?.dataset.initialized === "true") return;
+
+  if (!header) {
+    header = document.createElement("header");
+  }
+
+  header.replaceChildren();
+  header.dataset.initialized = "true";
+  header.removeAttribute("aria-hidden");
+  header.classList.remove("app-header-shell");
+  delete header.dataset.shell;
 
   // Cria o título de navegação dinamicamente
   const navTitle = document.createElement("nav");
@@ -24,9 +33,11 @@ function navBar(title) {
   navLinksButton.setAttribute("aria-label", "Toggle navigation menu");
   navLinksButton.setAttribute("aria-expanded", "false");
   navLinksButton.setAttribute("aria-controls", "navLinks");
-  const menuIcon = document.createElement("i");
+  const menuIcon = document.createElement("span");
   menuIcon.id = "menuIcon";
-  menuIcon.className = "fa-solid fa-bars icon";
+  menuIcon.className = "menu-icon-glyph";
+  menuIcon.setAttribute("aria-hidden", "true");
+  menuIcon.textContent = "☰";
   navLinksButton.appendChild(menuIcon);
   header.appendChild(navLinksButton);
 
@@ -40,7 +51,7 @@ function navBar(title) {
   containers.forEach((container) => {
     const containerId = container.id;
     // não adiciona âncora para a seção inicial, já temos título vinculando Home
-    if (containerId && containerId) {
+    if (containerId && containerId !== "Home") {
       const link = document.createElement("a");
       link.href = `#${containerId}`;
       link.role = "menuitem";
@@ -54,7 +65,9 @@ function navBar(title) {
   // Insere o header no início do body de forma segura (sem substituir conteúdo existente)
   const body = document.querySelector("body");
   if (body) {
-    body.prepend(header);
+    if (!header.isConnected) {
+      body.prepend(header);
+    }
   } else {
     console.error("Body element not found, cannot insert header");
   }
@@ -86,13 +99,7 @@ function initializeNavigation() {
 
     // Alternar o ícone dinamicamente (verifica existência do ícone)
     if (menuIcon) {
-      if (isExpanded) {
-        menuIcon.classList.remove("fa-xmark");
-        menuIcon.classList.add("fa-bars");
-      } else {
-        menuIcon.classList.remove("fa-bars");
-        menuIcon.classList.add("fa-xmark");
-      }
+      menuIcon.textContent = isExpanded ? "☰" : "✕";
     }
 
     // Atualiza aria-expanded (usar string)
@@ -113,8 +120,7 @@ function initializeNavigation() {
     ) {
       navLinks.classList.remove("active");
       if (menuIcon) {
-        menuIcon.classList.remove("fa-xmark");
-        menuIcon.classList.add("fa-bars");
+        menuIcon.textContent = "☰";
       }
       navLinksButton.setAttribute("aria-expanded", "false");
     }
@@ -125,8 +131,7 @@ function initializeNavigation() {
     if (e.key === "Escape") {
       navLinks.classList.remove("active");
       if (menuIcon) {
-        menuIcon.classList.remove("fa-xmark");
-        menuIcon.classList.add("fa-bars");
+        menuIcon.textContent = "☰";
       }
       navLinksButton.setAttribute("aria-expanded", "false");
     }
