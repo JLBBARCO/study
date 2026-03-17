@@ -86,7 +86,7 @@ function buildSiteContext({
   const defaultFaviconPath = "src/assets/favicon/default.ico";
 
   let faviconHref = runningOnVercel
-    ? `/api/asset?path=${encodeURIComponent(defaultFaviconPath)}`
+    ? `/${defaultFaviconPath}`
     : `${relativeRootPath}${defaultFaviconPath}`;
   try {
     const favicons = loadFaviconsMap(projectRoot);
@@ -103,7 +103,7 @@ function buildSiteContext({
       } else {
         const normalizedFaviconPath = faviconValue.replace(/^\/+/, "");
         faviconHref = runningOnVercel
-          ? `/api/asset?path=${encodeURIComponent(normalizedFaviconPath)}`
+          ? `/${normalizedFaviconPath}`
           : `${relativeRootPath}${faviconValue}`;
       }
     }

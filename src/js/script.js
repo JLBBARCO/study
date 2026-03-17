@@ -278,7 +278,7 @@ function resolveStaticAssetPath(pathFromRoot) {
   const normalizedRelativePath = String(pathFromRoot || "").replace(/^\/+/, "");
 
   if (shouldUseServerProcessing()) {
-    return `${getServerBaseUrl()}api/asset?path=${encodeURIComponent(normalizedRelativePath)}`;
+    return `${getServerBaseUrl()}${normalizedRelativePath}`;
   }
 
   const assetBasePath = getAssetBasePath();
