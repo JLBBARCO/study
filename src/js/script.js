@@ -78,6 +78,29 @@ function isVercelHost() {
   return hostname.includes(VERCEL_DOMAIN_TOKEN);
 }
 
+function shouldUseServerProcessing() {
+  const normalizedToken = String(DOCUMENT_URL_TOKEN || "").toLowerCase();
+  return normalizedToken.includes(VERCEL_DOMAIN_TOKEN);
+}
+
+function getServerBaseUrl() {
+  if (!shouldUseServerProcessing()) {
+    return "";
+  }
+
+  return normalizeBasePath(DOCUMENT_URL_TOKEN);
+}
+
+function getSiteContextEndpoint(params) {
+  const query = params ? `?${params.toString()}` : "";
+
+  if (shouldUseServerProcessing()) {
+    return `${getServerBaseUrl()}api/site-context${query}`;
+  }
+
+  return `/api/site-context${query}`;
+}
+
 function invokeGlobal(functionName, ...args) {
   const fn = window[functionName];
   if (typeof fn === "function") {
@@ -254,8 +277,8 @@ function getAssetBasePath() {
 function resolveStaticAssetPath(pathFromRoot) {
   const normalizedRelativePath = String(pathFromRoot || "").replace(/^\/+/, "");
 
-  if (isVercelHost()) {
-    return `/api/asset?path=${encodeURIComponent(normalizedRelativePath)}`;
+  if (shouldUseServerProcessing()) {
+    return `${getServerBaseUrl()}api/asset?path=${encodeURIComponent(normalizedRelativePath)}`;
   }
 
   const assetBasePath = getAssetBasePath();
@@ -332,7 +355,7 @@ function shouldUseServerContext() {
     return true;
   }
 
-  if (isVercelHost()) {
+  if (shouldUseServerProcessing()) {
     return true;
   }
 
@@ -395,7 +418,7 @@ async function carregarContextoServidor() {
   });
 
   try {
-    const response = await fetch(`/api/site-context?${params.toString()}`);
+    const response = await fetch(getSiteContextEndpoint(params));
     if (response.status === 404 || response.status === 503) {
       siteContextCache = buildLocalSiteContext();
       return siteContextCache;
