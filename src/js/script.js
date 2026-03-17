@@ -19,11 +19,20 @@ const PRECONNECT_ORIGINS = [
   "https://ka-f.fontawesome.com",
 ];
 const DEFERRED_TASK_TIMEOUT = 1800;
+let DOCUMENT_URL_TOKEN = "";
+const domain = document.URL;
+
+if (domain.includes(VERCEL_DOMAIN_TOKEN)) {
+  DOCUMENT_URL_TOKEN = "https://study-jlbbarco.vercel.app/";
+} else {
+  DOCUMENT_URL_TOKEN = obterCaminhoRelativoLocal();
+}
+console.log(`Files obtains of: ${DOCUMENT_URL_TOKEN}`);
 
 document.addEventListener("DOMContentLoaded", async () => {
   try {
     await carregarContextoServidor();
-    await headInsert();
+    await headInsert(DOCUMENT_URL_TOKEN);
 
     invokeGlobal("initializeNavigation");
     initializeSmoothScroll();
@@ -457,7 +466,7 @@ function insertFavicon() {
   return Promise.resolve();
 }
 
-function insertJS(jsFiles = []) {
+function insertJS(jsFiles = [], path) {
   const head = document.querySelector("head");
   if (!head) {
     console.error("Head element not found");
@@ -663,11 +672,11 @@ function mudouJanela() {
   }
 }
 
-async function headInsert() {
+async function headInsert(path) {
   const titleHomeEarly = document.querySelector("section#Home>h1");
   const titleText = titleHomeEarly?.textContent?.trim();
   await insertFavicon();
-  await insertJS(CRITICAL_JS_FILES);
+  await insertJS(CRITICAL_JS_FILES, path);
 
   invokeGlobal("navBar", titleText);
 }
