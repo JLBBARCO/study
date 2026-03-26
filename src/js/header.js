@@ -35,7 +35,7 @@ function navBar(title) {
   navLinksButton.setAttribute("aria-controls", "navLinks");
   const menuIcon = document.createElement("span");
   menuIcon.id = "menuIcon";
-  menuIcon.className = "menu-icon-glyph";
+  menuIcon.className = "menu-icon-glyph icon";
   menuIcon.setAttribute("aria-hidden", "true");
   menuIcon.textContent = "☰";
   navLinksButton.appendChild(menuIcon);
