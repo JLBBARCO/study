@@ -140,7 +140,14 @@ header {
 
 header.app-header-shell,
 header[data-shell="true"] {
-  visibility: hidden;
+  visibility: visible;
+}
+
+header.app-header-shell #nav-links-button,
+header[data-shell="true"] #nav-links-button,
+header.app-header-shell .nav_links,
+header[data-shell="true"] .nav_links {
+  display: none;
 }
 
 header button {

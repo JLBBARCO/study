@@ -178,10 +178,28 @@ function ensureLayoutShells() {
     return;
   }
 
+  const fallbackTitle =
+    document.querySelector("section#Home>h1")?.textContent?.trim() ||
+    document.title ||
+    "Início";
+
   const headerShell = document.createElement("header");
   headerShell.dataset.shell = "true";
-  headerShell.setAttribute("aria-hidden", "true");
   headerShell.className = "app-header-shell";
+
+  const navTitle = document.createElement("nav");
+  navTitle.className = "nav-title";
+
+  const homeLink = document.createElement("a");
+  homeLink.href = obterCaminhoRelativoLocal();
+
+  const heading = document.createElement("h2");
+  heading.textContent = fallbackTitle;
+
+  homeLink.appendChild(heading);
+  navTitle.appendChild(homeLink);
+  headerShell.appendChild(navTitle);
+
   document.body.prepend(headerShell);
 }
 
