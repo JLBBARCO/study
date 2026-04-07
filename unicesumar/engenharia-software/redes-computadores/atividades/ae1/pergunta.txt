@@ -1,9 +1,0 @@
-Ameaças cibernéticas a conexões Bluetooth são subestimadas, alertam especialistas.
- 
-Frequentemente subestimadas, ameaças cibernéticas às conexões Bluetooth envolvem falsificação de identidade, roubo de dados e até espionagem. Surgida nos anos 1990, a tecnologia Bluetooth foi uma revolução no campo da comunicação sem fio, permitindo a rápida transferência de arquivos por radiofrequência. Ainda assim, a conexão não é imune a vulnerabilidades. Segundo especialistas da empresa de segurança Check Point, o Bluetooth, por estar disponível em um alto número de computadores, pode estar suscetível a graves ameaças cibernéticas. Mesmo com o reforço de encriptação de dados e a frequente subestimação de ataques.
- 
-“É comum cometermos o erro de pensar que esses tipos de conexões não representam qualquer perigo para a integridade dos dados armazenados nos dispositivos”, diz o gerente de engenharia de segurança da Check Point, Fernando de Falchi. “Mas, na realidade, podem se tornar uma violação de segurança com potencial de modo a permitir que um cibercriminoso acesse uma abundância de informações.”
-
-Fonte: https://olhardigital.com.br/2022/06/22/seguranca/ameacas-ciberneticas-a-conexoes-bluetooth-sao-subestimadas-alertam-especialistas/  Acesso: 14 de jan. de 2025.
- 
-Explique os principais riscos de segurança associados ao uso de redes PAN (Personal Area Network) baseadas em Bluetooth, considerando aspectos como vulnerabilidades em pareamento, ataques de intercepção e configuração inadequada. Em sua resposta, inclua pelo menos uma prática recomendada para mitigar esses riscos e garantir a proteção das informações trocadas entre dispositivos.

@@ -51,6 +51,41 @@ function loadFaviconsMap(projectRoot) {
   return data.favicons || {};
 }
 
+function normalizeFaviconKey(value) {
+  return String(value || "")
+    .trim()
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9]+/g, "");
+}
+
+function resolveFaviconValueByLabel(favicons, bodyLabel) {
+  if (!favicons || typeof favicons !== "object") {
+    return "";
+  }
+
+  const rawLabel = String(bodyLabel || "book")
+    .trim()
+    .toLowerCase();
+  const normalizedLabel = normalizeFaviconKey(rawLabel);
+
+  if (favicons[rawLabel]) {
+    return favicons[rawLabel];
+  }
+
+  const entries = Object.entries(favicons);
+  const normalizedMatch = entries.find(
+    ([key]) => normalizeFaviconKey(key) === normalizedLabel,
+  );
+
+  if (normalizedMatch) {
+    return normalizedMatch[1];
+  }
+
+  return favicons.book || "";
+}
+
 function isValidRemoteFaviconUrl(value) {
   if (typeof value !== "string" || value.length === 0) {
     return false;
@@ -90,10 +125,7 @@ function buildSiteContext({
     : `${relativeRootPath}${defaultFaviconPath}`;
   try {
     const favicons = loadFaviconsMap(projectRoot);
-    const key = String(bodyLabel || "book")
-      .trim()
-      .toLowerCase();
-    const faviconValue = favicons[key] || favicons.book;
+    const faviconValue = resolveFaviconValueByLabel(favicons, bodyLabel);
 
     if (typeof faviconValue === "string" && faviconValue.length > 0) {
       if (faviconValue.startsWith("http")) {
@@ -104,7 +136,7 @@ function buildSiteContext({
         const normalizedFaviconPath = faviconValue.replace(/^\/+/, "");
         faviconHref = runningOnVercel
           ? `/${normalizedFaviconPath}`
-          : `${relativeRootPath}${faviconValue}`;
+          : `${relativeRootPath}${normalizedFaviconPath}`;
       }
     }
   } catch (error) {
