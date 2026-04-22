@@ -34,7 +34,7 @@ body.escuro {
 
 body {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  line-height: 1.5em;
+  line-height: 1.5rem;
   background-color: var(--fundo-principal);
   color: var(--texto);
   transition: all 0.3s;
@@ -102,7 +102,7 @@ section#ficha img.foto {
 section#ficha h1 {
   color: var(--destaque);
   margin: 15px 0;
-  font-size: 1.5em;
+  font-size: 1.5rem;
   text-align: center;
 }
 
@@ -115,7 +115,7 @@ div#social {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 1.6em;
+  font-size: 1.6rem;
   gap: 15px;
   margin-top: 15px;
 }
@@ -219,14 +219,14 @@ article#video .video-container iframe {
 }
 
 #formacao-container .periodo {
-  font-size: .8em;
+  font-size: .8rem;
   font-weight: bold;
   color: var(--texto);
 }
 
 #formacao-container .instituicao {
   color: var(--destaque-inverso);
-  font-size: 1.1em;
+  font-size: 1.1rem;
 }
 
 #projeto-container {

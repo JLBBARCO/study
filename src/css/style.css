@@ -100,25 +100,25 @@ h6 {
 }
 
 h1 {
-  font-size: 2em;
+  font-size: 2rem;
 }
 
 h2 {
-  font-size: 1.5em;
+  font-size: 1.5rem;
 }
 
 h3 {
-  font-size: 1.2em;
+  font-size: 1.2rem;
 }
 
 h4,
 h5,
 h6 {
-  font-size: 1em;
+  font-size: 1rem;
 }
 
 .icon {
-  font-size: 1em;
+  font-size: 1rem;
   transition: all 0.3s;
   color: var(--texto);
 }
@@ -156,9 +156,21 @@ header button {
   border-radius: 8px;
   background-color: var(--destaque);
   cursor: pointer;
+  transition: border-color 0.2s ease, background-color 0.2s ease,
+    transform 0.2s ease;
 }
 
 header button:hover {
+  border: var(--borda_padrão);
+  background-color: var(--interativo);
+}
+
+header button:focus-visible {
+  outline: 2px solid var(--texto);
+  outline-offset: 2px;
+}
+
+header button[aria-expanded="true"] {
   border: var(--borda_padrão);
   background-color: var(--interativo);
 }
@@ -172,6 +184,7 @@ header button:active #menuIcon {
   font-size: 1.5rem;
   line-height: 1;
   font-weight: 700;
+  transition: transform 0.2s ease;
 }
 
 nav {
@@ -184,6 +197,15 @@ nav {
   font-size: 1rem;
   color: var(--texto);
   font-weight: 600;
+}
+
+.nav-title a {
+  border-radius: 6px;
+}
+
+.nav-title a:focus-visible {
+  outline: 2px solid var(--texto);
+  outline-offset: 2px;
 }
 
 /* Estilos do menu mobile */
@@ -219,11 +241,33 @@ nav {
   white-space: nowrap;
   width: 100%;
   text-align: center;
+  border-radius: 6px;
+  transition: background-color 0.2s ease, text-decoration-color 0.2s ease;
+}
+
+.nav_links a:hover,
+.nav_links a:focus-visible {
+  background-color: var(--interativo);
+  text-decoration: none;
+}
+
+.nav_links a:focus-visible {
+  outline: 2px solid var(--texto);
+  outline-offset: 2px;
 }
 
 /* Classe para controlar a visibilidade do menu */
 .nav_links.active {
   display: flex;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  header button,
+  .menu-icon-glyph,
+  .nav_links a {
+    transition: none;
+  }
 }
 
 .root-paths {
@@ -329,12 +373,84 @@ footer {
   background-color: var(--footer);
 }
 
+footer .title_section_footer {
+  text-align: center;
+  margin-bottom: 20px;
+  font-family: var(--fonte02);
+  width: 100%;
+  margin-bottom: 5%;
+  padding-bottom: 5%;
+  border-bottom: var(--borda_padrão);
+}
+
 footer .container_footer {
   display: flex;
   flex: auto;
   flex-flow: row wrap;
   justify-content: space-between;
   align-items: center;
+}
+
+footer .card_footer {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  margin: 10px;
+  padding: 20px;
+  border-radius: 8px;
+  background-color: var(--interativo);
+  box-shadow: var(--shadow);
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+footer .card_footer:hover {
+  background-color: var(--destaque);
+  text-decoration: none;
+  transform: translateY(-5px);
+}
+
+footer .card_footer ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+footer .card_footer li+li {
+  margin-top: 6px;
+}
+
+footer .card_footer li {
+  display: flex;
+  justify-content: center;
+}
+
+footer .card_footer li a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  border-radius: 999px;
+  background-color: var(--interativo);
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+footer .card_footer li a:hover,
+footer .card_footer li a:focus-visible {
+  background-color: var(--destaque);
+  text-decoration: none;
+  transform: translateY(-2px);
+}
+
+footer .card_footer a:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+footer .card_footer li a i {
+  font-size: 1rem;
+  line-height: 1;
 }
 
 footer .copyright {

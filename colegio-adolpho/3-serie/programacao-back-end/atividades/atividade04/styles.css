@@ -59,10 +59,10 @@ section {
     background-color: var(--laranja-claro);
     border-radius: 30px;
     border: none;
-    width: 14em;
-    height: 3em;
+    width: 14rem;
+    height: 3rem;
     align-content: center;
-    
+
 }
 
 .display-4 {
@@ -76,7 +76,7 @@ section {
     margin-top: 3rem;
     margin-bottom: 3rem;
     background: url('img/flor.png') top right no-repeat,
-    url('img/flor-esquerda.png') bottom left no-repeat;
+        url('img/flor-esquerda.png') bottom left no-repeat;
     background-size: 180px 180px;
     /* Ajuste o tamanho conforme necessário */
 }
@@ -93,14 +93,14 @@ section {
 
 h2 {
     font-family: 'Lemon', serif;
-    font-size: 2.5em;
+    font-size: 2.5rem;
     font-style: normal;
     color: var(--laranja-claro);
 }
 
 #galeria {
     background-color: #FAF4F4;
-    
+
 }
 
 .fundo-galeria {
@@ -113,7 +113,7 @@ h2 {
     background-size: cover;
     padding: 4rem 0;
     /* Espaçamento interno para a seção de contato */
-    
+
 }
 
 .formulario {

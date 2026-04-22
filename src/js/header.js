@@ -1,7 +1,22 @@
-function navBar(title) {
-  let header = document.querySelector("header");
-  if (header?.dataset.initialized === "true") return;
+const NAV_SELECTORS = {
+  buttonId: "nav-links-button",
+  linksClass: ".nav_links",
+  iconId: "menuIcon",
+};
 
+let navigationListenersController = null;
+
+function resolveHomeHref() {
+  const context =
+    typeof getCurrentSiteContext === "function"
+      ? getCurrentSiteContext()
+      : null;
+
+  return context?.relativeRootPath || obterCaminhoRelativo();
+}
+
+function ensureHeaderElement() {
+  let header = document.querySelector("header");
   if (!header) {
     header = document.createElement("header");
   }
@@ -12,128 +27,153 @@ function navBar(title) {
   header.classList.remove("app-header-shell");
   delete header.dataset.shell;
 
-  // Cria o título de navegação dinamicamente
+  return header;
+}
+
+function createTitleNavigation(title) {
   const navTitle = document.createElement("nav");
   navTitle.className = "nav-title";
+
   const linkingHome = document.createElement("a");
-  const context =
-    typeof getCurrentSiteContext === "function"
-      ? getCurrentSiteContext()
-      : null;
-  linkingHome.href = context?.relativeRootPath || obterCaminhoRelativo();
+  linkingHome.href = resolveHomeHref();
+
   const heading = document.createElement("h2");
   heading.textContent = title || "Título do Site";
+
   linkingHome.appendChild(heading);
   navTitle.appendChild(linkingHome);
-  header.appendChild(navTitle);
 
-  // Cria o botão de menu para telas menores
+  return navTitle;
+}
+
+function createMenuButton() {
   const navLinksButton = document.createElement("button");
-  navLinksButton.id = "nav-links-button";
-  navLinksButton.setAttribute("aria-label", "Toggle navigation menu");
+  navLinksButton.id = NAV_SELECTORS.buttonId;
+  navLinksButton.setAttribute("aria-label", "Alternar menu de navegação");
   navLinksButton.setAttribute("aria-expanded", "false");
   navLinksButton.setAttribute("aria-controls", "navLinks");
+
   const menuIcon = document.createElement("span");
-  menuIcon.id = "menuIcon";
+  menuIcon.id = NAV_SELECTORS.iconId;
   menuIcon.className = "menu-icon-glyph icon";
   menuIcon.setAttribute("aria-hidden", "true");
   menuIcon.textContent = "☰";
-  navLinksButton.appendChild(menuIcon);
-  header.appendChild(navLinksButton);
 
-  // Cria o container para os links de navegação
+  navLinksButton.appendChild(menuIcon);
+  return navLinksButton;
+}
+
+function createSectionLink(sectionId) {
+  const link = document.createElement("a");
+  link.href = `#${sectionId}`;
+  link.role = "menuitem";
+  link.textContent = sectionId;
+  return link;
+}
+
+function createNavigationLinks() {
   const navLinks = document.createElement("nav");
-  navLinks.className = "nav_links";
+  navLinks.className = NAV_SELECTORS.linksClass.replace(".", "");
   navLinks.id = "navLinks";
 
   const containers = document.querySelectorAll("main>section");
-
   containers.forEach((container) => {
     const containerId = container.id;
-    // não adiciona âncora para a seção inicial, já temos título vinculando Home
     if (containerId && containerId !== "Home") {
-      const link = document.createElement("a");
-      link.href = `#${containerId}`;
-      link.role = "menuitem";
-      link.textContent = containerId; // Usar textContent em vez de innerHTML para evitar XSS
-      navLinks.appendChild(link);
+      navLinks.appendChild(createSectionLink(containerId));
     }
   });
 
-  header.appendChild(navLinks);
+  return navLinks;
+}
 
-  // Insere o header no início do body de forma segura (sem substituir conteúdo existente)
+function setMenuState(navLinksButton, navLinks, menuIcon, expanded) {
+  navLinks.classList.toggle("active", expanded);
+  if (menuIcon) {
+    menuIcon.textContent = expanded ? "✕" : "☰";
+  }
+  navLinksButton.setAttribute("aria-expanded", expanded.toString());
+}
+
+function closeMenu(navLinksButton, navLinks, menuIcon) {
+  setMenuState(navLinksButton, navLinks, menuIcon, false);
+}
+
+function mountHeader(header) {
   const body = document.querySelector("body");
-  if (body) {
-    if (!header.isConnected) {
-      body.prepend(header);
-    }
-  } else {
+  if (!body) {
     console.error("Body element not found, cannot insert header");
+    return;
+  }
+
+  if (!header.isConnected) {
+    body.prepend(header);
   }
 }
 
-function initializeNavigation() {
-  console.log("Inicializando navegação...");
+function navBar(title) {
+  const header = ensureHeaderElement();
 
-  const navLinksButton = document.getElementById("nav-links-button");
-  const navLinks = document.querySelector(".nav_links");
-  const menuIcon = document.getElementById("menuIcon");
+  header.appendChild(createTitleNavigation(title));
+  header.appendChild(createMenuButton());
+  header.appendChild(createNavigationLinks());
+
+  mountHeader(header);
+}
+
+function initializeNavigation() {
+  const navLinksButton = document.getElementById(NAV_SELECTORS.buttonId);
+  const navLinks = document.querySelector(NAV_SELECTORS.linksClass);
+  const menuIcon = document.getElementById(NAV_SELECTORS.iconId);
 
   if (!navLinksButton || !navLinks) {
     console.error("Elementos do menu não encontrados");
     return;
   }
 
-  // Inicializar estado do botão
-  navLinksButton.setAttribute("aria-expanded", "false");
+  if (navigationListenersController) {
+    navigationListenersController.abort();
+  }
 
-  // Adicionar listener de resize com debounce
-  window.addEventListener("resize", debounce(mudouJanela, 250));
+  navigationListenersController = new AbortController();
+  const { signal } = navigationListenersController;
 
-  navLinksButton.addEventListener("click", function (event) {
-    event.preventDefault();
+  closeMenu(navLinksButton, navLinks, menuIcon);
 
-    const isExpanded = navLinks.classList.contains("active");
-    navLinks.classList.toggle("active");
+  const handleResize = debounce(mudouJanela, 250);
 
-    // Alternar o ícone dinamicamente (verifica existência do ícone)
-    if (menuIcon) {
-      menuIcon.textContent = isExpanded ? "☰" : "✕";
-    }
+  navLinksButton.addEventListener(
+    "click",
+    (event) => {
+      event.preventDefault();
+      const isExpanded = navLinks.classList.contains("active");
+      setMenuState(navLinksButton, navLinks, menuIcon, !isExpanded);
+    },
+    { signal },
+  );
 
-    // Atualiza aria-expanded (usar string)
-    navLinksButton.setAttribute("aria-expanded", (!isExpanded).toString());
-
-    // Log para debug
-    console.log("Menu clicked:", {
-      isExpanded: !isExpanded,
-      menuVisível: navLinks.classList.contains("active"),
-    });
-  });
-
-  // Fechar menu ao clicar fora
-  document.addEventListener("click", (event) => {
-    if (
-      !navLinksButton.contains(event.target) &&
-      !navLinks.contains(event.target)
-    ) {
-      navLinks.classList.remove("active");
-      if (menuIcon) {
-        menuIcon.textContent = "☰";
+  document.addEventListener(
+    "click",
+    (event) => {
+      if (
+        !navLinksButton.contains(event.target) &&
+        !navLinks.contains(event.target)
+      ) {
+        closeMenu(navLinksButton, navLinks, menuIcon);
       }
-      navLinksButton.setAttribute("aria-expanded", "false");
-    }
-  });
+    },
+    { signal },
+  );
 
-  // Permitir fechar menu com Esc para maior acessibilidade
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") {
-      navLinks.classList.remove("active");
-      if (menuIcon) {
-        menuIcon.textContent = "☰";
+  document.addEventListener(
+    "keydown",
+    (event) => {
+      if (event.key === "Escape") {
+        closeMenu(navLinksButton, navLinks, menuIcon);
       }
-      navLinksButton.setAttribute("aria-expanded", "false");
-    }
-  });
+    },
+    { signal },
+  );
+
+  window.addEventListener("resize", handleResize, { signal });
 }
