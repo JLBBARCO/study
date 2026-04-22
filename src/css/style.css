@@ -374,7 +374,7 @@ footer {
 }
 
 footer .icon {
-  font-size: 1rem;
+  font-size: 1.5rem;
 }
 
 footer .button-to-top {
@@ -426,6 +426,7 @@ footer .card_footer {
   flex-flow: column nowrap;
   justify-content: center;
   align-items: center;
+  width: 100%;
   margin: 10px;
   padding: 20px;
   border-radius: 8px;
@@ -444,6 +445,11 @@ footer .card_footer ul {
   list-style: none;
   margin: 0;
   padding: 0;
+  width: 100%;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  align-items: center;
 }
 
 footer .card_footer li+li {
@@ -453,6 +459,7 @@ footer .card_footer li+li {
 footer .card_footer li {
   display: flex;
   justify-content: center;
+  margin: 10px;
 }
 
 footer .card_footer li a {
@@ -461,6 +468,7 @@ footer .card_footer li a {
   justify-content: center;
   padding: 1rem;
   border-radius: 999px;
+  border: var(--borda_padrão);
   background-color: var(--interativo);
   transition: background-color 0.2s ease, transform 0.2s ease;
 }
@@ -468,6 +476,7 @@ footer .card_footer li a {
 footer .card_footer li a:hover,
 footer .card_footer li a:focus-visible {
   background-color: var(--destaque);
+  border-color: transparent;
   text-decoration: none;
   transform: translateY(-2px);
 }
