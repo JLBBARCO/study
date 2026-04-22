@@ -25,6 +25,9 @@ const CONTACT_ICON_EXCEPTIONS = {
   },
 };
 
+const TOP_BUTTON_SCROLL_THRESHOLD = 8;
+let topButtonScrollController = null;
+
 function createTitleFooter(title, description) {
   const sectionTitle = document.createElement("section");
   sectionTitle.classList.add("title_section_footer");
@@ -91,8 +94,8 @@ function resolveContactIcon(contact) {
 
 function createContactIconElement(contact) {
   const { iconName, style } = resolveContactIcon(contact);
-  const icon = document.createElement("i");
-  icon.className = `${style} fa-${iconName}`;
+  const icon = document.createElement("span");
+  icon.className = `${style} fa-${iconName} icon`;
   icon.setAttribute("aria-hidden", "true");
   return icon;
 }
@@ -157,8 +160,22 @@ async function populateContactList(listElement) {
 }
 
 function removePreviousFooterContent(footerElement) {
+  const existingAccessibilityFunctions = footerElement.querySelector(
+    ".accessibility-functions",
+  );
+  const existingTitleSection = footerElement.querySelector(
+    ".title_section_footer",
+  );
   const existingContainer = footerElement.querySelector(".container_footer");
   const existingCopyright = footerElement.querySelector(".copyright");
+
+  if (existingAccessibilityFunctions) {
+    existingAccessibilityFunctions.remove();
+  }
+
+  if (existingTitleSection) {
+    existingTitleSection.remove();
+  }
 
   if (existingContainer) {
     existingContainer.remove();
@@ -167,6 +184,30 @@ function removePreviousFooterContent(footerElement) {
   if (existingCopyright) {
     existingCopyright.remove();
   }
+}
+
+function isAtPageTop() {
+  return window.scrollY <= TOP_BUTTON_SCROLL_THRESHOLD;
+}
+
+function updateTopButtonVisibility(buttonElement) {
+  buttonElement.hidden = isAtPageTop();
+}
+
+function setupTopButtonVisibility(buttonElement) {
+  if (topButtonScrollController) {
+    topButtonScrollController.abort();
+  }
+
+  topButtonScrollController = new AbortController();
+  const { signal } = topButtonScrollController;
+
+  updateTopButtonVisibility(buttonElement);
+  window.addEventListener(
+    "scroll",
+    () => updateTopButtonVisibility(buttonElement),
+    { passive: true, signal },
+  );
 }
 
 // --- Rodapé dinâmico ---
@@ -180,6 +221,22 @@ function initializeFooter() {
 
     const container = document.createElement("section");
     container.classList.add("container_footer");
+
+    const accessibilityFunctions = document.createElement("section");
+    accessibilityFunctions.classList.add("accessibility-functions");
+
+    const buttonFromTop = document.createElement("button");
+    buttonFromTop.setAttribute("aria-label", "Voltar ao topo da página");
+    buttonFromTop.classList.add("button-to-top");
+    buttonFromTop.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+    setupTopButtonVisibility(buttonFromTop);
+    const iconToTop = document.createElement("span");
+    iconToTop.className = "fa-solid fa-arrow-up icon";
+    iconToTop.setAttribute("aria-hidden", "true");
+    buttonFromTop.appendChild(iconToTop);
+    accessibilityFunctions.appendChild(buttonFromTop);
 
     const footerTitle = createTitleFooter(
       "Projeto de Estudos",

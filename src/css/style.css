@@ -373,6 +373,36 @@ footer {
   background-color: var(--footer);
 }
 
+footer .icon {
+  font-size: 1rem;
+}
+
+footer .button-to-top {
+  display: inline-flex;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  border: none;
+  border-radius: 45%;
+  background-color: var(--interativo);
+  color: var(--texto);
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+footer .button-to-top[hidden] {
+  display: none;
+}
+
+footer .button-to-top:hover {
+  background-color: var(--destaque);
+  text-decoration: none;
+  transform: translateY(-2px);
+  cursor: pointer;
+}
+
 footer .title_section_footer {
   text-align: center;
   margin-bottom: 20px;
