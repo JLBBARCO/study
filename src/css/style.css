@@ -118,7 +118,10 @@ h6 {
 }
 
 .icon {
+  display: inline-block;
   font-size: 1rem;
+  line-height: 1;
+  vertical-align: middle;
   transition: all 0.3s;
   color: var(--texto);
 }
@@ -487,7 +490,7 @@ footer .card_footer a:focus-visible {
   border-radius: 4px;
 }
 
-footer .card_footer li a i {
+footer .card_footer li a :is(i, svg) {
   font-size: 1rem;
   line-height: 1;
 }

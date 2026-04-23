@@ -19,11 +19,75 @@ const CONTACT_API_URL =
   "https://raw.githubusercontent.com/JLBBARCO/portfolio/refs/heads/main/src/json/areas/contact.json";
 
 const CONTACT_ICON_EXCEPTIONS = {
+  github: {
+    iconName: "github",
+    style: "fa-brands",
+  },
+  linkedin: {
+    iconName: "linkedin-in",
+    style: "fa-brands",
+  },
+  instagram: {
+    iconName: "instagram",
+    style: "fa-brands",
+  },
   email: {
     iconName: "envelope",
     style: "fa-regular",
   },
 };
+
+const CONTACT_BRAND_ICON_NAMES = new Set([
+  "github",
+  "linkedin",
+  "linkedin-in",
+  "instagram",
+  "facebook",
+  "facebook-f",
+  "x-twitter",
+  "twitter",
+  "youtube",
+  "tiktok",
+  "whatsapp",
+  "telegram",
+  "discord",
+]);
+
+function normalizeFaStyle(style) {
+  const normalizedStyle = String(style || "")
+    .trim()
+    .toLowerCase();
+
+  if (!normalizedStyle) return "";
+
+  if (normalizedStyle === "fab" || normalizedStyle === "brands") {
+    return "fa-brands";
+  }
+
+  if (normalizedStyle === "far" || normalizedStyle === "regular") {
+    return "fa-regular";
+  }
+
+  if (normalizedStyle === "fas" || normalizedStyle === "solid") {
+    return "fa-solid";
+  }
+
+  if (normalizedStyle === "fat" || normalizedStyle === "thin") {
+    return "fa-thin";
+  }
+
+  if (normalizedStyle === "fal" || normalizedStyle === "light") {
+    return "fa-light";
+  }
+
+  if (normalizedStyle === "fad" || normalizedStyle === "duotone") {
+    return "fa-duotone";
+  }
+
+  return normalizedStyle.startsWith("fa-")
+    ? normalizedStyle
+    : `fa-${normalizedStyle}`;
+}
 
 const TOP_BUTTON_SCROLL_THRESHOLD = 8;
 let topButtonScrollController = null;
@@ -83,18 +147,26 @@ function createLinkList(items) {
 }
 
 function resolveContactIcon(contact) {
-  const exception = CONTACT_ICON_EXCEPTIONS[contact?.iconName];
+  const rawIconName = String(contact?.iconName || contact?.icon || "circle")
+    .trim()
+    .toLowerCase();
+  const exception = CONTACT_ICON_EXCEPTIONS[rawIconName];
+  const resolvedIconName = exception?.iconName || rawIconName;
+  const resolvedStyle = normalizeFaStyle(exception?.style || contact?.style);
+
+  const inferredStyle = CONTACT_BRAND_ICON_NAMES.has(resolvedIconName)
+    ? "fa-brands"
+    : "fa-regular";
 
   return {
-    iconName:
-      exception?.iconName || contact?.iconName || contact?.icon || "circle",
-    style: exception?.style || contact?.style || "fa-regular",
+    iconName: resolvedIconName,
+    style: resolvedStyle || inferredStyle,
   };
 }
 
 function createContactIconElement(contact) {
   const { iconName, style } = resolveContactIcon(contact);
-  const icon = document.createElement("span");
+  const icon = document.createElement("i");
   icon.className = `${style} fa-${iconName} icon`;
   icon.setAttribute("aria-hidden", "true");
   return icon;
@@ -153,6 +225,10 @@ async function populateContactList(listElement) {
     contacts.forEach((contact) => {
       listElement.appendChild(createContactListItem(contact));
     });
+
+    if (typeof window.renderFontAwesomeIcons === "function") {
+      window.renderFontAwesomeIcons(listElement);
+    }
   } catch (error) {
     console.error("Error fetching contact data:", error);
     renderContactMessage(listElement, "Não foi possível carregar os contatos.");
@@ -232,10 +308,13 @@ function initializeFooter() {
       window.scrollTo({ top: 0, behavior: "smooth" });
     });
     setupTopButtonVisibility(buttonFromTop);
-    const iconToTop = document.createElement("span");
+    const iconToTop = document.createElement("i");
     iconToTop.className = "fa-solid fa-arrow-up icon";
     iconToTop.setAttribute("aria-hidden", "true");
     buttonFromTop.appendChild(iconToTop);
+    if (typeof window.renderFontAwesomeIcons === "function") {
+      window.renderFontAwesomeIcons(buttonFromTop);
+    }
     accessibilityFunctions.appendChild(buttonFromTop);
 
     const footerTitle = createTitleFooter(

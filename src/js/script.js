@@ -331,6 +331,47 @@ async function loadFontAwesome() {
   initializeFontAwesome();
 }
 
+function renderFontAwesomeIcons(scope = document) {
+  if (!window.FontAwesome?.dom?.i2svg) {
+    return;
+  }
+
+  const targetNode =
+    scope && scope.nodeType === Node.ELEMENT_NODE ? scope : document;
+
+  window.FontAwesome.dom.i2svg({
+    node: targetNode,
+  });
+}
+
+window.renderFontAwesomeIcons = renderFontAwesomeIcons;
+
+function cleanupFontAwesomeOriginalComments(scope = document) {
+  const rootNode =
+    scope && scope.nodeType === Node.ELEMENT_NODE ? scope : document;
+
+  const walker = document.createTreeWalker(rootNode, NodeFilter.SHOW_COMMENT);
+  const commentsToRemove = [];
+
+  while (walker.nextNode()) {
+    const commentNode = walker.currentNode;
+    const commentText = (commentNode.nodeValue || "").trim();
+
+    const isLegacyFontAwesomeComment =
+      /<i\b/i.test(commentText) && /\bfa-[\w-]+/i.test(commentText);
+
+    if (isLegacyFontAwesomeComment) {
+      commentsToRemove.push(commentNode);
+    }
+  }
+
+  commentsToRemove.forEach((commentNode) => {
+    commentNode.parentNode?.removeChild(commentNode);
+  });
+}
+
+window.cleanupFontAwesomeOriginalComments = cleanupFontAwesomeOriginalComments;
+
 function updateDocumentTitleFromHome() {
   const titleHome = document.querySelector("section#Home>h1");
   if (!titleHome) return;
@@ -660,7 +701,11 @@ function wrapCardLinks() {
 // Função auxiliar para reinicializar Font Awesome
 function initializeFontAwesome() {
   if (window.FontAwesome) {
-    window.FontAwesome.config.autoReplaceSvg = "nest";
+    window.FontAwesome.config.autoReplaceSvg = true;
+    window.FontAwesome.config.keepOriginalSource = false;
+    cleanupFontAwesomeOriginalComments(document);
+    renderFontAwesomeIcons(document);
+    cleanupFontAwesomeOriginalComments(document);
   }
 }
 
