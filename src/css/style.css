@@ -292,7 +292,7 @@ nav {
 }
 
 /* Conteúdo Principal */
-main section {
+main>section {
   display: flex;
   flex-flow: column nowrap;
   justify-content: center;
@@ -323,21 +323,21 @@ section#Home {
   align-items: center;
 }
 
-section#Home article.buttonCard {
+section#Home section.buttonCard {
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
   align-items: center;
 }
 
-section#Home article.buttonCard a {
+section#Home section.buttonCard a {
   margin: 25px;
   padding: 25px;
   border-radius: 8px;
   background-color: var(--destaque);
 }
 
-section#Home article.buttonCard a:hover {
+section#Home section.buttonCard a:hover {
   border: var(--borda_padrão);
   text-decoration: none;
   transform: translateY(-5px);

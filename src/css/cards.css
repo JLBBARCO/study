@@ -16,6 +16,45 @@ main .container {
   justify-content: space-evenly;
 }
 
+main .sub-container {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
+  width: 100%;
+  border-radius: 10px;
+  margin: 25px 0;
+}
+
+main .container-btn {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  width: 100%;
+  margin: 12px 0 24px;
+}
+
+main .container-btn-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 14px;
+  border: var(--borda_padrão);
+  border-radius: 999px;
+  background-color: var(--destaque);
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  transition: transform 180ms ease, background-color 180ms ease;
+}
+
+main .container-btn-link:hover,
+main .container-btn-link:focus-visible {
+  transform: translateY(-1px);
+  background-color: #032341;
+  outline: none;
+}
+
 div.card {
   display: flex;
   flex-direction: column;
@@ -42,7 +81,8 @@ div.card .icon {
   margin: 15px;
 }
 
-div.card img {
+div.card img,
+div.card iframe {
   width: 100%;
   height: auto;
   border-top-left-radius: 10px;
@@ -54,14 +94,58 @@ div.card p {
   text-align: justify;
 }
 
-div.card article.buttonCard {
+div.card .card-description {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: 100%;
+}
+
+div.card .card-description-text {
+  line-clamp: 4;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 0;
+}
+
+div.card .card-description.is-expanded .card-description-text {
+  display: block;
+  line-clamp: unset;
+  -webkit-line-clamp: unset;
+  overflow: visible;
+}
+
+div.card .card-description-toggle {
+  align-self: center;
+  margin: 0 25px 20px;
+  padding: 8px 14px;
+  border: var(--borda_padrão);
+  border-radius: 999px;
+  background-color: var(--destaque);
+  color: #fff;
+  cursor: pointer;
+  font: inherit;
+  transition: transform 180ms ease, background-color 180ms ease;
+}
+
+div.card .card-description-toggle:hover,
+div.card .card-description-toggle:focus-visible {
+  transform: translateY(-1px);
+  background-color: #032341;
+  outline: none;
+}
+
+div.card section.buttonCard {
   display: flex;
   flex-flow: row nowrap;
   justify-content: center;
   align-items: center;
 }
 
-div.card article.buttonCard a {
+div.card section.buttonCard a {
   display: block;
   margin: 15px;
   padding: 10px;
@@ -70,9 +154,14 @@ div.card article.buttonCard a {
   background-color: var(--destaque);
 }
 
-div.card article.buttonCard a:focus,
-div.card article.buttonCard a:focus-visible {
+div.card section.buttonCard a:focus,
+div.card section.buttonCard a:focus-visible {
   outline: 3px solid rgba(255, 255, 255, 0.9);
   outline-offset: 3px;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+div.card iframe.video-iframe {
+  aspect-ratio: 16 / 9;
+  background: #000;
 }

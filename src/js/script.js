@@ -2,7 +2,7 @@ const VERCEL_DOMAIN_TOKEN = "vercel.app";
 const DEFAULT_FAVICON_PATH = "src/assets/favicon/default.ico";
 const JS_BASE_PATH = "src/js";
 const CSS_BASE_PATH = "src/css";
-const CRITICAL_JS_FILES = ["header.js", "footer.js", "paths.js"];
+const CRITICAL_JS_FILES = ["header.js", "footer.js", "paths.js", "videos.js"];
 const CRITICAL_CSS_FILES = [
   { fileName: "style.css", media: "screen" },
   { fileName: "cards.css", media: "screen" },
@@ -45,6 +45,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     invokeGlobal("footer");
     invokeGlobal("initializeFooter");
     invokeGlobal("paths");
+    invokeGlobal("videos");
 
     runDeferredTask(() => {
       if (shouldLoadFontAwesome()) {
@@ -674,7 +675,7 @@ if (cookies.fontSize) {
   }
 }
 
-// Envolve links que sejam filhos diretos de `.card` dentro de um `article.buttonCard`.
+// Envolve links que sejam filhos diretos de `.card` dentro de um `section.buttonCard`.
 // Isso evita mover links inline dentro de parágrafos e corrige páginas que
 // possuem âncoras diretas nos cards sem precisar editar todos os HTMLs.
 function wrapCardLinks() {
@@ -685,7 +686,7 @@ function wrapCardLinks() {
       if (directAnchors.length === 0) return;
 
       // Cria o wrapper apenas se necessário
-      const wrapper = document.createElement("article");
+      const wrapper = document.createElement("section");
       wrapper.className = "buttonCard";
 
       directAnchors.forEach((a) => wrapper.appendChild(a));

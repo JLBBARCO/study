@@ -10,3 +10,5 @@ build/
 dist/
 .vscode/
 node_modules/
+.vercel
+.env*.local

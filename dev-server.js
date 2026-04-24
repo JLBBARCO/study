@@ -3,8 +3,51 @@ const fs = require("fs");
 const path = require("path");
 const { URL } = require("url");
 const { buildSiteContext } = require("./api/_lib/site-context");
+const youtubePlaylistHandler = require("./api/youtube-playlist");
 
 const ROOT = process.cwd();
+
+function loadEnvFiles() {
+  const envFiles = [".env.local", ".env"];
+
+  envFiles.forEach((fileName) => {
+    const filePath = path.join(ROOT, fileName);
+    if (!fs.existsSync(filePath)) {
+      return;
+    }
+
+    const content = fs.readFileSync(filePath, "utf8");
+    content.split(/\r?\n/).forEach((line) => {
+      const trimmed = line.trim();
+      if (!trimmed || trimmed.startsWith("#")) {
+        return;
+      }
+
+      const separatorIndex = trimmed.indexOf("=");
+      if (separatorIndex < 1) {
+        return;
+      }
+
+      const key = trimmed.slice(0, separatorIndex).trim();
+      if (!key || process.env[key] !== undefined) {
+        return;
+      }
+
+      let value = trimmed.slice(separatorIndex + 1).trim();
+      if (
+        (value.startsWith('"') && value.endsWith('"')) ||
+        (value.startsWith("'") && value.endsWith("'"))
+      ) {
+        value = value.slice(1, -1);
+      }
+
+      process.env[key] = value;
+    });
+  });
+}
+
+loadEnvFiles();
+
 const PORT = Number(process.env.PORT || 3000);
 const OFFLINE_MODE =
   process.argv.includes("--offline") || process.env.STUDY_OFFLINE === "1";
@@ -103,6 +146,43 @@ const server = http.createServer((req, res) => {
     });
 
     sendJson(res, 200, context);
+    return;
+  }
+
+  if (
+    url.pathname === "/api/youtube-playlist" ||
+    url.pathname === "/api/youtube-playlist/"
+  ) {
+    const reqProxy = {
+      query: Object.fromEntries(url.searchParams.entries()),
+      headers: req.headers,
+      url: req.url,
+    };
+
+    const resProxy = {
+      statusCode: 200,
+      headers: {},
+      setHeader(name, value) {
+        this.headers[name] = value;
+      },
+      status(code) {
+        this.statusCode = code;
+        return this;
+      },
+      json(payload) {
+        sendJson(res, this.statusCode, payload);
+      },
+    };
+
+    Promise.resolve(youtubePlaylistHandler(reqProxy, resProxy)).catch(
+      (error) => {
+        sendJson(res, 500, {
+          error: "Erro ao processar /api/youtube-playlist",
+          detail: error.message,
+        });
+      },
+    );
+
     return;
   }
 
