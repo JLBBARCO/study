@@ -25,6 +25,23 @@ main .sub-container {
   margin: 25px 0;
 }
 
+main article.is-growing {
+  animation: videos-subcontainer-grow 260ms ease-out both;
+  transform-origin: top center;
+}
+
+@keyframes videos-subcontainer-grow {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
 main .container-btn {
   display: flex;
   flex-wrap: wrap;
@@ -45,6 +62,7 @@ main .container-btn-link {
   color: #fff;
   text-decoration: none;
   font-weight: 600;
+  cursor: pointer;
   transition: transform 180ms ease, background-color 180ms ease;
 }
 
@@ -53,6 +71,40 @@ main .container-btn-link:focus-visible {
   transform: translateY(-1px);
   background-color: #032341;
   outline: none;
+}
+
+main .videos-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: min(720px, 96%);
+  margin: 8px auto 20px;
+  padding: 12px 16px;
+  border: var(--borda_padrão);
+  border-radius: 10px;
+  background-color: rgba(1, 19, 39, 0.8);
+  text-align: center;
+}
+
+main .videos-placeholder.is-loading::before {
+  content: "";
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: videos-loading-spin 900ms linear infinite;
+}
+
+@keyframes videos-loading-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 div.card {
@@ -164,4 +216,55 @@ div.card section.buttonCard a:focus-visible {
 div.card iframe.video-iframe {
   aspect-ratio: 16 / 9;
   background: #000;
+}
+
+div.card.card-skeleton {
+  pointer-events: none;
+  padding-bottom: 18px;
+}
+
+div.card.card-skeleton .skeleton-block {
+  position: relative;
+  overflow: hidden;
+  width: calc(100% - 32px);
+  margin-top: 16px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+div.card.card-skeleton .skeleton-block::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(90deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.24) 45%,
+      rgba(255, 255, 255, 0) 100%);
+  animation: card-skeleton-shimmer 1.15s ease-in-out infinite;
+}
+
+div.card.card-skeleton .skeleton-media {
+  width: 100%;
+  margin-top: 0;
+  border-radius: 10px 10px 0 0;
+  aspect-ratio: 16 / 9;
+}
+
+div.card.card-skeleton .skeleton-title {
+  height: 20px;
+}
+
+div.card.card-skeleton .skeleton-text {
+  height: 14px;
+}
+
+div.card.card-skeleton .skeleton-text-short {
+  width: calc(100% - 88px);
+}
+
+@keyframes card-skeleton-shimmer {
+  to {
+    transform: translateX(100%);
+  }
 }

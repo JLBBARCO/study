@@ -22,12 +22,40 @@ footer {
     max-width: 100%;
     padding: 0;
     box-shadow: none;
+    overflow: visible;
+}
+
+.nav_links .nav_item {
+    width: auto;
+}
+
+.nav_links .nav_item-header {
+    width: auto;
 }
 
 .nav_links a {
+    width: auto;
     margin: 10px;
     padding: 8px 12px;
     border-radius: 6px;
+}
+
+.nav_links .nav_submenu-toggle {
+    display: none;
+}
+
+.nav_links .nav_item.has-submenu .nav_submenu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    min-width: 220px;
+    z-index: 1001;
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.2);
+}
+
+.nav_links .nav_item.has-submenu:hover .nav_submenu,
+.nav_links .nav_item.has-submenu:focus-within .nav_submenu {
+    display: flex;
 }
 
 main,

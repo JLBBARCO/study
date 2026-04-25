@@ -1,6 +1,118 @@
 const fs = require("fs");
 const path = require("path");
 
+function decodeHtmlEntities(value) {
+  return String(value || "")
+    .replace(/&amp;/g, "&")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/&#x2F;/g, "/");
+}
+
+function escapeRegExp(value) {
+  return String(value || "").replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+function extractFirstTagValue(source, tagName) {
+  const pattern = new RegExp(
+    `<${escapeRegExp(tagName)}[^>]*>([\\s\\S]*?)<\\/${escapeRegExp(tagName)}>`,
+  );
+  const match = String(source || "").match(pattern);
+  return match ? decodeHtmlEntities(match[1].trim()) : "";
+}
+
+function parsePlaylistFeed(xmlText) {
+  const entryMatches =
+    String(xmlText || "").match(/<entry>[\s\S]*?<\/entry>/g) || [];
+
+  return entryMatches
+    .map((entry) => {
+      const videoId = extractFirstTagValue(entry, "yt:videoId");
+      if (!videoId) {
+        return null;
+      }
+
+      const title = extractFirstTagValue(entry, "title") || "Sem titulo";
+      const description =
+        extractFirstTagValue(entry, "media:description") ||
+        extractFirstTagValue(entry, "summary") ||
+        "";
+
+      return {
+        titulo: title,
+        descricao: description,
+        link: `https://www.youtube.com/watch?v=${videoId}`,
+        linkVideo: `https://www.youtube.com/embed/${videoId}`,
+      };
+    })
+    .filter(Boolean);
+}
+
+async function fetchVideosFromPublicPlaylistFeed(playlistId) {
+  const feedUrl = `https://www.youtube.com/feeds/videos.xml?playlist_id=${encodeURIComponent(playlistId)}`;
+  const response = await fetch(feedUrl);
+
+  if (!response.ok) {
+    throw new Error(`Feed request failed with status ${response.status}.`);
+  }
+
+  const feedXml = await response.text();
+  return parsePlaylistFeed(feedXml);
+}
+
+async function fetchVideosFromYoutubeApi(playlistId, apiKey) {
+  const params = new URLSearchParams({
+    part: "snippet",
+    maxResults: "20",
+    playlistId,
+    key: apiKey,
+  });
+
+  const apiUrl = `https://www.googleapis.com/youtube/v3/playlistItems?${params.toString()}`;
+  const response = await fetch(apiUrl);
+
+  if (!response.ok) {
+    const details = await response.text();
+    const error = new Error("YouTube API request failed.");
+    error.statusCode = response.status;
+    error.details = details;
+    throw error;
+  }
+
+  const data = await response.json();
+  const videos = Array.isArray(data.items)
+    ? data.items
+        .map((item) => {
+          const snippet = item?.snippet || {};
+          const videoId = snippet?.resourceId?.videoId;
+          if (!videoId) {
+            return null;
+          }
+
+          return {
+            titulo: snippet.title || "Sem titulo",
+            descricao: snippet.description || "",
+            link: `https://www.youtube.com/watch?v=${videoId}`,
+            linkVideo: `https://www.youtube.com/embed/${videoId}`,
+          };
+        })
+        .filter(Boolean)
+    : [];
+
+  return videos;
+}
+
+function resolveYoutubeApiKey() {
+  return (
+    process.env.YOUTUBE_API_KEY ||
+    process.env.YOUTUBE_KEY ||
+    process.env.GOOGLE_API_KEY ||
+    ""
+  );
+}
+
 function loadEnvFiles() {
   const root = process.cwd();
   const envFiles = [".env.local", ".env"];
@@ -47,63 +159,44 @@ module.exports = async function handler(req, res) {
   }
 
   const playlistId = String(req.query?.playlistId || "").trim();
-  const apiKey = process.env.YOUTUBE_API_KEY;
+  const apiKey = resolveYoutubeApiKey();
 
   if (!playlistId) {
     res.status(400).json({ error: "Missing playlistId query parameter." });
     return;
   }
 
-  if (!apiKey) {
-    res.status(500).json({
-      error: "Missing YOUTUBE_API_KEY environment variable.",
-    });
-    return;
-  }
-
   try {
-    const params = new URLSearchParams({
-      part: "snippet",
-      maxResults: "20",
-      playlistId,
-      key: apiKey,
-    });
+    let videos = [];
+    let source = "youtube-api";
 
-    const apiUrl = `https://www.googleapis.com/youtube/v3/playlistItems?${params.toString()}`;
-    const response = await fetch(apiUrl);
+    if (apiKey) {
+      videos = await fetchVideosFromYoutubeApi(playlistId, apiKey);
+    } else {
+      videos = await fetchVideosFromPublicPlaylistFeed(playlistId);
+      source = "youtube-feed";
+    }
 
-    if (!response.ok) {
-      const details = await response.text();
-      res.status(response.status).json({
-        error: "YouTube API request failed.",
-        details,
+    res.setHeader("Content-Type", "application/json; charset=utf-8");
+    res.status(200).json({ videos, source });
+  } catch (error) {
+    if (!apiKey) {
+      res.status(500).json({
+        error:
+          "Missing YOUTUBE_API_KEY environment variable and failed to fetch public playlist feed.",
+        details: error?.message || "unknown error",
       });
       return;
     }
 
-    const data = await response.json();
-    const videos = Array.isArray(data.items)
-      ? data.items
-          .map((item) => {
-            const snippet = item?.snippet || {};
-            const videoId = snippet?.resourceId?.videoId;
-            if (!videoId) {
-              return null;
-            }
+    if (error?.statusCode) {
+      res.status(error.statusCode).json({
+        error: error.message || "YouTube API request failed.",
+        details: error?.details || "",
+      });
+      return;
+    }
 
-            return {
-              titulo: snippet.title || "Sem titulo",
-              descricao: snippet.description || "",
-              link: `https://www.youtube.com/watch?v=${videoId}`,
-              linkVideo: `https://www.youtube.com/embed/${videoId}`,
-            };
-          })
-          .filter(Boolean)
-      : [];
-
-    res.setHeader("Content-Type", "application/json; charset=utf-8");
-    res.status(200).json({ videos });
-  } catch (error) {
     res.status(500).json({
       error: "Unexpected error while fetching YouTube videos.",
       details: error?.message || "unknown error",

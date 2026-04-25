@@ -259,6 +259,72 @@ nav {
   outline-offset: 2px;
 }
 
+.nav_item {
+  position: relative;
+  width: 100%;
+}
+
+.nav_item-header {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.nav_item .nav_link {
+  flex: 1;
+}
+
+.nav_submenu-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 40px;
+  padding: 8px;
+  margin-left: 4px;
+  border: var(--borda_padrão);
+  border-radius: 8px;
+  background-color: var(--interativo);
+  color: var(--texto);
+  cursor: pointer;
+}
+
+.nav_submenu-toggle[aria-expanded="true"] {
+  transform: rotate(180deg);
+}
+
+.nav_submenu {
+  display: none;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 6px;
+  padding: 8px;
+  border-radius: 8px;
+  background-color: rgba(1, 19, 39, 0.72);
+}
+
+.nav_item.submenu-open .nav_submenu {
+  display: flex;
+}
+
+.nav_submenu-link,
+.nav_submenu-empty {
+  display: block;
+  width: 100%;
+  padding: 6px 10px;
+  border-radius: 6px;
+  text-align: left;
+}
+
+.nav_submenu-empty {
+  opacity: 0.82;
+}
+
+.nav_submenu-link:hover,
+.nav_submenu-link:focus-visible {
+  background-color: var(--interativo);
+  text-decoration: none;
+}
+
 /* Classe para controlar a visibilidade do menu */
 .nav_links.active {
   display: flex;
