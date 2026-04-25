@@ -519,13 +519,43 @@ function scrollToPlaylistContainer(targetContainer, options = {}) {
     return;
   }
 
+  const executeScroll = () => {
+    scrollElementWithHeaderOffset(targetContainer);
+  };
+
   if (options?.source === "navbar") {
-    targetContainer.scrollIntoView({ behavior: "smooth", block: "start" });
+    executeScroll();
     return;
   }
 
-  window.requestAnimationFrame(() => {
-    targetContainer.scrollIntoView({ behavior: "smooth", block: "start" });
+  window.requestAnimationFrame(executeScroll);
+}
+
+function getStickyHeaderOffset() {
+  const header = document.querySelector("header");
+  const headerHeight = header ? header.getBoundingClientRect().height : 0;
+
+  const rootStyle = getComputedStyle(document.documentElement);
+  const cssHeaderSize = Number.parseFloat(
+    rootStyle.getPropertyValue("--header-size") || "0",
+  );
+
+  // Keep a small breathing room below the sticky header.
+  return Math.max(headerHeight, cssHeaderSize) + 12;
+}
+
+function scrollElementWithHeaderOffset(element) {
+  if (!element) {
+    return;
+  }
+
+  const offset = getStickyHeaderOffset();
+  const absoluteTop = window.scrollY + element.getBoundingClientRect().top;
+  const targetTop = Math.max(0, absoluteTop - offset);
+
+  window.scrollTo({
+    top: targetTop,
+    behavior: "smooth",
   });
 }
 
@@ -636,13 +666,6 @@ function getOrCreateSubContainer(cardsContainer, id, titleText) {
     const subtitle = existingContainer.querySelector("h3");
     if (subtitle) {
       subtitle.textContent = titleText;
-    }
-
-    const cardsHost = existingContainer.querySelector(
-      '[data-cards-host="true"]',
-    );
-    if (cardsHost) {
-      cardsHost.replaceChildren();
     }
 
     return existingContainer;
