@@ -1,0 +1,20 @@
+{
+  "playlists": {
+    "1": {
+      "titulo": "Mundo 1: Fundamentos",
+      "url": "https://youtube.com/playlist?list=PLHz_AreHm4dlKP6QQCekuIPky1CiwmdI6&si=mOmc-qJrA_vcY-6E"
+    },
+    "2": {
+      "titulo": "Mundo 2: Estruturas de Controle",
+      "url": "https://youtube.com/playlist?list=PLHz_AreHm4dk_nZHmxxf_J0WRAqy5Czye&si=XZHC38KhcinPE0mr"
+    },
+    "3": {
+      "titulo": "Mundo 3: Estruturas Compostas",
+      "url": "https://youtube.com/playlist?list=PLHz_AreHm4dksnH2jVTIVNviIMBVYyFnH&si=nNGMMu2wBB4mJLPu"
+    },
+    "4": {
+      "titulo": "Python POO",
+      "url": "https://youtube.com/playlist?list=PLHz_AreHm4dn_RXXoa3Ameh77f95Hgwv3&si=qzkPjLuvap0hMS97"
+    }
+  }
+}

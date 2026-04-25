@@ -1,0 +1,12 @@
+{
+  "playlists": {
+    "1": {
+      "titulo": "Curso de PHP para Iniciantes",
+      "url": "https://youtube.com/playlist?list=PLHz_AreHm4dm4beCCCmW4xwpmLf6EHY9k&si=mxQ8oNYS6mNS_ieR"
+    },
+    "2": {
+      "titulo": "Curso de PHP Moderno",
+      "url": "https://youtube.com/playlist?list=PLHz_AreHm4dlFPrCXCmd5g92860x_Pbr_&si=LfkbFmgCGS595pzu"
+    }
+  }
+}
