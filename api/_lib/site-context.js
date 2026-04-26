@@ -65,9 +65,13 @@ function resolveFaviconValueByLabel(favicons, bodyLabel) {
     return "";
   }
 
-  const rawLabel = String(bodyLabel || "book")
+  const rawLabel = String(bodyLabel || "")
     .trim()
     .toLowerCase();
+  if (!rawLabel) {
+    return "";
+  }
+
   const normalizedLabel = normalizeFaviconKey(rawLabel);
 
   if (favicons[rawLabel]) {
@@ -83,7 +87,7 @@ function resolveFaviconValueByLabel(favicons, bodyLabel) {
     return normalizedMatch[1];
   }
 
-  return favicons.book || "";
+  return "";
 }
 
 function isValidRemoteFaviconUrl(value) {
@@ -110,7 +114,7 @@ function isValidRemoteFaviconUrl(value) {
 
 function buildSiteContext({
   pathname,
-  bodyLabel = "book",
+  bodyLabel = "",
   host = "",
   repositoryName = "study",
   projectRoot,
@@ -118,11 +122,8 @@ function buildSiteContext({
   const directoryParts = getDirectoryParts(pathname, repositoryName);
   const relativeRootPath = buildRelativeRootPath(directoryParts);
   const runningOnVercel = isVercelHost(host);
-  const defaultFaviconPath = "src/assets/favicon/default.ico";
 
-  let faviconHref = runningOnVercel
-    ? `/${defaultFaviconPath}`
-    : `${relativeRootPath}${defaultFaviconPath}`;
+  let faviconHref = "";
   try {
     const favicons = loadFaviconsMap(projectRoot);
     const faviconValue = resolveFaviconValueByLabel(favicons, bodyLabel);
@@ -140,7 +141,7 @@ function buildSiteContext({
       }
     }
   } catch (error) {
-    // Mantém fallback padrão quando não for possível carregar o JSON.
+    // Mantém sem favicon quando não for possível carregar o JSON.
   }
 
   return {

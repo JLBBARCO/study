@@ -1,5 +1,4 @@
 const VERCEL_DOMAIN_TOKEN = "vercel.app";
-const DEFAULT_FAVICON_PATH = "src/assets/favicon/default.ico";
 const JS_BASE_PATH = "src/js";
 const CSS_BASE_PATH = "src/css";
 const CRITICAL_JS_FILES = ["header.js", "footer.js", "paths.js", "videos.js"];
@@ -441,7 +440,7 @@ function buildLocalSiteContext() {
     relativeRootPath,
     assetBasePath: relativeRootPath,
     pathParts: extrairPathPartsLocal(),
-    faviconHref: `${relativeRootPath}${DEFAULT_FAVICON_PATH}`,
+    faviconHref: "",
     contextSource: "local",
   };
 }
@@ -471,7 +470,8 @@ async function carregarContextoServidor() {
     return siteContextCache;
   }
 
-  const bodyLabel = document.body?.ariaLabel || "book";
+  const rawBodyLabel = document.body?.getAttribute("aria-label");
+  const bodyLabel = typeof rawBodyLabel === "string" ? rawBodyLabel.trim() : "";
   const params = new URLSearchParams({
     pathname: window.location.pathname,
     bodyLabel,
@@ -526,12 +526,18 @@ function insertFavicon() {
   }
 
   const context = getCurrentSiteContext();
-  const fallbackPath = resolveStaticAssetPath(DEFAULT_FAVICON_PATH);
-  const faviconHref = context?.faviconHref || fallbackPath;
+  const faviconHref =
+    typeof context?.faviconHref === "string" ? context.faviconHref.trim() : "";
 
   const existingLinks = Array.from(
     head.querySelectorAll('link[rel="icon"], link[rel="shortcut icon"]'),
   );
+
+  if (!faviconHref) {
+    existingLinks.forEach((faviconLink) => faviconLink.remove());
+    return Promise.resolve();
+  }
+
   const link = existingLinks[0] || document.createElement("link");
   const isPngFavicon = /(?:\.png(?:$|\?))|(?:[?&]format=png\b)/i.test(
     faviconHref,

@@ -70,6 +70,50 @@ function publishVideosPlaylists(sectionId, playlists) {
   );
 }
 
+function normalizePlaylistsCatalog(data) {
+  if (!data || typeof data !== "object") {
+    return [];
+  }
+
+  if (data.playlist && typeof data.playlist === "object") {
+    return [{ key: "1", playlist: data.playlist }];
+  }
+
+  const sourcePlaylists = data.playlists;
+  if (!sourcePlaylists || typeof sourcePlaylists !== "object") {
+    return [];
+  }
+
+  const entries = Object.entries(sourcePlaylists);
+  entries.sort(([keyA], [keyB]) => {
+    const numberA = Number(keyA);
+    const numberB = Number(keyB);
+    const isNumberA = Number.isFinite(numberA);
+    const isNumberB = Number.isFinite(numberB);
+
+    if (isNumberA && isNumberB) {
+      return numberA - numberB;
+    }
+
+    if (isNumberA) {
+      return -1;
+    }
+
+    if (isNumberB) {
+      return 1;
+    }
+
+    return String(keyA).localeCompare(String(keyB), "pt-BR", {
+      sensitivity: "base",
+      numeric: true,
+    });
+  });
+
+  return entries
+    .map(([key, playlist]) => ({ key, playlist }))
+    .filter(({ playlist }) => playlist && typeof playlist === "object");
+}
+
 function videos(options = {}) {
   // Função principal para carregar e exibir os vídeos do curso, organizados por playlists
 
@@ -103,19 +147,20 @@ function videos(options = {}) {
       return response;
     })
     .then((data) => {
-      const playlists = data?.playlists || {};
-      const playlistEntries = Object.keys(playlists)
-        .sort((a, b) => Number(a) - Number(b))
-        .map((key, index) => {
-          const playlist = playlists[key];
+      const playlistEntries = normalizePlaylistsCatalog(data)
+        .map(({ key, playlist }, index) => {
+          const playlistUrl = String(playlist?.url || "").trim();
 
-          if (!playlist || !playlist.url) {
+          if (!playlistUrl) {
             return null;
           }
 
           return {
             key,
-            playlist,
+            playlist: {
+              ...playlist,
+              url: playlistUrl,
+            },
             id: buildPlaylistSectionId(
               playlist.titulo || "playlist",
               key,
