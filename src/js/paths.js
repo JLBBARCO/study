@@ -66,12 +66,23 @@ function pathNames() {
   }
 
   const links = Array.from(pathsBar.querySelectorAll("a"));
-  const currentPageHeading = document.querySelector("section#Home > h1");
+
+  function findHomeHeadingInDoc(doc) {
+    return (
+      doc.querySelector("section#Home > h1") ||
+      doc.querySelector("section#home > h1") ||
+      doc.querySelector('section[aria-label="Home"] > h1') ||
+      doc.querySelector('section[aria-label="home"] > h1') ||
+      null
+    );
+  }
+
+  const currentPageHeading = findHomeHeadingInDoc(document);
 
   function extractTitleFromHtml(htmlText) {
     const parser = new DOMParser();
     const documentHtml = parser.parseFromString(htmlText, "text/html");
-    const heading = documentHtml.querySelector("section#Home > h1");
+    const heading = findHomeHeadingInDoc(documentHtml);
     return heading ? heading.textContent.trim() : null;
   }
 

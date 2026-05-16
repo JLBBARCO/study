@@ -125,15 +125,6 @@ function refreshVideoSubmenus(rootElement) {
   });
 }
 
-function resolveHomeHref() {
-  const context =
-    typeof getCurrentSiteContext === "function"
-      ? getCurrentSiteContext()
-      : null;
-
-  return context?.relativeRootPath || obterCaminhoRelativo();
-}
-
 function ensureHeaderElement() {
   let header = document.querySelector("header");
   if (!header) {
@@ -153,14 +144,14 @@ function createTitleNavigation(title) {
   const navTitle = document.createElement("nav");
   navTitle.className = "nav-title";
 
+  const heading = document.createElement("h1");
+
   const linkingHome = document.createElement("a");
-  linkingHome.href = resolveHomeHref();
+  linkingHome.href = "https://jlbbarco.github.io/portfolio/";
+  linkingHome.textContent = title || "Home";
 
-  const heading = document.createElement("h2");
-  heading.textContent = title || "Título do Site";
-
-  linkingHome.appendChild(heading);
-  navTitle.appendChild(linkingHome);
+  heading.appendChild(linkingHome);
+  navTitle.appendChild(heading);
 
   return navTitle;
 }
@@ -182,7 +173,7 @@ function createMenuButton() {
   return navLinksButton;
 }
 
-function createSectionLink(sectionId) {
+function createSectionLink(sectionId, sectionAriaLabel) {
   const item = document.createElement("div");
   item.className = "nav_item";
 
@@ -190,7 +181,7 @@ function createSectionLink(sectionId) {
   link.href = `#${sectionId}`;
   link.setAttribute("role", "menuitem");
   link.className = "nav_link";
-  link.textContent = sectionId;
+  link.textContent = sectionAriaLabel || sectionId;
 
   if (!isVideoSection(sectionId)) {
     item.appendChild(link);
@@ -234,8 +225,9 @@ function createNavigationLinks() {
   const containers = document.querySelectorAll("main>section");
   containers.forEach((container) => {
     const containerId = container.id;
+    const sectionAriaLabel = container.getAttribute("aria-label");
     if (containerId && containerId !== "Home") {
-      navLinks.appendChild(createSectionLink(containerId));
+      navLinks.appendChild(createSectionLink(containerId, sectionAriaLabel));
     }
   });
 
@@ -267,10 +259,10 @@ function mountHeader(header) {
   }
 }
 
-function navBar(title) {
+function navBar() {
   const header = ensureHeaderElement();
 
-  header.appendChild(createTitleNavigation(title));
+  header.appendChild(createTitleNavigation("JLBBARCO"));
   header.appendChild(createMenuButton());
   header.appendChild(createNavigationLinks());
 

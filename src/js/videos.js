@@ -224,9 +224,9 @@ function videos(options = {}) {
 
 function getVideosCatalogSlug(videosSection) {
   return (
-    videosSection?.getAttribute("aria-label") ||
+    videosSection?.getAttribute("aria-placeholder") ||
     videosSection?.dataset?.videosSlug ||
-    videosSection?.ariaLabel ||
+    videosSection?.ariaPlaceholder ||
     ""
   );
 }
@@ -875,7 +875,7 @@ function cards(linkVideo, titleText, description) {
 
   if (linkVideo) {
     const sectionLinks = document.createElement("section");
-    sectionLinks.classList.add("buttonCard");
+    sectionLinks.classList.add("buttonContainer");
 
     const linkElement = document.createElement("a");
     linkElement.href = linkVideo;

@@ -102,9 +102,28 @@ function getSiteContextEndpoint(params) {
 }
 
 function invokeGlobal(functionName, ...args) {
-  const fn = window[functionName];
-  if (typeof fn === "function") {
-    return fn(...args);
+  if (!functionName) return undefined;
+
+  const capitalize = (s) => (s && s[0].toUpperCase() + s.slice(1)) || s;
+
+  const candidates = [
+    functionName,
+    functionName.toLowerCase(),
+    capitalize(functionName),
+    `initialize${capitalize(functionName)}`,
+    `${functionName}Init`,
+  ];
+
+  for (const name of candidates) {
+    const fn = window[name];
+    if (typeof fn === "function") {
+      try {
+        return fn(...args);
+      } catch (err) {
+        console.error(`Erro ao executar global ${name}:`, err);
+        return undefined;
+      }
+    }
   }
 
   return undefined;
@@ -178,10 +197,9 @@ function ensureLayoutShells() {
     return;
   }
 
+  const homeHeading = getHomeHeadingElement();
   const fallbackTitle =
-    document.querySelector("section#Home>h1")?.textContent?.trim() ||
-    document.title ||
-    "Início";
+    homeHeading?.textContent?.trim() || document.title || "Início";
 
   const headerShell = document.createElement("header");
   headerShell.dataset.shell = "true";
@@ -201,6 +219,17 @@ function ensureLayoutShells() {
   headerShell.appendChild(navTitle);
 
   document.body.prepend(headerShell);
+}
+
+function getHomeHeadingElement() {
+  // Suporta variações comuns: #Home, #home e sections com aria-label="Home"
+  return (
+    document.querySelector("section#Home>h1") ||
+    document.querySelector("section#home>h1") ||
+    document.querySelector('section[aria-label="Home"]>h1') ||
+    document.querySelector('section[aria-label="home"]>h1') ||
+    null
+  );
 }
 
 function stabilizeMediaLayout() {
@@ -251,13 +280,23 @@ function optimizeImageLoading() {
   images.forEach((image, index) => {
     image.decoding = "async";
 
-    const isInHomeSection = Boolean(image.closest("section#Home"));
+    const isInHomeSection = isInsideHomeSection(image);
     const shouldPrioritize = index === 0 || isInHomeSection;
 
     if (!shouldPrioritize && !image.hasAttribute("loading")) {
       image.loading = "lazy";
     }
   });
+}
+
+function isInsideHomeSection(node) {
+  if (!node || !node.closest) return false;
+  return Boolean(
+    node.closest("section#Home") ||
+    node.closest("section#home") ||
+    node.closest('section[aria-label="Home"]') ||
+    node.closest('section[aria-label="home"]'),
+  );
 }
 
 function primeHeadAssets() {
@@ -373,7 +412,7 @@ function cleanupFontAwesomeOriginalComments(scope = document) {
 window.cleanupFontAwesomeOriginalComments = cleanupFontAwesomeOriginalComments;
 
 function updateDocumentTitleFromHome() {
-  const titleHome = document.querySelector("section#Home>h1");
+  const titleHome = getHomeHeadingElement();
   if (!titleHome) return;
 
   const title = titleHome.textContent?.trim() || "Document";
@@ -681,7 +720,7 @@ if (cookies.fontSize) {
   }
 }
 
-// Envolve links que sejam filhos diretos de `.card` dentro de um `section.buttonCard`.
+// Envolve links que sejam filhos diretos de `.card` dentro de um `section.buttonContainer`.
 // Isso evita mover links inline dentro de parágrafos e corrige páginas que
 // possuem âncoras diretas nos cards sem precisar editar todos os HTMLs.
 function wrapCardLinks() {
@@ -693,7 +732,7 @@ function wrapCardLinks() {
 
       // Cria o wrapper apenas se necessário
       const wrapper = document.createElement("section");
-      wrapper.className = "buttonCard";
+      wrapper.className = "buttonContainer";
 
       directAnchors.forEach((a) => wrapper.appendChild(a));
 
@@ -766,7 +805,7 @@ function mudouJanela() {
 }
 
 async function headInsert(path) {
-  const titleHomeEarly = document.querySelector("section#Home>h1");
+  const titleHomeEarly = getHomeHeadingElement();
   const titleText = titleHomeEarly?.textContent?.trim();
   await insertFavicon();
   await insertJS(CRITICAL_JS_FILES, path);

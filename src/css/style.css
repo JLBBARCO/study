@@ -99,24 +99,6 @@ h6 {
   text-align: center;
 }
 
-h1 {
-  font-size: 2rem;
-}
-
-h2 {
-  font-size: 1.5rem;
-}
-
-h3 {
-  font-size: 1.2rem;
-}
-
-h4,
-h5,
-h6 {
-  font-size: 1rem;
-}
-
 .icon {
   display: inline-block;
   font-size: 1rem;
@@ -138,6 +120,7 @@ header {
   width: 100%;
   height: var(--header-size);
   padding: 10px 25px;
+  font-size: .8rem;
   background-color: var(--destaque);
 }
 
@@ -382,28 +365,32 @@ main p {
   text-align: justify;
 }
 
-section#Home {
+section#Home,
+section#home {
   display: flex;
   flex-flow: column nowrap;
   justify-content: center;
   align-items: center;
 }
 
-section#Home section.buttonCard {
+section#Home section.buttonContainer,
+section#home section.buttonContainer {
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
   align-items: center;
 }
 
-section#Home section.buttonCard a {
+section#Home section.buttonContainer a,
+section#home section.buttonContainer a {
   margin: 25px;
   padding: 25px;
   border-radius: 8px;
   background-color: var(--destaque);
 }
 
-section#Home section.buttonCard a:hover {
+section#Home section.buttonContainer a:hover,
+section#home section.buttonContainer a:hover {
   border: var(--borda_padrão);
   text-decoration: none;
   transform: translateY(-5px);

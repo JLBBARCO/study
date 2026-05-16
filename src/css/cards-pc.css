@@ -8,7 +8,7 @@ div.card h3,
 div.card p,
 div.card ul,
 div.card li,
-div.card section.buttonCard {
+div.card section.buttonContainer {
     max-width: 25vw;
 }
 
