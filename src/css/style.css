@@ -108,6 +108,17 @@ h6 {
   color: var(--texto);
 }
 
+span.enphasis {
+  font-weight: 600;
+  color: var(--destaque);
+}
+
+span.enphasis:hover {
+  color: var(--interativo);
+  text-decoration: none;
+  cursor: auto;
+}
+
 /* Cabeçalho */
 header {
   display: flex;

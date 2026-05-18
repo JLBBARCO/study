@@ -116,6 +116,28 @@
             contém as alterações que desejamos incorporar na branch atual.
           </p>
         </div>
+        <div class="card">
+          <h2>Como deletar um commit?</h2>
+          <p>Para deletar um commit, você pode usar o comando <span class="enphasis">git reset</span>. Existem três
+            opções principais para git reset:
+            <span class="enphasis">--soft</span>, <span class="enphasis">--mixed</span> e <span
+              class="enphasis">--hard</span>. O comando <span class="enphasis">
+              git reset
+              --soft HEAD~1
+            </span> irá remover o
+            último commit, mas manterá as
+            alterações no seu diretório de trabalho e na área de stage. O comando <span class="enphasis">
+              git reset
+              --mixed HEAD~1
+            </span> irá remover o
+            último commit e as alterações serão mantidas no seu diretório de trabalho, mas não estarão mais na área de
+            stage. O comando <span class="enphasis">
+              git reset
+              --hard HEAD~1
+            </span> irá remover o último commit e todas as alterações associadas a ele,
+            tanto no diretório de trabalho quanto na área de stage.
+          </p>
+        </div>
       </article>
     </section>
     <section id="videos" aria-label="Videos" aria-placeholder="cursoemvideo-git-github"></section>
