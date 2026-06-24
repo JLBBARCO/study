@@ -1,0 +1,21 @@
+{
+  "favicon": "https://inscricoes.unicesumar.edu.br/assets/images/features/seo/icon/favicon.ico",
+  "main": {
+    "home": {
+      "title": "UniCesumar",
+      "description": "Cursos feitos na UniCesumar"
+    },
+    "cursos": {
+      "aria-label": "Cursos",
+      "container": [
+        {
+          "icon": "fa-solid fa-desktop",
+          "title": "Engenharia de Software",
+          "buttonContainer": [
+            { "link": "engenharia-software/", "text": "Ver Curso" }
+          ]
+        }
+      ]
+    }
+  }
+}

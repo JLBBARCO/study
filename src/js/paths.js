@@ -11,7 +11,9 @@ function paths() {
   }
 
   const caminhoRelativo = obterCaminhoRelativo();
-  const rootPaths = document.createElement("div");
+  const rootPaths = document.createElement("section");
+  rootPaths.id = "rootPaths";
+  rootPaths.setAttribute("aria-label", "Caminho do site");
   rootPaths.className = "root-paths";
   const context =
     typeof getCurrentSiteContext === "function"

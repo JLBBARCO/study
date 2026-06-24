@@ -1,12 +1,17 @@
 const VERCEL_DOMAIN_TOKEN = "vercel.app";
 const JS_BASE_PATH = "src/js";
 const CSS_BASE_PATH = "src/css";
-const CRITICAL_JS_FILES = ["header.js", "footer.js", "paths.js", "videos.js"];
+const JS_LOCAL_PATH = "script.js";
+const CRITICAL_JS_FILES = [
+  "header.js",
+  "data.js",
+  "footer.js",
+  "paths.js",
+  "videos.js",
+];
 const CRITICAL_CSS_FILES = [
   { fileName: "style.css", media: "screen" },
-  { fileName: "cards.css", media: "screen" },
   { fileName: "pc.css", media: "screen and (min-width: 990px)" },
-  { fileName: "cards-pc.css", media: "screen and (min-width: 990px)" },
 ];
 const DEFERRED_JS_FILES = ["accessibility.js", "adsense.js"];
 const PRELOADABLE_FONT_ASSETS = [
@@ -41,6 +46,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     optimizeImageLoading();
     updateDocumentTitleFromHome();
 
+    invokeGlobal("localScript");
+    invokeGlobal("JSONData");
     invokeGlobal("footer");
     invokeGlobal("initializeFooter");
     invokeGlobal("paths");
@@ -548,13 +555,13 @@ async function carregarContextoServidor() {
 }
 
 function extrairPathPartsLocal() {
-  const nomeRepositorio = "study";
+  const nomeRepository = "study";
   const pathIgnore = ["index.html"];
 
   return window.location.pathname
     .split("/")
     .filter(Boolean)
-    .filter((part) => !pathIgnore.includes(part) && part !== nomeRepositorio);
+    .filter((part) => !pathIgnore.includes(part) && part !== nomeRepository);
 }
 
 function insertFavicon() {
@@ -770,24 +777,24 @@ function obterCaminhoRelativo() {
 }
 
 function obterCaminhoRelativoLocal() {
-  const nomeRepositorio = "study";
+  const nomeRepository = "study";
 
   // Caminho relativo do arquivo HTML atual em relação à raiz do site
   let caminhoHTML = window.location.pathname.replace(/^\//, "");
 
-  if (caminhoHTML.startsWith(nomeRepositorio + "/")) {
-    caminhoHTML = caminhoHTML.substring(nomeRepositorio.length + 1);
+  if (caminhoHTML.startsWith(nomeRepository + "/")) {
+    caminhoHTML = caminhoHTML.substring(nomeRepository.length + 1);
   }
 
   // Se quiser apenas o diretório do arquivo HTML:
-  const diretorioHTML = caminhoHTML.substring(
+  const directoryHTML = caminhoHTML.substring(
     0,
     caminhoHTML.lastIndexOf("/") + 1,
   );
 
   // Conta quantas pastas existem no caminho (ignorando o arquivo)
   const pastas =
-    diretorioHTML === "" ? [] : diretorioHTML.split("/").filter(Boolean);
+    directoryHTML === "" ? [] : directoryHTML.split("/").filter(Boolean);
 
   // Gera a string com "../" para cada pasta
   const caminhoRelativoAteRaiz = pastas.map(() => "../").join("");

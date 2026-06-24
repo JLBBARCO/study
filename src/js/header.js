@@ -140,22 +140,6 @@ function ensureHeaderElement() {
   return header;
 }
 
-function createTitleNavigation(title) {
-  const navTitle = document.createElement("nav");
-  navTitle.className = "nav-title";
-
-  const heading = document.createElement("h1");
-
-  const linkingHome = document.createElement("a");
-  linkingHome.href = "https://jlbbarco.github.io/portfolio/";
-  linkingHome.textContent = title || "Home";
-
-  heading.appendChild(linkingHome);
-  navTitle.appendChild(heading);
-
-  return navTitle;
-}
-
 function createMenuButton() {
   const navLinksButton = document.createElement("button");
   navLinksButton.id = NAV_SELECTORS.buttonId;
@@ -262,7 +246,6 @@ function mountHeader(header) {
 function navBar() {
   const header = ensureHeaderElement();
 
-  header.appendChild(createTitleNavigation("JLBBARCO"));
   header.appendChild(createMenuButton());
   header.appendChild(createNavigationLinks());
 
