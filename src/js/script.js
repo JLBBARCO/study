@@ -2,13 +2,7 @@ const VERCEL_DOMAIN_TOKEN = "vercel.app";
 const JS_BASE_PATH = "src/js";
 const CSS_BASE_PATH = "src/css";
 const JS_LOCAL_PATH = "script.js";
-const CRITICAL_JS_FILES = [
-  "header.js",
-  "data.js",
-  "footer.js",
-  "paths.js",
-  "videos.js",
-];
+const CRITICAL_JS_FILES = ["header.js", "footer.js", "paths.js", "videos.js"];
 const CRITICAL_CSS_FILES = [
   { fileName: "style.css", media: "screen" },
   { fileName: "pc.css", media: "screen and (min-width: 990px)" },
@@ -46,8 +40,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     optimizeImageLoading();
     updateDocumentTitleFromHome();
 
-    invokeGlobal("localScript");
-    invokeGlobal("JSONData");
     invokeGlobal("footer");
     invokeGlobal("initializeFooter");
     invokeGlobal("paths");
