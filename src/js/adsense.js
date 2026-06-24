@@ -6,12 +6,21 @@ var adScript = document.createElement("script");
 adScript.async = true;
 adScript.src = scriptSrc;
 adScript.setAttribute("crossorigin", "anonymous");
-document.head.appendChild(adScript);
+if (adScript !== document.head.querySelector(`script[src="${scriptSrc}"]`)) {
+  document.head.appendChild(adScript);
+}
 
 // Criando e adicionando a meta tag de verificação da conta ao <head>
 if (publisherId && publisherId !== "") {
   var adMeta = document.createElement("meta");
   adMeta.name = "google-adsense-account";
   adMeta.content = publisherId;
-  document.head.appendChild(adMeta);
+  if (
+    adMeta !==
+    document.head.querySelector(
+      `meta[name="google-adsense-account"][content="${publisherId}"]`,
+    )
+  ) {
+    document.head.appendChild(adMeta);
+  }
 }
