@@ -376,11 +376,14 @@ main .container {
 
 main .sub-container {
   display: flex;
-  flex-flow: row wrap;
+  flex-flow: column nowrap;
   justify-content: space-evenly;
-  width: 100%;
+  width: auto;
   border-radius: 10px;
   margin: 25px 0;
+  background-color: var(--fundo);
+  border: var(--borda_padrão);
+  box-shadow: var(--shadow);
 }
 
 main article.is-growing {
