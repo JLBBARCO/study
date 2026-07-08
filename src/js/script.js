@@ -590,6 +590,17 @@ function insertFavicon() {
 
   existingLinks.slice(1).forEach((faviconLink) => faviconLink.remove());
 
+  const faviconsList = JSON.parse(
+    `${obterCaminhoRelativoLocal()}src/json/favicons.json`,
+  );
+  if (faviconsList?.favicons) {
+    Object.entries(faviconsList.favicons).forEach(([key, href]) => {
+      if (key === "dio") {
+        faviconHref = href;
+      }
+    });
+  }
+
   return Promise.resolve();
 }
 

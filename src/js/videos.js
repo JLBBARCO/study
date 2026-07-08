@@ -244,9 +244,9 @@ function getVideosCatalogEndpoints(videosSection) {
   const assetBasePath = String(context?.assetBasePath || "");
 
   const candidates = [
-    `${obterCaminhoRelativo()}src/data/youtube/${slug}.json`,
-    `${assetBasePath}src/data/youtube/${slug}.json`,
-    `/src/data/youtube/${slug}.json`,
+    `${obterCaminhoRelativo()}src/json/youtube/${slug}.json`,
+    `${assetBasePath}src/json/youtube/${slug}.json`,
+    `/src/json/youtube/${slug}.json`,
   ];
 
   return Array.from(new Set(candidates));
