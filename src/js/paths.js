@@ -1,3 +1,5 @@
+const blacklist = ["materias", "hackathons"];
+
 function paths() {
   const main = document.querySelector("main");
   if (!main) {
