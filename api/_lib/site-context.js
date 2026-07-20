@@ -1,6 +1,3 @@
-const path = require("path");
-const fs = require("fs");
-
 function normalizePathname(pathname = "/") {
   const decoded = decodeURIComponent(pathname || "/");
   return decoded.startsWith("/") ? decoded : `/${decoded}`;
@@ -38,111 +35,14 @@ function buildRelativeRootPath(directoryParts) {
   return directoryParts.map(() => "../").join("");
 }
 
-function loadFaviconsMap(projectRoot) {
-  const jsonPath = path.join(
-    projectRoot,
-    "src",
-    "assets",
-    "json",
-    "favicons.json",
-  );
-  const raw = fs.readFileSync(jsonPath, "utf-8");
-  const data = JSON.parse(raw);
-  return data.favicons || {};
-}
-
-function normalizeFaviconKey(value) {
-  return String(value || "")
-    .trim()
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .replace(/[^a-z0-9]+/g, "");
-}
-
-function resolveFaviconValueByLabel(favicons, bodyLabel) {
-  if (!favicons || typeof favicons !== "object") {
-    return "";
-  }
-
-  const rawLabel = String(bodyLabel || "")
-    .trim()
-    .toLowerCase();
-  if (!rawLabel) {
-    return "";
-  }
-
-  const normalizedLabel = normalizeFaviconKey(rawLabel);
-
-  if (favicons[rawLabel]) {
-    return favicons[rawLabel];
-  }
-
-  const entries = Object.entries(favicons);
-  const normalizedMatch = entries.find(
-    ([key]) => normalizeFaviconKey(key) === normalizedLabel,
-  );
-
-  if (normalizedMatch) {
-    return normalizedMatch[1];
-  }
-
-  return "";
-}
-
-function isValidRemoteFaviconUrl(value) {
-  if (typeof value !== "string" || value.length === 0) {
-    return false;
-  }
-
-  try {
-    const parsed = new URL(value);
-    const hostname = parsed.hostname.toLowerCase();
-
-    if (
-      (hostname === "icons8.com" || hostname === "www.icons8.com") &&
-      parsed.pathname.startsWith("/icon/")
-    ) {
-      return false;
-    }
-
-    return true;
-  } catch {
-    return false;
-  }
-}
-
 function buildSiteContext({
   pathname,
-  bodyLabel = "",
   host = "",
   repositoryName = "study",
-  projectRoot,
 }) {
   const directoryParts = getDirectoryParts(pathname, repositoryName);
   const relativeRootPath = buildRelativeRootPath(directoryParts);
   const runningOnVercel = isVercelHost(host);
-
-  let faviconHref = "";
-  try {
-    const favicons = loadFaviconsMap(projectRoot);
-    const faviconValue = resolveFaviconValueByLabel(favicons, bodyLabel);
-
-    if (typeof faviconValue === "string" && faviconValue.length > 0) {
-      if (faviconValue.startsWith("http")) {
-        if (isValidRemoteFaviconUrl(faviconValue)) {
-          faviconHref = faviconValue;
-        }
-      } else {
-        const normalizedFaviconPath = faviconValue.replace(/^\/+/, "");
-        faviconHref = runningOnVercel
-          ? `/${normalizedFaviconPath}`
-          : `${relativeRootPath}${normalizedFaviconPath}`;
-      }
-    }
-  } catch (error) {
-    // Mantém sem favicon quando não for possível carregar o JSON.
-  }
 
   return {
     pathname: normalizePathname(pathname),
@@ -152,7 +52,6 @@ function buildSiteContext({
     assetBasePath: runningOnVercel ? "/" : relativeRootPath,
     relativeRootPath,
     pathParts: directoryParts,
-    faviconHref,
   };
 }
 

@@ -136,12 +136,9 @@ const server = http.createServer((req, res) => {
     }
 
     const pathname = url.searchParams.get("pathname") || "/";
-    const bodyLabel = url.searchParams.get("bodyLabel") || "book";
 
     const context = buildSiteContext({
       pathname,
-      bodyLabel,
-      projectRoot: ROOT,
       repositoryName: "study",
     });
 
