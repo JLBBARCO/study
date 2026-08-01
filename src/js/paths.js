@@ -1,4 +1,11 @@
-const blacklist = ["materias", "hackathons"];
+const blacklist = [
+  "materias",
+  "hackathons",
+  "boot-camps",
+  "2-serie",
+  "3-serie",
+  "projetos",
+];
 
 function paths() {
   const main = document.querySelector("main");
@@ -31,6 +38,9 @@ function paths() {
 
   let accumulatedPath = caminhoRelativo;
   pathParts.forEach((part) => {
+    if (blacklist.includes(part)) {
+      return;
+    }
     rootPaths.appendChild(document.createTextNode(" > "));
     accumulatedPath += `${part}/`;
     const link = document.createElement("a");

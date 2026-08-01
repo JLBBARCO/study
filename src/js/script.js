@@ -8,13 +8,11 @@ const CRITICAL_CSS_FILES = [
   { fileName: "pc.css", media: "screen and (min-width: 990px)" },
 ];
 const DEFERRED_JS_FILES = ["accessibility.js", "adsense.js"];
-const PRELOADABLE_FONT_ASSETS = [
-  "src/assets/fonts/Tektur/Tektur-VariableFont.ttf",
-  "src/assets/fonts/Sour_Gummy/SourGummy.ttf",
-];
 const PRECONNECT_ORIGINS = [
   "https://kit.fontawesome.com",
   "https://ka-f.fontawesome.com",
+  "https://fonts.googleapis.com",
+  "https://fonts.gstatic.com",
 ];
 const DEFERRED_TASK_TIMEOUT = 1800;
 let DOCUMENT_URL_TOKEN = "";
@@ -163,26 +161,6 @@ function insertResourceHints() {
     dnsPrefetch.rel = "dns-prefetch";
     dnsPrefetch.href = origin;
     head.appendChild(dnsPrefetch);
-  });
-
-  PRELOADABLE_FONT_ASSETS.forEach((assetPath) => {
-    const fontFileName = assetPath.split("/").pop();
-    const href = resolveStaticAssetPath(assetPath);
-    if (
-      head.querySelector(`link[data-preload="${fontFileName}"]`) ||
-      head.querySelector(`link[rel="preload"][href="${href}"]`)
-    ) {
-      return;
-    }
-
-    const preload = document.createElement("link");
-    preload.rel = "preload";
-    preload.as = "font";
-    preload.type = "font/ttf";
-    preload.href = href;
-    preload.crossOrigin = "anonymous";
-    preload.dataset.preload = fontFileName;
-    head.appendChild(preload);
   });
 }
 
@@ -626,9 +604,7 @@ function loadFaviconsMap() {
   faviconsMapPromise = fetch(url)
     .then((response) => {
       if (!response.ok) {
-        throw new Error(
-          `Falha ao carregar favicons.json: ${response.status}`,
-        );
+        throw new Error(`Falha ao carregar favicons.json: ${response.status}`);
       }
       return response.json();
     })

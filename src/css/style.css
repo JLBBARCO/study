@@ -1,15 +1,23 @@
 @charset "UTF-8";
 
-@font-face {
-  font-family: "Sour Gummy";
-  src: url(../assets/fonts/Sour_Gummy/SourGummy.ttf) format("truetype");
-  font-display: optional;
+@import url('https://fonts.googleapis.com/css2?family=Sour+Gummy:ital,wght@0,100..900;1,100..900&family=Tektur:wght@400..900&display=swap');
+
+.sour-gummy-<uniquifier> {
+  font-family: "Sour Gummy", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: <weight>;
+  font-style: normal;
+  font-variation-settings:
+    "wdth" 100;
 }
 
-@font-face {
-  font-family: "Tektur";
-  src: url(../assets/fonts/Tektur/Tektur-VariableFont.ttf) format("truetype");
-  font-display: optional;
+.tektur-<uniquifier> {
+  font-family: "Tektur", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: <weight>;
+  font-style: normal;
+  font-variation-settings:
+    "wdth" 100;
 }
 
 /* estilização base */
@@ -317,11 +325,6 @@ nav {
   text-decoration: none;
 }
 
-/* Classe para controlar a visibilidade do menu */
-.nav_links.active {
-  display: flex;
-}
-
 @media (prefers-reduced-motion: reduce) {
 
   header button,
@@ -507,13 +510,6 @@ section#home section.buttonContainer a:hover {
   border: var(--borda_padrão);
   text-decoration: none;
   transform: translateY(-5px);
-}
-
-main .container {
-  display: flex;
-  flex-flow: column nowrap;
-  justify-content: center;
-  align-items: center;
 }
 
 article .destaque {
