@@ -65,15 +65,6 @@ main .container {
     justify-content: space-around;
 }
 
-div.card h2,
-div.card h3,
-div.card p,
-div.card ul,
-div.card li,
-div.card section.buttonContainer {
-    max-width: 25vw;
-}
-
 div.card .card-description-text {
     line-clamp: 5;
     -webkit-line-clamp: 5;

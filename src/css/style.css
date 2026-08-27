@@ -375,6 +375,7 @@ main .container {
   flex-flow: row wrap;
   align-items: center;
   justify-content: space-evenly;
+  gap: 1rem;
 }
 
 main .sub-container {
@@ -524,12 +525,11 @@ article .destaque {
 
 div.card {
   display: flex;
+  flex: 1 1 auto;
   flex-direction: column;
   align-items: center;
-  flex: 1 1 280px;
-  min-width: 240px;
-  max-width: 420px;
-  margin: 25px;
+  justify-content: space-around;
+  height: stretch;
   border: var(--borda_padrão);
   border-radius: 10px;
   text-align: center;
@@ -554,6 +554,18 @@ div.card iframe {
   height: auto;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
+}
+
+div.card h1,
+div.card h2,
+div.card h3,
+div.card h4,
+div.card h5,
+div.card h6,
+div.card p,
+div.card ul,
+div.card li {
+  max-width: 250px;
 }
 
 div.card p {
