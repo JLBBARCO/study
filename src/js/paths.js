@@ -5,6 +5,7 @@ const blacklist = [
   "2-serie",
   "3-serie",
   "projetos",
+  "trilhas",
 ];
 
 function paths() {
