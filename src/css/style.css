@@ -530,12 +530,12 @@ div.card .icon {
   margin: 15px;
 }
 
+div.card picture,
 div.card img,
 div.card iframe {
-  width: 100%;
+  max-width: 250px;
   height: auto;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
+  border-radius: 10px 10px 0 0;
 }
 
 div.card h1,

@@ -1,4 +1,5 @@
 const blacklist = [
+  "cursos",
   "materias",
   "hackathons",
   "boot-camps",
