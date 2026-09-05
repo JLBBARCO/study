@@ -534,115 +534,6 @@ function extrairPathPartsLocal() {
     .filter((part) => !pathIgnore.includes(part) && part !== nomeRepository);
 }
 
-const FAVICONS_JSON_PATH = "src/json/favicons.json";
-let faviconsMapPromise = null;
-
-function normalizeFaviconKey(value) {
-  return String(value || "")
-    .trim()
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .replace(/[^a-z0-9]+/g, "");
-}
-
-function resolveFaviconValueByLabel(favicons, bodyLabel) {
-  if (!favicons || typeof favicons !== "object") {
-    return "";
-  }
-
-  const rawLabel = String(bodyLabel || "")
-    .trim()
-    .toLowerCase();
-  if (!rawLabel) {
-    return "";
-  }
-
-  const normalizedLabel = normalizeFaviconKey(rawLabel);
-
-  if (favicons[rawLabel]) {
-    return favicons[rawLabel];
-  }
-
-  const entries = Object.entries(favicons);
-  const normalizedMatch = entries.find(
-    ([key]) => normalizeFaviconKey(key) === normalizedLabel,
-  );
-
-  return normalizedMatch ? normalizedMatch[1] : "";
-}
-
-function isValidRemoteFaviconUrl(value) {
-  if (typeof value !== "string" || value.length === 0) {
-    return false;
-  }
-
-  try {
-    const parsed = new URL(value);
-    const hostname = parsed.hostname.toLowerCase();
-
-    if (
-      (hostname === "icons8.com" || hostname === "www.icons8.com") &&
-      parsed.pathname.startsWith("/icon/")
-    ) {
-      return false;
-    }
-
-    return true;
-  } catch {
-    return false;
-  }
-}
-
-function loadFaviconsMap() {
-  if (faviconsMapPromise) {
-    return faviconsMapPromise;
-  }
-
-  const url = resolveStaticAssetPath(FAVICONS_JSON_PATH);
-
-  faviconsMapPromise = fetch(url)
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error(`Falha ao carregar favicons.json: ${response.status}`);
-      }
-      return response.json();
-    })
-    .then((data) => data?.favicons || {})
-    .catch((error) => {
-      console.warn("Não foi possível carregar mapa de favicons.", error);
-      faviconsMapPromise = null;
-      return {};
-    });
-
-  return faviconsMapPromise;
-}
-
-function getFaviconBodyLabel() {
-  const rawBodyLabel = document.body?.getAttribute("aria-label");
-  return typeof rawBodyLabel === "string" ? rawBodyLabel.trim() : "";
-}
-
-function buildFaviconHref(faviconValue) {
-  if (typeof faviconValue !== "string" || faviconValue.length === 0) {
-    return "";
-  }
-
-  if (faviconValue.startsWith("http")) {
-    return isValidRemoteFaviconUrl(faviconValue) ? faviconValue : "";
-  }
-
-  const normalizedFaviconPath = faviconValue.replace(/^\/+/, "");
-  return resolveStaticAssetPath(normalizedFaviconPath);
-}
-
-async function resolveFaviconHref() {
-  const favicons = await loadFaviconsMap();
-  const bodyLabel = getFaviconBodyLabel();
-  const faviconValue = resolveFaviconValueByLabel(favicons, bodyLabel);
-  return buildFaviconHref(faviconValue);
-}
-
 async function insertFavicon() {
   const head = document.querySelector("head");
   if (!head) {
@@ -654,12 +545,7 @@ async function insertFavicon() {
     head.querySelectorAll('link[rel="icon"], link[rel="shortcut icon"]'),
   );
 
-  let faviconHref = "";
-  try {
-    faviconHref = await resolveFaviconHref();
-  } catch (error) {
-    console.warn("Não foi possível resolver o favicon no cliente.", error);
-  }
+  const faviconHref = "/src/assets/favicon/default.ico";
 
   if (!faviconHref) {
     existingLinks.forEach((faviconLink) => faviconLink.remove());
