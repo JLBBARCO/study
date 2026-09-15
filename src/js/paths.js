@@ -1,4 +1,10 @@
 const blacklist = [
+  "cursoemvideo",
+  "colegioadolpho",
+  "fundacao-bradesco",
+  "hashtag-programacao",
+  "qlik",
+  "unicesumar",
   "cursos",
   "materias",
   "hackathons",
@@ -40,17 +46,23 @@ function paths() {
 
   let accumulatedPath = caminhoRelativo;
   pathParts.forEach((part) => {
-    if (blacklist.includes(part)) {
-      return;
-    }
     rootPaths.appendChild(document.createTextNode(" > "));
     accumulatedPath += `${part}/`;
-    const link = document.createElement("a");
-    link.href = accumulatedPath;
-    link.id = part;
-    link.dataset.pathKey = decodeURIComponent(part);
-    link.textContent = decodeURIComponent(part);
-    rootPaths.appendChild(link);
+    const backHTML = (accumulatedPath += "index.html");
+    console.log(backHTML);
+    if (backHTML) {
+      const item = document.createElement("p");
+      item.dataset.pathKey = decodeURIComponent(part);
+      item.textContent = decodeURIComponent(part).toUpperCase().split();
+      rootPaths.appendChild(item);
+    } else {
+      const item = document.createElement("a");
+      item.href = accumulatedPath;
+      item.id = part;
+      item.dataset.pathKey = decodeURIComponent(part);
+      item.textContent = decodeURIComponent(part);
+      rootPaths.appendChild(item);
+    }
   });
 
   main.prepend(rootPaths);

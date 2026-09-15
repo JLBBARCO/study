@@ -215,6 +215,11 @@ function createNavigationLinks() {
     }
   });
 
+  const aside = document.querySelector("body>aside");
+  if (aside && aside.id) {
+    navLinks.appendChild(createSectionLink(aside.id, "Mais"));
+  }
+
   return navLinks;
 }
 

@@ -329,7 +329,8 @@ nav {
   font-size: 0.9rem;
 }
 
-.root-paths a {
+.root-paths a,
+.root-paths p {
   box-shadow: var(--shadow);
   padding: 5px 10px;
   margin: 5px;
@@ -338,7 +339,8 @@ nav {
 }
 
 /* Conteúdo Principal */
-main>section {
+main>section,
+main>section>section {
   display: flex;
   flex-flow: column nowrap;
   justify-content: center;
@@ -358,6 +360,7 @@ main .container {
   align-items: center;
   justify-content: space-evenly;
   gap: 1rem;
+  margin: 1rem 0;
 }
 
 main .sub-container {
@@ -472,24 +475,24 @@ section#home {
   align-items: center;
 }
 
-section#Home section.buttonContainer,
-section#home section.buttonContainer {
+section article.buttonContainer,
+section article.buttonContainer {
   display: flex;
   flex-flow: row wrap;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
 }
 
-section#Home section.buttonContainer a,
-section#home section.buttonContainer a {
+section article.buttonContainer a,
+section article.buttonContainer a {
   margin: 25px;
   padding: 25px;
   border-radius: 8px;
   background-color: var(--destaque);
 }
 
-section#Home section.buttonContainer a:hover,
-section#home section.buttonContainer a:hover {
+section article.buttonContainer a:hover,
+section article.buttonContainer a:hover {
   border: var(--borda_padrão);
   text-decoration: none;
   transform: translateY(-5px);
