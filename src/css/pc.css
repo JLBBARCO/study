@@ -25,7 +25,7 @@ header {
     padding: .5rem 1rem;
     gap: 1rem;
     width: auto;
-    overflow: hidden;
+    overflow: visible;
     border-radius: 999px;
 }
 
@@ -58,6 +58,38 @@ header {
 .nav_links .nav_item.has-submenu:hover .nav_submenu,
 .nav_links .nav_item.has-submenu:focus-within .nav_submenu {
     display: flex;
+}
+
+div.drop-menu {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 220px;
+    z-index: 1001;
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    background-color: var(--fundo-header);
+}
+
+div.drop-menu.active {
+    display: flex;
+}
+
+div.drop-menu .nav_item,
+div.drop-menu .nav_item-header,
+div.drop-menu .nav_link {
+    width: 100%;
+}
+
+div.drop-menu .nav_link {
+    border-radius: 6px;
+    text-align: left;
 }
 
 main .container {

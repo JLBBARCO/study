@@ -256,6 +256,34 @@ nav {
   width: 100%;
 }
 
+.drop-menu {
+  display: none;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 4px;
+  width: 100%;
+  margin-top: 6px;
+  padding: 8px;
+  border-radius: 8px;
+  background-color: rgba(1, 19, 39, 0.72);
+}
+
+.drop-menu.active,
+.nav_item.submenu-open>.drop-menu {
+  display: flex;
+}
+
+.drop-menu .nav_item,
+.drop-menu .nav_item-header,
+.drop-menu .nav_link {
+  width: 100%;
+}
+
+.drop-menu .nav_link {
+  padding: 6px 10px;
+  text-align: left;
+}
+
 .nav_submenu-toggle {
   display: inline-flex;
   align-items: center;

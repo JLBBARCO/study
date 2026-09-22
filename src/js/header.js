@@ -14,117 +14,6 @@ function normalizeSectionId(sectionId) {
     .replace(/[\u0300-\u036f]/g, "");
 }
 
-function isVideoSection(sectionId) {
-  return normalizeSectionId(sectionId) === "videos";
-}
-
-function getVideoPlaylistsBySection(sectionId) {
-  const playlistsBySection = window.videosPlaylistsBySection || {};
-  const directMatch = playlistsBySection[sectionId];
-  if (Array.isArray(directMatch)) {
-    return directMatch;
-  }
-
-  const normalizedRequestedId = normalizeSectionId(sectionId);
-  const matchedKey = Object.keys(playlistsBySection).find(
-    (key) => normalizeSectionId(key) === normalizedRequestedId,
-  );
-
-  return Array.isArray(playlistsBySection[matchedKey])
-    ? playlistsBySection[matchedKey]
-    : [];
-}
-
-function createVideoSubmenu(sectionId) {
-  const submenu = document.createElement("div");
-  submenu.className = "nav_submenu";
-  submenu.dataset.sectionId = sectionId;
-  submenu.setAttribute("role", "menu");
-
-  populateVideoSubmenu(submenu, sectionId);
-  return submenu;
-}
-
-function populateVideoSubmenu(submenu, sectionId) {
-  if (!submenu) {
-    return;
-  }
-
-  submenu.replaceChildren();
-
-  const playlists = getVideoPlaylistsBySection(sectionId);
-  if (!playlists.length) {
-    const emptyItem = document.createElement("span");
-    emptyItem.className = "nav_submenu-empty";
-    emptyItem.textContent = "Playlists indisponíveis";
-    submenu.appendChild(emptyItem);
-    return;
-  }
-
-  playlists.forEach(({ id, title }) => {
-    const link = document.createElement("a");
-    link.href = `#${id}`;
-    link.textContent = title || "Playlist";
-    link.dataset.playlistId = id;
-    link.dataset.sectionId = sectionId;
-    link.className = "nav_submenu-link";
-    link.setAttribute("role", "menuitem");
-
-    link.addEventListener("click", (event) => {
-      event.preventDefault();
-      const targetSectionId = link.dataset.sectionId;
-      const targetPlaylistId = link.dataset.playlistId;
-
-      if (
-        typeof window.videosLoadPlaylist === "function" &&
-        targetSectionId &&
-        targetPlaylistId
-      ) {
-        window.videosLoadPlaylist(targetSectionId, targetPlaylistId);
-        return;
-      }
-
-      const fallbackTarget = document.getElementById(targetPlaylistId);
-      if (fallbackTarget) {
-        fallbackTarget.scrollIntoView({ behavior: "smooth", block: "start" });
-      }
-    });
-
-    submenu.appendChild(link);
-  });
-}
-
-function closeAllVideoSubmenus(rootElement) {
-  if (!rootElement) {
-    return;
-  }
-
-  const expandedToggles = rootElement.querySelectorAll(
-    ".nav_submenu-toggle[aria-expanded='true']",
-  );
-  expandedToggles.forEach((toggle) => {
-    toggle.setAttribute("aria-expanded", "false");
-  });
-
-  const openedItems = rootElement.querySelectorAll(".nav_item.submenu-open");
-  openedItems.forEach((item) => {
-    item.classList.remove("submenu-open");
-  });
-}
-
-function refreshVideoSubmenus(rootElement) {
-  if (!rootElement) {
-    return;
-  }
-
-  const videoSubmenus = rootElement.querySelectorAll(
-    ".nav_submenu[data-section-id]",
-  );
-  videoSubmenus.forEach((submenu) => {
-    populateVideoSubmenu(submenu, submenu.dataset.sectionId);
-  });
-}
-
 function ensureHeaderElement() {
   let header = document.querySelector("header");
   if (!header) {
@@ -157,46 +46,58 @@ function createMenuButton() {
   return navLinksButton;
 }
 
-function createSectionLink(sectionId, sectionAriaLabel) {
+function createSectionLink(sectionId, sectionAriaLabel, subSections = false) {
   const item = document.createElement("div");
   item.className = "nav_item";
 
   const link = document.createElement("a");
   link.href = `#${sectionId}`;
   link.setAttribute("role", "menuitem");
+  link.setAttribute("aria-popups", "true");
   link.className = "nav_link";
   link.textContent = sectionAriaLabel || sectionId;
+  if (subSections) {
+    item.classList.add("has-submenu");
+    item.setAttribute("aria-haspopup", "true");
+    link.setAttribute("aria-haspopup", "true");
+    item.dataset.dropMenuId = `${sectionId}-drop-menu`;
 
-  if (!isVideoSection(sectionId)) {
-    item.appendChild(link);
-    return item;
+    item.addEventListener("mouseenter", () => {
+      showDropMenu(item.dataset.dropMenuId, true);
+    });
+
+    item.addEventListener("mouseleave", () => {
+      showDropMenu(item.dataset.dropMenuId, false);
+    });
   }
-
-  item.classList.add("has-submenu");
 
   const itemHeader = document.createElement("div");
   itemHeader.className = "nav_item-header";
   itemHeader.appendChild(link);
 
-  const submenuToggle = document.createElement("button");
-  submenuToggle.type = "button";
-  submenuToggle.className = "nav_submenu-toggle";
-  submenuToggle.setAttribute("aria-label", "Mostrar playlists de videos");
-  submenuToggle.setAttribute("aria-expanded", "false");
-  submenuToggle.textContent = "▾";
+  if (subSections) {
+    const submenuToggle = document.createElement("button");
+    submenuToggle.type = "button";
+    submenuToggle.className = "nav_submenu-toggle";
+    submenuToggle.setAttribute("aria-label", "Mostrar playlists de videos");
+    submenuToggle.setAttribute("aria-expanded", "false");
+    submenuToggle.textContent = "▾";
 
-  submenuToggle.addEventListener("click", (event) => {
-    event.preventDefault();
-    event.stopPropagation();
+    submenuToggle.addEventListener("click", (event) => {
+      event.preventDefault();
+      event.stopPropagation();
 
-    const isExpanded = submenuToggle.getAttribute("aria-expanded") === "true";
-    submenuToggle.setAttribute("aria-expanded", String(!isExpanded));
-    item.classList.toggle("submenu-open", !isExpanded);
-  });
+      const isExpanded = submenuToggle.getAttribute("aria-expanded") === "true";
+      const shouldExpand = !isExpanded;
+      submenuToggle.setAttribute("aria-expanded", String(shouldExpand));
+      item.classList.toggle("submenu-open", shouldExpand);
+      showDropMenu(item.dataset.dropMenuId, shouldExpand);
+    });
 
-  itemHeader.appendChild(submenuToggle);
+    itemHeader.appendChild(submenuToggle);
+  }
+
   item.appendChild(itemHeader);
-  item.appendChild(createVideoSubmenu(sectionId));
 
   return item;
 }
@@ -211,7 +112,21 @@ function createNavigationLinks() {
     const containerId = container.id;
     const sectionAriaLabel = container.getAttribute("aria-label");
     if (containerId && containerId !== "Home") {
-      navLinks.appendChild(createSectionLink(containerId, sectionAriaLabel));
+      navLinks.appendChild(
+        createSectionLink(
+          containerId,
+          sectionAriaLabel,
+          container.dataset.ariaControls == "drop-menu" ? true : false,
+        ),
+      );
+    }
+
+    if (container.dataset.ariaControls == "drop-menu") {
+      const containerSubSections = document.querySelectorAll(
+        `main>section#${containerId}>section`,
+      );
+
+      dropMenu(navLinks, container.id, container.dataset, containerSubSections);
     }
   });
 
@@ -233,7 +148,6 @@ function setMenuState(navLinksButton, navLinks, menuIcon, expanded) {
 
 function closeMenu(navLinksButton, navLinks, menuIcon) {
   setMenuState(navLinksButton, navLinks, menuIcon, false);
-  closeAllVideoSubmenus(navLinks);
 }
 
 function mountHeader(header) {
@@ -319,7 +233,34 @@ function initializeNavigation() {
     { signal },
   );
 
-  refreshVideoSubmenus(navLinks);
-
   window.addEventListener("resize", handleResize, { signal });
+}
+
+function dropMenu(navLinks, containerId, containerData, containerSubSections) {
+  const containerMenu = document.createElement("div");
+  containerMenu.id = `${containerId}-drop-menu`;
+  containerMenu.className = "drop-menu";
+  containerMenu.setAttribute("aria-label", containerData["aria-label"] || "");
+
+  containerSubSections.forEach((subSection) => {
+    const subSectionId = subSection.id;
+    const subSectionAriaLabel = subSection.getAttribute("aria-label");
+    containerMenu.appendChild(
+      createSectionLink(subSectionId, subSectionAriaLabel),
+    );
+  });
+
+  const containerItem = navLinks.querySelector(
+    `[data-drop-menu-id="${containerMenu.id}"]`,
+  );
+  (containerItem || navLinks).appendChild(containerMenu);
+
+  console.log(containerId, containerData, containerSubSections);
+}
+
+function showDropMenu(containerMenuId, show = true) {
+  const containerMenu = document.getElementById(containerMenuId);
+  if (containerMenu) {
+    containerMenu.classList.toggle("active", show);
+  }
 }
