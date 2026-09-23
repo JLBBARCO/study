@@ -1,0 +1,24 @@
+/* Estilização do layout em tablet */
+
+body {
+    font-size: 0.9rem;
+}
+
+header {
+    flex-flow: row wrap;
+    justify-content: space-between;
+}
+
+main>section,
+main>section>section {
+    padding: 6%;
+}
+
+main .container {
+    justify-content: center;
+    gap: 1.25rem;
+}
+
+footer {
+    padding: 4%;
+}

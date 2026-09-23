@@ -5,7 +5,19 @@ const JS_LOCAL_PATH = "script.js";
 const CRITICAL_JS_FILES = ["header.js", "footer.js", "paths.js"];
 const CRITICAL_CSS_FILES = [
   { fileName: "style.css", media: "screen" },
+  {
+    fileName: "tablet.css",
+    media: "screen and (min-width: 768px) and (max-width: 989px)",
+  },
   { fileName: "pc.css", media: "screen and (min-width: 990px)" },
+  { fileName: "tv.css", media: "screen and (min-width: 1200px)" },
+  { fileName: "cards.css", media: "screen" },
+  {
+    fileName: "cards-tablet.css",
+    media: "screen and (min-width: 768px) and (max-width: 989px)",
+  },
+  { fileName: "cards-pc.css", media: "screen and (min-width: 990px)" },
+  { fileName: "cards-tv.css", media: "screen and (min-width: 1200px)" },
 ];
 const DEFERRED_JS_FILES = ["accessibility.js", "adsense.js"];
 const PRECONNECT_ORIGINS = [

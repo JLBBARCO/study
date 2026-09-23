@@ -1,0 +1,18 @@
+/* Estilização para televisão */
+
+body {
+    font-size: 1.05rem;
+}
+
+main>section,
+main>section>section {
+    padding: 4%;
+}
+
+main .container {
+    gap: 1.5rem;
+}
+
+footer {
+    padding: 3%;
+}

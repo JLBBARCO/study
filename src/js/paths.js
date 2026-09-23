@@ -15,6 +15,22 @@ const blacklist = [
   "trilhas",
 ];
 
+async function directoryHasIndex(indexUrl) {
+  try {
+    const headResponse = await fetch(indexUrl, { method: "HEAD" });
+    if (headResponse.ok) {
+      return true;
+    }
+  } catch {}
+
+  try {
+    const getResponse = await fetch(indexUrl, { method: "GET" });
+    return getResponse.ok;
+  } catch {
+    return false;
+  }
+}
+
 function paths() {
   const main = document.querySelector("main");
   if (!main) {
@@ -48,21 +64,31 @@ function paths() {
   pathParts.forEach((part) => {
     rootPaths.appendChild(document.createTextNode(" > "));
     accumulatedPath += `${part}/`;
-    const backHTML = (accumulatedPath += "index.html");
-    console.log(backHTML);
-    if (backHTML) {
-      const item = document.createElement("p");
-      item.dataset.pathKey = decodeURIComponent(part);
-      item.textContent = decodeURIComponent(part).toUpperCase().split();
-      rootPaths.appendChild(item);
-    } else {
-      const item = document.createElement("a");
-      item.href = accumulatedPath;
-      item.id = part;
-      item.dataset.pathKey = decodeURIComponent(part);
-      item.textContent = decodeURIComponent(part);
-      rootPaths.appendChild(item);
-    }
+    const item = document.createElement("p");
+    const decodedPart = decodeURIComponent(part);
+    const indexPath = `${accumulatedPath}index.html`;
+
+    item.id = part;
+    item.dataset.pathKey = decodedPart;
+    item.textContent = decodedPart;
+    rootPaths.appendChild(item);
+
+    directoryHasIndex(indexPath).then((hasIndex) => {
+      if (!hasIndex || !item.isConnected) {
+        return;
+      }
+
+      const link = document.createElement("a");
+      link.href = indexPath;
+      link.id = part;
+      link.dataset.pathKey = decodedPart;
+      link.textContent = decodedPart;
+      item.replaceWith(link);
+
+      if (typeof pathNames === "function") {
+        pathNames();
+      }
+    });
   });
 
   main.prepend(rootPaths);

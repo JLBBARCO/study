@@ -1,0 +1,18 @@
+/* Estilização dos cards em desktop */
+
+div.card {
+    flex: 0 1 280px;
+}
+
+div.card picture,
+div.card img,
+div.card iframe {
+    max-width: 250px;
+    height: auto;
+    border-radius: 0;
+}
+
+div.card .card-description-text {
+    line-clamp: 5;
+    -webkit-line-clamp: 5;
+}

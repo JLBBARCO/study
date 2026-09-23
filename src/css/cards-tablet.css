@@ -1,0 +1,12 @@
+/* Estilização dos cards em tablet */
+
+div.card {
+    flex: 0 1 calc(50% - 1.25rem);
+    min-width: 280px;
+}
+
+div.card picture,
+div.card img,
+div.card iframe {
+    max-width: 100%;
+}
