@@ -27,6 +27,8 @@ const PRECONNECT_ORIGINS = [
   "https://fonts.gstatic.com",
 ];
 const DEFERRED_TASK_TIMEOUT = 1800;
+const ADSENSE_PUBLISHER_ID = "ca-pub-1575745628375298";
+const ADSENSE_SCRIPT_ID = "google-adsense-script";
 let DOCUMENT_URL_TOKEN = "";
 const domain = document.URL;
 
@@ -292,6 +294,7 @@ function isInsideHomeSection(node) {
 function primeHeadAssets() {
   if (!document.head) return;
 
+  loadAdSenseEarly();
   insertResourceHints();
   ensureLayoutShells();
 
@@ -300,6 +303,29 @@ function primeHeadAssets() {
   insertFavicon().catch(() => {
     // Silencia erro inicial; favicon será revalidado durante inicialização.
   });
+}
+
+function loadAdSenseEarly() {
+  const head = document.head;
+  if (!head) return;
+
+  if (!document.querySelector('meta[name="google-adsense-account"]')) {
+    const meta = document.createElement("meta");
+    meta.name = "google-adsense-account";
+    meta.content = ADSENSE_PUBLISHER_ID;
+    head.appendChild(meta);
+  }
+
+  window.adsbygoogle = window.adsbygoogle || [];
+
+  if (document.getElementById(ADSENSE_SCRIPT_ID)) return;
+
+  const script = document.createElement("script");
+  script.id = ADSENSE_SCRIPT_ID;
+  script.async = true;
+  script.src = `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_PUBLISHER_ID}`;
+  script.crossOrigin = "anonymous";
+  head.appendChild(script);
 }
 
 function normalizeBasePath(basePath) {
