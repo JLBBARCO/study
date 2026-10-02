@@ -42,6 +42,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     await carregarContextoServidor();
     await headInsert(DOCUMENT_URL_TOKEN);
 
+    loadAdSense();
     invokeGlobal("initializeNavigation");
     initializeSmoothScroll();
     initializeCookies();

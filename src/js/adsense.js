@@ -9,7 +9,3 @@ function loadAdSense() {
     `<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1575745628375298" crossorigin="anonymous"></script>`,
   );
 }
-
-document.addEventListener("DOMContentLoaded", function () {
-  loadAdSense();
-});
