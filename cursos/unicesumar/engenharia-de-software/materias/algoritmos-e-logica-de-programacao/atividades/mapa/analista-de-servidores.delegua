@@ -1,0 +1,25 @@
+var servidores = []
+var chave = -1
+var nome_servidor = ''
+
+enquanto (chave != 0) {
+    escreva("\n-----------------")
+    escreva("\n[0] Sair")
+    escreva("\n[1] Inserir dados")
+    escreva("\n-----------------\n")
+    chave = leia(chave)
+
+    se (chave == 1) {
+        escreva("\n----------------")
+        escreva("\nDigite o nome do servidor (ou 0 para voltar): ")
+        escreva("\n----------------\n")
+        nome_servidor = leia(nome_servidor)
+
+        se (nome_servidor != '0' e nome_servidor != '') {
+            servidores.adicionar(nome_servidor)
+            escreva("Servidor '" + nome_servidor + "' cadastrado com sucesso!\n")
+        }
+    }
+}
+
+escreva("Saindo... Total de servidores: " + servidores.tamanho())
