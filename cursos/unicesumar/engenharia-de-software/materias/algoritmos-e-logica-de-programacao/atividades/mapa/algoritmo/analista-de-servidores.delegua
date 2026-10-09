@@ -1,5 +1,5 @@
 var servidores = []
-var chave = -1
+var chave = 1
 var nome_servidor = ''
 
 enquanto (chave != 0) {
@@ -9,7 +9,9 @@ enquanto (chave != 0) {
     escreva("\n-----------------\n")
     chave = leia(chave)
 
-    se (chave == 1) {
+    se (chave == 0) {
+        escreva('Saindo do programa...');
+    } senao se (chave == 1) {
         escreva("\n----------------")
         escreva("\nDigite o nome do servidor (ou 0 para voltar): ")
         escreva("\n----------------\n")
