@@ -7,5 +7,9 @@
     "dev": "node dev-server.js",
     "dev:offline": "node dev-server.js --offline",
     "start": "node dev-server.js"
+  },
+  "dependencies": {
+    "@designliquido/delegua": "1.12.10",
+    "@designliquido/delegua-node": "1.12.10"
   }
 }
