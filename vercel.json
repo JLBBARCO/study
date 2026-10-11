@@ -1,4 +1,5 @@
 {
+  "installCommand": "npm install --omit=optional",
   "headers": [
     {
       "source": "/src/(.*)",

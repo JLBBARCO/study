@@ -3,7 +3,6 @@ const fs = require("fs");
 const path = require("path");
 const { URL } = require("url");
 const { buildSiteContext } = require("./api/_lib/site-context");
-const youtubePlaylistHandler = require("./api/youtube-playlist");
 
 const ROOT = process.cwd();
 
@@ -143,43 +142,6 @@ const server = http.createServer((req, res) => {
     });
 
     sendJson(res, 200, context);
-    return;
-  }
-
-  if (
-    url.pathname === "/api/youtube-playlist" ||
-    url.pathname === "/api/youtube-playlist/"
-  ) {
-    const reqProxy = {
-      query: Object.fromEntries(url.searchParams.entries()),
-      headers: req.headers,
-      url: req.url,
-    };
-
-    const resProxy = {
-      statusCode: 200,
-      headers: {},
-      setHeader(name, value) {
-        this.headers[name] = value;
-      },
-      status(code) {
-        this.statusCode = code;
-        return this;
-      },
-      json(payload) {
-        sendJson(res, this.statusCode, payload);
-      },
-    };
-
-    Promise.resolve(youtubePlaylistHandler(reqProxy, resProxy)).catch(
-      (error) => {
-        sendJson(res, 500, {
-          error: "Erro ao processar /api/youtube-playlist",
-          detail: error.message,
-        });
-      },
-    );
-
     return;
   }
 
