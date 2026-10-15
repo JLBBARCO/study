@@ -1,6 +1,10 @@
 {
   "name": "study",
   "version": "1.0.0",
+  "workspaces": [
+    "cursos/hashtag-programacao/react/audible",
+    "cursos/colegio-adolpho/ensino-medio/3-serie/programacao-back-end/atividades/atividade12/orgs-cesta"
+  ],
   "private": true,
   "description": "Projeto de estudos com execução local e deploy na Vercel",
   "scripts": {
@@ -11,5 +15,8 @@
   "optionalDependencies": {
     "@designliquido/delegua": "1.12.10",
     "@designliquido/delegua-node": "1.12.10"
+  },
+  "devDependencies": {
+    "vite": "^8.3.4"
   }
 }
