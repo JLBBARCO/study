@@ -1,23 +1,63 @@
+// Declarações iniciais de variáveis
 var servidores = []
-var chave = "1"
-var nome_servidor = ""
-enquanto (chave != "0") {
-    escreva("\n-----------------")
-    escreva("\n[0] Sair")
-    escreva("\n[1] Inserir dados")
-    escreva("\n-----------------\n")
-    chave = leia()
-    se (chave == "0") {
-        escreva("Saindo do programa...")
-    } senão     se (chave == "1") {
-        escreva("\n----------------")
-        escreva("\nDigite o nome do servidor (ou 0 para voltar): ")
-        escreva("\n----------------\n")
-        nome_servidor = leia()
-        se (nome_servidor != "0" e nome_servidor != "") {
-            servidores.adicionar(nome_servidor)
+var condicao_loop_principal = verdadeiro
+// Título do programa
+escreva("\n----------------------------")
+escreva("\n---Analista de Servidores---")
+escreva("\n----------------------------")
+// Início da lógica do programa
+enquanto (condicao_loop_principal == verdadeiro) {
+    escreva("\nDigite o nome do servidor (or 0 para sair): ")
+    var nome_servidor = leia()
+    se (nome_servidor == "0") {
+        condicao_loop_principal = falso
+        escreva("Saindo do programa...\n")
+    } senão {
+        se (nome_servidor != "") {
+            var servidor = {"nome": nome_servidor, "ping": [], "ping_medio": 0}
+            var condicao_loop_ping = verdadeiro
+            enquanto (condicao_loop_principal == verdadeiro e condicao_loop_ping == verdadeiro) {
+                escreva("Digite o valor do ping (ou 0 para encerrar o cadastro de pings): ")
+                var valor_ping = leia()
+                se (valor_ping == "0") {
+                    condicao_loop_ping = falso
+                } senão {
+                    se (valor_ping != "") {
+                        servidor["ping"].adicionar(numero(valor_ping))
+                    } senão {
+                        escreva("Valor de ping inválido. Tente novamente.\n")
+                    }
+                }
+            }
+            // Cálculo da média do ping
+            var media_ping = 0
+            var total_pings = servidor["ping"].tamanho()
+            se (total_pings > 0) {
+                para var i = 0; i < total_pings; i = i + 1 {
+                    media_ping = media_ping + servidor["ping"][i]
+                }
+                media_ping = media_ping / total_pings
+                servidor["ping_medio"] = media_ping
+            }
+            servidores.adicionar(servidor)
             escreva("Servidor " + nome_servidor + " cadastrado com sucesso!\n")
+        } senão {
+            escreva("Nome do servidor inválido. Tente novamente.\n")
         }
     }
 }
-escreva("Saindo... Total de servidores: " + texto(servidores.tamanho()))
+// Exibição do resultado final
+escreva("\n---- Lista de Servidores Cadastrados ----")
+escreva("\nServidores em alerta (ping médio >= 100ms):")
+para var i = 0; i < servidores.tamanho(); i = i + 1 {
+    se (servidores[i]["ping_medio"] >= 100) {
+        escreva("Servidor: " + servidores[i]["nome"] + " | Ping Medio: " + texto(servidores[i]["ping_medio"]) + "ms")
+    }
+}
+escreva("\nServidores com ping médio menor que 100ms:")
+para var i = 0; i < servidores.tamanho(); i = i + 1 {
+    se (servidores[i]["ping_medio"] < 100) {
+        escreva("Servidor: " + servidores[i]["nome"] + " | Ping Medio: " + texto(servidores[i]["ping_medio"]) + "ms")
+    }
+}
+escreva("\nTotal de servidores: " + texto(servidores.tamanho()))
