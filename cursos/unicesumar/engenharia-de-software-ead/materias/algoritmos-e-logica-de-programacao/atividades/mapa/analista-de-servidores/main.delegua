@@ -7,27 +7,29 @@ escreva("\n---Analista de Servidores---")
 escreva("\n----------------------------")
 // Início da lógica do programa
 enquanto (condicao_loop_principal == verdadeiro) {
-    escreva("\nDigite o nome do servidor (or 0 para sair): ")
+    escreva("\nDigite o nome do servidor (ou 0 para sair): ")
     var nome_servidor = leia()
     se (nome_servidor == "0") {
         condicao_loop_principal = falso
         escreva("Saindo do programa...\n")
     } senão {
         se (nome_servidor != "") {
-            var servidor = {"nome": nome_servidor, "ping": [], "ping_medio": 0}
+            var servidor = {"id": servidores.tamanho() + 1, "nome": nome_servidor, "ping": [], "ping_medio": 0}
             var condicao_loop_ping = verdadeiro
             enquanto (condicao_loop_principal == verdadeiro e condicao_loop_ping == verdadeiro) {
                 escreva("Digite o valor do ping (ou 0 para encerrar o cadastro de pings): ")
                 var valor_ping = leia()
                 se (valor_ping == "0") {
                     condicao_loop_ping = falso
-                } senão {
-                    se (valor_ping != "") {
-                        servidor["ping"].adicionar(numero(valor_ping))
-                    } senão {
-                        escreva("Valor de ping inválido. Tente novamente.\n")
-                    }
+                    continua
                 }
+                tente {
+                    valor_ping = numero(valor_ping)
+} pegue (erro) {
+                    escreva("Valor de ping inválido. Tente novamente.\n")
+                    continua
+                }
+                servidor["ping"].adicionar(valor_ping)
             }
             // Cálculo da média do ping
             var media_ping = 0
@@ -51,13 +53,13 @@ escreva("\n---- Lista de Servidores Cadastrados ----")
 escreva("\nServidores em alerta (ping médio >= 100ms):")
 para var i = 0; i < servidores.tamanho(); i = i + 1 {
     se (servidores[i]["ping_medio"] >= 100) {
-        escreva("Servidor: " + servidores[i]["nome"] + " | Ping Medio: " + texto(servidores[i]["ping_medio"]) + "ms")
+        escreva("ID: " + texto(servidores[i]["id"]) + " | Servidor: " + servidores[i]["nome"] + " | Quantidade de Pings: " + texto(servidores[i]["ping"].tamanho()) + " | Ping Medio: " + texto(servidores[i]["ping_medio"]) + "ms")
     }
 }
 escreva("\nServidores com ping médio menor que 100ms:")
 para var i = 0; i < servidores.tamanho(); i = i + 1 {
     se (servidores[i]["ping_medio"] < 100) {
-        escreva("Servidor: " + servidores[i]["nome"] + " | Ping Medio: " + texto(servidores[i]["ping_medio"]) + "ms")
+        escreva("ID: " + texto(servidores[i]["id"]) + " | Servidor: " + servidores[i]["nome"] + " | Quantidade de Pings: " + texto(servidores[i]["ping"].tamanho()) + " | Ping Medio: " + texto(servidores[i]["ping_medio"]) + "ms")
     }
 }
 escreva("\nTotal de servidores: " + texto(servidores.tamanho()))

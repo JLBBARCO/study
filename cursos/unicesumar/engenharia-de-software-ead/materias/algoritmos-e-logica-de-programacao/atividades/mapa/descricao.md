@@ -21,7 +21,6 @@ O sistema pedirá em um loop infinito qual o nome do servidor e o tempo de respo
 ]
 ```
 
-- O id possui 4 dígitos e é exadecimal, possibilitando um total de 65536 servidores
 - O nome é de escolha livre do usuário
 - O ping é numérico e o usuário só pode inserir números, e quantos ele quiser
 
