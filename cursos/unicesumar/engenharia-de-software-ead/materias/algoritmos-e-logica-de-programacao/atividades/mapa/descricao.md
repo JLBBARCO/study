@@ -13,7 +13,7 @@ O sistema pedirá em um loop infinito qual o nome do servidor e o tempo de respo
     "ping_medio": 25
   },
   {
-    "id": "1a9f",
+    "id": "1234",
     "nome": "Servidor Github",
     "ping": [16, 24, 30, 50, 100, 250, 100, 50, 24, 16],
     "ping_medio": 66
