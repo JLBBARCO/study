@@ -2,29 +2,130 @@
 
 @charset "UTF-8";
 
-@import url('https://fonts.googleapis.com/css2?family=Sour+Gummy:ital,wght@0,100..900;1,100..900&family=Tektur:wght@400..900&display=swap');
-
 /* estilização base */
 
 :root {
-  --fundo: #011327;
-  --fundo-header: #01132799;
-  --fundo-card: #387bd8;
-  --destaque: #011327;
-  --destaque-card: #387bd8;
-  --interativo: #0e3c55;
-  --texto: #fff;
-  --gradiente: linear-gradient(45deg, #011327 0%, #0e3c55 50%, #387bd8 100%);
-  --gradiente-reverso: linear-gradient(45deg,
-      #387bd8 0%,
-      #0e3c55 50%,
-      #011327 100%);
-  --footer: #0c1927;
-  --shadow: 0px 7px 7px #0000006b;
-  --borda_padrão: 2px solid var(--texto);
-  --fonte01: "Tektur", sans-serif;
-  --fonte02: "Sour Gummy", serif;
-  --header-size: 85px;
+  --surface: #ffffff;
+  --surface-muted: #f1f3f8;
+  --border-color: #dce2ec;
+  --text-primary: #192338;
+  --text-muted: #5b667a;
+  --brand: #5b54d9;
+  --brand-hover: #463db6;
+  --brand-soft: #eeedff;
+  --brand-light: #c4c1ff;
+  --brand-deep: #282458;
+  --page-width: 1200px;
+  --fundo: #f6f7fb;
+  --fundo-header: rgba(255, 255, 255, 0.92);
+  --fundo-card: var(--surface);
+  --destaque: var(--brand);
+  --destaque-card: var(--brand-soft);
+  --interativo: var(--surface-muted);
+  --texto: var(--text-primary);
+  --gradiente: linear-gradient(135deg, #f8f9fc 0%, #eef2f7 100%);
+  --gradiente-reverso: linear-gradient(135deg, #eeedff 0%, #ffffff 100%);
+  --footer: #e9edf4;
+  --shadow: 0 14px 36px rgba(28, 36, 58, 0.09);
+  --borda_padrão: 1px solid var(--border-color);
+  --fonte01: "Segoe UI", system-ui, -apple-system, sans-serif;
+  --fonte02: "Segoe UI", system-ui, -apple-system, sans-serif;
+  --header-size: 72px;
+  color-scheme: light;
+  --study-font-scale: 1;
+  --brand-action: var(--brand);
+  --brand-action-hover: var(--brand-hover);
+  --brand-action-text: #ffffff;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --surface: #151b2b;
+  --surface-muted: #20283a;
+  --border-color: #3a465d;
+  --text-primary: #f4f6fb;
+  --text-muted: #c2cad9;
+  --brand: #b5aeff;
+  --brand-hover: #d5d0ff;
+  --brand-soft: rgba(165, 155, 255, 0.16);
+  --brand-light: #e1deff;
+  --brand-deep: #292552;
+  --brand-action: #5148c4;
+  --brand-action-hover: #433aa8;
+  --brand-action-text: #ffffff;
+  --fundo: #101522;
+  --fundo-header: rgba(16, 21, 34, 0.94);
+  --fundo-card: var(--surface);
+  --destaque: var(--brand);
+  --destaque-card: var(--brand-soft);
+  --interativo: var(--surface-muted);
+  --texto: var(--text-primary);
+  --gradiente: linear-gradient(135deg, #101522 0%, #171d2b 100%);
+  --gradiente-reverso: linear-gradient(135deg, #292552 0%, #171d2b 100%);
+  --footer: #0d111b;
+  --shadow: 0 14px 36px rgba(0, 0, 0, 0.3);
+  --borda_padrão: 1px solid var(--border-color);
+}
+
+:root[data-contrast="high"] {
+  --surface: #ffffff;
+  --surface-muted: #ffffff;
+  --border-color: #222222;
+  --text-primary: #000000;
+  --text-muted: #1a1a1a;
+  --brand: #24146d;
+  --brand-hover: #120a44;
+  --brand-soft: #fff0a6;
+  --brand-light: #24146d;
+  --brand-deep: #120a44;
+  --brand-action: #24146d;
+  --brand-action-hover: #120a44;
+  --brand-action-text: #ffffff;
+  --fundo: #ffffff;
+  --fundo-header: rgba(255, 255, 255, 0.98);
+  --fundo-card: #ffffff;
+  --destaque: var(--brand);
+  --destaque-card: var(--brand-soft);
+  --interativo: #f2f2f2;
+  --texto: #000000;
+  --gradiente: #ffffff;
+  --gradiente-reverso: #ffffff;
+  --footer: #ffffff;
+  --shadow: none;
+  --borda_padrão: 2px solid var(--border-color);
+}
+
+:root[data-theme="dark"][data-contrast="high"] {
+  color-scheme: dark;
+  --surface: #000000;
+  --surface-muted: #050505;
+  --border-color: #ffffff;
+  --text-primary: #ffffff;
+  --text-muted: #ffffff;
+  --brand: #ffff00;
+  --brand-hover: #ffffff;
+  --brand-soft: #332b00;
+  --brand-light: #ffff00;
+  --brand-deep: #000000;
+  --brand-action: #ffffff;
+  --brand-action-hover: #e6e6e6;
+  --brand-action-text: #000000;
+  --fundo: #000000;
+  --fundo-header: rgba(0, 0, 0, 0.98);
+  --fundo-card: #000000;
+  --destaque: var(--brand);
+  --destaque-card: var(--brand-soft);
+  --interativo: #000000;
+  --texto: #ffffff;
+  --gradiente: #000000;
+  --gradiente-reverso: #000000;
+  --footer: #000000;
+  --shadow: none;
+  --borda_padrão: 2px solid #ffffff;
+}
+
+html {
+  font-size: calc(100% * var(--study-font-scale, 1));
 }
 
 * {
@@ -339,9 +440,9 @@ nav {
 
 @media (prefers-reduced-motion: reduce) {
 
-  header button,
-  .menu-icon-glyph,
-  .nav_links a {
+  :root:not([data-motion="full"]) header button,
+  :root:not([data-motion="full"]) .menu-icon-glyph,
+  :root:not([data-motion="full"]) .nav_links a {
     transition: none;
   }
 }
