@@ -36,6 +36,53 @@ const PRECONNECT_ORIGINS = [
 const DEFERRED_TASK_TIMEOUT = 1800;
 const ADSENSE_PUBLISHER_ID = "ca-pub-1575745628375298";
 const ADSENSE_SCRIPT_ID = "google-adsense-script";
+const CSS_LINK_TIMEOUT_MS = 9000;
+const CSS_GATE_TIMEOUT_MS = 12000;
+const CSS_GATE_STYLE_ID = "study-css-loading-gate";
+let criticalCssPromise = Promise.resolve();
+let cssGateTimeoutId = 0;
+
+function releaseCssLoadingGate() {
+  document.documentElement?.removeAttribute("data-css-loading");
+  document.getElementById(CSS_GATE_STYLE_ID)?.remove();
+
+  if (cssGateTimeoutId) {
+    window.clearTimeout(cssGateTimeoutId);
+    cssGateTimeoutId = 0;
+  }
+}
+
+function activateCssLoadingGate() {
+  const root = document.documentElement;
+  if (!root || root.hasAttribute("data-css-loading")) return;
+
+  root.setAttribute("data-css-loading", "true");
+
+  const gateStyle = document.createElement("style");
+  gateStyle.id = CSS_GATE_STYLE_ID;
+  gateStyle.textContent =
+    'html[data-css-loading="true"] body { visibility: hidden !important; }';
+  (document.head || root).appendChild(gateStyle);
+
+  cssGateTimeoutId = window.setTimeout(() => {
+    console.warn("Tempo limite do carregamento de CSS; exibindo a página.");
+    releaseCssLoadingGate();
+  }, CSS_GATE_TIMEOUT_MS);
+}
+
+function waitForStylesheetPaint() {
+  return new Promise((resolve) => {
+    if (typeof window.requestAnimationFrame === "function") {
+      window.requestAnimationFrame(() => resolve());
+      return;
+    }
+
+    window.setTimeout(resolve, 0);
+  });
+}
+
+activateCssLoadingGate();
+
 let DOCUMENT_URL_TOKEN = "";
 const domain = document.URL;
 
@@ -365,7 +412,13 @@ function primeHeadAssets() {
   insertResourceHints();
   ensureLayoutShells();
 
-  insertCSS(CRITICAL_CSS_FILES);
+  criticalCssPromise = Promise.resolve()
+    .then(() => insertCSS(CRITICAL_CSS_FILES))
+    .catch((error) => {
+      console.error("Falha ao carregar as folhas de estilo críticas.", error);
+    })
+    .then(waitForStylesheetPaint)
+    .finally(releaseCssLoadingGate);
 
   insertFavicon().catch(() => {
     // Silencia erro inicial; favicon será revalidado durante inicialização.
@@ -717,30 +770,100 @@ function insertJS(jsFiles = [], path) {
 
 function insertCSS(cssFiles = []) {
   const head = document.querySelector("head");
-  if (!head) {
-    console.error("Head element not found");
-    return;
+  if (!head || !Array.isArray(cssFiles) || cssFiles.length === 0) {
+    return Promise.resolve([]);
   }
 
-  cssFiles.forEach(({ fileName, media }) => {
-    const href = resolveStaticAssetPath(`${CSS_BASE_PATH}/${fileName}`);
+  function hasLoadedStylesheet(link) {
+    try {
+      return Boolean(link.sheet);
+    } catch {
+      return false;
+    }
+  }
+
+  function waitForStylesheet(link, fileName) {
     if (
-      document.querySelector(`link[data-css="${fileName}"]`) ||
-      document.querySelector(`link[rel="stylesheet"][href="${href}"]`)
+      link.dataset.cssLoadState === "loaded" ||
+      hasLoadedStylesheet(link)
     ) {
-      return;
+      link.dataset.cssLoadState = "loaded";
+      return Promise.resolve({ fileName, state: "loaded" });
     }
 
-    const link = document.createElement("link");
+    const previousState = link.dataset.cssLoadState;
+    if (previousState === "error" || previousState === "timeout") {
+      return Promise.resolve({ fileName, state: previousState });
+    }
+
+    return new Promise((resolve) => {
+      let settled = false;
+      let timeoutId = 0;
+
+      const finish = (state) => {
+        if (settled) return;
+        settled = true;
+        window.clearTimeout(timeoutId);
+        link.removeEventListener("load", onLoad);
+        link.removeEventListener("error", onError);
+        link.dataset.cssLoadState = state;
+
+        if (state !== "loaded") {
+          console.warn(`[CSS] ${state} ao carregar ${fileName}: ${link.href}`);
+        }
+
+        resolve({ fileName, state });
+      };
+
+      const onLoad = () => finish("loaded");
+      const onError = () => finish("error");
+
+      link.addEventListener("load", onLoad, { once: true });
+      link.addEventListener("error", onError, { once: true });
+      timeoutId = window.setTimeout(
+        () => finish("timeout"),
+        CSS_LINK_TIMEOUT_MS,
+      );
+
+      if (hasLoadedStylesheet(link)) finish("loaded");
+    });
+  }
+
+  const stylesheetPromises = cssFiles.map((entry) => {
+    const { fileName, media = "screen" } =
+      typeof entry === "string" ? { fileName: entry } : entry || {};
+    if (!fileName) return Promise.resolve({ state: "skipped" });
+
+    const href = resolveStaticAssetPath(`${CSS_BASE_PATH}/${fileName}`);
+    const absoluteHref = new URL(href, document.baseURI).href;
+    const existingLink = Array.from(
+      head.querySelectorAll('link[rel="stylesheet"]'),
+    ).find((candidate) => {
+      try {
+        return new URL(candidate.href, document.baseURI).href === absoluteHref;
+      } catch {
+        return false;
+      }
+    });
+
+    const link = existingLink || document.createElement("link");
     link.rel = "stylesheet";
-    link.href = href;
+    if (!existingLink) {
+      link.href = href;
+    }
     link.media = media;
     link.dataset.css = fileName;
-    link.onerror = () => {
-      console.error(`[CSS] Erro ao carregar ${fileName} em: ${link.href}`);
-    };
-    head.appendChild(link);
+
+    if (!existingLink) {
+      link.dataset.cssLoadState = "loading";
+    }
+
+    const loadPromise = waitForStylesheet(link, fileName);
+    if (!existingLink) head.appendChild(link);
+    return loadPromise;
   });
+
+  return Promise.all(stylesheetPromises);
 }
 
 function initializeSmoothScroll() {
@@ -862,6 +985,7 @@ function mudouJanela() {
 async function headInsert(path) {
   const titleHomeEarly = getHomeHeadingElement();
   const titleText = titleHomeEarly?.textContent?.trim();
+  await criticalCssPromise;
   await insertFavicon();
   await insertJS(CRITICAL_JS_FILES, path);
 

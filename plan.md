@@ -49,6 +49,12 @@ Modernizar a página inicial e a apresentação compartilhada do site para que o
 - **Menu funcional de acessibilidade:** montar o painel pelo módulo JavaScript compartilhado e incluir controle de tema, ajuste/redefinição do tamanho do texto, alto contraste e redução de movimento; indicar estado com atributos ARIA, permitir uso por teclado, fechar com Escape/clique externo, devolver foco ao botão quando apropriado e persistir preferências.
 - **Compatibilidade e escopo:** reaproveitar `src/js/accessibility.js` e `src/css/site-theme.css`, manter funções globais antigas de acessibilidade como wrappers quando úteis, preservar as páginas de atividades isoladas, API, rotas e lógica da conversa, e não adicionar dependências nem publicar/criar checkpoint.
 
+## Extensão: carregamento de estilos sem falha visual
+
+- **Entrada única:** manter `src/js/script.js` como importação comum que resolve e importa as folhas compartilhadas e seus media queries. Remover os links duplicados de CSS da home e tornar o script parser-blocking no `<head>` para ele iniciar o carregamento antes de o conteúdo poder piscar sem estilos.
+- **Aplicação coordenada:** adicionar um gate visual síncrono no início do carregador, inserir as folhas em paralelo mantendo sua ordem de cascata, deduplicar links já presentes, aguardar `load`/`error` com timeout e só então revelar o `body` e inicializar componentes. Erros ou falhas tardias devem revelar a página em vez de mantê-la em branco.
+- **Escopo:** ajustar apenas a home e as páginas de entrada compartilhadas que usam `/src/js/script.js`; conservar URLs de assets, atributos `media` e fallback de contexto, sem adicionar dependências nem alterar atividades independentes.
+
 ## Limites da mudança
 
 A experiência compartilhada alcança as páginas que já carregam `src/js/script.js`; atividades HTML independentes permanecem intocadas. Nenhum arquivo apontado por links externos do repositório será tratado como material de implementação. A manutenção ficará concentrada nos estilos existentes e em uma marcação clara na página inicial, sem nova biblioteca nem duplicação de CSS por página.
