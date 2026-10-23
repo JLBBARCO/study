@@ -13,6 +13,6 @@
 
 ## Media queries, temas e acessibilidade
 
-- [ ] **Sistema de media queries responsivo:** “adicione o sistema de media queries”. Completar a organização responsiva compartilhada para telas pequenas, tablets, desktops e telas largas, alinhando os breakpoints entre layout, navegação e painel de acessibilidade, sem alterar páginas de atividades isoladas.
-- [ ] **Tema light e dark:** “tema light e dark”. Oferecer alternância clara, escura e automática pelo sistema, aplicar os tokens de cores em todo o layout compartilhado, manter leitura legível nos dois temas e persistir a preferência entre visitas.
-- [ ] **Menu de acessibilidade funcional:** “um menu de acessibilidade funcional”. Permitir abertura/fechamento por mouse e teclado, estados ARIA e fechamento com Escape; incluir controles de tamanho do texto, alto contraste, redução de movimento e tema, manter foco perceptível, adaptar o painel a telas pequenas e persistir as escolhas.
+- [x] **Sistema de media queries responsivo:** “adicione o sistema de media queries”. Completar a organização responsiva compartilhada para telas pequenas, tablets, desktops e telas largas, alinhando os breakpoints entre layout, navegação e painel de acessibilidade, sem alterar páginas de atividades isoladas.
+- [x] **Tema light e dark:** “tema light e dark”. Oferecer alternância clara, escura e automática pelo sistema, aplicar os tokens de cores em todo o layout compartilhado, manter leitura legível nos dois temas e persistir a preferência entre visitas.
+- [x] **Menu de acessibilidade funcional:** “um menu de acessibilidade funcional”. Permitir abertura/fechamento por mouse e teclado, estados ARIA e fechamento com Escape; incluir controles de tamanho do texto, alto contraste, redução de movimento e tema, manter foco perceptível, adaptar o painel a telas pequenas e persistir as escolhas.

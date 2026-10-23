@@ -420,10 +420,10 @@ div.card .card-description-toggle:focus-visible {
 }
 
 .home-page #home {
-  display: grid;
-  grid-template-columns: minmax(0, 1.6fr) minmax(13rem, 0.55fr);
-  align-items: center;
-  gap: clamp(2rem, 6vw, 5rem);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 1.5rem;
   min-height: 0;
   margin: 1.5rem 0 0;
   padding: clamp(2rem, 6vw, 5rem);
@@ -724,10 +724,6 @@ footer .button-to-top:hover {
   }
 
   .home-page #home {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 1.5rem;
     margin-top: 0.75rem;
     padding: 1.5rem;
     border-radius: 21px;
@@ -1081,6 +1077,7 @@ footer .button-to-top:hover {
   .home-page #home {
     display: grid;
     grid-template-columns: minmax(0, 1.25fr) minmax(12rem, 0.75fr);
+    gap: clamp(1.5rem, 4vw, 3rem);
   }
 
   .home-page #cursos > section .container {
@@ -1098,6 +1095,7 @@ footer .button-to-top:hover {
   .home-page #home {
     display: grid;
     grid-template-columns: minmax(0, 1.7fr) minmax(15rem, 0.55fr);
+    gap: clamp(2rem, 6vw, 5rem);
   }
 
   .home-page #cursos > section .container {
@@ -1230,7 +1228,7 @@ footer .button-to-top:hover {
 
 #study-assistant .study-assistant-trigger {
   border-color: var(--brand-action-text) !important;
-  background: linear-gradient(120deg, var(--brand-deep), var(--brand-action)) !important;
+  background: var(--brand-action) !important;
   color: var(--brand-action-text) !important;
 }
 
