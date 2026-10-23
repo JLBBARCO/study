@@ -15,17 +15,25 @@ int main(void)
     printf("1 soma, 2 subtracao, 3 multiplicacao, 4 divisao: ");
     scanf("%d", &op);
 
-    switch (op) {
-    case 1: printf("Soma: %.1f\n", a + b); break;
-    case 2: printf("Subtracao: %.1f\n", a - b); break;
-    case 3: printf("Multiplicacao: %.1f\n", a * b); break;
+    switch (op)
+    {
+    case 1:
+        printf("Soma: %.1f\n", a + b);
+        break;
+    case 2:
+        printf("Subtracao: %.1f\n", a - b);
+        break;
+    case 3:
+        printf("Multiplicacao: %.1f\n", a * b);
+        break;
     case 4:
         if (b != 0)
             printf("Divisao: %.1f\n", a / b);
         else
             printf("Erro: divisao por zero\n");
         break;
-    default: printf("Opcao invalida\n");
+    default:
+        printf("Opcao invalida\n");
     }
     return 0;
 }

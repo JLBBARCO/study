@@ -12,11 +12,24 @@ int main(void)
     printf("Codigo do cargo (1 a 4): ");
     scanf("%d", &cargo);
 
-    switch (cargo) {
-    case 1: aumento = salario * 0.40f; printf("Servente"); break;
-    case 2: aumento = salario * 0.35f; printf("Pedreiro"); break;
-    case 3: aumento = salario * 0.20f; printf("Mestre de obras"); break;
-    case 4: aumento = salario * 0.10f; printf("Tecnico de seguranca"); break;
+    switch (cargo)
+    {
+    case 1:
+        aumento = salario * 0.40f;
+        printf("Servente");
+        break;
+    case 2:
+        aumento = salario * 0.35f;
+        printf("Pedreiro");
+        break;
+    case 3:
+        aumento = salario * 0.20f;
+        printf("Mestre de obras");
+        break;
+    case 4:
+        aumento = salario * 0.10f;
+        printf("Tecnico de seguranca");
+        break;
     default:
         printf("Codigo de cargo invalido\n");
         return 0;

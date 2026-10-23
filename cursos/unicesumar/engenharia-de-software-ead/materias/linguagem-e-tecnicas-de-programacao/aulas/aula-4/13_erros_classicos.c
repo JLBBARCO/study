@@ -7,15 +7,19 @@ int main(void)
 {
     int x = 5;
 
-    if (x = 3)              /* erro 1: atribui em vez de comparar */
+    if (x = 3) /* erro 1: atribui em vez de comparar */
         printf("x vale %d\n", x);
 
-    if (x > 10);            /* erro 2: ; encerra o if */
-        printf("maior\n");
+    if (x > 10)
+        ; /* erro 2: ; encerra o if */
+    printf("maior\n");
 
-    switch (x) {            /* erro 3: falta o break */
-    case 3: printf("tres\n");
-    case 4: printf("quatro\n");
+    switch (x)
+    { /* erro 3: falta o break */
+    case 3:
+        printf("tres\n");
+    case 4:
+        printf("quatro\n");
     }
     return 0;
 }
