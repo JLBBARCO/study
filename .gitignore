@@ -1,3 +1,11 @@
+# Local Keys
+.env
+.env*.local
+
+# IDE files
+.vscode/
+
+# Python
 __pycache__/
 *.pyc
 *.pyo
@@ -8,7 +16,16 @@ venv/
 ENV/
 build/
 dist/
-.vscode/
+
+# Node
 node_modules/
+
+# Vercel
 .vercel
-.env*.local
+
+# Manus
+.manus/
+.work/
+
+# MacOS
+.DS_Store
