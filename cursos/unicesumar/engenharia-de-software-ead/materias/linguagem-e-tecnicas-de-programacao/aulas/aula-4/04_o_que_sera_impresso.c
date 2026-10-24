@@ -6,11 +6,15 @@
 int main(void)
 {
     int x = 8;
-    if (x > 10) printf("A"); printf("B");
+    if (x > 10)
+        printf("A");
+    printf("B");
     printf("\n");
 
     int y = 8;
-    if (y = 10) printf("C"); printf("%d", y);
+    if (y = 10)
+        printf("C");
+    printf("%d", y);
     printf("\n");
     return 0;
 }

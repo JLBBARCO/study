@@ -7,14 +7,25 @@ int main(void)
     float a, b;
     int op;
 
-    printf("Digite a, b e a opcao (1 soma, 2 subtracao, 3 multiplicacao): ");
+    printf("Digite a, b e a opcao (1 soma, 2 subtracao, 3 multiplicacao, 4 divisao): ");
     scanf("%f %f %d", &a, &b, &op);
 
-    switch (op) {
-    case 1: printf("%.1f\n", a + b); break;
-    case 2: printf("%.1f\n", a - b); break;
-    case 3: printf("%.1f\n", a * b); break;
-    default: printf("Opcao invalida\n");
+    switch (op)
+    {
+    case 1:
+        printf("%.1f\n", a + b);
+        break;
+    case 2:
+        printf("%.1f\n", a - b);
+        break;
+    case 3:
+        printf("%.1f\n", a * b);
+        break;
+    case 4:
+        printf("%.1f\n", a / b);
+        break;
+    default:
+        printf("Opcao invalida\n");
     }
     return 0;
 }

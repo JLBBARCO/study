@@ -11,19 +11,28 @@ int main(void)
     printf("Digite a, b e a opcao: ");
     scanf("%f %f %d", &a, &b, &op);
 
-    switch (op) {
-    case 1: printf("%.1f\n", a + b);
-    case 2: printf("%.1f\n", a - b);
-    case 3: printf("%.1f\n", a * b);
-    default: printf("Opcao invalida\n");
+    switch (op)
+    {
+    case 1:
+        printf("%.1f\n", a + b);
+    case 2:
+        printf("%.1f\n", a - b);
+    case 3:
+        printf("%.1f\n", a * b);
+    default:
+        printf("Opcao invalida\n");
     }
 
     /* Uso legitimo: dois valores com a mesma acao */
     char r = 's';
-    switch (r) {
+    switch (r)
+    {
     case 's':
-    case 'S': printf("Sim\n"); break;
-    default: printf("Nao\n");
+    case 'S':
+        printf("Sim\n");
+        break;
+    default:
+        printf("Nao\n");
     }
     return 0;
 }
