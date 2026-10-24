@@ -3,6 +3,7 @@ const fs = require("fs");
 const path = require("path");
 const { URL } = require("url");
 const { buildSiteContext } = require("./api/_lib/site-context");
+const { answerAssistantRequest } = require("./api/_lib/assistant");
 
 const ROOT = process.cwd();
 
@@ -74,6 +75,29 @@ function sendJson(res, statusCode, payload) {
   res.end(JSON.stringify(payload));
 }
 
+async function readJsonBody(req, maxBytes = 192 * 1024) {
+  const chunks = [];
+  let bytes = 0;
+  for await (const chunk of req) {
+    bytes += chunk.length;
+    if (bytes > maxBytes) {
+      const error = new Error("Corpo da requisição muito grande.");
+      error.statusCode = 413;
+      throw error;
+    }
+    chunks.push(chunk);
+  }
+
+  if (!bytes) return null;
+  try {
+    return JSON.parse(Buffer.concat(chunks).toString("utf8"));
+  } catch {
+    const error = new Error("O corpo da requisição precisa ser JSON válido.");
+    error.statusCode = 400;
+    throw error;
+  }
+}
+
 function resolveStaticPath(requestPath) {
   const cleanPath = decodeURIComponent(requestPath.split("?")[0]);
 
@@ -116,9 +140,9 @@ function resolveStaticPath(requestPath) {
   }
 
   return null;
-}
+  }
 
-const server = http.createServer((req, res) => {
+const server = http.createServer(async (req, res) => {
   const url = new URL(req.url, `http://localhost:${PORT}`);
 
   if (
@@ -145,6 +169,35 @@ const server = http.createServer((req, res) => {
     return;
   }
 
+  if (url.pathname === "/api/assistant" || url.pathname === "/api/assistant/") {
+    if (req.method !== "POST") {
+      res.setHeader("Allow", "POST");
+      sendJson(res, 405, { error: "Use uma requisição POST para conversar com o assistente." });
+      return;
+    }
+
+    try {
+      const body = await readJsonBody(req);
+      const result = await answerAssistantRequest(req.method, body, ROOT);
+      res.writeHead(result.status, {
+        "Content-Type": "application/json; charset=utf-8",
+        "Cache-Control": "no-store",
+        "X-Content-Type-Options": "nosniff",
+      });
+      res.end(JSON.stringify(result.payload));
+    } catch (error) {
+      const status = error.statusCode || 500;
+      sendJson(res, status, {
+        error: status === 413
+          ? "A pergunta enviada é muito grande."
+          : status === 400
+            ? "O corpo da requisição precisa ser JSON válido."
+            : "O assistente encontrou um erro inesperado. Tente novamente.",
+      });
+    }
+    return;
+  }
+
   const filePath = resolveStaticPath(url.pathname);
   if (!filePath) {
     sendJson(res, 404, { error: "Arquivo não encontrado" });
@@ -168,7 +221,7 @@ const server = http.createServer((req, res) => {
   });
 });
 
-server.listen(PORT, () => {
+server.listen(PORT, "127.0.0.1", () => {
   console.log(`Servidor local iniciado em http://localhost:${PORT}`);
   if (OFFLINE_MODE) {
     console.log("Modo offline ativo: /api/site-context respondera 503.");

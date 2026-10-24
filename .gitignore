@@ -22,6 +22,10 @@ node_modules/
 
 # Vercel
 .vercel
+<<<<<<< HEAD
+.env*.local
+.env*
+=======
 
 # Manus
 .manus/
@@ -29,3 +33,4 @@ node_modules/
 
 # MacOS
 .DS_Store
+>>>>>>> main

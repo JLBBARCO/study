@@ -6,35 +6,52 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Study</title>
 
-  <meta name="google-adsense-account" content="ca-pub-1575745628375298" />
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1575745628375298"
-    crossorigin="anonymous"></script>
-
-  <link rel="stylesheet" href="/src/css/style.css" media="screen" data-css="style.css">
-  <link rel="stylesheet" href="/src/css/pc.css" media="screen and (min-width: 990px)" data-css="pc.css">
-  <script defer src="src/js/script.js"></script>
-  <link rel="shortcut icon" href="src/assets/favicon/default.ico" type="image/x-icon">
+  <script src="src/js/script.js"></script>
 </head>
 
-<body>
+<body class="home-page">
+  <a class="skip-link" href="#principal">Pular para o conteúdo</a>
   <header class="app-header-shell" data-shell="true">
     <nav class="nav_links" id="navLinks">
       <div class="nav_item"><a href="#home" role="menuitem" class="nav_link">Home</a></div>
     </nav>
   </header>
-  <main>
-    <section id="home" aria-label="Home">
-      <h1>Meus Estudos</h1>
-      <h2>Bem-vindo ao Meu Repositório de Estudos</h2>
-      <p>
-        Uma coleção organizada dos meus projetos, anotações e materiais
-        desenvolvidos durante minha jornada de aprendizado em programação.
-      </p>
-      <p>Para mais informações sobre o conteúdo do repositório, visite: <a
-          href="https://github.com/JLBBARCO/study/blob/main/README.md" target="_blank" rel="noopener noreferrer"
-          class="externo">README.md</a></p>
+  <main id="principal">
+    <section id="home" aria-label="Home" class="home-intro">
+      <div class="home-intro-copy">
+        <div class="home-brand">
+          <span class="home-brand-mark" aria-hidden="true">&lt;/&gt;</span>
+          <span class="home-brand-name">STUDY</span>
+          <span class="home-brand-caption">Caderno de tecnologia</span>
+        </div>
+        <h1>Meus Estudos</h1>
+        <h2>Aprender, praticar e guardar o que funciona.</h2>
+        <p>
+          Uma coleção organizada dos meus projetos, anotações e materiais
+          desenvolvidos durante minha jornada de aprendizado em programação.
+        </p>
+        <div class="home-actions" aria-label="Atalhos principais">
+          <a class="home-action home-action-primary" href="#cursos">Explorar cursos</a>
+          <a class="home-action home-action-secondary" href="#Sobre">Sobre o projeto</a>
+        </div>
+        <p class="home-reference">Para mais informações sobre o conteúdo do repositório, visite: <a
+            href="https://github.com/JLBBARCO/study/blob/main/README.md" target="_blank" rel="noopener noreferrer"
+            class="externo">README.md</a></p>
+      </div>
+      <div class="home-side-note" aria-hidden="true">
+        <span class="home-side-code">&lt;/&gt;</span>
+        <p class="home-side-caption">Seu caderno de código</p>
+        <div class="home-note-step"><span>01</span><span>Aprender</span></div>
+        <div class="home-note-step"><span>02</span><span>Praticar</span></div>
+        <div class="home-note-step"><span>03</span><span>Registrar</span></div>
+      </div>
     </section>
     <section id="cursos" aria-label="Cursos" data-aria-controls="drop-menu">
+      <div class="catalog-intro">
+        <p class="eyebrow">Biblioteca de estudos</p>
+        <h2>O próximo assunto começa aqui.</h2>
+        <p>Navegue pelos cursos e trilhas organizados por origem.</p>
+      </div>
       <section id="cursoEmVideo" aria-label="CursoemVideo">
         <h1>CursoemVideo</h1>
         <p>

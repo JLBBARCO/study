@@ -49,9 +49,15 @@ In this mode, the server still hosts static files, but `GET /api/site-context` r
 You can also force offline mode in the browser (without restarting the server):
 
 - Add `?offline=1` to the page URL, or
-- Run `setOfflineContextMode(true)` in the browser console.
+ - Run `setOfflineContextMode(true)` in the browser console.
 
 To disable the browser-level override, run `setOfflineContextMode(false)`.
+
+## AI code assistant
+
+The site includes a Portuguese chat assistant that searches relevant text/code files in the repository and returns code examples or links to matching files. It appears on the homepage and the 31 HTML pages that already load the shared `src/js/script.js`; independent activity pages are left unchanged. Its server-side route is `POST /api/assistant`; it does not send credentials to browser JavaScript.
+
+The Manus-managed runtime provides `MANUS_API_URL` and the server-side `MANUS_API_KEY`. The local Desktop Host does not inject the server key into local previews, so the endpoint returns a recoverable configuration error there rather than using a browser-safe key. For deployments outside the Manus runtime, configure `MANUS_API_URL` and `MANUS_API_KEY` as server-side environment variables in the hosting provider. Never put these credentials in frontend code or commit them in an environment file.
 
 ## Running on Vercel
 

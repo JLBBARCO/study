@@ -2,7 +2,13 @@ const VERCEL_DOMAIN_TOKEN = "vercel.app";
 const JS_BASE_PATH = "src/js";
 const CSS_BASE_PATH = "src/css";
 const JS_LOCAL_PATH = "script.js";
-const CRITICAL_JS_FILES = ["adsense.js", "header.js", "footer.js", "paths.js"];
+const CRITICAL_JS_FILES = [
+  "adsense.js",
+  "header.js",
+  "footer.js",
+  "paths.js",
+  "accessibility.js",
+];
 const CRITICAL_CSS_FILES = [
   { fileName: "style.css", media: "screen" },
   {
@@ -18,17 +24,63 @@ const CRITICAL_CSS_FILES = [
   },
   { fileName: "cards-pc.css", media: "screen and (min-width: 990px)" },
   { fileName: "cards-tv.css", media: "screen and (min-width: 1200px)" },
+  { fileName: "site-theme.css", media: "screen" },
 ];
 const DEFERRED_JS_FILES = ["accessibility.js", "adsense.js"];
 const PRECONNECT_ORIGINS = [
   "https://kit.fontawesome.com",
   "https://ka-f.fontawesome.com",
-  "https://fonts.googleapis.com",
-  "https://fonts.gstatic.com",
 ];
 const DEFERRED_TASK_TIMEOUT = 1800;
 const ADSENSE_PUBLISHER_ID = "ca-pub-1575745628375298";
 const ADSENSE_SCRIPT_ID = "google-adsense-script";
+const CSS_LINK_TIMEOUT_MS = 9000;
+const CSS_GATE_TIMEOUT_MS = 12000;
+const CSS_GATE_STYLE_ID = "study-css-loading-gate";
+let criticalCssPromise = Promise.resolve();
+let cssGateTimeoutId = 0;
+
+function releaseCssLoadingGate() {
+  document.documentElement?.removeAttribute("data-css-loading");
+  document.getElementById(CSS_GATE_STYLE_ID)?.remove();
+
+  if (cssGateTimeoutId) {
+    window.clearTimeout(cssGateTimeoutId);
+    cssGateTimeoutId = 0;
+  }
+}
+
+function activateCssLoadingGate() {
+  const root = document.documentElement;
+  if (!root || root.hasAttribute("data-css-loading")) return;
+
+  root.setAttribute("data-css-loading", "true");
+
+  const gateStyle = document.createElement("style");
+  gateStyle.id = CSS_GATE_STYLE_ID;
+  gateStyle.textContent =
+    'html[data-css-loading="true"] body { visibility: hidden !important; }';
+  (document.head || root).appendChild(gateStyle);
+
+  cssGateTimeoutId = window.setTimeout(() => {
+    console.warn("Tempo limite do carregamento de CSS; exibindo a página.");
+    releaseCssLoadingGate();
+  }, CSS_GATE_TIMEOUT_MS);
+}
+
+function waitForStylesheetPaint() {
+  return new Promise((resolve) => {
+    if (typeof window.requestAnimationFrame === "function") {
+      window.requestAnimationFrame(() => resolve());
+      return;
+    }
+
+    window.setTimeout(resolve, 0);
+  });
+}
+
+activateCssLoadingGate();
+
 let DOCUMENT_URL_TOKEN = "";
 const domain = document.URL;
 
@@ -39,13 +91,73 @@ if (domain.includes(VERCEL_DOMAIN_TOKEN)) {
 }
 console.log(`Files obtains of: ${DOCUMENT_URL_TOKEN}`);
 
+function restoreAccessibilityPreferencesEarly() {
+  const root = document.documentElement;
+  let themePreference = "system";
+  let contrastPreference = "system";
+  let motionPreference = "system";
+  let storedScale = null;
+
+  try {
+    themePreference = localStorage.getItem("study_theme_mode") || "system";
+    contrastPreference =
+      localStorage.getItem("study_contrast_mode") || "system";
+    motionPreference = localStorage.getItem("study_motion_mode") || "system";
+    storedScale = localStorage.getItem("study_font_scale");
+  } catch {
+    // As preferências do dispositivo podem estar indisponíveis neste navegador.
+  }
+
+  const matches = (query) =>
+    typeof window.matchMedia === "function" && window.matchMedia(query).matches;
+  const effectiveTheme =
+    themePreference === "light" || themePreference === "dark"
+      ? themePreference
+      : matches("(prefers-color-scheme: dark)")
+        ? "dark"
+        : "light";
+  root.dataset.theme = effectiveTheme;
+
+  const highContrast =
+    contrastPreference === "high" ||
+    (contrastPreference === "system" && matches("(prefers-contrast: more)"));
+  root.dataset.contrast = highContrast ? "high" : "normal";
+
+  const reduceMotion =
+    motionPreference === "reduce" ||
+    (motionPreference === "system" &&
+      matches("(prefers-reduced-motion: reduce)"));
+  root.dataset.motion = reduceMotion ? "reduce" : "full";
+
+  let scale = Number(storedScale);
+  if (storedScale === null || !Number.isFinite(scale)) {
+    try {
+      const legacyFontSize = document.cookie.match(
+        /(?:^|;\s*)fontSize=([^;]+)/,
+      );
+      const legacyPixels = legacyFontSize
+        ? Number.parseFloat(decodeURIComponent(legacyFontSize[1]))
+        : Number.NaN;
+      scale = Number.isFinite(legacyPixels) ? legacyPixels / 16 : 1;
+    } catch {
+      scale = 1;
+    }
+  }
+
+  scale = Math.min(1.4, Math.max(0.9, Math.round(scale * 10) / 10));
+  root.style.setProperty("--study-font-scale", String(scale));
+}
+
+restoreAccessibilityPreferencesEarly();
+
 document.addEventListener("DOMContentLoaded", async () => {
   try {
     await carregarContextoServidor();
     await headInsert(DOCUMENT_URL_TOKEN);
 
-    loadAdSense();
+    invokeGlobal("loadAdSense");
     invokeGlobal("initializeNavigation");
+    invokeGlobal("initializeAccessibilityMenu");
     initializeSmoothScroll();
     initializeCookies();
     wrapCardLinks();
@@ -298,7 +410,13 @@ function primeHeadAssets() {
   insertResourceHints();
   ensureLayoutShells();
 
-  insertCSS(CRITICAL_CSS_FILES);
+  criticalCssPromise = Promise.resolve()
+    .then(() => insertCSS(CRITICAL_CSS_FILES))
+    .catch((error) => {
+      console.error("Falha ao carregar as folhas de estilo críticas.", error);
+    })
+    .then(waitForStylesheetPaint)
+    .finally(releaseCssLoadingGate);
 
   insertFavicon().catch(() => {
     // Silencia erro inicial; favicon será revalidado durante inicialização.
@@ -650,30 +768,100 @@ function insertJS(jsFiles = [], path) {
 
 function insertCSS(cssFiles = []) {
   const head = document.querySelector("head");
-  if (!head) {
-    console.error("Head element not found");
-    return;
+  if (!head || !Array.isArray(cssFiles) || cssFiles.length === 0) {
+    return Promise.resolve([]);
   }
 
-  cssFiles.forEach(({ fileName, media }) => {
-    const href = resolveStaticAssetPath(`${CSS_BASE_PATH}/${fileName}`);
+  function hasLoadedStylesheet(link) {
+    try {
+      return Boolean(link.sheet);
+    } catch {
+      return false;
+    }
+  }
+
+  function waitForStylesheet(link, fileName) {
     if (
-      document.querySelector(`link[data-css="${fileName}"]`) ||
-      document.querySelector(`link[rel="stylesheet"][href="${href}"]`)
+      link.dataset.cssLoadState === "loaded" ||
+      hasLoadedStylesheet(link)
     ) {
-      return;
+      link.dataset.cssLoadState = "loaded";
+      return Promise.resolve({ fileName, state: "loaded" });
     }
 
-    const link = document.createElement("link");
+    const previousState = link.dataset.cssLoadState;
+    if (previousState === "error" || previousState === "timeout") {
+      return Promise.resolve({ fileName, state: previousState });
+    }
+
+    return new Promise((resolve) => {
+      let settled = false;
+      let timeoutId = 0;
+
+      const finish = (state) => {
+        if (settled) return;
+        settled = true;
+        window.clearTimeout(timeoutId);
+        link.removeEventListener("load", onLoad);
+        link.removeEventListener("error", onError);
+        link.dataset.cssLoadState = state;
+
+        if (state !== "loaded") {
+          console.warn(`[CSS] ${state} ao carregar ${fileName}: ${link.href}`);
+        }
+
+        resolve({ fileName, state });
+      };
+
+      const onLoad = () => finish("loaded");
+      const onError = () => finish("error");
+
+      link.addEventListener("load", onLoad, { once: true });
+      link.addEventListener("error", onError, { once: true });
+      timeoutId = window.setTimeout(
+        () => finish("timeout"),
+        CSS_LINK_TIMEOUT_MS,
+      );
+
+      if (hasLoadedStylesheet(link)) finish("loaded");
+    });
+  }
+
+  const stylesheetPromises = cssFiles.map((entry) => {
+    const { fileName, media = "screen" } =
+      typeof entry === "string" ? { fileName: entry } : entry || {};
+    if (!fileName) return Promise.resolve({ state: "skipped" });
+
+    const href = resolveStaticAssetPath(`${CSS_BASE_PATH}/${fileName}`);
+    const absoluteHref = new URL(href, document.baseURI).href;
+    const existingLink = Array.from(
+      head.querySelectorAll('link[rel="stylesheet"]'),
+    ).find((candidate) => {
+      try {
+        return new URL(candidate.href, document.baseURI).href === absoluteHref;
+      } catch {
+        return false;
+      }
+    });
+
+    const link = existingLink || document.createElement("link");
     link.rel = "stylesheet";
-    link.href = href;
+    if (!existingLink) {
+      link.href = href;
+    }
     link.media = media;
     link.dataset.css = fileName;
-    link.onerror = () => {
-      console.error(`[CSS] Erro ao carregar ${fileName} em: ${link.href}`);
-    };
-    head.appendChild(link);
+
+    if (!existingLink) {
+      link.dataset.cssLoadState = "loading";
+    }
+
+    const loadPromise = waitForStylesheet(link, fileName);
+    if (!existingLink) head.appendChild(link);
+    return loadPromise;
   });
+
+  return Promise.all(stylesheetPromises);
 }
 
 function initializeSmoothScroll() {
@@ -707,30 +895,6 @@ const debounce = (func, wait) => {
     timeout = setTimeout(later, wait);
   };
 };
-
-// Setar configs salvas em Cookies
-const cookies = document.cookie
-  ? document.cookie.split("; ").reduce((acc, cookie) => {
-      const [name, ...rest] = cookie.split("=");
-      const value = rest.join("=");
-      try {
-        acc[name] = decodeURIComponent(value);
-      } catch {
-        acc[name] = value;
-      }
-      return acc;
-    }, {})
-  : {};
-
-if (cookies.fontSize) {
-  const body = document.querySelector("body");
-  if (body) {
-    const fontValue = cookies.fontSize;
-    body.style.fontSize = isNaN(Number(fontValue))
-      ? fontValue
-      : `${fontValue}px`;
-  }
-}
 
 // Envolve links que sejam filhos diretos de `.card` dentro de um `section.buttonContainer`.
 // Isso evita mover links inline dentro de parágrafos e corrige páginas que
@@ -819,8 +983,19 @@ function mudouJanela() {
 async function headInsert(path) {
   const titleHomeEarly = getHomeHeadingElement();
   const titleText = titleHomeEarly?.textContent?.trim();
+  await criticalCssPromise;
   await insertFavicon();
-  await insertJS(CRITICAL_JS_FILES, path);
-
+  await insertJS(["header.js"], path);
   invokeGlobal("navBar", titleText);
+
+  const supportingScripts = CRITICAL_JS_FILES.filter(
+    (fileName) => fileName !== "header.js",
+  );
+  for (const fileName of supportingScripts) {
+    try {
+      await insertJS([fileName], path);
+    } catch (error) {
+      console.warn(`Falha ao carregar o script auxiliar ${fileName}.`, error);
+    }
+  }
 }

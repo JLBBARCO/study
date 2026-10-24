@@ -1,0 +1,756 @@
+{
+  "routes": [
+    {
+      "path": "/",
+      "title": "Study"
+    },
+    {
+      "path": "/cursos/colegio-adolpho/ensino-medio/",
+      "title": "ensino medio"
+    },
+    {
+      "path": "/cursos/colegio-adolpho/ensino-medio/2-serie/programacao-front-end/",
+      "title": "programacao front end"
+    },
+    {
+      "path": "/cursos/colegio-adolpho/ensino-medio/2-serie/programacao-front-end/atividade/atividade01/",
+      "title": "atividade01"
+    },
+    {
+      "path": "/cursos/colegio-adolpho/ensino-medio/2-serie/programacao-front-end/atividade/atividade02/",
+      "title": "atividade02"
+    },
+    {
+      "path": "/cursos/colegio-adolpho/ensino-medio/2-serie/programacao-front-end/atividade/atividade04/",
+      "title": "atividade04"
+    },
+    {
+      "path": "/cursos/colegio-adolpho/ensino-medio/2-serie/programacao-front-end/atividade/atividade07/",
+      "title": "atividade07"
+    },
+    {
+      "path": "/cursos/colegio-adolpho/ensino-medio/2-serie/programacao-front-end/atividade/atividade08/",
+      "title": "atividade08"
+    },
+    {
+      "path": "/cursos/colegio-adolpho/ensino-medio/2-serie/programacao-front-end/atividade/atividade09/",
+      "title": "atividade09"
+    },
+    {
+      "path": "/cursos/colegio-adolpho/ensino-medio/2-serie/programacao-front-end/atividade/atividade10/primeiroForm.html",
+      "title": "primeiroForm"
+    },
+    {
+      "path": "/cursos/colegio-adolpho/ensino-medio/2-serie/programacao-front-end/atividade/atividade11/",
+      "title": "atividade11"
+    },
+    {
+      "path": "/cursos/colegio-adolpho/ensino-medio/2-serie/programacao-front-end/avaliacao/avaliacao1/",
+      "title": "avaliacao1"
+    },
+    {
+      "path": "/cursos/colegio-adolpho/ensino-medio/2-serie/programacao-front-end/avaliacao/avaliacao2/",
+      "title": "avaliacao2"
+    },
+    {
+      "path": "/cursos/colegio-adolpho/ensino-medio/2-serie/programacao-front-end/avaliacao/avaliacao2/dlc/dlc.html",
+      "title": "dlc"
+    },
+    {
+      "path": "/cursos/colegio-adolpho/ensino-medio/3-serie/ciencias-dados/",
+      "title": "ciencias dados"
+    },
+    {
+      "path": "/cursos/colegio-adolpho/ensino-medio/3-serie/computacao-grafica/",
+      "title": "computacao grafica"
+    },
+    {
+      "path": "/cursos/colegio-adolpho/ensino-medio/3-serie/programacao-back-end/",
+      "title": "programacao back end"
+    },
+    {
+      "path": "/cursos/colegio-adolpho/ensino-medio/3-serie/programacao-back-end/atividades/atividade02/",
+      "title": "atividade02"
+    },
+    {
+      "path": "/cursos/colegio-adolpho/ensino-medio/3-serie/programacao-back-end/atividades/atividade03/",
+      "title": "atividade03"
+    },
+    {
+      "path": "/cursos/colegio-adolpho/ensino-medio/3-serie/programacao-back-end/atividades/atividade04/",
+      "title": "atividade04"
+    },
+    {
+      "path": "/cursos/colegio-adolpho/ensino-medio/3-serie/programacao-back-end/atividades/atividade05/",
+      "title": "atividade05"
+    },
+    {
+      "path": "/cursos/colegio-adolpho/ensino-medio/3-serie/programacao-back-end/atividades/atividade06/",
+      "title": "atividade06"
+    },
+    {
+      "path": "/cursos/colegio-adolpho/ensino-medio/3-serie/programacao-back-end/atividades/atividade07/",
+      "title": "atividade07"
+    },
+    {
+      "path": "/cursos/colegio-adolpho/ensino-medio/3-serie/programacao-back-end/atividades/atividade08/",
+      "title": "atividade08"
+    },
+    {
+      "path": "/cursos/colegio-adolpho/ensino-medio/3-serie/programacao-back-end/atividades/atividade09/",
+      "title": "atividade09"
+    },
+    {
+      "path": "/cursos/colegio-adolpho/ensino-medio/3-serie/programacao-back-end/atividades/atividade10/",
+      "title": "atividade10"
+    },
+    {
+      "path": "/cursos/colegio-adolpho/ensino-medio/3-serie/programacao-desenvolvimento-sistemas/",
+      "title": "programacao desenvolvimento sistemas"
+    },
+    {
+      "path": "/cursos/cursoemvideo/algoritmo-e-logica-de-programacao/",
+      "title": "algoritmo e logica de programacao"
+    },
+    {
+      "path": "/cursos/cursoemvideo/git-github/",
+      "title": "git github"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/",
+      "title": "html css"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/desafios/modulo-01/d001/",
+      "title": "d001"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/desafios/modulo-01/d002/",
+      "title": "d002"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/desafios/modulo-01/d003/",
+      "title": "d003"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/desafios/modulo-01/d004/",
+      "title": "d004"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/desafios/modulo-01/d005/",
+      "title": "d005"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/desafios/modulo-01/d006/",
+      "title": "d006"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/desafios/modulo-01/d007/",
+      "title": "d007"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/desafios/modulo-01/d008/",
+      "title": "d008"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/desafios/modulo-01/d008/pg2.html",
+      "title": "pg2"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/desafios/modulo-01/d008/pg3.html",
+      "title": "pg3"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/desafios/modulo-01/d009/",
+      "title": "d009"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/desafios/modulo-01/d009/outraspag/cursohardware.html",
+      "title": "cursohardware"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/desafios/modulo-01/d009/outraspag/cursohtml.html",
+      "title": "cursohtml"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/desafios/modulo-01/d009/outraspag/cursojs.html",
+      "title": "cursojs"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/desafios/modulo-01/d009/outraspag/cursopy.html",
+      "title": "cursopy"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/desafios/modulo-02/d010/",
+      "title": "d010"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/desafios/modulo-02/d011/",
+      "title": "d011"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/desafios/modulo-02/d012/",
+      "title": "d012"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/desafios/modulo-04/d013/desafio-13-01.html",
+      "title": "desafio 13 01"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/desafios/modulo-04/d013/desafio-13-02.html",
+      "title": "desafio 13 02"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/desafios/modulo-04/d014/",
+      "title": "d014"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/desafios/modulo-04/d015/",
+      "title": "d015"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/desafios/modulo-05/d016/",
+      "title": "d016"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/desafios/modulo-05/d017/",
+      "title": "d017"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/desafios/modulo-05/d018/",
+      "title": "d018"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/exercicios/modulo-01/ex001/",
+      "title": "ex001"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/exercicios/modulo-01/ex002/",
+      "title": "ex002"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/exercicios/modulo-01/ex003/",
+      "title": "ex003"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/exercicios/modulo-01/ex004/",
+      "title": "ex004"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/exercicios/modulo-01/ex006/",
+      "title": "ex006"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/exercicios/modulo-01/ex008/",
+      "title": "ex008"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/exercicios/modulo-01/ex008b/",
+      "title": "ex008b"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/exercicios/modulo-01/ex009/",
+      "title": "ex009"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/exercicios/modulo-01/ex010/",
+      "title": "ex010"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/exercicios/modulo-01/ex010/notic%23U00edas/pag003.html",
+      "title": "pag003"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/exercicios/modulo-01/ex010/notic%C3%ADas/pag003.html",
+      "title": "pag003"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/exercicios/modulo-01/ex010/pag002.html",
+      "title": "pag002"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/exercicios/modulo-01/ex011/",
+      "title": "ex011"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/exercicios/modulo-01/ex012/",
+      "title": "ex012"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/exercicios/modulo-01/ex013/",
+      "title": "ex013"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/exercicios/modulo-01/ex014/",
+      "title": "ex014"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/exercicios/modulo-01/ex015/",
+      "title": "ex015"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/exercicios/modulo-01/ex015/pagina02.html",
+      "title": "pagina02"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/exercicios/modulo-02/ex016/cor01.html",
+      "title": "cor01"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/exercicios/modulo-02/ex016/cor02.html",
+      "title": "cor02"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/exercicios/modulo-02/ex016/cor03.html",
+      "title": "cor03"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/exercicios/modulo-02/ex017/fonte01.html",
+      "title": "fonte01"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/exercicios/modulo-02/ex017/fonte02.html",
+      "title": "fonte02"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/exercicios/modulo-02/ex018/fonte01.html",
+      "title": "fonte01"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/exercicios/modulo-02/ex018/fonte02.html",
+      "title": "fonte02"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/exercicios/modulo-02/ex019/seletor01.html",
+      "title": "seletor01"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/exercicios/modulo-02/ex020/",
+      "title": "ex020"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/exercicios/modulo-02/ex020/hover.html",
+      "title": "hover"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/exercicios/modulo-02/ex020/pseudoclasse.html",
+      "title": "pseudoclasse"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/exercicios/modulo-03/ex021/caixa01.html",
+      "title": "caixa01"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/exercicios/modulo-03/ex021/caixa02.html",
+      "title": "caixa02"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/exercicios/modulo-03/ex021/caixa03.html",
+      "title": "caixa03"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/exercicios/modulo-03/ex022/fundo001.html",
+      "title": "fundo001"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/exercicios/modulo-03/ex022/fundo002.html",
+      "title": "fundo002"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/exercicios/modulo-03/ex022/fundo003.html",
+      "title": "fundo003"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/exercicios/modulo-03/ex022/fundo004.html",
+      "title": "fundo004"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/exercicios/modulo-03/ex022/fundo005.html",
+      "title": "fundo005"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/exercicios/modulo-03/ex022/fundo006.html",
+      "title": "fundo006"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/exercicios/modulo-03/ex022/fundo007.html",
+      "title": "fundo007"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/exercicios/modulo-03/ex023/tabela001.html",
+      "title": "tabela001"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/exercicios/modulo-03/ex023/tabela002.html",
+      "title": "tabela002"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/exercicios/modulo-03/ex023/tabela003.html",
+      "title": "tabela003"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/exercicios/modulo-03/ex023/tabela004.html",
+      "title": "tabela004"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/exercicios/modulo-03/ex023/tabela005.html",
+      "title": "tabela005"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/exercicios/modulo-03/ex023/tabela006.html",
+      "title": "tabela006"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/exercicios/modulo-04/ex024/iframe001.html",
+      "title": "iframe001"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/exercicios/modulo-04/ex024/iframe002.html",
+      "title": "iframe002"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/exercicios/modulo-04/ex024/iframe003.html",
+      "title": "iframe003"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/exercicios/modulo-04/ex024/iframe004.html",
+      "title": "iframe004"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/exercicios/modulo-04/ex024/iframe005.html",
+      "title": "iframe005"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/exercicios/modulo-04/ex024/iframe006.html",
+      "title": "iframe006"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/exercicios/modulo-04/ex024/paginas-extras/pag001.html",
+      "title": "pag001"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/exercicios/modulo-04/ex024/paginas-extras/pag002.html",
+      "title": "pag002"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/exercicios/modulo-04/ex024/paginas-extras/pag003.html",
+      "title": "pag003"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/exercicios/modulo-04/ex024/paginas-extras/pag004.html",
+      "title": "pag004"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/exercicios/modulo-04/ex024/paginas-extras/pag005.html",
+      "title": "pag005"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/exercicios/modulo-04/ex025/form001.html",
+      "title": "form001"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/exercicios/modulo-04/ex025/form002.html",
+      "title": "form002"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/exercicios/modulo-04/ex025/form003.html",
+      "title": "form003"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/exercicios/modulo-04/ex025/form004.html",
+      "title": "form004"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/exercicios/modulo-04/ex025/form005.html",
+      "title": "form005"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/exercicios/modulo-04/ex025/form006.html",
+      "title": "form006"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/exercicios/modulo-04/ex025/form007.html",
+      "title": "form007"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/exercicios/modulo-04/ex025/form008.html",
+      "title": "form008"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/exercicios/modulo-04/ex025/form009.html",
+      "title": "form009"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/exercicios/modulo-04/ex025/form010.html",
+      "title": "form010"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/exercicios/modulo-04/ex026/mq001/",
+      "title": "mq001"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/exercicios/modulo-04/ex026/mq002/",
+      "title": "mq002"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/exercicios/modulo-04/ex026/mq003/",
+      "title": "mq003"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/exercicios/modulo-04/ex026/mq004/",
+      "title": "mq004"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/exercicios/modulo-04/ex026/mq005/",
+      "title": "mq005"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/exercicios/modulo-05/ex027/flex001/",
+      "title": "flex001"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/exercicios/modulo-05/ex027/flex002/",
+      "title": "flex002"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/exercicios/modulo-05/ex027/flex003/",
+      "title": "flex003"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/exercicios/modulo-05/ex027/flex004/",
+      "title": "flex004"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/exercicios/modulo-05/ex027/flex005/",
+      "title": "flex005"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/exercicios/modulo-05/ex027/flex006/",
+      "title": "flex006"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/exercicios/modulo-05/ex027/flex007/",
+      "title": "flex007"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/exercicios/modulo-05/ex027/flex008/",
+      "title": "flex008"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/exercicios/modulo-05/ex027/flex009/",
+      "title": "flex009"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/exercicios/modulo-05/ex027/flex010/",
+      "title": "flex010"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/exercicios/modulo-05/ex027/flex011/",
+      "title": "flex011"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/exercicios/modulo-05/ex027/flex012/",
+      "title": "flex012"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/exercicios/modulo-05/ex027/flex013%20-%20menu%20flexbox/",
+      "title": "flex013   menu flexbox"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/exercicios/modulo-05/ex027/flex014%20-%20conteudo%20flex/",
+      "title": "flex014   conteudo flex"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/exercicios/modulo-05/ex028/grid01/",
+      "title": "grid01"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/exercicios/modulo-05/ex028/grid02/",
+      "title": "grid02"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/exercicios/modulo-05/ex028/grid03/",
+      "title": "grid03"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/exercicios/modulo-05/ex028/grid04/",
+      "title": "grid04"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/exercicios/modulo-05/ex028/grid05/",
+      "title": "grid05"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/exercicios/modulo-05/ex028/grid06/",
+      "title": "grid06"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/projetos/projeto-redes-sociais/",
+      "title": "projeto redes sociais"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/projetos/projeto-redes-sociais/facebook.html",
+      "title": "facebook"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/projetos/projeto-redes-sociais/github.html",
+      "title": "github"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/projetos/projeto-redes-sociais/home.html",
+      "title": "home"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/projetos/projeto-redes-sociais/instagram.html",
+      "title": "instagram"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/projetos/projeto-redes-sociais/twitter.html",
+      "title": "twitter"
+    },
+    {
+      "path": "/cursos/cursoemvideo/html-css/projetos/projeto-redes-sociais/youtube.html",
+      "title": "youtube"
+    },
+    {
+      "path": "/cursos/cursoemvideo/javascript/",
+      "title": "javascript"
+    },
+    {
+      "path": "/cursos/cursoemvideo/javascript/modulo-a/aula04/ex001.html",
+      "title": "ex001"
+    },
+    {
+      "path": "/cursos/cursoemvideo/javascript/modulo-b/aula06/ex002.html",
+      "title": "ex002"
+    },
+    {
+      "path": "/cursos/cursoemvideo/javascript/modulo-b/aula06/ex003.html",
+      "title": "ex003"
+    },
+    {
+      "path": "/cursos/cursoemvideo/javascript/modulo-b/aula06/ex004.html",
+      "title": "ex004"
+    },
+    {
+      "path": "/cursos/cursoemvideo/javascript/modulo-c/aula09/ex005.html",
+      "title": "ex005"
+    },
+    {
+      "path": "/cursos/cursoemvideo/javascript/modulo-d/aula11/ex010.html",
+      "title": "ex010"
+    },
+    {
+      "path": "/cursos/cursoemvideo/javascript/modulo-d/aula12ex/ex014/",
+      "title": "ex014"
+    },
+    {
+      "path": "/cursos/cursoemvideo/javascript/modulo-d/aula12ex/ex015/",
+      "title": "ex015"
+    },
+    {
+      "path": "/cursos/cursoemvideo/javascript/modulo-d/aula12ex/modelo/",
+      "title": "modelo"
+    },
+    {
+      "path": "/cursos/cursoemvideo/javascript/modulo-e/aula14ex/ex016/",
+      "title": "ex016"
+    },
+    {
+      "path": "/cursos/cursoemvideo/javascript/modulo-e/aula14ex/ex017/",
+      "title": "ex017"
+    },
+    {
+      "path": "/cursos/cursoemvideo/javascript/modulo-e/aula14ex/modelo/",
+      "title": "modelo"
+    },
+    {
+      "path": "/cursos/cursoemvideo/javascript/modulo-f/aula16ex/ex018/",
+      "title": "ex018"
+    },
+    {
+      "path": "/cursos/cursoemvideo/javascript/modulo-f/aula16ex/modelo/",
+      "title": "modelo"
+    },
+    {
+      "path": "/cursos/cursoemvideo/python/",
+      "title": "python"
+    },
+    {
+      "path": "/cursos/fundacao-bradesco/aplicacoes-web/",
+      "title": "aplicacoes web"
+    },
+    {
+      "path": "/cursos/fundacao-bradesco/aplicacoes-web/projeto/",
+      "title": "projeto"
+    },
+    {
+      "path": "/cursos/hashtag-programacao/javascript/",
+      "title": "javascript"
+    },
+    {
+      "path": "/cursos/hashtag-programacao/react/",
+      "title": "react"
+    },
+    {
+      "path": "/cursos/hashtag-programacao/react/audible/",
+      "title": "audible"
+    },
+    {
+      "path": "/cursos/qlik/trilhas/trilha-criar-visualiza%C3%A7%C3%B5es-com-qlik-cloud-analytics/",
+      "title": "trilha criar visualizações com qlik cloud analytics"
+    },
+    {
+      "path": "/cursos/qlik/trilhas/trilha-modelagem-de-dados-com-qlik-cloud-analytics/",
+      "title": "trilha modelagem de dados com qlik cloud analytics"
+    },
+    {
+      "path": "/cursos/unicesumar/engenharia-de-software-ead/",
+      "title": "engenharia de software ead"
+    },
+    {
+      "path": "/cursos/unicesumar/engenharia-de-software-ead/hackathons/unicesumar-2026-qlik/",
+      "title": "unicesumar 2026 qlik"
+    },
+    {
+      "path": "/cursos/unicesumar/engenharia-de-software-ead/materias/algoritmos-e-logica-de-programacao/",
+      "title": "algoritmos e logica de programacao"
+    },
+    {
+      "path": "/cursos/unicesumar/engenharia-de-software-ead/materias/engenharia-de-software/",
+      "title": "engenharia de software"
+    },
+    {
+      "path": "/cursos/unicesumar/engenharia-de-software-ead/materias/fundamentos-arquiteturas-computadores/",
+      "title": "fundamentos arquiteturas computadores"
+    },
+    {
+      "path": "/cursos/unicesumar/engenharia-de-software-ead/materias/go-projeto-de-vida/",
+      "title": "go projeto de vida"
+    },
+    {
+      "path": "/cursos/unicesumar/engenharia-de-software-ead/materias/linguagem-e-tecnicas-de-programacao/",
+      "title": "linguagem e tecnicas de programacao"
+    },
+    {
+      "path": "/cursos/unicesumar/engenharia-de-software-ead/materias/matematica-aplicada-a-computacao/",
+      "title": "matematica aplicada a computacao"
+    },
+    {
+      "path": "/cursos/unicesumar/engenharia-de-software-ead/materias/producao-conhecimento-cientifico-tecnologico-disrupcao/",
+      "title": "producao conhecimento cientifico tecnologico disrupcao"
+    },
+    {
+      "path": "/cursos/unicesumar/engenharia-de-software-ead/materias/redes-computadores/",
+      "title": "redes computadores"
+    },
+    {
+      "path": "/cursos/youtube/pietro-martins-de-oliveira/",
+      "title": "pietro martins de oliveira"
+    },
+    {
+      "path": "/cursos/youtube/pietro-martins-de-oliveira/linguagem-c/",
+      "title": "linguagem c"
+    }
+  ]
+}
