@@ -21,3 +21,7 @@
 
 - [x] **Aplicação visual sem salto durante o carregamento:** “Otimize o sistema de aplicação de css para que as páginas não fiquem bugadas temporariamente ao serem carregadas”. Aguardar a aplicação das folhas compartilhadas antes de revelar a página e oferecer uma saída segura se algum arquivo falhar.
 - [x] **Importação centralizada mantida:** “mantenha a ideia de importação via js, pois quero que ao importar somente o script.js sejam importadas todas as outras configurações”. Manter `src/js/script.js` como entrada comum para CSS, variantes responsivas e configurações compartilhadas, sem exigir `<link>` de CSS na home nem adicionar dependências; preservar páginas de atividades isoladas.
+
+## Correção da navbar em páginas com IDs especiais
+
+- [ ] **Montagem robusta do menu compartilhado:** manter a navbar funcional quando uma seção possui ID com espaço, acento ou começa com número, sem alterar IDs, destinos ou conteúdo das páginas e sem modificar atividades isoladas.

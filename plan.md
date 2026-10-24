@@ -55,6 +55,11 @@ Modernizar a página inicial e a apresentação compartilhada do site para que o
 - **Aplicação coordenada:** adicionar um gate visual síncrono no início do carregador, inserir as folhas em paralelo mantendo sua ordem de cascata, deduplicar links já presentes, aguardar `load`/`error` com timeout e só então revelar o `body` e inicializar componentes. Erros ou falhas tardias devem revelar a página em vez de mantê-la em branco.
 - **Escopo:** ajustar apenas a home e as páginas de entrada compartilhadas que usam `/src/js/script.js`; conservar URLs de assets, atributos `media` e fallback de contexto, sem adicionar dependências nem alterar atividades independentes.
 
+## Extensão: robustez da navegação compartilhada
+
+- **Montagem segura da navbar:** não interpolar IDs de seção diretamente em seletores CSS. Encontrar subseções pelos filhos DOM do elemento pai e localizar o item de menu pelos dados já atribuídos, mantendo IDs com espaços, acentos ou dígitos iniciais válidos.
+- **Compatibilidade:** preservar os IDs, rótulos, destinos dos links, dropdowns e conteúdo das páginas; corrigir somente a lógica de `src/js/header.js`, sem editar atividades nem publicar a produção.
+
 ## Limites da mudança
 
 A experiência compartilhada alcança as páginas que já carregam `src/js/script.js`; atividades HTML independentes permanecem intocadas. Nenhum arquivo apontado por links externos do repositório será tratado como material de implementação. A manutenção ficará concentrada nos estilos existentes e em uma marcação clara na página inicial, sem nova biblioteca nem duplicação de CSS por página.
