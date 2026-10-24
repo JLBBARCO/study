@@ -7,7 +7,6 @@ const CRITICAL_JS_FILES = [
   "header.js",
   "footer.js",
   "paths.js",
-  "assistant.js",
   "accessibility.js",
 ];
 const CRITICAL_CSS_FILES = [
@@ -25,7 +24,6 @@ const CRITICAL_CSS_FILES = [
   },
   { fileName: "cards-pc.css", media: "screen and (min-width: 990px)" },
   { fileName: "cards-tv.css", media: "screen and (min-width: 1200px)" },
-  { fileName: "assistant.css", media: "screen" },
   { fileName: "site-theme.css", media: "screen" },
 ];
 const DEFERRED_JS_FILES = ["accessibility.js", "adsense.js"];
@@ -157,7 +155,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     await carregarContextoServidor();
     await headInsert(DOCUMENT_URL_TOKEN);
 
-    loadAdSense();
+    invokeGlobal("loadAdSense");
     invokeGlobal("initializeNavigation");
     invokeGlobal("initializeAccessibilityMenu");
     initializeSmoothScroll();
@@ -987,7 +985,17 @@ async function headInsert(path) {
   const titleText = titleHomeEarly?.textContent?.trim();
   await criticalCssPromise;
   await insertFavicon();
-  await insertJS(CRITICAL_JS_FILES, path);
-
+  await insertJS(["header.js"], path);
   invokeGlobal("navBar", titleText);
+
+  const supportingScripts = CRITICAL_JS_FILES.filter(
+    (fileName) => fileName !== "header.js",
+  );
+  for (const fileName of supportingScripts) {
+    try {
+      await insertJS([fileName], path);
+    } catch (error) {
+      console.warn(`Falha ao carregar o script auxiliar ${fileName}.`, error);
+    }
+  }
 }
