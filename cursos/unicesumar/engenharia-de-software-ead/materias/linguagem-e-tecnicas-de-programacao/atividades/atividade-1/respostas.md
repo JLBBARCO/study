@@ -1,6 +1,6 @@
 # Respostas
 
-## Questão 1: Estruturas de Dados Homogêneas vs Heterogêneas em Linguagem C
+## Questão 1
 
 1. Estruturas de dados Homogêneas
    - **Definição:** São coleções de elementos indexados que possuem estritamente o **mesmo tipo de dado**. Os elementos são alocados de forma sequencial e contínua no bloco de memória principal.
@@ -17,7 +17,7 @@
      - **Eficiência de Memória:** O tamanho total ocupado pela `struct` equivale à soma dos tamanhos de seus campos (com possíveis alinhamentos de memória/padding aplicados pelo computador). Permite agrupar os dados de uma entidade em um bloco contíguo na memória.
      - **Organização do Código:** Aumenta significativamente a legibilidade, o encapsulamento e a manutenibilidade do código-fonte. Em vez de manter múltiplos vetores paralelos desconectados, os atributos ficam unificados em uma única entidade acessível pelo operador ponto (`.`).
 
-## Questão 2: Projeto da Estrutura (`struct`) para o Sistema Escolar
+## Questão 2
 
 ```c
 #include <stdio.h>
