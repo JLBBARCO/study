@@ -36,7 +36,7 @@ enquanto (condicao_loop_principal == verdadeiro) {
             var total_pings = servidor["ping"].tamanho()
             se (total_pings > 0) {
                 para var i = 0; i < total_pings; i = i + 1 {
-                    media_ping = media_ping + servidor["ping"][i]
+                    media_ping = media_ping + (servidor["ping"][i] * 1)
                 }
                 media_ping = media_ping / total_pings
                 servidor["ping_medio"] = media_ping
@@ -48,6 +48,19 @@ enquanto (condicao_loop_principal == verdadeiro) {
         }
     }
 }
+// Loop de ordenação dos servidores pelo ping médio (do maior para o menor)
+var _esta_ordenado = falso
+enquanto (_esta_ordenado == falso) {
+    _esta_ordenado = verdadeiro
+    para var i = 0; i < servidores.tamanho() - 1; i = i + 1 {
+        se (servidores[i]["ping_medio"] < servidores[i + 1]["ping_medio"]) {
+            var temp = servidores[i]
+            servidores[i] = servidores[i + 1]
+            servidores[i + 1] = temp
+            _esta_ordenado = falso
+        }
+    }
+}
 // Exibição do resultado final
 escreva("\n---- Lista de Servidores Cadastrados ----")
 escreva("\nServidores em alerta (ping médio >= 100ms):")
@@ -56,10 +69,8 @@ para var i = 0; i < servidores.tamanho(); i = i + 1 {
         escreva("ID: " + texto(servidores[i]["id"]) + " | Servidor: " + servidores[i]["nome"] + " | Quantidade de Pings: " + texto(servidores[i]["ping"].tamanho()) + " | Ping Medio: " + texto(servidores[i]["ping_medio"]) + "ms")
     }
 }
-escreva("\nServidores com ping médio menor que 100ms:")
+escreva("\nTodos os Servidores:")
 para var i = 0; i < servidores.tamanho(); i = i + 1 {
-    se (servidores[i]["ping_medio"] < 100) {
-        escreva("ID: " + texto(servidores[i]["id"]) + " | Servidor: " + servidores[i]["nome"] + " | Quantidade de Pings: " + texto(servidores[i]["ping"].tamanho()) + " | Ping Medio: " + texto(servidores[i]["ping_medio"]) + "ms")
-    }
+    escreva("ID: " + texto(servidores[i]["id"]) + " | Servidor: " + servidores[i]["nome"] + " | Quantidade de Pings: " + texto(servidores[i]["ping"].tamanho()) + " | Ping Medio: " + texto(servidores[i]["ping_medio"]) + "ms")
 }
 escreva("\nTotal de servidores: " + texto(servidores.tamanho()))

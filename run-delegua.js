@@ -1,6 +1,6 @@
 const path = require("path");
 const fs = require("fs");
-const { execSync } = require("child_process");
+const { execFileSync } = require("child_process");
 
 const caminhoArquivo = process.argv[2];
 
@@ -16,17 +16,23 @@ if (!fs.existsSync(arquivoAbsoluto)) {
   process.exit(1);
 }
 
-// Identifica a extensão do arquivo
 const extensao = path.extname(arquivoAbsoluto).toLowerCase();
+const executavelDelegua = path.join(
+  __dirname,
+  "node_modules",
+  "@designliquido",
+  "delegua-node",
+  "bin",
+  "delegua",
+);
 
-// Se for .alg, aplica o dialeto visualg; caso contrário, roda o Delégua padrão
-const comando =
-  extensao === ".alg"
-    ? `npx delegua -d visualg "${arquivoAbsoluto}"`
-    : `npx delegua "${arquivoAbsoluto}"`;
+const argumentos =
+  extensao === ".alg" ? ["-d", "visualg", arquivoAbsoluto] : [arquivoAbsoluto];
 
 try {
-  execSync(comando, { stdio: "inherit" });
+  execFileSync(process.execPath, [executavelDelegua, ...argumentos], {
+    stdio: "inherit",
+  });
 } catch (error) {
   process.exit(error.status || 1);
 }
