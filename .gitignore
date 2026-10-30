@@ -20,6 +20,9 @@ dist/
 # Node
 node_modules/
 
+# Java
+*.class
+
 # Vercel
 .vercel
 
