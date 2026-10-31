@@ -8,13 +8,19 @@ int main(void)
 {
     int i;
 
-    for (i = 1; i <= 3; i++) printf("%d ", i * i);
+    for (i = 1; i <= 3; i++)
+        printf("%d ", i * i);
     printf("\n");
 
-    for (i = 0; i < 3; i++); printf("A");
+    for (i = 0; i < 3; i++)
+        ;
+    printf("A");
     printf("\n");
 
-    int k = 10; while (k < 5) k++; printf("%d", k);
+    int k = 10;
+    while (k < 5)
+        k++;
+    printf("%d", k);
     printf("\n");
     return 0;
 }

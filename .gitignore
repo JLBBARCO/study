@@ -1,5 +1,6 @@
 # Local Keys
 .env
+.env*
 .env*.local
 
 # IDE files

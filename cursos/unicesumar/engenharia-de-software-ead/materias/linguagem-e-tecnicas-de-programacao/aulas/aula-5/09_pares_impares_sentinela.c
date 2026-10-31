@@ -10,9 +10,16 @@ int main(void)
 
     printf("Numero (0 encerra): ");
     scanf("%d", &n);
-    while (n != 0) {
-        if (n % 2 == 0) pares++;
-        else            impares++;
+    while (n != 0)
+    {
+        if (n % 2 == 0)
+        {
+            pares++;
+        }
+        else
+        {
+            impares++;
+        }
         scanf("%d", &n);
     }
     printf("Pares: %d Impares: %d\n", pares, impares);
