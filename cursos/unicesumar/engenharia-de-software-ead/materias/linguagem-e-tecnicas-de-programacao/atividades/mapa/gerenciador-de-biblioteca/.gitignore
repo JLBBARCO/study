@@ -1,1 +1,5 @@
-*.exe
+# Arquivos de armazenamento de dados do programa
+livros.txt
+usuarios.txt
+emprestimos.txt
+backup/

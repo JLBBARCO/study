@@ -33,3 +33,7 @@ node_modules/
 
 # MacOS
 .DS_Store
+
+# Arquivos de testes
+teste.*
+test.*
