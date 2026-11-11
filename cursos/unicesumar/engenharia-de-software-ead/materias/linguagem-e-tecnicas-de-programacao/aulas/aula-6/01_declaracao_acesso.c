@@ -5,8 +5,8 @@
 /* Slide 6: declaracao, acesso por indice e valores iniciais. */
 int main(void)
 {
-    int nota[5];                  /* 5 posicoes: indices 0, 1, 2, 3 e 4 */
-    int v[TAM] = {5, 3, 8, 1};    /* tamanho em constante, com valores iniciais */
+    int nota[5];               /* 5 posicoes: indices 0, 1, 2, 3 e 4 */
+    int v[TAM] = {5, 3, 8, 1}; /* tamanho em constante, com valores iniciais */
 
     nota[0] = 7;
     nota[4] = 9;
