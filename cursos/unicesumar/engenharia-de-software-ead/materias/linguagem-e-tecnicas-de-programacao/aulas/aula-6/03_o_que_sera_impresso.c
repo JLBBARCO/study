@@ -7,14 +7,14 @@ int main(void)
     int v[4] = {5, 3, 8, 1};
     int i;
 
-    printf("%d\n", v[0] + v[3]);                 /* 5 + 1 = 6 */
+    printf("%d\n", v[0] + v[3]); /* 5 + 1 = 6 */
 
     v[2] = v[1] + 4;
-    printf("%d\n", v[2]);                        /* 3 + 4 = 7 */
+    printf("%d\n", v[2]); /* 3 + 4 = 7 */
 
-    int w[4] = {5, 3, 8, 1};                     /* vetor original de novo */
+    int w[4] = {5, 3, 8, 1}; /* vetor original de novo */
     for (i = 3; i >= 0; i--)
-        printf("%d ", w[i]);                     /* 1 8 3 5 */
+        printf("%d ", w[i]); /* 1 8 3 5 */
     printf("\n");
     return 0;
 }

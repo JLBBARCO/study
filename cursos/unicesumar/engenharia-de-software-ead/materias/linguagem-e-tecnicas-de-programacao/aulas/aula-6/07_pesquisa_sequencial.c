@@ -13,10 +13,14 @@ int main(void)
     scanf("%d", &busca);
     while (i < TAM && achou == 0)
     {
-        if (v[i] == busca) achou = 1;
-        else i++;
+        if (v[i] == busca)
+            achou = 1;
+        else
+            i++;
     }
-    if (achou) printf("Posicao %d\n", i);
-    else printf("Nao encontrado\n");
+    if (achou)
+        printf("Posicao %d\n", i);
+    else
+        printf("Nao encontrado\n");
     return 0;
 }

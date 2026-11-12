@@ -11,11 +11,12 @@ int main(void)
     aux = v[0];
     v[0] = v[1];
     v[1] = aux;
-    printf("Com auxiliar: %d %d\n", v[0], v[1]);     /* 8 3 */
+    printf("Com auxiliar: %d %d\n", v[0], v[1]); /* 8 3 */
 
-    v[0] = 3; v[1] = 8;
+    v[0] = 3;
+    v[1] = 8;
     v[0] = v[1];
     v[1] = v[0];
-    printf("Sem auxiliar: %d %d\n", v[0], v[1]);     /* 8 8 */
+    printf("Sem auxiliar: %d %d\n", v[0], v[1]); /* 8 8 */
     return 0;
 }

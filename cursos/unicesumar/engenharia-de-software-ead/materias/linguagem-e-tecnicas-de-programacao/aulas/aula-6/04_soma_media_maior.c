@@ -12,9 +12,11 @@ int main(void)
     for (i = 0; i < TAM; i++)
         scanf("%f", &n[i]);
     maior = n[0];
-    for (i = 0; i < TAM; i++) {
+    for (i = 0; i < TAM; i++)
+    {
         soma = soma + n[i];
-        if (n[i] > maior) maior = n[i];
+        if (n[i] > maior)
+            maior = n[i];
     }
     printf("Media %.2f Maior %.1f\n",
            soma / TAM, maior);

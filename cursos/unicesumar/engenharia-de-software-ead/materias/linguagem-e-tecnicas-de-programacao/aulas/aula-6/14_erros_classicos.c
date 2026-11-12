@@ -10,18 +10,18 @@ int main(void)
     int i, soma;
 
     soma = 0;
-    for (i = 0; i <= TAM; i++)          /* erro 1: <= le v[5], que nao existe */
+    for (i = 0; i <= TAM; i++) /* erro 1: <= le v[5], que nao existe */
         soma = soma + v[i];
     printf("Soma com <= (errada): %d\n", soma);
 
     soma = 0;
-    for (i = 1; i < TAM; i++)           /* erro 2: comecar em 1 deixa v[0] de fora */
+    for (i = 1; i < TAM; i++) /* erro 2: comecar em 1 deixa v[0] de fora */
         soma = soma + v[i];
-    printf("Soma comecando em 1 (errada): %d\n", soma);       /* 14, e nao 15 */
+    printf("Soma comecando em 1 (errada): %d\n", soma); /* 14, e nao 15 */
 
     soma = 0;
-    for (i = 0; i < TAM; i++)           /* correto: de 0 a TAM - 1 */
+    for (i = 0; i < TAM; i++) /* correto: de 0 a TAM - 1 */
         soma = soma + v[i];
-    printf("Soma correta: %d\n", soma);                         /* 15 */
+    printf("Soma correta: %d\n", soma); /* 15 */
     return 0;
 }
