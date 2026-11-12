@@ -201,8 +201,8 @@ main {
   margin: 0 auto;
 }
 
-main > section,
-main > section > section {
+main>section,
+main>section>section {
   display: flex;
   flex-flow: column nowrap;
   align-items: stretch;
@@ -213,7 +213,7 @@ main > section > section {
   scroll-margin-top: calc(var(--header-size) + 1rem);
 }
 
-main > section > section {
+main>section>section {
   border-top: 1px solid var(--border-color);
 }
 
@@ -395,6 +395,80 @@ div.card .card-description-toggle:focus-visible {
   background: var(--surface);
   box-shadow: none;
   color: var(--text-muted);
+}
+
+.root-path-separator {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.5rem;
+  min-height: 2rem;
+  color: var(--text-muted);
+  cursor: default;
+}
+
+.root-path-separator svg {
+  transition: transform 220ms ease;
+}
+
+.root-path-separator.has-menu {
+  cursor: pointer;
+}
+
+.root-path-separator.has-menu:hover svg,
+.root-path-separator.has-menu:focus-visible svg {
+  transform: rotate(90deg);
+}
+
+.root-path-menu {
+  position: absolute;
+  top: calc(100% - 0.1rem);
+  left: 50%;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  min-width: 12rem;
+  padding: 0.35rem;
+  border: 1px solid var(--border-color);
+  border-radius: 0.75rem;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, -0.35rem);
+  transition: opacity 180ms ease, transform 180ms ease;
+}
+
+.root-path-separator.has-menu:hover .root-path-menu,
+.root-path-separator.has-menu:focus-within .root-path-menu,
+.root-path-separator.has-menu:focus-visible .root-path-menu {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate(-50%, 0);
+}
+
+.root-path-menu a {
+  margin: 0;
+  border: 0;
+  border-radius: 0.5rem;
+  background: transparent;
+  box-shadow: none;
+  color: var(--text-primary);
+  white-space: nowrap;
+}
+
+.root-path-menu a:hover,
+.root-path-menu a:focus-visible {
+  background: var(--surface-muted);
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .root-path-separator svg,
+  .root-path-menu {
+    transition: none;
+  }
 }
 
 .skip-link {
@@ -611,27 +685,27 @@ div.card .card-description-toggle:focus-visible {
   letter-spacing: -0.045em;
 }
 
-.home-page #cursos > section {
+.home-page #cursos>section {
   padding: clamp(1.5rem, 4vw, 2.6rem) 0;
 }
 
-.home-page #cursos > section > h1 {
+.home-page #cursos>section>h1 {
   margin: 0 0 0.6rem;
   padding: 0 0 0 0.85rem;
   border-left: 3px solid var(--brand);
   font-size: clamp(1.35rem, 2vw, 1.7rem);
 }
 
-.home-page #cursos > section > p {
+.home-page #cursos>section>p {
   max-width: 72ch;
   margin: 0.2rem 0 0.8rem;
 }
 
-.home-page #cursos > section .container {
+.home-page #cursos>section .container {
   margin-top: 1rem;
 }
 
-.home-page #cursos > section .card {
+.home-page #cursos>section .card {
   width: 100%;
   max-width: none;
 }
@@ -718,8 +792,8 @@ footer .button-to-top:hover {
     width: calc(100% - 1.25rem);
   }
 
-  main > section,
-  main > section > section {
+  main>section,
+  main>section>section {
     padding: 2rem 0;
   }
 
@@ -750,7 +824,7 @@ footer .button-to-top:hover {
     flex: 1 1 10rem;
   }
 
-  .home-page #cursos > section {
+  .home-page #cursos>section {
     padding: 1.7rem 0;
   }
 
@@ -836,6 +910,7 @@ footer .button-to-top:hover {
 }
 
 @media (prefers-reduced-motion: reduce) {
+
   :root:not([data-motion="full"]) *,
   :root:not([data-motion="full"]) *::before,
   :root:not([data-motion="full"]) *::after {
@@ -1080,7 +1155,7 @@ footer .button-to-top:hover {
     gap: clamp(1.5rem, 4vw, 3rem);
   }
 
-  .home-page #cursos > section .container {
+  .home-page #cursos>section .container {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     align-items: stretch;
@@ -1098,7 +1173,7 @@ footer .button-to-top:hover {
     gap: clamp(2rem, 6vw, 5rem);
   }
 
-  .home-page #cursos > section .container {
+  .home-page #cursos>section .container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
     align-items: stretch;
@@ -1106,12 +1181,13 @@ footer .button-to-top:hover {
 }
 
 @media (min-width: 1200px) {
-  .home-page #cursos > section .container {
+  .home-page #cursos>section .container {
     grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
   }
 }
 
 @media (pointer: coarse) {
+
   .accessibility-toggle,
   .accessibility-theme-choice,
   .accessibility-font-button,
@@ -1122,6 +1198,7 @@ footer .button-to-top:hover {
 }
 
 @media (forced-colors: active) {
+
   .accessibility-toggle,
   .accessibility-panel,
   .accessibility-panel button,

@@ -34,6 +34,7 @@ const PRECONNECT_ORIGINS = [
 const DEFERRED_TASK_TIMEOUT = 1800;
 const ADSENSE_PUBLISHER_ID = "ca-pub-1575745628375298";
 const ADSENSE_SCRIPT_ID = "google-adsense-script";
+const DOCUMENT_TITLE_PREFIX = "Estudos de JLBBARCO - ";
 const CSS_LINK_TIMEOUT_MS = 9000;
 const CSS_GATE_TIMEOUT_MS = 12000;
 const CSS_GATE_STYLE_ID = "study-css-loading-gate";
@@ -549,7 +550,8 @@ function updateDocumentTitleFromHome() {
   const titleHome = getHomeHeadingElement();
   if (!titleHome) return;
 
-  const title = titleHome.textContent?.trim() || "Document";
+  const titleText = titleHome.textContent?.trim() || "Document";
+  const title = `${DOCUMENT_TITLE_PREFIX}${titleText}`;
   let titlePg = document.querySelector("title");
 
   if (!titlePg) {
@@ -781,10 +783,7 @@ function insertCSS(cssFiles = []) {
   }
 
   function waitForStylesheet(link, fileName) {
-    if (
-      link.dataset.cssLoadState === "loaded" ||
-      hasLoadedStylesheet(link)
-    ) {
+    if (link.dataset.cssLoadState === "loaded" || hasLoadedStylesheet(link)) {
       link.dataset.cssLoadState = "loaded";
       return Promise.resolve({ fileName, state: "loaded" });
     }

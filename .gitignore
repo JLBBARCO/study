@@ -37,3 +37,9 @@ node_modules/
 # Arquivos de testes
 teste.*
 test.*
+
+# Arquivos de log
+*.log
+
+# Arquivos compilados
+*.exe

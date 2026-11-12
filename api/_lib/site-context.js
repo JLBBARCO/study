@@ -35,11 +35,7 @@ function buildRelativeRootPath(directoryParts) {
   return directoryParts.map(() => "../").join("");
 }
 
-function buildSiteContext({
-  pathname,
-  host = "",
-  repositoryName = "study",
-}) {
+function buildSiteContext({ pathname, host = "", repositoryName = "study" }) {
   const directoryParts = getDirectoryParts(pathname, repositoryName);
   const relativeRootPath = buildRelativeRootPath(directoryParts);
   const runningOnVercel = isVercelHost(host);
