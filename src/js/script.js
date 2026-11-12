@@ -161,6 +161,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     invokeGlobal("initializeAccessibilityMenu");
     initializeSmoothScroll();
     initializeCookies();
+    ensureActivityLinksOpenInNewTab();
     wrapCardLinks();
     stabilizeMediaLayout();
     optimizeImageLoading();
@@ -879,6 +880,43 @@ function initializeSmoothScroll() {
       behavior: "smooth",
       block: "start",
     });
+  });
+}
+
+function ensureActivityLinksOpenInNewTab() {
+  const sectionIds = [
+    "atividades",
+    "Atividades",
+    "aulas",
+    "Aulas",
+    "trabalhos",
+    "Trabalhos",
+    "projetos",
+    "Projetos",
+    "materias",
+    "matérias",
+    "Materias",
+    "Matérias",
+  ];
+
+  sectionIds.forEach((sectionId) => {
+    const section = document.getElementById(sectionId);
+    if (!section) return;
+
+    section
+      .querySelectorAll(
+        ":scope > article.container > div.card > article.buttonContainer > a",
+      )
+      .forEach((link) => {
+        link.target = "_blank";
+
+        const relTokens = new Set(
+          (link.getAttribute("rel") || "").split(/\s+/).filter(Boolean),
+        );
+        relTokens.add("noopener");
+        relTokens.add("noreferrer");
+        link.rel = Array.from(relTokens).join(" ");
+      });
   });
 }
 

@@ -10,13 +10,16 @@
   "scripts": {
     "dev": "node dev-server.js",
     "dev:offline": "node dev-server.js --offline",
-    "start": "node dev-server.js"
+    "start": "node dev-server.js",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
   "optionalDependencies": {
     "@designliquido/delegua": "1.12.10",
     "@designliquido/delegua-node": "1.12.10"
   },
   "devDependencies": {
+    "prettier": "^3.6.2",
     "vite": "^8.3.4"
   },
   "dependencies": {
