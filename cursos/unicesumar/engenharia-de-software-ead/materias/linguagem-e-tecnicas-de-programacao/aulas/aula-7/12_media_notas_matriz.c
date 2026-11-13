@@ -11,7 +11,7 @@ int main(void)
 
     for (a = 0; a < ALU; a++)
     {
-        soma = 0;                               /* zera o acumulador a cada aluno */
+        soma = 0; /* zera o acumulador a cada aluno */
         for (p = 0; p < PROVAS; p++)
         {
             scanf("%f", &nota[a][p]);

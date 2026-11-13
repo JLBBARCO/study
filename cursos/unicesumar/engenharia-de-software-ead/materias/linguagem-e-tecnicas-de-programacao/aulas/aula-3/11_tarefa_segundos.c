@@ -1,4 +1,4 @@
-#define _CRT_SECURE_NO_WARNINGS   /* MSVC: permite usar scanf sem avisos */
+#define _CRT_SECURE_NO_WARNINGS /* MSVC: permite usar scanf sem avisos */
 /*
  * 11_tarefa_segundos.c
  * Slide: Tarefa para casa (parte 1) - solucao do professor
@@ -17,7 +17,7 @@ int main()
     scanf("%d", &total);
 
     horas = total / 3600;
-    minutos = (total % 3600) / 60;     /* parenteses: o resto vem primeiro */
+    minutos = (total % 3600) / 60; /* parenteses: o resto vem primeiro */
     segundos = total % 60;
 
     printf("%02d:%02d:%02d\n", horas, minutos, segundos);

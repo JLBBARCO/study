@@ -1,4 +1,4 @@
-#define _CRT_SECURE_NO_WARNINGS   /* MSVC: permite usar scanf sem avisos */
+#define _CRT_SECURE_NO_WARNINGS /* MSVC: permite usar scanf sem avisos */
 /*
  * 12_tarefa_distancia.c
  * Slide: Tarefa para casa (parte 2) - solucao do professor

@@ -9,14 +9,14 @@ int main(void)
     char a[10] = "Ana", b[10] = "Ana", lido[20];
     char *pa = a, *pb = b;
 
-    if (pa == pb)                      /* mesmos enderecos? nao: sao dois vetores */
+    if (pa == pb) /* mesmos enderecos? nao: sao dois vetores */
         printf("== diz: iguais\n");
     else
         printf("== diz: diferentes (compara enderecos)\n");
-    if (strcmp(a, b) == 0)             /* forma correta */
+    if (strcmp(a, b) == 0) /* forma correta */
         printf("strcmp diz: iguais\n");
 
-    scanf("%19s", lido);               /* para no primeiro espaco */
-    printf("Lido: [%s]\n", lido);      /* so Ana */
+    scanf("%19s", lido);          /* para no primeiro espaco */
+    printf("Lido: [%s]\n", lido); /* so Ana */
     return 0;
 }

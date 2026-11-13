@@ -1,14 +1,14 @@
 {
-  "installCommand": "npm install --omit=optional",
-  "headers": [
-    {
-      "source": "/src/(.*)",
-      "headers": [
+    "installCommand": "npm install --omit=optional",
+    "headers": [
         {
-          "key": "Cache-Control",
-          "value": "public, max-age=31536000, immutable"
+            "source": "/src/(.*)",
+            "headers": [
+                {
+                    "key": "Cache-Control",
+                    "value": "public, max-age=31536000, immutable"
+                }
+            ]
         }
-      ]
-    }
-  ]
+    ]
 }

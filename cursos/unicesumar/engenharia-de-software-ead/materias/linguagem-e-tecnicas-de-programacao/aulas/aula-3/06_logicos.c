@@ -10,24 +10,26 @@
 
 int main()
 {
-    int a = 1;                       /* verdadeiro */
-    int b = 0;                       /* falso      */
+    int a = 1; /* verdadeiro */
+    int b = 0; /* falso      */
 
-    printf("a && b = %d\n", a && b);     /* 0: precisa dos dois verdadeiros */
-    printf("a || b = %d\n", a || b);     /* 1: basta um verdadeiro          */
-    printf("!a     = %d\n", !a);         /* 0: inverte                      */
-    printf("a > b  = %d\n", a > b);      /* 1                               */
+    printf("a && b = %d\n", a && b); /* 0: precisa dos dois verdadeiros */
+    printf("a || b = %d\n", a || b); /* 1: basta um verdadeiro          */
+    printf("!a     = %d\n", !a);     /* 0: inverte                      */
+    printf("a > b  = %d\n", a > b);  /* 1                               */
 
     /* ---- Tabela-verdade completa, usando todos os valores ---- */
     printf("\n a b | a&&b a||b\n");
-    for (a = 0; a <= 1; a++) {           /* o for sera estudado na Aula 05 */
-        for (b = 0; b <= 1; b++) {
+    for (a = 0; a <= 1; a++)
+    { /* o for sera estudado na Aula 05 */
+        for (b = 0; b <= 1; b++)
+        {
             printf(" %d %d |  %d    %d\n", a, b, a && b, a || b);
         }
     }
 
     /* Em C, zero e falso e QUALQUER valor diferente de zero e verdadeiro. */
-    printf("\n!0 = %d, !5 = %d\n", !0, !5);     /* 1 e 0 */
+    printf("\n!0 = %d, !5 = %d\n", !0, !5); /* 1 e 0 */
 
     /* ---- Pratica: escreva as condicoes ---- */
     int idade = 30;

@@ -10,7 +10,7 @@ int main(void)
     int i;
 
     scanf("%29s", palavra);
-    for (i = 0; i < (int) strlen(palavra); i += 2)   /* passo de 2 */
+    for (i = 0; i < (int)strlen(palavra); i += 2) /* passo de 2 */
         printf("%c ", palavra[i]);
     printf("\n");
     return 0;

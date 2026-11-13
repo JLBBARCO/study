@@ -1,4 +1,4 @@
-#define _CRT_SECURE_NO_WARNINGS   /* MSVC: permite usar scanf sem avisos */
+#define _CRT_SECURE_NO_WARNINGS /* MSVC: permite usar scanf sem avisos */
 /*
  * 09_juros.c
  * Slide: Pratica: juros e trapezio (parte 1)

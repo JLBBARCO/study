@@ -13,7 +13,7 @@ int main(void)
 {
     struct produto p;
 
-    scanf("%d %19s %f", &p.codigo, p.nome, &p.preco);   /* p.nome e vetor: sem & */
+    scanf("%d %19s %f", &p.codigo, p.nome, &p.preco); /* p.nome e vetor: sem & */
     printf("%s: R$ %.2f\n", p.nome, p.preco * 1.1);
     return 0;
 }

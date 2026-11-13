@@ -14,30 +14,30 @@ O sistema deverá gerenciar o acervo de uma biblioteca, incluindo cadastro de li
 
 1. **Cadastro de Livros:**
 
-   - Código do livro (inteiro)
-   - Título (string até 100 caracteres)
-   - Autor (string até 80 caracteres)
-   - Editora (string até 60 caracteres)
-   - Ano de publicação (inteiro)
-   - Número de exemplares disponíveis (inteiro)
-   - Status (disponível/emprestado)
+    - Código do livro (inteiro)
+    - Título (string até 100 caracteres)
+    - Autor (string até 80 caracteres)
+    - Editora (string até 60 caracteres)
+    - Ano de publicação (inteiro)
+    - Número de exemplares disponíveis (inteiro)
+    - Status (disponível/emprestado)
 
 2. **Cadastro de Usuários**
 
-   - Matrícula (inteiro)
-   - Nome completo (string até 100 caracteres)
-   - Curso (string até 50 caracteres)
-   - Telefone (string até 15 caracteres)
-   - Data de cadastro (dia, mês, ano)
+    - Matrícula (inteiro)
+    - Nome completo (string até 100 caracteres)
+    - Curso (string até 50 caracteres)
+    - Telefone (string até 15 caracteres)
+    - Data de cadastro (dia, mês, ano)
 
 3. **Sistema de Empréstimos:**
 
-   - Código do empréstimo (inteiro)
-   - Matrícula do usuário
-   - Código do livro
-   - Data do empréstimo (dia, mês, ano)
-   - Data prevista de devolução (7 dias após empréstimo)
-   - Status (ativo/devolvido)
+    - Código do empréstimo (inteiro)
+    - Matrícula do usuário
+    - Código do livro
+    - Data do empréstimo (dia, mês, ano)
+    - Data prevista de devolução (7 dias após empréstimo)
+    - Status (ativo/devolvido)
 
 **Requisitos Técnicos:**
 

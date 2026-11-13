@@ -17,7 +17,7 @@ int main(void)
     {
         for (i = 0; i < n; i++)
         {
-            c = (char) tolower((unsigned char) palavra[i]);
+            c = (char)tolower((unsigned char)palavra[i]);
             if (c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u')
                 printf("%c ", c);
         }

@@ -8,9 +8,9 @@ int main(void)
     char palavra[30];
     int i, n;
 
-    scanf("%29s", palavra);          /* ate 29 letras, sobra espaco para o \0 */
+    scanf("%29s", palavra); /* ate 29 letras, sobra espaco para o \0 */
     n = strlen(palavra);
-    for (i = n - 1; i >= 0; i--)     /* do ultimo indice ate 0 */
+    for (i = n - 1; i >= 0; i--) /* do ultimo indice ate 0 */
         printf("%c", palavra[i]);
     printf("\n");
     return 0;

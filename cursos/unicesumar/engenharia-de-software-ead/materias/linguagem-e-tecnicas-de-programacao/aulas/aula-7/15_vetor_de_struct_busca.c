@@ -4,7 +4,11 @@
 
 /* Slide 19: vetor de struct com busca por codigo.
    Teste: 10 5.5 / 20 8 / 30 2.25 e busca 20 -> R$ 8.00 */
-struct produto { int codigo; float preco; };
+struct produto
+{
+    int codigo;
+    float preco;
+};
 
 int main(void)
 {

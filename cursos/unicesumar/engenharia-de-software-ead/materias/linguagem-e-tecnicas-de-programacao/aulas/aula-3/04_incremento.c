@@ -11,21 +11,21 @@
 
 int main()
 {
-    int x = 5;
-    int y = 5;
+   int x = 5;
+   int y = 5;
 
-    printf("%d\n", x++);            /* imprime 5; depois x passa a 6 */
-    printf("%d\n", ++y);            /* y passa a 6; imprime 6        */
-    printf("%d %d\n", x, y);        /* 6 6: no fim, os dois valem 6  */
+   printf("%d\n", x++);     /* imprime 5; depois x passa a 6 */
+   printf("%d\n", ++y);     /* y passa a 6; imprime 6        */
+   printf("%d %d\n", x, y); /* 6 6: no fim, os dois valem 6  */
 
-    /* Sozinhos, como comando, x++; e ++x; fazem exatamente a mesma
-       coisa. A diferenca so aparece quando o valor e aproveitado. */
-    int i = 0;
-    i++;
-    ++i;
-    printf("i = %d\n", i);          /* 2 */
+   /* Sozinhos, como comando, x++; e ++x; fazem exatamente a mesma
+      coisa. A diferenca so aparece quando o valor e aproveitado. */
+   int i = 0;
+   i++;
+   ++i;
+   printf("i = %d\n", i); /* 2 */
 
-    /* Boa pratica: evite misturar ++ com outras operacoes na mesma
-       linha. Prefira escrever o incremento em um comando separado. */
-    return 0;
+   /* Boa pratica: evite misturar ++ com outras operacoes na mesma
+      linha. Prefira escrever o incremento em um comando separado. */
+   return 0;
 }

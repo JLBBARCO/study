@@ -10,21 +10,21 @@ int main(void)
     char *p;
     int i;
 
-    printf("strlen: %d\n", (int) strlen(a));          /* 3 */
-    strcpy(b, a);                                     /* b = "Ana" */
-    strcat(b, " Silva");                              /* b = "Ana Silva" */
+    printf("strlen: %d\n", (int)strlen(a)); /* 3 */
+    strcpy(b, a);                           /* b = "Ana" */
+    strcat(b, " Silva");                    /* b = "Ana Silva" */
     printf("b = %s\n", b);
-    printf("strcmp(a, b) < 0? %d\n", strcmp(a, b) < 0);   /* 1: "Ana" vem antes */
-    printf("strcmp(a, a) = %d\n", strcmp(a, a));          /* 0: iguais */
+    printf("strcmp(a, b) < 0? %d\n", strcmp(a, b) < 0); /* 1: "Ana" vem antes */
+    printf("strcmp(a, a) = %d\n", strcmp(a, a));        /* 0: iguais */
 
-    p = strstr(t, "Prog");                            /* endereco da primeira ocorrencia */
+    p = strstr(t, "Prog"); /* endereco da primeira ocorrencia */
     if (p != NULL)
-        printf("\"Prog\" comeca na posicao %d\n", (int) (p - t));   /* 8 */
+        printf("\"Prog\" comeca na posicao %d\n", (int)(p - t)); /* 8 */
     else
         printf("nao encontrado\n");
 
-    for (i = 0; x[i] != '\0'; i++)                     /* strlwr nao e padrao: use tolower */
-        x[i] = (char) tolower((unsigned char) x[i]);
+    for (i = 0; x[i] != '\0'; i++) /* strlwr nao e padrao: use tolower */
+        x[i] = (char)tolower((unsigned char)x[i]);
     printf("%s\n", x);
     return 0;
 }

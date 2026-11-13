@@ -1,3 +1,24 @@
 {
-  "recommendations": ["esbenp.prettier-vscode"]
+    "recommendations": [
+        "esbenp.prettier-vscode",
+        "designliquido.designliquido-vscode",
+        "ms-vscode.cpptools-extension-pack",
+        "aaron-bond.better-comments",
+        "formulahendry.code-runner",
+        "vscjava.vscode-java-pack",
+        "ms-python.vscode-python-envs",
+        "usernamehw.errorlens",
+        "hyoretsu.code-spell-checker-language-pack",
+        "BracketPairColorDLW.bracket-pair-color-dlw",
+        "formulahendry.code-runner",
+        "naumovs.color-highlight",
+        "donjayamanne.githistory",
+        "vinirossa.vscode-gitandgithub-pack",
+        "kisstkondoros.vscode-gutter-preview",
+        "oderwat.indent-rainbow",
+        "ritwickdey.LiveServer",
+        "DavidAnson.vscode-markdownlint",
+        "ms-vscode.powershell",
+        "redhat.vscode-yaml"
+    ]
 }

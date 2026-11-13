@@ -10,7 +10,7 @@ typedef struct
 
 int main(void)
 {
-    Produto ficha[2] = {{10, 5.5f}, {20, 8.0f}};    /* sem repetir a palavra struct */
+    Produto ficha[2] = {{10, 5.5f}, {20, 8.0f}}; /* sem repetir a palavra struct */
     int i;
 
     for (i = 0; i < 2; i++)

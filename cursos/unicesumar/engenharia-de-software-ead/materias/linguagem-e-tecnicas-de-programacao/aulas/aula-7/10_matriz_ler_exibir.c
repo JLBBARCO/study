@@ -8,14 +8,14 @@ int main(void)
 {
     int m[LIN][COL], i, j;
 
-    for (i = 0; i < LIN; i++)               /* laco de fora: linhas */
-        for (j = 0; j < COL; j++)           /* laco de dentro: colunas */
+    for (i = 0; i < LIN; i++)     /* laco de fora: linhas */
+        for (j = 0; j < COL; j++) /* laco de dentro: colunas */
             scanf("%d", &m[i][j]);
     for (i = 0; i < LIN; i++)
     {
         for (j = 0; j < COL; j++)
             printf("%d ", m[i][j]);
-        printf("\n");                       /* muda de linha ao fim de cada linha da matriz */
+        printf("\n"); /* muda de linha ao fim de cada linha da matriz */
     }
     return 0;
 }
