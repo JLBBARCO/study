@@ -1,6 +1,22 @@
 // * Importação de bibliotecas externas
 #include <stdio.h>
 
+static int leituraBancoDeDados(char nomeArquivo[])
+{
+    printf("%d", nomeArquivo);
+}
+
+static int insercaoNoBancoDeDados(char *nomeArquivo[]) {};
+
+static int logFile(char nivel, char mensagem) {
+    /*
+        * Níveis de inserção no arquivo .log
+        - INFO (Nível que indica que a mensagem é só avisando sobre algo)
+        - WARNING (Nível que indica um erro não crítico, ou seja, um erro que não faz com que o sistema pare ou quebre partes)
+        - ERROR (Nível que indica um erro crítico, ou seja, um erro que faz com que partes ou o programa inteiro quebre)
+    */
+};
+
 static int barraDeSeparacao(void) // * barra de separação
 {
     printf("--------------------------------------\n");
@@ -93,13 +109,26 @@ int menuDeEmprestimos(void) // * Menu de Emprestimos
         "Voltar",
         "Novo Emprestimo",
         "Renovar Emprestimo",
+        "Devolver Livro",
         "Emprestimos Expirados"};
 
     return menu(3, options);
 }
 
+static int consultarUsuarios() {}
+
+static int cadastrarUsuario()
+{
+    char nome[50];
+}
+
 int main(void) // * Função principal
 {
+    // * Declarações de chamadas de arquivos externos
+    int livros = leituraBancoDeDados("livros.txt");
+    int usuarios = leituraBancoDeDados("usuarios.txt");
+    int emprestimos = leituraBancoDeDados("emprestimos.txt");
+
     cabecalho();                          // * Chamada do cabeçalho
     int opcaoPrincipal = menuPrincipal(); // * Chamada do menu principal
 
