@@ -1,354 +1,345 @@
 function footer() {
-  let footerElement = document.querySelector("footer");
-  if (footerElement) {
+    let footerElement = document.querySelector('footer');
+    if (footerElement) {
+        return footerElement;
+    }
+
+    footerElement = document.createElement('footer');
+    const body = document.querySelector('body');
+    if (body) {
+        body.appendChild(footerElement);
+    } else {
+        console.error('Body element not found, cannot append footer');
+    }
+
     return footerElement;
-  }
-
-  footerElement = document.createElement("footer");
-  const body = document.querySelector("body");
-  if (body) {
-    body.appendChild(footerElement);
-  } else {
-    console.error("Body element not found, cannot append footer");
-  }
-
-  return footerElement;
 }
 
 const CONTACT_API_URL =
-  "https://raw.githubusercontent.com/JLBBARCO/portfolio/refs/heads/main/src/json/areas/contact.json";
+    'https://raw.githubusercontent.com/JLBBARCO/portfolio/refs/heads/main/src/json/areas/contact.json';
 
 const CONTACT_ICON_EXCEPTIONS = {
-  github: {
-    iconName: "github",
-    style: "fa-brands",
-  },
-  linkedin: {
-    iconName: "linkedin-in",
-    style: "fa-brands",
-  },
-  instagram: {
-    iconName: "instagram",
-    style: "fa-brands",
-  },
-  email: {
-    iconName: "envelope",
-    style: "fa-regular",
-  },
+    github: {
+        iconName: 'github',
+        style: 'fa-brands',
+    },
+    linkedin: {
+        iconName: 'linkedin-in',
+        style: 'fa-brands',
+    },
+    instagram: {
+        iconName: 'instagram',
+        style: 'fa-brands',
+    },
+    email: {
+        iconName: 'envelope',
+        style: 'fa-regular',
+    },
 };
 
 const CONTACT_BRAND_ICON_NAMES = new Set([
-  "github",
-  "linkedin",
-  "linkedin-in",
-  "instagram",
-  "facebook",
-  "facebook-f",
-  "x-twitter",
-  "twitter",
-  "youtube",
-  "tiktok",
-  "whatsapp",
-  "telegram",
-  "discord",
+    'github',
+    'linkedin',
+    'linkedin-in',
+    'instagram',
+    'facebook',
+    'facebook-f',
+    'x-twitter',
+    'twitter',
+    'youtube',
+    'tiktok',
+    'whatsapp',
+    'telegram',
+    'discord',
 ]);
 
 function normalizeFaStyle(style) {
-  const normalizedStyle = String(style || "")
-    .trim()
-    .toLowerCase();
+    const normalizedStyle = String(style || '')
+        .trim()
+        .toLowerCase();
 
-  if (!normalizedStyle) return "";
+    if (!normalizedStyle) return '';
 
-  if (normalizedStyle === "fab" || normalizedStyle === "brands") {
-    return "fa-brands";
-  }
+    if (normalizedStyle === 'fab' || normalizedStyle === 'brands') {
+        return 'fa-brands';
+    }
 
-  if (normalizedStyle === "far" || normalizedStyle === "regular") {
-    return "fa-regular";
-  }
+    if (normalizedStyle === 'far' || normalizedStyle === 'regular') {
+        return 'fa-regular';
+    }
 
-  if (normalizedStyle === "fas" || normalizedStyle === "solid") {
-    return "fa-solid";
-  }
+    if (normalizedStyle === 'fas' || normalizedStyle === 'solid') {
+        return 'fa-solid';
+    }
 
-  if (normalizedStyle === "fat" || normalizedStyle === "thin") {
-    return "fa-thin";
-  }
+    if (normalizedStyle === 'fat' || normalizedStyle === 'thin') {
+        return 'fa-thin';
+    }
 
-  if (normalizedStyle === "fal" || normalizedStyle === "light") {
-    return "fa-light";
-  }
+    if (normalizedStyle === 'fal' || normalizedStyle === 'light') {
+        return 'fa-light';
+    }
 
-  if (normalizedStyle === "fad" || normalizedStyle === "duotone") {
-    return "fa-duotone";
-  }
+    if (normalizedStyle === 'fad' || normalizedStyle === 'duotone') {
+        return 'fa-duotone';
+    }
 
-  return normalizedStyle.startsWith("fa-")
-    ? normalizedStyle
-    : `fa-${normalizedStyle}`;
+    return normalizedStyle.startsWith('fa-') ? normalizedStyle : `fa-${normalizedStyle}`;
 }
 
 const TOP_BUTTON_SCROLL_THRESHOLD = 8;
 let topButtonScrollController = null;
 
 function createTitleFooter(title, description) {
-  const sectionTitle = document.createElement("section");
-  sectionTitle.classList.add("title_section_footer");
+    const sectionTitle = document.createElement('section');
+    sectionTitle.classList.add('title_section_footer');
 
-  const titleElement = document.createElement("h2");
-  titleElement.classList.add("title_footer");
-  titleElement.textContent = title;
-  sectionTitle.appendChild(titleElement);
+    const titleElement = document.createElement('h2');
+    titleElement.classList.add('title_footer');
+    titleElement.textContent = title;
+    sectionTitle.appendChild(titleElement);
 
-  const descriptionElement = document.createElement("p");
-  descriptionElement.classList.add("description_footer");
-  descriptionElement.textContent = description || "";
-  sectionTitle.appendChild(descriptionElement);
+    const descriptionElement = document.createElement('p');
+    descriptionElement.classList.add('description_footer');
+    descriptionElement.textContent = description || '';
+    sectionTitle.appendChild(descriptionElement);
 
-  return sectionTitle;
+    return sectionTitle;
 }
 
 function createFooterCard(title, contentElement) {
-  const card = document.createElement("div");
-  card.classList.add("card_footer");
+    const card = document.createElement('div');
+    card.classList.add('card_footer');
 
-  const heading = document.createElement("h2");
-  heading.textContent = title;
+    const heading = document.createElement('h2');
+    heading.textContent = title;
 
-  card.appendChild(heading);
-  card.appendChild(contentElement);
+    card.appendChild(heading);
+    card.appendChild(contentElement);
 
-  return card;
+    return card;
 }
 
 function createLinkListItem(label, href) {
-  const li = document.createElement("li");
-  const a = document.createElement("a");
-  a.href = href || "#";
-  a.textContent = label || "Link";
+    const li = document.createElement('li');
+    const a = document.createElement('a');
+    a.href = href || '#';
+    a.textContent = label || 'Link';
 
-  const isExternal = /^https?:\/\//i.test(a.href);
-  if (isExternal) {
-    a.target = "_blank";
-    a.rel = "noopener noreferrer";
-  }
+    const isExternal = /^https?:\/\//i.test(a.href);
+    if (isExternal) {
+        a.target = '_blank';
+        a.rel = 'noopener noreferrer';
+    }
 
-  li.appendChild(a);
-  return li;
+    li.appendChild(a);
+    return li;
 }
 
 function createLinkList(items) {
-  const list = document.createElement("ul");
-  items.forEach((item) => {
-    list.appendChild(createLinkListItem(item.label, item.href));
-  });
-  return list;
+    const list = document.createElement('ul');
+    items.forEach((item) => {
+        list.appendChild(createLinkListItem(item.label, item.href));
+    });
+    return list;
 }
 
 function resolveContactIcon(contact) {
-  const rawIconName = String(contact?.iconName || contact?.icon || "circle")
-    .trim()
-    .toLowerCase();
-  const exception = CONTACT_ICON_EXCEPTIONS[rawIconName];
-  const resolvedIconName = exception?.iconName || rawIconName;
-  const resolvedStyle = normalizeFaStyle(exception?.style || contact?.style);
+    const rawIconName = String(contact?.iconName || contact?.icon || 'circle')
+        .trim()
+        .toLowerCase();
+    const exception = CONTACT_ICON_EXCEPTIONS[rawIconName];
+    const resolvedIconName = exception?.iconName || rawIconName;
+    const resolvedStyle = normalizeFaStyle(exception?.style || contact?.style);
 
-  const inferredStyle = CONTACT_BRAND_ICON_NAMES.has(resolvedIconName)
-    ? "fa-brands"
-    : "fa-regular";
+    const inferredStyle = CONTACT_BRAND_ICON_NAMES.has(resolvedIconName)
+        ? 'fa-brands'
+        : 'fa-regular';
 
-  return {
-    iconName: resolvedIconName,
-    style: resolvedStyle || inferredStyle,
-  };
+    return {
+        iconName: resolvedIconName,
+        style: resolvedStyle || inferredStyle,
+    };
 }
 
 function createContactIconElement(contact) {
-  const { iconName, style } = resolveContactIcon(contact);
-  const icon = document.createElement("i");
-  icon.className = `${style} fa-${iconName} icon`;
-  icon.setAttribute("aria-hidden", "true");
-  return icon;
+    const { iconName, style } = resolveContactIcon(contact);
+    const icon = document.createElement('i');
+    icon.className = `${style} fa-${iconName} icon`;
+    icon.setAttribute('aria-hidden', 'true');
+    return icon;
 }
 
 function createContactListItem(contact) {
-  const li = document.createElement("li");
-  const link = document.createElement("a");
-  const contactTitle = contact?.name || "Contato";
+    const li = document.createElement('li');
+    const link = document.createElement('a');
+    const contactTitle = contact?.name || 'Contato';
 
-  link.href = contact?.url || "#";
-  link.title = contactTitle;
-  link.setAttribute("aria-label", contactTitle);
+    link.href = contact?.url || '#';
+    link.title = contactTitle;
+    link.setAttribute('aria-label', contactTitle);
 
-  const isExternal = /^https?:\/\//i.test(link.href);
-  if (isExternal) {
-    link.target = "_blank";
-    link.rel = "noopener noreferrer";
-  }
+    const isExternal = /^https?:\/\//i.test(link.href);
+    if (isExternal) {
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+    }
 
-  link.appendChild(createContactIconElement(contact));
-  li.appendChild(link);
+    link.appendChild(createContactIconElement(contact));
+    li.appendChild(link);
 
-  return li;
+    return li;
 }
 
 function renderContactMessage(listElement, message) {
-  listElement.innerHTML = "";
-  const li = document.createElement("li");
-  li.textContent = message;
-  listElement.appendChild(li);
+    listElement.innerHTML = '';
+    const li = document.createElement('li');
+    li.textContent = message;
+    listElement.appendChild(li);
 }
 
 async function fetchContactCards() {
-  const response = await fetch(CONTACT_API_URL);
-  if (!response.ok) {
-    throw new Error(`HTTP ${response.status}`);
-  }
+    const response = await fetch(CONTACT_API_URL);
+    if (!response.ok) {
+        throw new Error(`HTTP ${response.status}`);
+    }
 
-  const payload = await response.json();
-  return Array.isArray(payload.cards) ? payload.cards : [];
+    const payload = await response.json();
+    return Array.isArray(payload.cards) ? payload.cards : [];
 }
 
 async function populateContactList(listElement) {
-  renderContactMessage(listElement, "Carregando contatos...");
+    renderContactMessage(listElement, 'Carregando contatos...');
 
-  try {
-    const contacts = await fetchContactCards();
+    try {
+        const contacts = await fetchContactCards();
 
-    if (contacts.length === 0) {
-      renderContactMessage(listElement, "Contato indisponível no momento.");
-      return;
+        if (contacts.length === 0) {
+            renderContactMessage(listElement, 'Contato indisponível no momento.');
+            return;
+        }
+
+        listElement.innerHTML = '';
+        contacts.forEach((contact) => {
+            listElement.appendChild(createContactListItem(contact));
+        });
+
+        if (typeof window.renderFontAwesomeIcons === 'function') {
+            window.renderFontAwesomeIcons(listElement);
+        }
+    } catch (error) {
+        console.error('Error fetching contact data:', error);
+        renderContactMessage(listElement, 'Não foi possível carregar os contatos.');
     }
-
-    listElement.innerHTML = "";
-    contacts.forEach((contact) => {
-      listElement.appendChild(createContactListItem(contact));
-    });
-
-    if (typeof window.renderFontAwesomeIcons === "function") {
-      window.renderFontAwesomeIcons(listElement);
-    }
-  } catch (error) {
-    console.error("Error fetching contact data:", error);
-    renderContactMessage(listElement, "Não foi possível carregar os contatos.");
-  }
 }
 
 function removePreviousFooterContent(footerElement) {
-  const existingAccessibilityFunctions = footerElement.querySelector(
-    ".accessibility-functions",
-  );
-  const existingTitleSection = footerElement.querySelector(
-    ".title_section_footer",
-  );
-  const existingContainer = footerElement.querySelector(".container_footer");
-  const existingCopyright = footerElement.querySelector(".copyright");
+    const existingAccessibilityFunctions = footerElement.querySelector('.accessibility-functions');
+    const existingTitleSection = footerElement.querySelector('.title_section_footer');
+    const existingContainer = footerElement.querySelector('.container_footer');
+    const existingCopyright = footerElement.querySelector('.copyright');
 
-  if (existingAccessibilityFunctions) {
-    existingAccessibilityFunctions.remove();
-  }
+    if (existingAccessibilityFunctions) {
+        existingAccessibilityFunctions.remove();
+    }
 
-  if (existingTitleSection) {
-    existingTitleSection.remove();
-  }
+    if (existingTitleSection) {
+        existingTitleSection.remove();
+    }
 
-  if (existingContainer) {
-    existingContainer.remove();
-  }
+    if (existingContainer) {
+        existingContainer.remove();
+    }
 
-  if (existingCopyright) {
-    existingCopyright.remove();
-  }
+    if (existingCopyright) {
+        existingCopyright.remove();
+    }
 }
 
 function isAtPageTop() {
-  return window.scrollY <= TOP_BUTTON_SCROLL_THRESHOLD;
+    return window.scrollY <= TOP_BUTTON_SCROLL_THRESHOLD;
 }
 
 function updateTopButtonVisibility(buttonElement) {
-  buttonElement.hidden = isAtPageTop();
+    buttonElement.hidden = isAtPageTop();
 }
 
 function setupTopButtonVisibility(buttonElement) {
-  if (topButtonScrollController) {
-    topButtonScrollController.abort();
-  }
+    if (topButtonScrollController) {
+        topButtonScrollController.abort();
+    }
 
-  topButtonScrollController = new AbortController();
-  const { signal } = topButtonScrollController;
+    topButtonScrollController = new AbortController();
+    const { signal } = topButtonScrollController;
 
-  updateTopButtonVisibility(buttonElement);
-  window.addEventListener(
-    "scroll",
-    () => updateTopButtonVisibility(buttonElement),
-    { passive: true, signal },
-  );
+    updateTopButtonVisibility(buttonElement);
+    window.addEventListener('scroll', () => updateTopButtonVisibility(buttonElement), {
+        passive: true,
+        signal,
+    });
 }
 
 // --- Rodapé dinâmico ---
 function initializeFooter() {
-  const footer = document.querySelector("footer");
-  if (footer) {
-    removePreviousFooterContent(footer);
+    const footer = document.querySelector('footer');
+    if (footer) {
+        removePreviousFooterContent(footer);
 
-    const data = new Date();
-    const ano = data.getFullYear();
+        const data = new Date();
+        const ano = data.getFullYear();
 
-    const container = document.createElement("section");
-    container.classList.add("container_footer");
+        const container = document.createElement('section');
+        container.classList.add('container_footer');
 
-    const accessibilityFunctions = document.createElement("section");
-    accessibilityFunctions.classList.add("accessibility-functions");
+        const accessibilityFunctions = document.createElement('section');
+        accessibilityFunctions.classList.add('accessibility-functions');
 
-    const buttonFromTop = document.createElement("button");
-    buttonFromTop.setAttribute("aria-label", "Voltar ao topo da página");
-    buttonFromTop.classList.add("button-to-top");
-    buttonFromTop.addEventListener("click", () => {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    });
-    setupTopButtonVisibility(buttonFromTop);
-    const iconToTop = document.createElement("i");
-    iconToTop.className = "fa-solid fa-arrow-up icon";
-    iconToTop.setAttribute("aria-hidden", "true");
-    buttonFromTop.appendChild(iconToTop);
-    if (typeof window.renderFontAwesomeIcons === "function") {
-      window.renderFontAwesomeIcons(buttonFromTop);
+        const buttonFromTop = document.createElement('button');
+        buttonFromTop.setAttribute('aria-label', 'Voltar ao topo da página');
+        buttonFromTop.classList.add('button-to-top');
+        buttonFromTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+        setupTopButtonVisibility(buttonFromTop);
+        const iconToTop = document.createElement('i');
+        iconToTop.className = 'fa-solid fa-arrow-up icon';
+        iconToTop.setAttribute('aria-hidden', 'true');
+        buttonFromTop.appendChild(iconToTop);
+        if (typeof window.renderFontAwesomeIcons === 'function') {
+            window.renderFontAwesomeIcons(buttonFromTop);
+        }
+        accessibilityFunctions.appendChild(buttonFromTop);
+
+        const footerTitle = createTitleFooter(
+            'Projeto de Estudos',
+            'Projeto realizado para estudos de programação, com possibilidade de uso de qualquer pessoa.',
+        );
+
+        const card1Links = [{ label: 'Repositório', href: 'https://github.com/jlbbarco/study' }];
+        const card1 = createFooterCard('Links Rápidos', createLinkList(card1Links));
+
+        const card2Links = [
+            { label: 'Portfólio', href: 'https://jlbbarco.github.io/portfolio' },
+            { label: 'GitHub', href: 'https://github.com/jlbbarco' },
+        ];
+        const card2 = createFooterCard('Recursos', createLinkList(card2Links));
+
+        const ulCard3 = document.createElement('ul');
+        ulCard3.setAttribute('aria-live', 'polite');
+        const card3 = createFooterCard('Contato', ulCard3);
+        populateContactList(ulCard3);
+
+        container.appendChild(card1);
+        container.appendChild(card2);
+        container.appendChild(card3);
+
+        footer.appendChild(accessibilityFunctions);
+        footer.appendChild(footerTitle);
+        footer.appendChild(container);
+
+        const pCopyright = document.createElement('p');
+        pCopyright.classList.add('copyright');
+        pCopyright.textContent = `© ${ano} Projeto de Estudos. Todos os direitos reservados.`;
+        footer.appendChild(pCopyright);
     }
-    accessibilityFunctions.appendChild(buttonFromTop);
-
-    const footerTitle = createTitleFooter(
-      "Projeto de Estudos",
-      "Projeto realizado para estudos de programação, com possibilidade de uso de qualquer pessoa.",
-    );
-
-    const card1Links = [
-      { label: "Repositório", href: "https://github.com/jlbbarco/study" },
-    ];
-    const card1 = createFooterCard("Links Rápidos", createLinkList(card1Links));
-
-    const card2Links = [
-      { label: "Portfólio", href: "https://jlbbarco.github.io/portfolio" },
-      { label: "GitHub", href: "https://github.com/jlbbarco" },
-    ];
-    const card2 = createFooterCard("Recursos", createLinkList(card2Links));
-
-    const ulCard3 = document.createElement("ul");
-    ulCard3.setAttribute("aria-live", "polite");
-    const card3 = createFooterCard("Contato", ulCard3);
-    populateContactList(ulCard3);
-
-    container.appendChild(card1);
-    container.appendChild(card2);
-    container.appendChild(card3);
-
-    footer.appendChild(accessibilityFunctions);
-    footer.appendChild(footerTitle);
-    footer.appendChild(container);
-
-    const pCopyright = document.createElement("p");
-    pCopyright.classList.add("copyright");
-    pCopyright.textContent = `© ${ano} Projeto de Estudos. Todos os direitos reservados.`;
-    footer.appendChild(pCopyright);
-  }
 }

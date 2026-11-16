@@ -4,8 +4,8 @@ body {
     font-size: 1.05rem;
 }
 
-main>section,
-main>section>section {
+main > section,
+main > section > section {
     padding: 4%;
 }
 

@@ -1,28 +1,28 @@
 {
-  "name": "study",
-  "version": "1.0.0",
-  "workspaces": [
-    "cursos/hashtag-programacao/react/audible",
-    "cursos/colegio-adolpho/ensino-medio/3-serie/programacao-back-end/atividades/atividade12/orgs-cesta"
-  ],
-  "private": true,
-  "description": "Projeto de estudos com execução local e deploy na Vercel",
-  "scripts": {
-    "dev": "node dev-server.js",
-    "dev:offline": "node dev-server.js --offline",
-    "start": "node dev-server.js",
-    "format": "prettier --write .",
-    "format:check": "prettier --check ."
-  },
-  "optionalDependencies": {
-    "@designliquido/delegua": "1.12.10",
-    "@designliquido/delegua-node": "1.12.10"
-  },
-  "devDependencies": {
-    "prettier": "^3.6.2",
-    "vite": "^8.3.4"
-  },
-  "dependencies": {
-    "@designliquido/delegua-matematica": "^0.4.0"
-  }
+    "name": "study",
+    "version": "1.0.0",
+    "workspaces": [
+        "cursos/hashtag-programacao/react/audible",
+        "cursos/colegio-adolpho/ensino-medio/3-serie/programacao-back-end/atividades/atividade12/orgs-cesta"
+    ],
+    "private": true,
+    "description": "Projeto de estudos com execução local e deploy na Vercel",
+    "scripts": {
+        "dev": "node dev-server.js",
+        "dev:offline": "node dev-server.js --offline",
+        "start": "node dev-server.js",
+        "format": "prettier --write .",
+        "format:check": "prettier --check ."
+    },
+    "optionalDependencies": {
+        "@designliquido/delegua": "1.12.10",
+        "@designliquido/delegua-node": "1.12.10"
+    },
+    "devDependencies": {
+        "prettier": "^3.6.2",
+        "vite": "^8.3.4"
+    },
+    "dependencies": {
+        "@designliquido/delegua-matematica": "^0.4.0"
+    }
 }

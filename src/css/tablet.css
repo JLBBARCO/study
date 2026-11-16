@@ -9,8 +9,8 @@ header {
     justify-content: space-between;
 }
 
-main>section,
-main>section>section {
+main > section,
+main > section > section {
     padding: 6%;
 }
 

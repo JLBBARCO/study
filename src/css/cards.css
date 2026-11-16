@@ -11,7 +11,9 @@ div.card {
     border-radius: 10px;
     text-align: center;
     background-color: var(--interativo);
-    transition: transform 240ms ease, box-shadow 240ms ease;
+    transition:
+        transform 240ms ease,
+        box-shadow 240ms ease;
     box-shadow: var(--shadow);
 }
 
@@ -84,7 +86,9 @@ div.card .card-description-toggle {
     color: #fff;
     cursor: pointer;
     font: inherit;
-    transition: transform 180ms ease, background-color 180ms ease;
+    transition:
+        transform 180ms ease,
+        background-color 180ms ease;
 }
 
 div.card .card-description-toggle:hover,
@@ -137,14 +141,16 @@ div.card.card-skeleton .skeleton-block {
 }
 
 div.card.card-skeleton .skeleton-block::after {
-    content: "";
+    content: '';
     position: absolute;
     inset: 0;
     transform: translateX(-100%);
-    background: linear-gradient(90deg,
-            rgba(255, 255, 255, 0) 0%,
-            rgba(255, 255, 255, 0.24) 45%,
-            rgba(255, 255, 255, 0) 100%);
+    background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.24) 45%,
+        rgba(255, 255, 255, 0) 100%
+    );
     animation: card-skeleton-shimmer 1.15s ease-in-out infinite;
 }
 

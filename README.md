@@ -15,7 +15,14 @@ The script centralizes dependency installation in one place, so setup instructio
 From the repository root:
 
 ```bash
-python src/lib/installation.py
+# Windows
+.\run.ps1
+
+# Linux
+./run.sh
+
+# macOS
+./run-mac.sh
 ```
 
 ## Running on localhost (development)
@@ -49,7 +56,7 @@ In this mode, the server still hosts static files, but `GET /api/site-context` r
 You can also force offline mode in the browser (without restarting the server):
 
 - Add `?offline=1` to the page URL, or
- - Run `setOfflineContextMode(true)` in the browser console.
+- Run `setOfflineContextMode(true)` in the browser console.
 
 To disable the browser-level override, run `setOfflineContextMode(false)`.
 
