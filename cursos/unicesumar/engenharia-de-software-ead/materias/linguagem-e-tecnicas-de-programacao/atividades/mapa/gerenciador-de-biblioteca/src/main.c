@@ -1,7 +1,13 @@
 // * Importação de bibliotecas externas
 #include <stdio.h>
 #include <stdarg.h>
+#include <string.h>
 #include <time.h>
+
+// * Declaração de variáveis globais
+char *usuarios;
+char *livros;
+char *emprestimos;
 
 char *getTimestamp(void)
 {
@@ -58,35 +64,64 @@ static int logFile(const char *nivel, const char *formato, ...)
     return 0;
 }
 
-int inicializacaoBancoDeDados()
+static int leituraBancoDeDados(const char *arquivo)
 {
-    char leituraBancoDeDados(char *arquivo)
+    FILE *arquivoTXT = fopen(arquivo, "r");
+
+    if (arquivoTXT != NULL)
     {
-        FILE *arquivoTXT = fopen(arquivo, "r");
-
-        if (arquivoTXT == NULL)
-        {
-            logFile("WARNING", "Falha ao abrir o arquivo %s! Criando um novo...", arquivo);
-
-            FILE *arquivoTXT = fopen(arquivo, "w");
-
-            if (arquivoTXT == NULL)
-            {
-                logFile("ERROR", "Falha ao criar o arquivo %s!", arquivo);
-                return -1;
-            }
-            else
-            {
-                logFile("INFO", "Arquivo %s criado com sucesso!", arquivo);
-                fclose(arquivoTXT);
-                return 0;
-            }
-        }
+        fclose(arquivoTXT);
+        return 0;
     }
 
-    leituraBancoDeDados("usuarios.txt");
-    leituraBancoDeDados("livros.txt");
-    leituraBancoDeDados("emprestimos.txt");
+    logFile("WARNING", "Falha ao abrir o arquivo %s! Criando um novo...", arquivo);
+
+    arquivoTXT = fopen(arquivo, "w");
+    if (arquivoTXT == NULL)
+    {
+        logFile("ERROR", "Falha ao criar o arquivo %s!", arquivo);
+        return -1;
+    }
+
+    logFile("INFO", "Arquivo %s criado com sucesso!", arquivo);
+
+    const char *cabecalho = NULL;
+    if (strcmp(arquivo, "usuarios.txt") == 0)
+    {
+        cabecalho = "id;nomeCompleto;curso;telefone;dataCadastro\n";
+    }
+    else if (strcmp(arquivo, "livros.txt") == 0)
+    {
+        cabecalho = "id;titulo;autor;editora;anoDePublicacao;status\n";
+    }
+    else if (strcmp(arquivo, "emprestimos.txt") == 0)
+    {
+        cabecalho = "id;idUsuario;idLivro;dataEmprestimo;dataDevolucao;status\n";
+    }
+
+    if (cabecalho != NULL && fprintf(arquivoTXT, "%s", cabecalho) < 0)
+    {
+        logFile("ERROR", "Falha ao escrever o cabecalho do arquivo %s!", arquivo);
+        fclose(arquivoTXT);
+        return -1;
+    }
+
+    fclose(arquivoTXT); // * Fechar o arquivo após a criação
+    return 0;
+}
+
+int inicializacaoBancoDeDados(void)
+{
+    logFile("INFO", "Inicializando o banco de dados...");
+
+    if (leituraBancoDeDados("usuarios.txt") != 0 ||
+        leituraBancoDeDados("livros.txt") != 0 ||
+        leituraBancoDeDados("emprestimos.txt") != 0)
+    {
+        return -1;
+    }
+
+    return 0;
 }
 
 static int barraDeSeparacao(void) // * barra de separação
@@ -133,9 +168,14 @@ static int leituraDeOpcoes(int maximum)
     return option;
 }
 
-static int menu(int maximum, const char *options[])
+static int menu(int maximum, const char *options[], const char *title)
 {
     barraDeSeparacao();
+    if (title != NULL)
+    {
+        printf("%s\n", title);
+        barraDeSeparacao();
+    }
     for (int i = 0; i <= maximum; i++)
     {
         printf("%d - %s\n", i, options[i]);
@@ -145,57 +185,28 @@ static int menu(int maximum, const char *options[])
     return leituraDeOpcoes(maximum);
 }
 
-int menuPrincipal(void)
+void gerenciarUsuarios(void)
 {
-    const char *options[] = {
-        "Sair",
-        "Usuarios",
-        "Livros",
-        "Emprestimos"};
+    logFile("INFO", "Gerenciamento de usuários acessado");
 
-    return menu(3, options);
-}
-
-int menuDeUsuarios(void) // * Menu de Usuarios
-{
+    int opcao;
     const char *options[] = {
         "Voltar",
-        "Consultar Usuarios",
-        "Cadastrar Usuario"};
+        "Cadastrar Usuario",
+        "Listar Usuarios",
+        "Editar Usuario",
+        "Excluir Usuario"};
+    do
+    {
+        opcao = menu(4, options, "Gerenciamento de Usuarios");
 
-    return menu(2, options);
-}
-
-int menuDeLivros(void) // * Menu de Livros
-{
-    const char *options[] = {
-        "Voltar",
-        "Consultar Livros",
-        "Cadastrar Livro"};
-
-    return menu(2, options);
-}
-
-int menuDeEmprestimos(void) // * Menu de Emprestimos
-{
-    const char *options[] = {
-        "Voltar",
-        "Novo Emprestimo",
-        "Renovar Emprestimo",
-        "Devolver Livro",
-        "Emprestimos Expirados"};
-
-    return menu(3, options);
-}
-
-static int consultarUsuarios(void)
-{
-    return 0;
-}
-
-static int cadastrarUsuario(void)
-{
-    return 0;
+        switch (opcao)
+        {
+        case 0:
+            logFile("INFO", "Voltando ao menu principal");
+            break;
+        }
+    } while (opcao != 0);
 }
 
 int main(void) // * Função principal
@@ -204,37 +215,32 @@ int main(void) // * Função principal
     inicializacaoBancoDeDados(); // * Inicialização do banco de dados
     cabecalho();                 // * Chamada do cabeçalho
 
-    int opcaoPrincipal = menuPrincipal();                     // * Chamada do menu principal
-    logFile("INFO", "Menu Principal Acessado");               // * Chamada do log de acesso ao menu principal
-    logFile("INFO", "Opção Selecionada: %d", opcaoPrincipal); // * Chamada do log de opção selecionada no menu principal
+    int opcaoPrincipal;
+    const char *options[] = {
+        "Sair",
+        "Usuarios",
+        "Livros",
+        "Emprestimos"};
+    do
+    {
+        opcaoPrincipal = menu(3, options, NULL); // * Chamada do menu principal
 
-    switch (opcaoPrincipal)
-    {
-    case 0:
-        break;
-    case 1:
-    {
-        int opcaoUsuarios = menuDeUsuarios(); // * Chamada do menu de usuarios
-        switch (opcaoUsuarios)
+        logFile("INFO", "Menu Principal Acessado");               // * Chamada do log de acesso ao menu principal
+        logFile("INFO", "Opção Selecionada: %d", opcaoPrincipal); // * Chamada do log de opção selecionada no menu principal
+
+        switch (opcaoPrincipal)
         {
         case 0:
+            logFile("INFO", "Saindo do programa");
+            printf("Saindo do programa...\n");
             break;
         case 1:
-            consultarUsuarios();
+            gerenciarUsuarios();
             break;
         case 2:
-            cadastrarUsuario();
+            break;
+        case 3:
             break;
         }
-        break;
-    }
-    case 2:
-        // * Tratamento da opção 2
-        break;
-    case 3:
-        // * Tratamento da opção 3
-        break;
-    }
-
-    return 0;
+    } while (opcaoPrincipal != 0);
 }
