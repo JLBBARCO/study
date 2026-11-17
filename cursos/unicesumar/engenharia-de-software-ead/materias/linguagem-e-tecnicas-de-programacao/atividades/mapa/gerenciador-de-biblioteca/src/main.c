@@ -9,12 +9,15 @@ char *usuarios;
 char *livros;
 char *emprestimos;
 
-char *getTimestamp(void)
+char *getTimestamp(char hora)
 {
     time_t t = time(NULL);
     struct tm *tm = localtime(&t);
     static char timestamp[20];
-    strftime(timestamp, sizeof(timestamp), "%Y-%m-%d %H:%M:%S", tm);
+    if (hora == 1)
+        strftime(timestamp, sizeof(timestamp), "%Y-%m-%d %H:%M:%S", tm);
+    else
+        strftime(timestamp, sizeof(timestamp), "%Y-%m-%d", tm);
     return timestamp;
 }
 
@@ -28,7 +31,7 @@ static int logFileInit(void)
         return -1;
 
     // * Escrever a mensagem de inicialização no arquivo .log com o timestamp
-    fprintf(log, "[%s] [INFO] Inicializando o sistema...\n", getTimestamp());
+    fprintf(log, "[%s] [INFO] Inicializando o sistema...\n", getTimestamp(1));
 
     fflush(log); //* Garantir que os dados sejam gravados no arquivo imediatamente
     fclose(log); //* Fechar o arquivo .log
@@ -50,7 +53,7 @@ static int logFile(const char *nivel, const char *formato, ...)
         return -1;
 
     // * Escrever a mensagem no arquivo .log com o timestamp e o nível
-    fprintf(log, "[%s] [%s] ", getTimestamp(), nivel);
+    fprintf(log, "[%s] [%s] ", getTimestamp(1), nivel);
 
     va_list args;
     va_start(args, formato);
@@ -124,6 +127,27 @@ int inicializacaoBancoDeDados(void)
     return 0;
 }
 
+int inserirNoBancoDeDados(const char *arquivo, const char *registro)
+{
+    FILE *arquivoTXT = fopen(arquivo, "a");
+    if (arquivoTXT == NULL)
+    {
+        logFile("ERROR", "Falha ao abrir o arquivo %s para inserção!", arquivo);
+        return -1;
+    }
+
+    if (fprintf(arquivoTXT, "%s\n", registro) < 0)
+    {
+        logFile("ERROR", "Falha ao escrever no arquivo %s!", arquivo);
+        fclose(arquivoTXT);
+        return -1;
+    }
+
+    fclose(arquivoTXT); // * Fechar o arquivo após a inserção
+    logFile("INFO", "Registro inserido com sucesso no arquivo %s!", arquivo);
+    return 0;
+}
+
 static int barraDeSeparacao(void) // * barra de separação
 {
     printf("--------------------------------------\n");
@@ -185,6 +209,26 @@ static int menu(int maximum, const char *options[], const char *title)
     return leituraDeOpcoes(maximum);
 }
 
+void cadastrarUsuario(void)
+{
+    logFile("INFO", "Cadastro de usuário acessado");
+    barraDeSeparacao();
+    printf("Cadastro de usuario\n");
+    barraDeSeparacao();
+
+    // * Estrutura para armazenar os dados do usuário
+    struct Usuario
+    {
+        int matricula;
+        char nomeCompleto[100], curso[50], telefone[15];
+        char dataCadastro[11]; // * Data de cadastro no formato YYYY-MM-DD
+    };
+
+    struct Usuario novoUsuario;
+    novoUsuario.dataCadastro[10] = '\0'; // * Inicializar a string com o caractere de fim de string
+    strcpy(novoUsuario.dataCadastro, getTimestamp(0));
+}
+
 void gerenciarUsuarios(void)
 {
     logFile("INFO", "Gerenciamento de usuários acessado");
@@ -204,6 +248,9 @@ void gerenciarUsuarios(void)
         {
         case 0:
             logFile("INFO", "Voltando ao menu principal");
+            break;
+        case 1:
+            cadastrarUsuario();
             break;
         }
     } while (opcao != 0);
