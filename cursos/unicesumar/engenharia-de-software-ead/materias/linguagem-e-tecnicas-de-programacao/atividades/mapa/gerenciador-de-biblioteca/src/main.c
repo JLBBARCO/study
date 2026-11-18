@@ -6,11 +6,94 @@
 #include <time.h>
 
 // * Declaração de variáveis globais
-char *usuarios;
-char *livros;
-char *emprestimos;
+typedef struct // * Estrutura para armazenar os dados dos usuários
+{
+    int matricula;
+    char nomeCompleto[100], curso[50], telefone[15], dataCadastro[11];
+} usuario;
+typedef struct // * Estrutura para armazenar os dados dos livros
+{
+    int idLivro, anoDePublicacao, numeroExDisp, status; // * status: 0 = indisponível, 1 = disponível
+    char titulo[100], autor[80], editora[60];
+} livros;
+typedef struct // * Estrutura para armazenar os dados dos empréstimos
+{
+    int idEmprestimo, matriculaUsuario, idLivro, status; // * status: 0 = devolvido, 1 = ativo
+    char dataEmprestimo[11], dataDevolucaoPrevista[11];
+} emprestimos;
+
+// * Conteúdo textual carregado dos arquivos do banco de dados
+static char *dadosUsuarios = NULL;
+static char *dadosLivros = NULL;
+static char *dadosEmprestimos = NULL;
 
 static int logFile(char *logFileName, char *nomeVariavel, const char *nivel, const char *formato, ...);
+
+// * Converte uma linha de usuarios.txt para a estrutura usuario
+static int parse_linha(const char *linha, usuario *novoUsuario)
+{
+    char matricula[20];
+    int camposLidos = sscanf(linha, "%19[^;];%99[^;];%49[^;];%14[^;];%10[^\r\n]",
+                             matricula, novoUsuario->nomeCompleto,
+                             novoUsuario->curso, novoUsuario->telefone,
+                             novoUsuario->dataCadastro);
+
+    if (camposLidos != 5 || sscanf(matricula, "%d", &novoUsuario->matricula) != 1)
+        return 0;
+
+    return 1;
+}
+
+// * Converte uma linha de livros.txt para a estrutura livros
+static int parse_linha_livro(const char *linha, livros *novoLivro)
+{
+    int camposLidos = sscanf(linha, "%d;%99[^;];%79[^;];%59[^;];%d;%d",
+                             &novoLivro->idLivro, novoLivro->titulo,
+                             novoLivro->autor, novoLivro->editora,
+                             &novoLivro->anoDePublicacao, &novoLivro->status);
+
+    novoLivro->numeroExDisp = 0;
+    return camposLidos == 6;
+}
+
+// * Converte uma linha de emprestimos.txt para a estrutura emprestimos
+static int parse_linha_emprestimo(const char *linha, emprestimos *novoEmprestimo)
+{
+    int camposLidos = sscanf(linha, "%d;%d;%d;%10[^;];%10[^;];%d",
+                             &novoEmprestimo->idEmprestimo,
+                             &novoEmprestimo->matriculaUsuario,
+                             &novoEmprestimo->idLivro,
+                             novoEmprestimo->dataEmprestimo,
+                             novoEmprestimo->dataDevolucaoPrevista,
+                             &novoEmprestimo->status);
+
+    return camposLidos == 6;
+}
+
+// * Procura um livro pelo seu identificador
+static int buscarLivroPorId(int idLivro, livros *livroEncontrado)
+{
+    char linha[512];
+    FILE *arquivoLivros = fopen("livros.txt", "r");
+
+    if (arquivoLivros == NULL)
+        return 0;
+
+    while (fgets(linha, sizeof(linha), arquivoLivros) != NULL)
+    {
+        if (strncmp(linha, "id;", 3) == 0 || !parse_linha_livro(linha, livroEncontrado))
+            continue;
+
+        if (livroEncontrado->idLivro == idLivro)
+        {
+            fclose(arquivoLivros);
+            return 1;
+        }
+    }
+
+    fclose(arquivoLivros);
+    return 0;
+}
 
 static int carregarArquivoNaVariavel(const char *arquivo, char **destino)
 {
@@ -141,7 +224,7 @@ static int leituraBancoDeDados(const char *arquivo)
         const char *cabecalho = NULL;
         if (strcmp(arquivo, "usuarios.txt") == 0)
         {
-            cabecalho = "id;nomeCompleto;curso;telefone;dataCadastro\n";
+            cabecalho = "matricula;nomeCompleto;curso;telefone;dataCadastro\n";
         }
         else if (strcmp(arquivo, "livros.txt") == 0)
         {
@@ -164,21 +247,21 @@ static int leituraBancoDeDados(const char *arquivo)
     // * Carrega o conteúdo completo em variáveis globais para uso posterior
     if (strcasecmp(arquivo, "usuarios.txt") == 0)
     {
-        if (carregarArquivoNaVariavel(arquivo, &usuarios) != 0)
+        if (carregarArquivoNaVariavel(arquivo, &dadosUsuarios) != 0)
             return -1;
-        logFile("print.log", "usuarios", "INFO", "%s", usuarios);
+        logFile("print.log", "usuarios", "INFO", "%s", dadosUsuarios);
     }
     else if (strcasecmp(arquivo, "livros.txt") == 0)
     {
-        if (carregarArquivoNaVariavel(arquivo, &livros) != 0)
+        if (carregarArquivoNaVariavel(arquivo, &dadosLivros) != 0)
             return -1;
-        logFile("print.log", "livros", "INFO", "%s", livros);
+        logFile("print.log", "livros", "INFO", "%s", dadosLivros);
     }
     else if (strcasecmp(arquivo, "emprestimos.txt") == 0)
     {
-        if (carregarArquivoNaVariavel(arquivo, &emprestimos) != 0)
+        if (carregarArquivoNaVariavel(arquivo, &dadosEmprestimos) != 0)
             return -1;
-        logFile("print.log", "emprestimos", "INFO", "%s", emprestimos);
+        logFile("print.log", "emprestimos", "INFO", "%s", dadosEmprestimos);
     }
     return 0;
 }
@@ -309,19 +392,12 @@ void cadastrarUsuario(void)
     printf("Cadastro de usuario\n");
     barraDeSeparacao();
 
-    // * Estrutura para armazenar os dados do usuário
-    struct Usuario
-    {
-        int matricula;
-        char nomeCompleto[100], curso[50], telefone[15], dataCadastro[11];
-    };
-
-    struct Usuario novoUsuario;
-    novoUsuario.matricula = 0;           // * Inicializar a matrícula com 0
-    novoUsuario.nomeCompleto[0] = '\0';  // * Inicializar a string com o caractere de fim de string
-    novoUsuario.curso[0] = '\0';         // * Inicializar a string com o caractere de fim de string
-    novoUsuario.telefone[0] = '\0';      // * Inicializar a string com o caractere de fim de string
-    novoUsuario.dataCadastro[10] = '\0'; // * Inicializar a string com o caractere de fim de string
+    usuario novoUsuario = {0};
+    novoUsuario.matricula = 0;          // * Inicializar a matrícula com 0
+    novoUsuario.nomeCompleto[0] = '\0'; // * Inicializar a string com o caractere de fim de string
+    novoUsuario.curso[0] = '\0';        // * Inicializar a string com o caractere de fim de string
+    novoUsuario.telefone[0] = '\0';     // * Inicializar a string com o caractere de fim de string
+    novoUsuario.dataCadastro[0] = '\0'; // * Inicializar a string com o caractere de fim de string
 
     printf("Digite a matricula do usuario: ");
     if (scanf("%d", &novoUsuario.matricula) != 1)
@@ -368,8 +444,8 @@ void cadastrarUsuario(void)
     int resultadoInsercao = inserirNoBancoDeDados("usuarios.txt", registro);
     if (resultadoInsercao == 0)
     {
-        if (carregarArquivoNaVariavel("usuarios.txt", &usuarios) == 0)
-            logFile("print.log", "usuarios", "INFO", "%s", usuarios);
+        if (carregarArquivoNaVariavel("usuarios.txt", &dadosUsuarios) == 0)
+            logFile("print.log", "usuarios", "INFO", "%s", dadosUsuarios);
         printf("Usuario cadastrado com sucesso.\n");
         logFile(".log", NULL, "INFO", "Usuario cadastrado com sucesso: %s", registro);
     }
@@ -380,7 +456,90 @@ void cadastrarUsuario(void)
 }
 
 // * Função para pesquisar um usuário específico pela matrícula ou nome
-void pesquisarUsuario(void) {}
+void pesquisarUsuario(void)
+{
+    char busca[100];
+    char linha[512];
+    int encontrado = 0;
+    usuario usuarioEncontrado = {0};
+    FILE *arquivoTXT = fopen("usuarios.txt", "r");
+
+    if (arquivoTXT == NULL)
+    {
+        logFile(".log", NULL, "ERROR", "Falha ao abrir usuarios.txt para pesquisa!");
+        return;
+    }
+
+    while (getchar() != '\n' && !feof(stdin))
+    {
+    }
+
+    printf("Digite a matricula ou o nome do usuario: ");
+    if (fgets(busca, sizeof(busca), stdin) == NULL)
+    {
+        fclose(arquivoTXT);
+        return;
+    }
+    busca[strcspn(busca, "\r\n")] = '\0';
+
+    while (fgets(linha, sizeof(linha), arquivoTXT) != NULL)
+    {
+        if (strncmp(linha, "matricula;", 10) == 0 || !parse_linha(linha, &usuarioEncontrado))
+            continue;
+
+        char matriculaTexto[20];
+        snprintf(matriculaTexto, sizeof(matriculaTexto), "%d", usuarioEncontrado.matricula);
+        if (strcmp(busca, matriculaTexto) == 0 ||
+            strstr(usuarioEncontrado.nomeCompleto, busca) != NULL)
+        {
+            printf("Matricula: %d\n", usuarioEncontrado.matricula);
+            printf("Nome: %s\n", usuarioEncontrado.nomeCompleto);
+            printf("Curso: %s\n", usuarioEncontrado.curso);
+            printf("Telefone: %s\n", usuarioEncontrado.telefone);
+            printf("Data de cadastro: %s\n", usuarioEncontrado.dataCadastro);
+            encontrado = 1;
+        }
+    }
+
+    fclose(arquivoTXT);
+    if (!encontrado)
+        printf("Usuario nao encontrado.\n");
+
+    if (encontrado)
+    {
+        FILE *arquivoEmprestimos = fopen("emprestimos.txt", "r");
+        int encontrouEmprestimo = 0;
+
+        if (arquivoEmprestimos != NULL)
+        {
+            while (fgets(linha, sizeof(linha), arquivoEmprestimos) != NULL)
+            {
+                emprestimos emprestimo;
+                livros livro;
+
+                if (strncmp(linha, "id;", 3) == 0 ||
+                    !parse_linha_emprestimo(linha, &emprestimo) ||
+                    emprestimo.matriculaUsuario != usuarioEncontrado.matricula ||
+                    emprestimo.status != 1)
+                    continue;
+
+                if (buscarLivroPorId(emprestimo.idLivro, &livro))
+                {
+                    printf("\nEmprestimo em aberto:\n");
+                    printf("ID do livro: %d\n", livro.idLivro);
+                    printf("Titulo: %s\n", livro.titulo);
+                    printf("Autor: %s\n", livro.autor);
+                    printf("Data do emprestimo: %s\n", emprestimo.dataEmprestimo);
+                    encontrouEmprestimo = 1;
+                }
+            }
+            fclose(arquivoEmprestimos);
+        }
+
+        if (!encontrouEmprestimo)
+            printf("Nenhum emprestimo em aberto para este usuario.\n");
+    }
+}
 
 // * Função para gerenciar as opções relacionadas aos usuários
 void gerenciarUsuarios(void)
@@ -419,7 +578,34 @@ void cadastrarLivro(void) {}
 void pesquisarLivro(void) {}
 
 // * Função para gerenciar as opções relacionadas aos livros
-void gerenciarLivros(void) {}
+void gerenciarLivros(void)
+{
+    logFile(".log", NULL, "INFO", "Gerenciamento de livros acessado");
+
+    int opcao;
+    const char *options[] = {
+        "Voltar",
+        "Cadastrar Livro",
+        "Pesquisar Livro",
+    };
+    do
+    {
+        opcao = menu(2, options, "Gerenciamento de Livros");
+
+        switch (opcao)
+        {
+        case 0:
+            logFile(".log", NULL, "INFO", "Voltando ao menu principal");
+            break;
+        case 1:
+            cadastrarLivro();
+            break;
+        case 2:
+            pesquisarLivro();
+            break;
+        }
+    } while (opcao != 0);
+}
 
 // * Função para cadastrar um novo empréstimo
 void cadastrarEmprestimo(void) {}
@@ -431,7 +617,38 @@ void devolverLivro(void) {}
 void listarEmprestimosAtivos(void) {}
 
 // * Função para gerenciar as opções relacionadas aos empréstimos
-void gerenciarEmprestimos(void) {}
+void gerenciarEmprestimos(void)
+{
+    logFile(".log", NULL, "INFO", "Gerenciamento de empréstimos acessado");
+
+    int opcao;
+    const char *options[] = {
+        "Voltar",
+        "Cadastrar Emprestimo",
+        "Devolver Livro",
+        "Listar Emprestimos Ativos",
+    };
+    do
+    {
+        opcao = menu(3, options, "Gerenciamento de Emprestimos");
+
+        switch (opcao)
+        {
+        case 0:
+            logFile(".log", NULL, "INFO", "Voltando ao menu principal");
+            break;
+        case 1:
+            cadastrarEmprestimo();
+            break;
+        case 2:
+            devolverLivro();
+            break;
+        case 3:
+            listarEmprestimosAtivos();
+            break;
+        }
+    } while (opcao != 0);
+}
 
 int main(void) // * Função principal
 {
