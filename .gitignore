@@ -37,11 +37,6 @@ manus-webdev.json
 # MacOS
 .DS_Store
 
-# Arquivos de testes
-teste.*
-test.*
-tests/
-
 # Arquivos de log
 *.log
 

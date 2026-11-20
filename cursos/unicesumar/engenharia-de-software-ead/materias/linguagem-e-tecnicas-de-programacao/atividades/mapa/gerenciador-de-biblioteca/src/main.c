@@ -3,6 +3,7 @@
 #include <stdarg.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 #include <time.h>
 
 // * Declaração de variáveis globais
@@ -22,12 +23,25 @@ typedef struct // * Estrutura para armazenar os dados dos empréstimos
     char dataEmprestimo[11], dataDevolucaoPrevista[11];
 } emprestimos;
 
+#define MAX_USUARIOS 1000
+#define MAX_LIVROS 1000
+#define MAX_EMPRESTIMOS 5000
+
 // * Conteúdo textual carregado dos arquivos do banco de dados
 static char *dadosUsuarios = NULL;
 static char *dadosLivros = NULL;
 static char *dadosEmprestimos = NULL;
+static usuario usuarios[MAX_USUARIOS];
+static livros livrosCadastrados[MAX_LIVROS];
+static emprestimos emprestimosCadastrados[MAX_EMPRESTIMOS];
+static size_t totalUsuarios = 0;
+static size_t totalLivros = 0;
+static size_t totalEmprestimos = 0;
 
 static int logFile(char *logFileName, char *nomeVariavel, const char *nivel, const char *formato, ...);
+static int carregarArquivoNaVariavel(const char *arquivo, char **destino);
+static void carregarVetores(void);
+static int fazerBackupDosDados(void);
 
 // * Converte uma linha de usuarios.txt para a estrutura usuario
 static int parse_linha(const char *linha, usuario *novoUsuario)
@@ -47,12 +61,22 @@ static int parse_linha(const char *linha, usuario *novoUsuario)
 // * Converte uma linha de livros.txt para a estrutura livros
 static int parse_linha_livro(const char *linha, livros *novoLivro)
 {
-    int camposLidos = sscanf(linha, "%d;%99[^;];%79[^;];%59[^;];%d;%d",
+    int camposLidos = sscanf(linha, "%d;%99[^;];%79[^;];%59[^;];%d;%d;%d",
                              &novoLivro->idLivro, novoLivro->titulo,
                              novoLivro->autor, novoLivro->editora,
-                             &novoLivro->anoDePublicacao, &novoLivro->status);
+                             &novoLivro->anoDePublicacao,
+                             &novoLivro->numeroExDisp, &novoLivro->status);
 
-    novoLivro->numeroExDisp = 0;
+    if (camposLidos == 7)
+        return 1;
+
+    // Compatibilidade com registros antigos, que nao armazenavam exemplares.
+    camposLidos = sscanf(linha, "%d;%99[^;];%79[^;];%59[^;];%d;%d",
+                         &novoLivro->idLivro, novoLivro->titulo,
+                         novoLivro->autor, novoLivro->editora,
+                         &novoLivro->anoDePublicacao, &novoLivro->status);
+
+    novoLivro->numeroExDisp = novoLivro->status == 1 ? 1 : 0;
     return camposLidos == 6;
 }
 
@@ -68,6 +92,158 @@ static int parse_linha_emprestimo(const char *linha, emprestimos *novoEmprestimo
                              &novoEmprestimo->status);
 
     return camposLidos == 6;
+}
+
+static void inicializarUsuario(usuario *novoUsuario)
+{
+    memset(novoUsuario, 0, sizeof(*novoUsuario));
+}
+
+static void inicializarLivro(livros *novoLivro)
+{
+    memset(novoLivro, 0, sizeof(*novoLivro));
+}
+
+static void inicializarEmprestimo(emprestimos *novoEmprestimo)
+{
+    memset(novoEmprestimo, 0, sizeof(*novoEmprestimo));
+}
+
+static void limparEntrada(void)
+{
+    int caractere;
+    while ((caractere = getchar()) != '\n' && caractere != EOF)
+    {
+    }
+}
+
+static int lerTexto(const char *mensagem, char *destino, size_t tamanho)
+{
+    printf("%s", mensagem);
+    if (fgets(destino, (int)tamanho, stdin) == NULL)
+        return 0;
+
+    if (strchr(destino, '\n') == NULL)
+        limparEntrada();
+    destino[strcspn(destino, "\r\n")] = '\0';
+    return 1;
+}
+
+static int copiarArquivo(const char *origem, const char *destino)
+{
+    FILE *arquivoOrigem = fopen(origem, "rb");
+    FILE *arquivoDestino;
+    char buffer[4096];
+    size_t lidos;
+
+    if (arquivoOrigem == NULL)
+        return -1;
+
+    arquivoDestino = fopen(destino, "wb");
+    if (arquivoDestino == NULL)
+    {
+        fclose(arquivoOrigem);
+        return -1;
+    }
+
+    while ((lidos = fread(buffer, 1, sizeof(buffer), arquivoOrigem)) > 0)
+    {
+        if (fwrite(buffer, 1, lidos, arquivoDestino) != lidos)
+        {
+            fclose(arquivoOrigem);
+            fclose(arquivoDestino);
+            return -1;
+        }
+    }
+
+    {
+        int erroLeitura = ferror(arquivoOrigem);
+        int erroOrigem = fclose(arquivoOrigem);
+        int erroDestino = fclose(arquivoDestino);
+        return erroLeitura || erroOrigem != 0 || erroDestino != 0 ? -1 : 0;
+    }
+}
+
+static int fazerBackupDosDados(void)
+{
+    const char *arquivos[] = {"usuarios.txt", "livros.txt", "emprestimos.txt"};
+    const char *backups[] = {"usuarios.bak", "livros.bak", "emprestimos.bak"};
+
+    for (size_t i = 0; i < 3; i++)
+    {
+        if (copiarArquivo(arquivos[i], backups[i]) != 0)
+        {
+            logFile(".log", NULL, "ERROR", "Falha ao criar o backup de %s", arquivos[i]);
+            return -1;
+        }
+    }
+    return 0;
+}
+
+static void carregarVetores(void)
+{
+    char linha[512];
+    FILE *arquivo;
+
+    totalUsuarios = totalLivros = totalEmprestimos = 0;
+
+    arquivo = fopen("usuarios.txt", "r");
+    if (arquivo != NULL)
+    {
+        while (fgets(linha, sizeof(linha), arquivo) != NULL &&
+               totalUsuarios < MAX_USUARIOS)
+            if (strncmp(linha, "matricula;", 10) != 0 &&
+                parse_linha(linha, &usuarios[totalUsuarios]))
+                totalUsuarios++;
+        fclose(arquivo);
+    }
+
+    arquivo = fopen("livros.txt", "r");
+    if (arquivo != NULL)
+    {
+        while (fgets(linha, sizeof(linha), arquivo) != NULL &&
+               totalLivros < MAX_LIVROS)
+            if (strncmp(linha, "id;", 3) != 0 &&
+                parse_linha_livro(linha, &livrosCadastrados[totalLivros]))
+                totalLivros++;
+        fclose(arquivo);
+    }
+
+    arquivo = fopen("emprestimos.txt", "r");
+    if (arquivo != NULL)
+    {
+        while (fgets(linha, sizeof(linha), arquivo) != NULL &&
+               totalEmprestimos < MAX_EMPRESTIMOS)
+            if (strncmp(linha, "id;", 3) != 0 &&
+                parse_linha_emprestimo(linha, &emprestimosCadastrados[totalEmprestimos]))
+                totalEmprestimos++;
+        fclose(arquivo);
+    }
+}
+
+// * Procura uma substring sem diferenciar maiúsculas de minúsculas
+static int contemTextoSemDistincaoDeCaixa(const char *texto, const char *busca)
+{
+    if (*busca == '\0')
+        return 1;
+
+    for (; *texto != '\0'; texto++)
+    {
+        const char *textoAtual = texto;
+        const char *buscaAtual = busca;
+
+        while (*textoAtual != '\0' && *buscaAtual != '\0' &&
+               tolower((unsigned char)*textoAtual) == tolower((unsigned char)*buscaAtual))
+        {
+            textoAtual++;
+            buscaAtual++;
+        }
+
+        if (*buscaAtual == '\0')
+            return 1;
+    }
+
+    return 0;
 }
 
 // * Procura um livro pelo seu identificador
@@ -92,6 +268,180 @@ static int buscarLivroPorId(int idLivro, livros *livroEncontrado)
     }
 
     fclose(arquivoLivros);
+    return 0;
+}
+
+// * Procura um usuario pela matricula
+static int buscarUsuarioPorMatricula(int matricula, usuario *usuarioEncontrado)
+{
+    char linha[512];
+    FILE *arquivoUsuarios = fopen("usuarios.txt", "r");
+
+    if (arquivoUsuarios == NULL)
+        return 0;
+
+    while (fgets(linha, sizeof(linha), arquivoUsuarios) != NULL)
+    {
+        if (strncmp(linha, "matricula", 9) == 0 || !parse_linha(linha, usuarioEncontrado))
+            continue;
+
+        if (usuarioEncontrado->matricula == matricula)
+        {
+            fclose(arquivoUsuarios);
+            return 1;
+        }
+    }
+
+    fclose(arquivoUsuarios);
+    return 0;
+}
+
+// * Calcula uma data adicionando a quantidade informada de dias
+static void adicionarDias(const char *dataInicial, int dias, char *dataFinal, size_t tamanho)
+{
+    struct tm data = {0};
+
+    if (sscanf(dataInicial, "%d-%d-%d", &data.tm_year, &data.tm_mon, &data.tm_mday) != 3)
+        return;
+
+    data.tm_year -= 1900;
+    data.tm_mon -= 1;
+    data.tm_mday += dias;
+    mktime(&data);
+    strftime(dataFinal, tamanho, "%Y-%m-%d", &data);
+}
+
+// * Atualiza um livro no arquivo preservando todos os demais registros
+static int atualizarLivroNoArquivo(const livros *livroAtualizado)
+{
+    FILE *arquivoOriginal = fopen("livros.txt", "r");
+    FILE *arquivoTemporario = fopen("livros.tmp", "w");
+
+    if (arquivoOriginal == NULL || arquivoTemporario == NULL)
+    {
+        if (arquivoOriginal != NULL)
+            fclose(arquivoOriginal);
+        if (arquivoTemporario != NULL)
+            fclose(arquivoTemporario);
+        return -1;
+    }
+
+    char linha[512];
+    int atualizado = 0;
+
+    while (fgets(linha, sizeof(linha), arquivoOriginal) != NULL)
+    {
+        livros livro;
+
+        if (strncmp(linha, "id;", 3) == 0)
+        {
+            fprintf(arquivoTemporario, "%s", linha);
+            continue;
+        }
+
+        if (!parse_linha_livro(linha, &livro) || livro.idLivro != livroAtualizado->idLivro)
+        {
+            fprintf(arquivoTemporario, "%s", linha);
+            continue;
+        }
+
+        fprintf(arquivoTemporario, "%d;%s;%s;%s;%d;%d;%d\n",
+                livroAtualizado->idLivro,
+                livroAtualizado->titulo,
+                livroAtualizado->autor,
+                livroAtualizado->editora,
+                livroAtualizado->anoDePublicacao,
+                livroAtualizado->numeroExDisp,
+                livroAtualizado->status);
+        atualizado = 1;
+    }
+
+    fclose(arquivoOriginal);
+
+    if (fflush(arquivoTemporario) != 0 || fclose(arquivoTemporario) != 0)
+    {
+        remove("livros.tmp");
+        return -1;
+    }
+
+    if (!atualizado || remove("livros.txt") != 0 || rename("livros.tmp", "livros.txt") != 0)
+    {
+        remove("livros.tmp");
+        return -1;
+    }
+
+    carregarArquivoNaVariavel("livros.txt", &dadosLivros);
+    carregarVetores();
+    fazerBackupDosDados();
+    return 0;
+}
+
+// * Atualiza o status de um emprestimo no arquivo
+static int atualizarEmprestimoNoArquivo(int idEmprestimo)
+{
+    FILE *arquivoOriginal = fopen("emprestimos.txt", "r");
+    FILE *arquivoTemporario = fopen("emprestimos.tmp", "w");
+
+    if (arquivoOriginal == NULL || arquivoTemporario == NULL)
+    {
+        if (arquivoOriginal != NULL)
+            fclose(arquivoOriginal);
+        if (arquivoTemporario != NULL)
+            fclose(arquivoTemporario);
+        return -1;
+    }
+
+    char linha[512];
+    int atualizado = 0;
+
+    while (fgets(linha, sizeof(linha), arquivoOriginal) != NULL)
+    {
+        emprestimos emprestimo;
+
+        if (strncmp(linha, "id;", 3) == 0)
+        {
+            fprintf(arquivoTemporario, "%s", linha);
+            continue;
+        }
+
+        if (!parse_linha_emprestimo(linha, &emprestimo))
+        {
+            fprintf(arquivoTemporario, "%s", linha);
+            continue;
+        }
+
+        if (emprestimo.idEmprestimo == idEmprestimo && emprestimo.status == 1)
+        {
+            emprestimo.status = 0;
+            atualizado = 1;
+        }
+
+        fprintf(arquivoTemporario, "%d;%d;%d;%s;%s;%d\n",
+                emprestimo.idEmprestimo,
+                emprestimo.matriculaUsuario,
+                emprestimo.idLivro,
+                emprestimo.dataEmprestimo,
+                emprestimo.dataDevolucaoPrevista,
+                emprestimo.status);
+    }
+
+    fclose(arquivoOriginal);
+
+    if (fflush(arquivoTemporario) != 0 || fclose(arquivoTemporario) != 0)
+    {
+        remove("emprestimos.tmp");
+        return -1;
+    }
+
+    if (!atualizado || remove("emprestimos.txt") != 0 || rename("emprestimos.tmp", "emprestimos.txt") != 0)
+    {
+        remove("emprestimos.tmp");
+        return -1;
+    }
+
+    carregarArquivoNaVariavel("emprestimos.txt", &dadosEmprestimos);
+    carregarVetores();
+    fazerBackupDosDados();
     return 0;
 }
 
@@ -228,7 +578,7 @@ static int leituraBancoDeDados(const char *arquivo)
         }
         else if (strcmp(arquivo, "livros.txt") == 0)
         {
-            cabecalho = "id;titulo;autor;editora;anoDePublicacao;status\n";
+            cabecalho = "id;titulo;autor;editora;anoDePublicacao;numeroExemplares;status\n";
         }
         else if (strcmp(arquivo, "emprestimos.txt") == 0)
         {
@@ -245,23 +595,20 @@ static int leituraBancoDeDados(const char *arquivo)
     }
 
     // * Carrega o conteúdo completo em variáveis globais para uso posterior
-    if (strcasecmp(arquivo, "usuarios.txt") == 0)
+    if (strcmp(arquivo, "usuarios.txt") == 0)
     {
         if (carregarArquivoNaVariavel(arquivo, &dadosUsuarios) != 0)
             return -1;
-        logFile("print.log", "usuarios", "INFO", "%s", dadosUsuarios);
     }
-    else if (strcasecmp(arquivo, "livros.txt") == 0)
+    else if (strcmp(arquivo, "livros.txt") == 0)
     {
         if (carregarArquivoNaVariavel(arquivo, &dadosLivros) != 0)
             return -1;
-        logFile("print.log", "livros", "INFO", "%s", dadosLivros);
     }
-    else if (strcasecmp(arquivo, "emprestimos.txt") == 0)
+    else if (strcmp(arquivo, "emprestimos.txt") == 0)
     {
         if (carregarArquivoNaVariavel(arquivo, &dadosEmprestimos) != 0)
             return -1;
-        logFile("print.log", "emprestimos", "INFO", "%s", dadosEmprestimos);
     }
     return 0;
 }
@@ -278,7 +625,8 @@ int inicializacaoBancoDeDados(void)
         return -1;
     }
 
-    return 0;
+    carregarVetores();
+    return fazerBackupDosDados();
 }
 
 // * Função para inserir dados no banco de dados
@@ -316,6 +664,8 @@ int inserirNoBancoDeDados(const char *arquivo, const char *registro)
     }
 
     fclose(arquivoTXT); // * Fechar o arquivo após a inserção
+    carregarVetores();
+    fazerBackupDosDados();
     logFile(".log", NULL, "INFO", "Registro inserido com sucesso no arquivo %s!", arquivo);
     return 0;
 }
@@ -392,41 +742,27 @@ void cadastrarUsuario(void)
     printf("Cadastro de usuario\n");
     barraDeSeparacao();
 
-    usuario novoUsuario = {0};
-    novoUsuario.matricula = 0;          // * Inicializar a matrícula com 0
-    novoUsuario.nomeCompleto[0] = '\0'; // * Inicializar a string com o caractere de fim de string
-    novoUsuario.curso[0] = '\0';        // * Inicializar a string com o caractere de fim de string
-    novoUsuario.telefone[0] = '\0';     // * Inicializar a string com o caractere de fim de string
-    novoUsuario.dataCadastro[0] = '\0'; // * Inicializar a string com o caractere de fim de string
+    usuario novoUsuario;
+    inicializarUsuario(&novoUsuario);
 
     printf("Digite a matricula do usuario: ");
     if (scanf("%d", &novoUsuario.matricula) != 1)
     {
         logFile(".log", NULL, "WARNING", "Matricula invalida informada no cadastro");
-        while (getchar() != '\n' && !feof(stdin))
-        {
-        }
+        limparEntrada();
         return;
     }
 
-    while (getchar() != '\n' && !feof(stdin))
-    {
-    }
-
-    printf("Digite o nome completo do usuario: ");
-    if (fgets(novoUsuario.nomeCompleto, sizeof(novoUsuario.nomeCompleto), stdin) == NULL)
+    limparEntrada();
+    if (!lerTexto("Digite o nome completo do usuario: ",
+                  novoUsuario.nomeCompleto, sizeof(novoUsuario.nomeCompleto)))
         return;
-    novoUsuario.nomeCompleto[strcspn(novoUsuario.nomeCompleto, "\n")] = '\0';
-
-    printf("Digite o curso do usuario: ");
-    if (fgets(novoUsuario.curso, sizeof(novoUsuario.curso), stdin) == NULL)
+    if (!lerTexto("Digite o curso do usuario: ",
+                  novoUsuario.curso, sizeof(novoUsuario.curso)))
         return;
-    novoUsuario.curso[strcspn(novoUsuario.curso, "\n")] = '\0';
-
-    printf("Digite o telefone do usuario: ");
-    if (fgets(novoUsuario.telefone, sizeof(novoUsuario.telefone), stdin) == NULL)
+    if (!lerTexto("Digite o telefone do usuario: ",
+                  novoUsuario.telefone, sizeof(novoUsuario.telefone)))
         return;
-    novoUsuario.telefone[strcspn(novoUsuario.telefone, "\n")] = '\0';
 
     strcpy(novoUsuario.dataCadastro, getTimestamp(0));
 
@@ -482,6 +818,13 @@ void pesquisarUsuario(void)
     }
     busca[strcspn(busca, "\r\n")] = '\0';
 
+    if (busca[0] == '\0')
+    {
+        printf("Informe pelo menos parte da matricula ou do nome.\n");
+        fclose(arquivoTXT);
+        return;
+    }
+
     while (fgets(linha, sizeof(linha), arquivoTXT) != NULL)
     {
         if (strncmp(linha, "matricula;", 10) == 0 || !parse_linha(linha, &usuarioEncontrado))
@@ -489,56 +832,57 @@ void pesquisarUsuario(void)
 
         char matriculaTexto[20];
         snprintf(matriculaTexto, sizeof(matriculaTexto), "%d", usuarioEncontrado.matricula);
-        if (strcmp(busca, matriculaTexto) == 0 ||
-            strstr(usuarioEncontrado.nomeCompleto, busca) != NULL)
+
+        if (strstr(matriculaTexto, busca) != NULL ||
+            contemTextoSemDistincaoDeCaixa(usuarioEncontrado.nomeCompleto, busca))
         {
-            printf("Matricula: %d\n", usuarioEncontrado.matricula);
+            printf("\nMatricula: %d\n", usuarioEncontrado.matricula);
             printf("Nome: %s\n", usuarioEncontrado.nomeCompleto);
             printf("Curso: %s\n", usuarioEncontrado.curso);
             printf("Telefone: %s\n", usuarioEncontrado.telefone);
             printf("Data de cadastro: %s\n", usuarioEncontrado.dataCadastro);
             encontrado = 1;
+
+            FILE *arquivoEmprestimos = fopen("emprestimos.txt", "r");
+            int encontrouEmprestimo = 0;
+
+            if (arquivoEmprestimos != NULL)
+            {
+                char linhaEmprestimo[512];
+
+                while (fgets(linhaEmprestimo, sizeof(linhaEmprestimo), arquivoEmprestimos) != NULL)
+                {
+                    emprestimos emprestimo;
+                    livros livro;
+
+                    if (strncmp(linhaEmprestimo, "id;", 3) == 0 ||
+                        !parse_linha_emprestimo(linhaEmprestimo, &emprestimo) ||
+                        emprestimo.matriculaUsuario != usuarioEncontrado.matricula ||
+                        emprestimo.status != 1)
+                        continue;
+
+                    if (buscarLivroPorId(emprestimo.idLivro, &livro))
+                    {
+                        printf("\nEmprestimo em aberto:\n");
+                        printf("ID do livro: %d\n", livro.idLivro);
+                        printf("Titulo: %s\n", livro.titulo);
+                        printf("Autor: %s\n", livro.autor);
+                        printf("Data do emprestimo: %s\n", emprestimo.dataEmprestimo);
+                        encontrouEmprestimo = 1;
+                    }
+                }
+                fclose(arquivoEmprestimos);
+            }
+
+            if (!encontrouEmprestimo)
+                printf("Nenhum emprestimo em aberto para este usuario.\n");
         }
     }
 
     fclose(arquivoTXT);
+
     if (!encontrado)
         printf("Usuario nao encontrado.\n");
-
-    if (encontrado)
-    {
-        FILE *arquivoEmprestimos = fopen("emprestimos.txt", "r");
-        int encontrouEmprestimo = 0;
-
-        if (arquivoEmprestimos != NULL)
-        {
-            while (fgets(linha, sizeof(linha), arquivoEmprestimos) != NULL)
-            {
-                emprestimos emprestimo;
-                livros livro;
-
-                if (strncmp(linha, "id;", 3) == 0 ||
-                    !parse_linha_emprestimo(linha, &emprestimo) ||
-                    emprestimo.matriculaUsuario != usuarioEncontrado.matricula ||
-                    emprestimo.status != 1)
-                    continue;
-
-                if (buscarLivroPorId(emprestimo.idLivro, &livro))
-                {
-                    printf("\nEmprestimo em aberto:\n");
-                    printf("ID do livro: %d\n", livro.idLivro);
-                    printf("Titulo: %s\n", livro.titulo);
-                    printf("Autor: %s\n", livro.autor);
-                    printf("Data do emprestimo: %s\n", emprestimo.dataEmprestimo);
-                    encontrouEmprestimo = 1;
-                }
-            }
-            fclose(arquivoEmprestimos);
-        }
-
-        if (!encontrouEmprestimo)
-            printf("Nenhum emprestimo em aberto para este usuario.\n");
-    }
 }
 
 // * Função para gerenciar as opções relacionadas aos usuários
@@ -572,10 +916,176 @@ void gerenciarUsuarios(void)
 }
 
 // * Função para cadastrar um novo livro
-void cadastrarLivro(void) {}
+void cadastrarLivro(void)
+{
+    logFile(".log", NULL, "INFO", "Cadastro de livro acessado");
+    barraDeSeparacao();
+    printf("Cadastro de livro\n");
+    barraDeSeparacao();
+
+    livros novoLivro;
+    inicializarLivro(&novoLivro);
+
+    printf("Digite o codigo do livro: ");
+    if (scanf("%d", &novoLivro.idLivro) != 1)
+    {
+        logFile(".log", NULL, "WARNING", "Codigo de livro invalido informado no cadastro");
+        limparEntrada();
+        return;
+    }
+
+    if (novoLivro.idLivro <= 0)
+    {
+        printf("O codigo do livro deve ser maior que zero.\n");
+        limparEntrada();
+        return;
+    }
+
+    limparEntrada();
+    if (!lerTexto("Digite o titulo do livro: ",
+                  novoLivro.titulo, sizeof(novoLivro.titulo)))
+        return;
+    if (!lerTexto("Digite o autor do livro: ",
+                  novoLivro.autor, sizeof(novoLivro.autor)))
+        return;
+    if (!lerTexto("Digite a editora do livro: ",
+                  novoLivro.editora, sizeof(novoLivro.editora)))
+        return;
+
+    printf("Digite o ano de publicacao: ");
+    if (scanf("%d", &novoLivro.anoDePublicacao) != 1)
+    {
+        logFile(".log", NULL, "WARNING", "Ano de publicacao invalido informado no cadastro");
+        limparEntrada();
+        return;
+    }
+
+    if (novoLivro.anoDePublicacao <= 0)
+    {
+        printf("O ano de publicacao deve ser maior que zero.\n");
+        while (getchar() != '\n' && !feof(stdin))
+        {
+        }
+        return;
+    }
+
+    printf("Digite o numero de exemplares disponiveis: ");
+    if (scanf("%d", &novoLivro.numeroExDisp) != 1)
+    {
+        logFile(".log", NULL, "WARNING", "Numero de exemplares invalido informado no cadastro");
+        while (getchar() != '\n' && !feof(stdin))
+        {
+        }
+        return;
+    }
+
+    if (novoLivro.numeroExDisp < 0)
+    {
+        printf("O numero de exemplares nao pode ser negativo.\n");
+        limparEntrada();
+        return;
+    }
+
+    limparEntrada();
+
+    if (novoLivro.titulo[0] == '\0' || novoLivro.autor[0] == '\0' || novoLivro.editora[0] == '\0')
+    {
+        printf("Titulo, autor e editora sao obrigatorios.\n");
+        logFile(".log", NULL, "WARNING", "Cadastro de livro com campo textual vazio");
+        return;
+    }
+
+    novoLivro.status = novoLivro.numeroExDisp > 0 ? 1 : 0;
+
+    char registro[400];
+    int tamanho = snprintf(registro, sizeof(registro), "%d;%s;%s;%s;%d;%d;%d",
+                           novoLivro.idLivro, novoLivro.titulo, novoLivro.autor,
+                           novoLivro.editora, novoLivro.anoDePublicacao,
+                           novoLivro.numeroExDisp, novoLivro.status);
+
+    if (tamanho < 0 || (size_t)tamanho >= sizeof(registro))
+    {
+        logFile(".log", NULL, "ERROR", "Registro do livro excede o tamanho permitido");
+        return;
+    }
+
+    int resultadoInsercao = inserirNoBancoDeDados("livros.txt", registro);
+    if (resultadoInsercao == 0)
+    {
+        if (carregarArquivoNaVariavel("livros.txt", &dadosLivros) == 0)
+            logFile("print.log", "livros", "INFO", "%s", dadosLivros);
+        printf("Livro cadastrado com sucesso.\n");
+        logFile(".log", NULL, "INFO", "Livro cadastrado com sucesso: %s", registro);
+    }
+    else if (resultadoInsercao == 1)
+    {
+        printf("Livro ja cadastrado.\n");
+    }
+}
 
 // * Função para pesquisar livros por código, título ou autor
-void pesquisarLivro(void) {}
+void pesquisarLivro(void)
+{
+    char busca[100];
+    char linha[512];
+    int encontrado = 0;
+    FILE *arquivoLivros = fopen("livros.txt", "r");
+
+    if (arquivoLivros == NULL)
+    {
+        logFile(".log", NULL, "ERROR", "Falha ao abrir livros.txt para pesquisa!");
+        return;
+    }
+
+    while (getchar() != '\n' && !feof(stdin))
+    {
+    }
+
+    printf("Digite o codigo, titulo ou autor do livro: ");
+    if (fgets(busca, sizeof(busca), stdin) == NULL)
+    {
+        fclose(arquivoLivros);
+        return;
+    }
+    busca[strcspn(busca, "\r\n")] = '\0';
+
+    if (busca[0] == '\0')
+    {
+        printf("Informe pelo menos parte do codigo, titulo ou autor.\n");
+        fclose(arquivoLivros);
+        return;
+    }
+
+    while (fgets(linha, sizeof(linha), arquivoLivros) != NULL)
+    {
+        livros livroEncontrado;
+
+        if (strncmp(linha, "id;", 3) == 0 || !parse_linha_livro(linha, &livroEncontrado))
+            continue;
+
+        char codigoTexto[20];
+        snprintf(codigoTexto, sizeof(codigoTexto), "%d", livroEncontrado.idLivro);
+
+        if (strstr(codigoTexto, busca) != NULL ||
+            contemTextoSemDistincaoDeCaixa(livroEncontrado.titulo, busca) ||
+            contemTextoSemDistincaoDeCaixa(livroEncontrado.autor, busca))
+        {
+            printf("\nCodigo: %d\n", livroEncontrado.idLivro);
+            printf("Titulo: %s\n", livroEncontrado.titulo);
+            printf("Autor: %s\n", livroEncontrado.autor);
+            printf("Editora: %s\n", livroEncontrado.editora);
+            printf("Ano de publicacao: %d\n", livroEncontrado.anoDePublicacao);
+            printf("Exemplares disponiveis: %d\n", livroEncontrado.numeroExDisp);
+            printf("Status: %s\n", livroEncontrado.status == 1 ? "Disponivel" : "Emprestado");
+            encontrado = 1;
+        }
+    }
+
+    fclose(arquivoLivros);
+
+    if (!encontrado)
+        printf("Livro nao encontrado.\n");
+}
 
 // * Função para gerenciar as opções relacionadas aos livros
 void gerenciarLivros(void)
@@ -608,13 +1118,444 @@ void gerenciarLivros(void)
 }
 
 // * Função para cadastrar um novo empréstimo
-void cadastrarEmprestimo(void) {}
+void cadastrarEmprestimo(void)
+{
+    int matriculaUsuario;
+    int idLivro;
 
-// * Função para devolver um livro emprestado, atualizando o status do empréstimo e do livro. (O empréstimo pode ser identificado pelo ID do empréstimo ou pelo código do livro e a matrícula do usuário)
-void devolverLivro(void) {}
+    logFile(".log", NULL, "INFO", "Cadastro de emprestimo acessado");
+    barraDeSeparacao();
+    printf("Cadastrar emprestimo\n");
+    barraDeSeparacao();
 
-// * Listar empréstimos ativos, mostrando informações do usuário, do livro e a data de empréstimo. (O status do empréstimo deve ser "ativo" para ser listado)
-void listarEmprestimosAtivos(void) {}
+    printf("Digite a matricula do usuario: ");
+    if (scanf("%d", &matriculaUsuario) != 1)
+    {
+        while (getchar() != '\n' && !feof(stdin))
+        {
+        }
+        printf("Matricula invalida.\n");
+        return;
+    }
+
+    printf("Digite o codigo do livro: ");
+    if (scanf("%d", &idLivro) != 1)
+    {
+        while (getchar() != '\n' && !feof(stdin))
+        {
+        }
+        printf("Codigo de livro invalido.\n");
+        return;
+    }
+
+    while (getchar() != '\n' && !feof(stdin))
+    {
+    }
+
+    usuario usuarioEmprestimo;
+    livros livroEmprestimo;
+
+    if (!buscarUsuarioPorMatricula(matriculaUsuario, &usuarioEmprestimo))
+    {
+        printf("Usuario nao encontrado.\n");
+        return;
+    }
+
+    if (!buscarLivroPorId(idLivro, &livroEmprestimo))
+    {
+        printf("Livro nao encontrado.\n");
+        return;
+    }
+
+    if (livroEmprestimo.numeroExDisp <= 0)
+    {
+        printf("Nao ha exemplares disponiveis deste livro.\n");
+        return;
+    }
+
+    FILE *arquivoEmprestimos = fopen("emprestimos.txt", "r");
+    char linha[512];
+    int novoId = 1;
+
+    if (arquivoEmprestimos != NULL)
+    {
+        while (fgets(linha, sizeof(linha), arquivoEmprestimos) != NULL)
+        {
+            emprestimos emprestimo;
+
+            if (strncmp(linha, "id;", 3) != 0 && parse_linha_emprestimo(linha, &emprestimo) &&
+                emprestimo.idEmprestimo >= novoId)
+            {
+                novoId = emprestimo.idEmprestimo + 1;
+            }
+        }
+        fclose(arquivoEmprestimos);
+    }
+
+    const char *dataEmprestimo = getTimestamp(0);
+    char dataDevolucao[11];
+    adicionarDias(dataEmprestimo, 7, dataDevolucao, sizeof(dataDevolucao));
+
+    char registro[200];
+    snprintf(registro, sizeof(registro), "%d;%d;%d;%s;%s;1",
+             novoId, matriculaUsuario, idLivro,
+             dataEmprestimo, dataDevolucao);
+
+    int resultado = inserirNoBancoDeDados("emprestimos.txt", registro);
+    if (resultado != 0)
+    {
+        if (resultado == 1)
+            printf("Emprestimo ja cadastrado.\n");
+        return;
+    }
+
+    livroEmprestimo.numeroExDisp--;
+    livroEmprestimo.status = livroEmprestimo.numeroExDisp > 0 ? 1 : 0;
+
+    if (atualizarLivroNoArquivo(&livroEmprestimo) != 0)
+    {
+        logFile(".log", NULL, "ERROR", "Falha ao atualizar exemplares disponiveis do livro %d", idLivro);
+        printf("Emprestimo cadastrado, mas nao foi possivel atualizar o livro.\n");
+        return;
+    }
+
+    printf("Emprestimo cadastrado com sucesso.\n");
+    printf("Usuario: %s\n", usuarioEmprestimo.nomeCompleto);
+    printf("Livro: %s\n", livroEmprestimo.titulo);
+    printf("Data de devolucao: %s\n", dataDevolucao);
+    logFile(".log", NULL, "INFO", "Emprestimo %d cadastrado", novoId);
+}
+
+// * Função para devolver um livro emprestado
+void devolverLivro(void)
+{
+    int idEmprestimo;
+
+    logFile(".log", NULL, "INFO", "Devolucao de emprestimo acessada");
+    barraDeSeparacao();
+    printf("Devolver livro\n");
+    barraDeSeparacao();
+
+    printf("Digite o ID do emprestimo: ");
+    if (scanf("%d", &idEmprestimo) != 1)
+    {
+        while (getchar() != '\n' && !feof(stdin))
+        {
+        }
+        printf("ID invalido.\n");
+        return;
+    }
+
+    while (getchar() != '\n' && !feof(stdin))
+    {
+    }
+
+    FILE *arquivoEmprestimos = fopen("emprestimos.txt", "r");
+    char linha[512];
+    emprestimos emprestimoEncontrado = {0};
+    int encontrado = 0;
+
+    if (arquivoEmprestimos == NULL)
+    {
+        printf("Nao foi possivel acessar os emprestimos.\n");
+        return;
+    }
+
+    while (fgets(linha, sizeof(linha), arquivoEmprestimos) != NULL)
+    {
+        emprestimos emprestimo;
+
+        if (strncmp(linha, "id;", 3) != 0 && parse_linha_emprestimo(linha, &emprestimo) &&
+            emprestimo.idEmprestimo == idEmprestimo && emprestimo.status == 1)
+        {
+            emprestimoEncontrado = emprestimo;
+            encontrado = 1;
+            break;
+        }
+    }
+    fclose(arquivoEmprestimos);
+
+    if (!encontrado)
+    {
+        printf("Emprestimo ativo nao encontrado.\n");
+        return;
+    }
+
+    livros livroDevolvido;
+    if (!buscarLivroPorId(emprestimoEncontrado.idLivro, &livroDevolvido))
+    {
+        printf("Livro associado ao emprestimo nao encontrado.\n");
+        return;
+    }
+
+    if (atualizarEmprestimoNoArquivo(idEmprestimo) != 0)
+    {
+        printf("Nao foi possivel atualizar o emprestimo.\n");
+        return;
+    }
+
+    livroDevolvido.numeroExDisp++;
+    livroDevolvido.status = 1;
+
+    if (atualizarLivroNoArquivo(&livroDevolvido) != 0)
+    {
+        printf("Livro devolvido, mas nao foi possivel atualizar os exemplares.\n");
+        return;
+    }
+
+    printf("Devolucao registrada com sucesso.\n");
+    printf("Exemplares disponiveis: %d\n", livroDevolvido.numeroExDisp);
+    logFile(".log", NULL, "INFO", "Emprestimo %d devolvido", idEmprestimo);
+}
+
+// * Listar empréstimos ativos
+void listarEmprestimosAtivos(void)
+{
+    FILE *arquivoEmprestimos = fopen("emprestimos.txt", "r");
+    char linha[512];
+    int encontrados = 0;
+
+    logFile(".log", NULL, "INFO", "Listagem de emprestimos ativos acessada");
+    barraDeSeparacao();
+    printf("Emprestimos ativos\n");
+    barraDeSeparacao();
+
+    if (arquivoEmprestimos == NULL)
+    {
+        printf("Nao foi possivel abrir emprestimos.txt.\n");
+        return;
+    }
+
+    while (fgets(linha, sizeof(linha), arquivoEmprestimos) != NULL)
+    {
+        emprestimos emprestimo;
+
+        if (strncmp(linha, "id;", 3) == 0 ||
+            !parse_linha_emprestimo(linha, &emprestimo) ||
+            emprestimo.status != 1)
+            continue;
+
+        usuario usuarioEmprestimo;
+        livros livroEmprestimo;
+
+        if (!buscarUsuarioPorMatricula(emprestimo.matriculaUsuario, &usuarioEmprestimo) ||
+            !buscarLivroPorId(emprestimo.idLivro, &livroEmprestimo))
+            continue;
+
+        printf("\nID do emprestimo: %d\n", emprestimo.idEmprestimo);
+        printf("Matricula: %d\n", usuarioEmprestimo.matricula);
+        printf("Usuario: %s\n", usuarioEmprestimo.nomeCompleto);
+        printf("Codigo do livro: %d\n", livroEmprestimo.idLivro);
+        printf("Livro: %s\n", livroEmprestimo.titulo);
+        printf("Autor: %s\n", livroEmprestimo.autor);
+        printf("Data do emprestimo: %s\n", emprestimo.dataEmprestimo);
+        printf("Data prevista de devolucao: %s\n", emprestimo.dataDevolucaoPrevista);
+        encontrados++;
+    }
+
+    fclose(arquivoEmprestimos);
+
+    if (!encontrados)
+        printf("Nenhum emprestimo ativo encontrado.\n");
+}
+
+static int atualizarDataEmprestimoNoArquivo(int idEmprestimo, const char *novaData)
+{
+    FILE *original = fopen("emprestimos.txt", "r");
+    FILE *temporario = fopen("emprestimos.tmp", "w");
+    char linha[512];
+    int atualizado = 0;
+
+    if (original == NULL || temporario == NULL)
+    {
+        if (original != NULL)
+            fclose(original);
+        if (temporario != NULL)
+            fclose(temporario);
+        return -1;
+    }
+
+    while (fgets(linha, sizeof(linha), original) != NULL)
+    {
+        emprestimos emprestimo;
+        if (strncmp(linha, "id;", 3) == 0)
+        {
+            fputs(linha, temporario);
+            continue;
+        }
+        if (!parse_linha_emprestimo(linha, &emprestimo))
+        {
+            fputs(linha, temporario);
+            continue;
+        }
+        if (emprestimo.idEmprestimo == idEmprestimo && emprestimo.status == 1)
+        {
+            strncpy(emprestimo.dataDevolucaoPrevista, novaData,
+                    sizeof(emprestimo.dataDevolucaoPrevista) - 1);
+            emprestimo.dataDevolucaoPrevista[
+                sizeof(emprestimo.dataDevolucaoPrevista) - 1] = '\0';
+            atualizado = 1;
+        }
+        fprintf(temporario, "%d;%d;%d;%s;%s;%d\n",
+                emprestimo.idEmprestimo, emprestimo.matriculaUsuario,
+                emprestimo.idLivro, emprestimo.dataEmprestimo,
+                emprestimo.dataDevolucaoPrevista, emprestimo.status);
+    }
+
+    fclose(original);
+    if (fflush(temporario) != 0 || fclose(temporario) != 0 ||
+        !atualizado || remove("emprestimos.txt") != 0 ||
+        rename("emprestimos.tmp", "emprestimos.txt") != 0)
+    {
+        remove("emprestimos.tmp");
+        return -1;
+    }
+
+    carregarArquivoNaVariavel("emprestimos.txt", &dadosEmprestimos);
+    carregarVetores();
+    fazerBackupDosDados();
+    return 0;
+}
+
+static void relatorioLivrosMaisEmprestados(void)
+{
+    int contagens[MAX_LIVROS] = {0};
+    int maior = 0;
+
+    barraDeSeparacao();
+    printf("Relatorio de livros mais emprestados\n");
+    barraDeSeparacao();
+    for (size_t i = 0; i < totalEmprestimos; i++)
+    {
+        for (size_t j = 0; j < totalLivros; j++)
+            if (emprestimosCadastrados[i].idLivro == livrosCadastrados[j].idLivro)
+            {
+                contagens[j]++;
+                if (contagens[j] > maior)
+                    maior = contagens[j];
+                break;
+            }
+    }
+
+    if (maior == 0)
+    {
+        printf("Nenhum emprestimo registrado.\n");
+        return;
+    }
+    for (size_t i = 0; i < totalLivros; i++)
+        if (contagens[i] == maior)
+            printf("Codigo: %d | Titulo: %s | Emprestimos: %d\n",
+                   livrosCadastrados[i].idLivro, livrosCadastrados[i].titulo,
+                   contagens[i]);
+}
+
+static void relatorioUsuariosEmAtraso(void)
+{
+    const char *hoje = getTimestamp(0);
+    int encontrados = 0;
+
+    barraDeSeparacao();
+    printf("Relatorio de usuarios com emprestimos em atraso\n");
+    barraDeSeparacao();
+    for (size_t i = 0; i < totalEmprestimos; i++)
+    {
+        if (emprestimosCadastrados[i].status != 1 ||
+            strcmp(emprestimosCadastrados[i].dataDevolucaoPrevista, hoje) >= 0)
+            continue;
+        for (size_t j = 0; j < totalUsuarios; j++)
+            if (usuarios[j].matricula == emprestimosCadastrados[i].matriculaUsuario)
+            {
+                printf("Matricula: %d | Usuario: %s | Emprestimo: %d | Vencimento: %s\n",
+                       usuarios[j].matricula, usuarios[j].nomeCompleto,
+                       emprestimosCadastrados[i].idEmprestimo,
+                       emprestimosCadastrados[i].dataDevolucaoPrevista);
+                encontrados = 1;
+                break;
+            }
+    }
+    if (!encontrados)
+        printf("Nenhum usuario com emprestimo em atraso.\n");
+}
+
+static void buscaAvancadaLivros(void)
+{
+    char titulo[100], autor[80], statusTexto[10], anoTexto[12];
+    int ano = 0;
+    int encontrados = 0;
+
+    limparEntrada();
+    printf("Busca avancada (deixe vazio para ignorar o criterio)\n");
+    if (!lerTexto("Titulo: ", titulo, sizeof(titulo)) ||
+        !lerTexto("Autor: ", autor, sizeof(autor)) ||
+        !lerTexto("Ano: ", anoTexto, sizeof(anoTexto)) ||
+        !lerTexto("Status (D=disponivel, E=emprestado): ",
+                  statusTexto, sizeof(statusTexto)))
+        return;
+    if (anoTexto[0] != '\0' && (sscanf(anoTexto, "%d", &ano) != 1 || ano <= 0))
+    {
+        printf("Ano invalido.\n");
+        return;
+    }
+
+    for (size_t i = 0; i < totalLivros; i++)
+    {
+        livros *livro = &livrosCadastrados[i];
+        int statusValido = statusTexto[0] == '\0' ||
+                           (tolower((unsigned char)statusTexto[0]) == 'd' && livro->status == 1) ||
+                           (tolower((unsigned char)statusTexto[0]) == 'e' && livro->status == 0);
+        if ((titulo[0] == '\0' || contemTextoSemDistincaoDeCaixa(livro->titulo, titulo)) &&
+            (autor[0] == '\0' || contemTextoSemDistincaoDeCaixa(livro->autor, autor)) &&
+            (ano == 0 || livro->anoDePublicacao == ano) && statusValido)
+        {
+            printf("Codigo: %d | %s | %s | %d | %s\n", livro->idLivro,
+                   livro->titulo, livro->autor, livro->anoDePublicacao,
+                   livro->status == 1 ? "Disponivel" : "Emprestado");
+            encontrados = 1;
+        }
+    }
+    if (!encontrados)
+        printf("Nenhum livro atende aos criterios.\n");
+}
+
+static void renovarEmprestimo(void)
+{
+    int idEmprestimo;
+    emprestimos encontrado;
+    int localizado = 0;
+    char dataRenovada[11];
+
+    limparEntrada();
+    inicializarEmprestimo(&encontrado);
+    printf("Digite o ID do emprestimo: ");
+    if (scanf("%d", &idEmprestimo) != 1)
+    {
+        limparEntrada();
+        printf("ID invalido.\n");
+        return;
+    }
+    limparEntrada();
+    for (size_t i = 0; i < totalEmprestimos; i++)
+        if (emprestimosCadastrados[i].idEmprestimo == idEmprestimo &&
+            emprestimosCadastrados[i].status == 1)
+        {
+            encontrado = emprestimosCadastrados[i];
+            localizado = 1;
+            break;
+        }
+    if (!localizado)
+    {
+        printf("Emprestimo ativo nao encontrado.\n");
+        return;
+    }
+    adicionarDias(encontrado.dataDevolucaoPrevista, 7, dataRenovada,
+                  sizeof(dataRenovada));
+    if (atualizarDataEmprestimoNoArquivo(idEmprestimo, dataRenovada) != 0)
+    {
+        printf("Nao foi possivel renovar o emprestimo.\n");
+        return;
+    }
+    printf("Emprestimo renovado ate %s.\n", dataRenovada);
+}
 
 // * Função para gerenciar as opções relacionadas aos empréstimos
 void gerenciarEmprestimos(void)
@@ -627,10 +1568,14 @@ void gerenciarEmprestimos(void)
         "Cadastrar Emprestimo",
         "Devolver Livro",
         "Listar Emprestimos Ativos",
+        "Renovar Emprestimo",
+        "Relatorio de livros mais emprestados",
+        "Relatorio de usuarios em atraso",
+        "Busca avancada de livros",
     };
     do
     {
-        opcao = menu(3, options, "Gerenciamento de Emprestimos");
+        opcao = menu(7, options, "Gerenciamento de Emprestimos");
 
         switch (opcao)
         {
@@ -646,6 +1591,18 @@ void gerenciarEmprestimos(void)
         case 3:
             listarEmprestimosAtivos();
             break;
+        case 4:
+            renovarEmprestimo();
+            break;
+        case 5:
+            relatorioLivrosMaisEmprestados();
+            break;
+        case 6:
+            relatorioUsuariosEmAtraso();
+            break;
+        case 7:
+            buscaAvancadaLivros();
+            break;
         }
     } while (opcao != 0);
 }
@@ -655,7 +1612,14 @@ int main(void) // * Função principal
     // * Inicialização do sistema
     logFileInit(".log");         // * Inicialização do arquivo .log
     logFileInit("print.log");    // * Inicialização do arquivo print.log
-    inicializacaoBancoDeDados(); // * Inicialização do banco de dados
+    if (inicializacaoBancoDeDados() != 0)
+    {
+        fprintf(stderr, "Nao foi possivel inicializar o banco de dados.\n");
+        free(dadosUsuarios);
+        free(dadosLivros);
+        free(dadosEmprestimos);
+        return EXIT_FAILURE;
+    }
     cabecalho();                 // * Chamada do cabeçalho
 
     int opcaoPrincipal;
@@ -688,4 +1652,9 @@ int main(void) // * Função principal
             break;
         }
     } while (opcaoPrincipal != 0);
+
+    free(dadosUsuarios);
+    free(dadosLivros);
+    free(dadosEmprestimos);
+    return EXIT_SUCCESS;
 }
