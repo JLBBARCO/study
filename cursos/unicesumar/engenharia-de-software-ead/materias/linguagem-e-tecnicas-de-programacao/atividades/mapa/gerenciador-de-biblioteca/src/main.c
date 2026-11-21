@@ -94,21 +94,21 @@ static int parse_linha_emprestimo(const char *linha, emprestimos *novoEmprestimo
     return camposLidos == 6;
 }
 
+// * Funções para inicializar as estruturas de dados
 static void inicializarUsuario(usuario *novoUsuario)
 {
     memset(novoUsuario, 0, sizeof(*novoUsuario));
 }
-
 static void inicializarLivro(livros *novoLivro)
 {
     memset(novoLivro, 0, sizeof(*novoLivro));
 }
-
 static void inicializarEmprestimo(emprestimos *novoEmprestimo)
 {
     memset(novoEmprestimo, 0, sizeof(*novoEmprestimo));
 }
 
+// * Função para limpar a entrada do buffer de entrada padrão
 static void limparEntrada(void)
 {
     int caractere;
@@ -117,6 +117,7 @@ static void limparEntrada(void)
     }
 }
 
+// * Função para ler uma linha de texto do usuário, com mensagem de prompt e tamanho máximo
 static int lerTexto(const char *mensagem, char *destino, size_t tamanho)
 {
     printf("%s", mensagem);
@@ -129,6 +130,7 @@ static int lerTexto(const char *mensagem, char *destino, size_t tamanho)
     return 1;
 }
 
+// * Função para copiar o conteúdo de um arquivo para outro
 static int copiarArquivo(const char *origem, const char *destino)
 {
     FILE *arquivoOrigem = fopen(origem, "rb");
@@ -164,6 +166,7 @@ static int copiarArquivo(const char *origem, const char *destino)
     }
 }
 
+// * Função para fazer backup dos dados
 static int fazerBackupDosDados(void)
 {
     const char *arquivos[] = {"usuarios.txt", "livros.txt", "emprestimos.txt"};
@@ -221,6 +224,71 @@ static void carregarVetores(void)
     }
 }
 
+// * Funções para salvar os dados dos usuários, livros e empréstimos em arquivos
+static int salvarUsuarios(void)
+{
+    FILE *arquivo = fopen("usuarios.txt", "w");
+    if (arquivo == NULL)
+        return -1;
+
+    fprintf(arquivo, "matricula;nomeCompleto;curso;telefone;dataCadastro\n");
+    for (size_t i = 0; i < totalUsuarios; i++)
+        fprintf(arquivo, "%d;%s;%s;%s;%s\n",
+                usuarios[i].matricula, usuarios[i].nomeCompleto,
+                usuarios[i].curso, usuarios[i].telefone, usuarios[i].dataCadastro);
+
+    if (fflush(arquivo) != 0 || fclose(arquivo) != 0)
+        return -1;
+
+    carregarArquivoNaVariavel("usuarios.txt", &dadosUsuarios);
+    fazerBackupDosDados();
+    return 0;
+}
+static int salvarLivros(void)
+{
+    FILE *arquivo = fopen("livros.txt", "w");
+    if (arquivo == NULL)
+        return -1;
+
+    fprintf(arquivo, "id;titulo;autor;editora;anoDePublicacao;numeroExemplares;status\n");
+    for (size_t i = 0; i < totalLivros; i++)
+        fprintf(arquivo, "%d;%s;%s;%s;%d;%d;%d\n",
+                livrosCadastrados[i].idLivro, livrosCadastrados[i].titulo,
+                livrosCadastrados[i].autor, livrosCadastrados[i].editora,
+                livrosCadastrados[i].anoDePublicacao,
+                livrosCadastrados[i].numeroExDisp, livrosCadastrados[i].status);
+
+    if (fflush(arquivo) != 0 || fclose(arquivo) != 0)
+        return -1;
+
+    carregarArquivoNaVariavel("livros.txt", &dadosLivros);
+    fazerBackupDosDados();
+    return 0;
+}
+static int salvarEmprestimos(void)
+{
+    FILE *arquivo = fopen("emprestimos.txt", "w");
+    if (arquivo == NULL)
+        return -1;
+
+    fprintf(arquivo, "id;idUsuario;idLivro;dataEmprestimo;dataDevolucao;status\n");
+    for (size_t i = 0; i < totalEmprestimos; i++)
+        fprintf(arquivo, "%d;%d;%d;%s;%s;%d\n",
+                emprestimosCadastrados[i].idEmprestimo,
+                emprestimosCadastrados[i].matriculaUsuario,
+                emprestimosCadastrados[i].idLivro,
+                emprestimosCadastrados[i].dataEmprestimo,
+                emprestimosCadastrados[i].dataDevolucaoPrevista,
+                emprestimosCadastrados[i].status);
+
+    if (fflush(arquivo) != 0 || fclose(arquivo) != 0)
+        return -1;
+
+    carregarArquivoNaVariavel("emprestimos.txt", &dadosEmprestimos);
+    fazerBackupDosDados();
+    return 0;
+}
+
 // * Procura uma substring sem diferenciar maiúsculas de minúsculas
 static int contemTextoSemDistincaoDeCaixa(const char *texto, const char *busca)
 {
@@ -249,50 +317,28 @@ static int contemTextoSemDistincaoDeCaixa(const char *texto, const char *busca)
 // * Procura um livro pelo seu identificador
 static int buscarLivroPorId(int idLivro, livros *livroEncontrado)
 {
-    char linha[512];
-    FILE *arquivoLivros = fopen("livros.txt", "r");
-
-    if (arquivoLivros == NULL)
-        return 0;
-
-    while (fgets(linha, sizeof(linha), arquivoLivros) != NULL)
-    {
-        if (strncmp(linha, "id;", 3) == 0 || !parse_linha_livro(linha, livroEncontrado))
-            continue;
-
-        if (livroEncontrado->idLivro == idLivro)
+    for (size_t i = 0; i < totalLivros; i++)
+        if (livrosCadastrados[i].idLivro == idLivro)
         {
-            fclose(arquivoLivros);
+            if (livroEncontrado != NULL)
+                *livroEncontrado = livrosCadastrados[i];
             return 1;
         }
-    }
 
-    fclose(arquivoLivros);
     return 0;
 }
 
 // * Procura um usuario pela matricula
 static int buscarUsuarioPorMatricula(int matricula, usuario *usuarioEncontrado)
 {
-    char linha[512];
-    FILE *arquivoUsuarios = fopen("usuarios.txt", "r");
-
-    if (arquivoUsuarios == NULL)
-        return 0;
-
-    while (fgets(linha, sizeof(linha), arquivoUsuarios) != NULL)
-    {
-        if (strncmp(linha, "matricula", 9) == 0 || !parse_linha(linha, usuarioEncontrado))
-            continue;
-
-        if (usuarioEncontrado->matricula == matricula)
+    for (size_t i = 0; i < totalUsuarios; i++)
+        if (usuarios[i].matricula == matricula)
         {
-            fclose(arquivoUsuarios);
+            if (usuarioEncontrado != NULL)
+                *usuarioEncontrado = usuarios[i];
             return 1;
         }
-    }
 
-    fclose(arquivoUsuarios);
     return 0;
 }
 
@@ -311,138 +357,41 @@ static void adicionarDias(const char *dataInicial, int dias, char *dataFinal, si
     strftime(dataFinal, tamanho, "%Y-%m-%d", &data);
 }
 
-// * Atualiza um livro no arquivo preservando todos os demais registros
+// * Atualiza um livro na struct e salva o vetor no arquivo
 static int atualizarLivroNoArquivo(const livros *livroAtualizado)
 {
-    FILE *arquivoOriginal = fopen("livros.txt", "r");
-    FILE *arquivoTemporario = fopen("livros.tmp", "w");
-
-    if (arquivoOriginal == NULL || arquivoTemporario == NULL)
-    {
-        if (arquivoOriginal != NULL)
-            fclose(arquivoOriginal);
-        if (arquivoTemporario != NULL)
-            fclose(arquivoTemporario);
-        return -1;
-    }
-
-    char linha[512];
-    int atualizado = 0;
-
-    while (fgets(linha, sizeof(linha), arquivoOriginal) != NULL)
-    {
-        livros livro;
-
-        if (strncmp(linha, "id;", 3) == 0)
+    for (size_t i = 0; i < totalLivros; i++)
+        if (livrosCadastrados[i].idLivro == livroAtualizado->idLivro)
         {
-            fprintf(arquivoTemporario, "%s", linha);
-            continue;
+            livros anterior = livrosCadastrados[i];
+            livrosCadastrados[i] = *livroAtualizado;
+            if (salvarLivros() == 0)
+                return 0;
+            livrosCadastrados[i] = anterior;
+            salvarLivros();
+            return -1;
         }
 
-        if (!parse_linha_livro(linha, &livro) || livro.idLivro != livroAtualizado->idLivro)
-        {
-            fprintf(arquivoTemporario, "%s", linha);
-            continue;
-        }
-
-        fprintf(arquivoTemporario, "%d;%s;%s;%s;%d;%d;%d\n",
-                livroAtualizado->idLivro,
-                livroAtualizado->titulo,
-                livroAtualizado->autor,
-                livroAtualizado->editora,
-                livroAtualizado->anoDePublicacao,
-                livroAtualizado->numeroExDisp,
-                livroAtualizado->status);
-        atualizado = 1;
-    }
-
-    fclose(arquivoOriginal);
-
-    if (fflush(arquivoTemporario) != 0 || fclose(arquivoTemporario) != 0)
-    {
-        remove("livros.tmp");
-        return -1;
-    }
-
-    if (!atualizado || remove("livros.txt") != 0 || rename("livros.tmp", "livros.txt") != 0)
-    {
-        remove("livros.tmp");
-        return -1;
-    }
-
-    carregarArquivoNaVariavel("livros.txt", &dadosLivros);
-    carregarVetores();
-    fazerBackupDosDados();
-    return 0;
+    return -1;
 }
 
-// * Atualiza o status de um emprestimo no arquivo
+// * Atualiza o status de um emprestimo na struct e salva o vetor
 static int atualizarEmprestimoNoArquivo(int idEmprestimo)
 {
-    FILE *arquivoOriginal = fopen("emprestimos.txt", "r");
-    FILE *arquivoTemporario = fopen("emprestimos.tmp", "w");
-
-    if (arquivoOriginal == NULL || arquivoTemporario == NULL)
-    {
-        if (arquivoOriginal != NULL)
-            fclose(arquivoOriginal);
-        if (arquivoTemporario != NULL)
-            fclose(arquivoTemporario);
-        return -1;
-    }
-
-    char linha[512];
-    int atualizado = 0;
-
-    while (fgets(linha, sizeof(linha), arquivoOriginal) != NULL)
-    {
-        emprestimos emprestimo;
-
-        if (strncmp(linha, "id;", 3) == 0)
+    for (size_t i = 0; i < totalEmprestimos; i++)
+        if (emprestimosCadastrados[i].idEmprestimo == idEmprestimo &&
+            emprestimosCadastrados[i].status == 1)
         {
-            fprintf(arquivoTemporario, "%s", linha);
-            continue;
+            emprestimos anterior = emprestimosCadastrados[i];
+            emprestimosCadastrados[i].status = 0;
+            if (salvarEmprestimos() == 0)
+                return 0;
+            emprestimosCadastrados[i] = anterior;
+            salvarEmprestimos();
+            return -1;
         }
 
-        if (!parse_linha_emprestimo(linha, &emprestimo))
-        {
-            fprintf(arquivoTemporario, "%s", linha);
-            continue;
-        }
-
-        if (emprestimo.idEmprestimo == idEmprestimo && emprestimo.status == 1)
-        {
-            emprestimo.status = 0;
-            atualizado = 1;
-        }
-
-        fprintf(arquivoTemporario, "%d;%d;%d;%s;%s;%d\n",
-                emprestimo.idEmprestimo,
-                emprestimo.matriculaUsuario,
-                emprestimo.idLivro,
-                emprestimo.dataEmprestimo,
-                emprestimo.dataDevolucaoPrevista,
-                emprestimo.status);
-    }
-
-    fclose(arquivoOriginal);
-
-    if (fflush(arquivoTemporario) != 0 || fclose(arquivoTemporario) != 0)
-    {
-        remove("emprestimos.tmp");
-        return -1;
-    }
-
-    if (!atualizado || remove("emprestimos.txt") != 0 || rename("emprestimos.tmp", "emprestimos.txt") != 0)
-    {
-        remove("emprestimos.tmp");
-        return -1;
-    }
-
-    carregarArquivoNaVariavel("emprestimos.txt", &dadosEmprestimos);
-    carregarVetores();
-    fazerBackupDosDados();
-    return 0;
+    return -1;
 }
 
 static int carregarArquivoNaVariavel(const char *arquivo, char **destino)
@@ -629,45 +578,85 @@ int inicializacaoBancoDeDados(void)
     return fazerBackupDosDados();
 }
 
-// * Função para inserir dados no banco de dados
+// * Insere diretamente no vetor correspondente e atualiza o arquivo de backup
 int inserirNoBancoDeDados(const char *arquivo, const char *registro)
 {
-    FILE *arquivoLeitura = fopen(arquivo, "r");
-    if (arquivoLeitura != NULL)
+    if (strcmp(arquivo, "usuarios.txt") == 0)
     {
-        char linha[512];
-        while (fgets(linha, sizeof(linha), arquivoLeitura) != NULL)
-        {
-            linha[strcspn(linha, "\r\n")] = '\0';
-            if (strcmp(linha, registro) == 0)
-            {
-                fclose(arquivoLeitura);
-                logFile(".log", NULL, "WARNING", "Registro duplicado ignorado no arquivo %s!", arquivo);
+        usuario novoUsuario;
+        inicializarUsuario(&novoUsuario);
+        if (!parse_linha(registro, &novoUsuario))
+            return -1;
+
+        for (size_t i = 0; i < totalUsuarios; i++)
+            if (usuarios[i].matricula == novoUsuario.matricula)
                 return 1;
-            }
+
+        if (totalUsuarios >= MAX_USUARIOS)
+            return -1;
+
+        usuarios[totalUsuarios++] = novoUsuario;
+        if (salvarUsuarios() == 0)
+        {
+            logFile(".log", NULL, "INFO", "Registro inserido no vetor e no arquivo %s!", arquivo);
+            return 0;
         }
-        fclose(arquivoLeitura);
-    }
-
-    FILE *arquivoTXT = fopen(arquivo, "a");
-    if (arquivoTXT == NULL)
-    {
-        logFile(".log", NULL, "ERROR", "Falha ao abrir o arquivo %s para inserção!", arquivo);
+        totalUsuarios--;
+        salvarUsuarios();
         return -1;
     }
 
-    if (fprintf(arquivoTXT, "%s\n", registro) < 0)
+    if (strcmp(arquivo, "livros.txt") == 0)
     {
-        logFile(".log", NULL, "ERROR", "Falha ao escrever no arquivo %s!", arquivo);
-        fclose(arquivoTXT);
+        livros novoLivro;
+        inicializarLivro(&novoLivro);
+        if (!parse_linha_livro(registro, &novoLivro))
+            return -1;
+
+        for (size_t i = 0; i < totalLivros; i++)
+            if (livrosCadastrados[i].idLivro == novoLivro.idLivro)
+                return 1;
+
+        if (totalLivros >= MAX_LIVROS)
+            return -1;
+
+        livrosCadastrados[totalLivros++] = novoLivro;
+        if (salvarLivros() == 0)
+        {
+            logFile(".log", NULL, "INFO", "Registro inserido no vetor e no arquivo %s!", arquivo);
+            return 0;
+        }
+        totalLivros--;
+        salvarLivros();
         return -1;
     }
 
-    fclose(arquivoTXT); // * Fechar o arquivo após a inserção
-    carregarVetores();
-    fazerBackupDosDados();
-    logFile(".log", NULL, "INFO", "Registro inserido com sucesso no arquivo %s!", arquivo);
-    return 0;
+    if (strcmp(arquivo, "emprestimos.txt") == 0)
+    {
+        emprestimos novoEmprestimo;
+        inicializarEmprestimo(&novoEmprestimo);
+        if (!parse_linha_emprestimo(registro, &novoEmprestimo))
+            return -1;
+
+        for (size_t i = 0; i < totalEmprestimos; i++)
+            if (emprestimosCadastrados[i].idEmprestimo == novoEmprestimo.idEmprestimo)
+                return 1;
+
+        if (totalEmprestimos >= MAX_EMPRESTIMOS)
+            return -1;
+
+        emprestimosCadastrados[totalEmprestimos++] = novoEmprestimo;
+        if (salvarEmprestimos() == 0)
+        {
+            logFile(".log", NULL, "INFO", "Registro inserido no vetor e no arquivo %s!", arquivo);
+            return 0;
+        }
+        totalEmprestimos--;
+        salvarEmprestimos();
+        return -1;
+    }
+
+    return -1;
 }
 
 // * Função para exibir uma barra de separação
@@ -795,16 +784,7 @@ void cadastrarUsuario(void)
 void pesquisarUsuario(void)
 {
     char busca[100];
-    char linha[512];
     int encontrado = 0;
-    usuario usuarioEncontrado = {0};
-    FILE *arquivoTXT = fopen("usuarios.txt", "r");
-
-    if (arquivoTXT == NULL)
-    {
-        logFile(".log", NULL, "ERROR", "Falha ao abrir usuarios.txt para pesquisa!");
-        return;
-    }
 
     while (getchar() != '\n' && !feof(stdin))
     {
@@ -812,74 +792,55 @@ void pesquisarUsuario(void)
 
     printf("Digite a matricula ou o nome do usuario: ");
     if (fgets(busca, sizeof(busca), stdin) == NULL)
-    {
-        fclose(arquivoTXT);
         return;
-    }
     busca[strcspn(busca, "\r\n")] = '\0';
 
     if (busca[0] == '\0')
     {
         printf("Informe pelo menos parte da matricula ou do nome.\n");
-        fclose(arquivoTXT);
         return;
     }
 
-    while (fgets(linha, sizeof(linha), arquivoTXT) != NULL)
+    for (size_t i = 0; i < totalUsuarios; i++)
     {
-        if (strncmp(linha, "matricula;", 10) == 0 || !parse_linha(linha, &usuarioEncontrado))
-            continue;
-
+        usuario *usuarioEncontrado = &usuarios[i];
         char matriculaTexto[20];
-        snprintf(matriculaTexto, sizeof(matriculaTexto), "%d", usuarioEncontrado.matricula);
+        snprintf(matriculaTexto, sizeof(matriculaTexto), "%d", usuarioEncontrado->matricula);
 
         if (strstr(matriculaTexto, busca) != NULL ||
-            contemTextoSemDistincaoDeCaixa(usuarioEncontrado.nomeCompleto, busca))
+            contemTextoSemDistincaoDeCaixa(usuarioEncontrado->nomeCompleto, busca))
         {
-            printf("\nMatricula: %d\n", usuarioEncontrado.matricula);
-            printf("Nome: %s\n", usuarioEncontrado.nomeCompleto);
-            printf("Curso: %s\n", usuarioEncontrado.curso);
-            printf("Telefone: %s\n", usuarioEncontrado.telefone);
-            printf("Data de cadastro: %s\n", usuarioEncontrado.dataCadastro);
+            printf("\nMatricula: %d\n", usuarioEncontrado->matricula);
+            printf("Nome: %s\n", usuarioEncontrado->nomeCompleto);
+            printf("Curso: %s\n", usuarioEncontrado->curso);
+            printf("Telefone: %s\n", usuarioEncontrado->telefone);
+            printf("Data de cadastro: %s\n", usuarioEncontrado->dataCadastro);
             encontrado = 1;
 
-            FILE *arquivoEmprestimos = fopen("emprestimos.txt", "r");
             int encontrouEmprestimo = 0;
-
-            if (arquivoEmprestimos != NULL)
+            for (size_t j = 0; j < totalEmprestimos; j++)
             {
-                char linhaEmprestimo[512];
+                emprestimos *emprestimo = &emprestimosCadastrados[j];
+                if (emprestimo->matriculaUsuario != usuarioEncontrado->matricula ||
+                    emprestimo->status != 1)
+                    continue;
 
-                while (fgets(linhaEmprestimo, sizeof(linhaEmprestimo), arquivoEmprestimos) != NULL)
+                livros livro;
+                if (buscarLivroPorId(emprestimo->idLivro, &livro))
                 {
-                    emprestimos emprestimo;
-                    livros livro;
-
-                    if (strncmp(linhaEmprestimo, "id;", 3) == 0 ||
-                        !parse_linha_emprestimo(linhaEmprestimo, &emprestimo) ||
-                        emprestimo.matriculaUsuario != usuarioEncontrado.matricula ||
-                        emprestimo.status != 1)
-                        continue;
-
-                    if (buscarLivroPorId(emprestimo.idLivro, &livro))
-                    {
-                        printf("\nEmprestimo em aberto:\n");
-                        printf("ID do livro: %d\n", livro.idLivro);
-                        printf("Titulo: %s\n", livro.titulo);
-                        printf("Autor: %s\n", livro.autor);
-                        printf("Data do emprestimo: %s\n", emprestimo.dataEmprestimo);
-                        encontrouEmprestimo = 1;
-                    }
+                    printf("\nEmprestimo em aberto:\n");
+                    printf("ID do livro: %d\n", livro.idLivro);
+                    printf("Titulo: %s\n", livro.titulo);
+                    printf("Autor: %s\n", livro.autor);
+                    printf("Data do emprestimo: %s\n", emprestimo->dataEmprestimo);
+                    encontrouEmprestimo = 1;
                 }
-                fclose(arquivoEmprestimos);
             }
 
             if (!encontrouEmprestimo)
                 printf("Nenhum emprestimo em aberto para este usuario.\n");
         }
     }
-
-    fclose(arquivoTXT);
 
     if (!encontrado)
         printf("Usuario nao encontrado.\n");
@@ -1027,15 +988,7 @@ void cadastrarLivro(void)
 void pesquisarLivro(void)
 {
     char busca[100];
-    char linha[512];
     int encontrado = 0;
-    FILE *arquivoLivros = fopen("livros.txt", "r");
-
-    if (arquivoLivros == NULL)
-    {
-        logFile(".log", NULL, "ERROR", "Falha ao abrir livros.txt para pesquisa!");
-        return;
-    }
 
     while (getchar() != '\n' && !feof(stdin))
     {
@@ -1043,45 +996,35 @@ void pesquisarLivro(void)
 
     printf("Digite o codigo, titulo ou autor do livro: ");
     if (fgets(busca, sizeof(busca), stdin) == NULL)
-    {
-        fclose(arquivoLivros);
         return;
-    }
     busca[strcspn(busca, "\r\n")] = '\0';
 
     if (busca[0] == '\0')
     {
         printf("Informe pelo menos parte do codigo, titulo ou autor.\n");
-        fclose(arquivoLivros);
         return;
     }
 
-    while (fgets(linha, sizeof(linha), arquivoLivros) != NULL)
+    for (size_t i = 0; i < totalLivros; i++)
     {
-        livros livroEncontrado;
-
-        if (strncmp(linha, "id;", 3) == 0 || !parse_linha_livro(linha, &livroEncontrado))
-            continue;
-
+        livros *livroEncontrado = &livrosCadastrados[i];
         char codigoTexto[20];
-        snprintf(codigoTexto, sizeof(codigoTexto), "%d", livroEncontrado.idLivro);
+        snprintf(codigoTexto, sizeof(codigoTexto), "%d", livroEncontrado->idLivro);
 
         if (strstr(codigoTexto, busca) != NULL ||
-            contemTextoSemDistincaoDeCaixa(livroEncontrado.titulo, busca) ||
-            contemTextoSemDistincaoDeCaixa(livroEncontrado.autor, busca))
+            contemTextoSemDistincaoDeCaixa(livroEncontrado->titulo, busca) ||
+            contemTextoSemDistincaoDeCaixa(livroEncontrado->autor, busca))
         {
-            printf("\nCodigo: %d\n", livroEncontrado.idLivro);
-            printf("Titulo: %s\n", livroEncontrado.titulo);
-            printf("Autor: %s\n", livroEncontrado.autor);
-            printf("Editora: %s\n", livroEncontrado.editora);
-            printf("Ano de publicacao: %d\n", livroEncontrado.anoDePublicacao);
-            printf("Exemplares disponiveis: %d\n", livroEncontrado.numeroExDisp);
-            printf("Status: %s\n", livroEncontrado.status == 1 ? "Disponivel" : "Emprestado");
+            printf("\nCodigo: %d\n", livroEncontrado->idLivro);
+            printf("Titulo: %s\n", livroEncontrado->titulo);
+            printf("Autor: %s\n", livroEncontrado->autor);
+            printf("Editora: %s\n", livroEncontrado->editora);
+            printf("Ano de publicacao: %d\n", livroEncontrado->anoDePublicacao);
+            printf("Exemplares disponiveis: %d\n", livroEncontrado->numeroExDisp);
+            printf("Status: %s\n", livroEncontrado->status == 1 ? "Disponivel" : "Emprestado");
             encontrado = 1;
         }
     }
-
-    fclose(arquivoLivros);
 
     if (!encontrado)
         printf("Livro nao encontrado.\n");
@@ -1173,24 +1116,11 @@ void cadastrarEmprestimo(void)
         return;
     }
 
-    FILE *arquivoEmprestimos = fopen("emprestimos.txt", "r");
-    char linha[512];
     int novoId = 1;
 
-    if (arquivoEmprestimos != NULL)
-    {
-        while (fgets(linha, sizeof(linha), arquivoEmprestimos) != NULL)
-        {
-            emprestimos emprestimo;
-
-            if (strncmp(linha, "id;", 3) != 0 && parse_linha_emprestimo(linha, &emprestimo) &&
-                emprestimo.idEmprestimo >= novoId)
-            {
-                novoId = emprestimo.idEmprestimo + 1;
-            }
-        }
-        fclose(arquivoEmprestimos);
-    }
+    for (size_t i = 0; i < totalEmprestimos; i++)
+        if (emprestimosCadastrados[i].idEmprestimo >= novoId)
+            novoId = emprestimosCadastrados[i].idEmprestimo + 1;
 
     const char *dataEmprestimo = getTimestamp(0);
     char dataDevolucao[11];
@@ -1250,30 +1180,17 @@ void devolverLivro(void)
     {
     }
 
-    FILE *arquivoEmprestimos = fopen("emprestimos.txt", "r");
-    char linha[512];
     emprestimos emprestimoEncontrado = {0};
     int encontrado = 0;
 
-    if (arquivoEmprestimos == NULL)
-    {
-        printf("Nao foi possivel acessar os emprestimos.\n");
-        return;
-    }
-
-    while (fgets(linha, sizeof(linha), arquivoEmprestimos) != NULL)
-    {
-        emprestimos emprestimo;
-
-        if (strncmp(linha, "id;", 3) != 0 && parse_linha_emprestimo(linha, &emprestimo) &&
-            emprestimo.idEmprestimo == idEmprestimo && emprestimo.status == 1)
+    for (size_t i = 0; i < totalEmprestimos; i++)
+        if (emprestimosCadastrados[i].idEmprestimo == idEmprestimo &&
+            emprestimosCadastrados[i].status == 1)
         {
-            emprestimoEncontrado = emprestimo;
+            emprestimoEncontrado = emprestimosCadastrados[i];
             encontrado = 1;
             break;
         }
-    }
-    fclose(arquivoEmprestimos);
 
     if (!encontrado)
     {
@@ -1311,8 +1228,6 @@ void devolverLivro(void)
 // * Listar empréstimos ativos
 void listarEmprestimosAtivos(void)
 {
-    FILE *arquivoEmprestimos = fopen("emprestimos.txt", "r");
-    char linha[512];
     int encontrados = 0;
 
     logFile(".log", NULL, "INFO", "Listagem de emprestimos ativos acessada");
@@ -1320,40 +1235,29 @@ void listarEmprestimosAtivos(void)
     printf("Emprestimos ativos\n");
     barraDeSeparacao();
 
-    if (arquivoEmprestimos == NULL)
+    for (size_t i = 0; i < totalEmprestimos; i++)
     {
-        printf("Nao foi possivel abrir emprestimos.txt.\n");
-        return;
-    }
-
-    while (fgets(linha, sizeof(linha), arquivoEmprestimos) != NULL)
-    {
-        emprestimos emprestimo;
-
-        if (strncmp(linha, "id;", 3) == 0 ||
-            !parse_linha_emprestimo(linha, &emprestimo) ||
-            emprestimo.status != 1)
+        emprestimos *emprestimo = &emprestimosCadastrados[i];
+        if (emprestimo->status != 1)
             continue;
 
         usuario usuarioEmprestimo;
         livros livroEmprestimo;
 
-        if (!buscarUsuarioPorMatricula(emprestimo.matriculaUsuario, &usuarioEmprestimo) ||
-            !buscarLivroPorId(emprestimo.idLivro, &livroEmprestimo))
+        if (!buscarUsuarioPorMatricula(emprestimo->matriculaUsuario, &usuarioEmprestimo) ||
+            !buscarLivroPorId(emprestimo->idLivro, &livroEmprestimo))
             continue;
 
-        printf("\nID do emprestimo: %d\n", emprestimo.idEmprestimo);
+        printf("\nID do emprestimo: %d\n", emprestimo->idEmprestimo);
         printf("Matricula: %d\n", usuarioEmprestimo.matricula);
         printf("Usuario: %s\n", usuarioEmprestimo.nomeCompleto);
         printf("Codigo do livro: %d\n", livroEmprestimo.idLivro);
         printf("Livro: %s\n", livroEmprestimo.titulo);
         printf("Autor: %s\n", livroEmprestimo.autor);
-        printf("Data do emprestimo: %s\n", emprestimo.dataEmprestimo);
-        printf("Data prevista de devolucao: %s\n", emprestimo.dataDevolucaoPrevista);
+        printf("Data do emprestimo: %s\n", emprestimo->dataEmprestimo);
+        printf("Data prevista de devolucao: %s\n", emprestimo->dataDevolucaoPrevista);
         encontrados++;
     }
-
-    fclose(arquivoEmprestimos);
 
     if (!encontrados)
         printf("Nenhum emprestimo ativo encontrado.\n");
@@ -1361,60 +1265,24 @@ void listarEmprestimosAtivos(void)
 
 static int atualizarDataEmprestimoNoArquivo(int idEmprestimo, const char *novaData)
 {
-    FILE *original = fopen("emprestimos.txt", "r");
-    FILE *temporario = fopen("emprestimos.tmp", "w");
-    char linha[512];
-    int atualizado = 0;
-
-    if (original == NULL || temporario == NULL)
-    {
-        if (original != NULL)
-            fclose(original);
-        if (temporario != NULL)
-            fclose(temporario);
-        return -1;
-    }
-
-    while (fgets(linha, sizeof(linha), original) != NULL)
-    {
-        emprestimos emprestimo;
-        if (strncmp(linha, "id;", 3) == 0)
+    for (size_t i = 0; i < totalEmprestimos; i++)
+        if (emprestimosCadastrados[i].idEmprestimo == idEmprestimo &&
+            emprestimosCadastrados[i].status == 1)
         {
-            fputs(linha, temporario);
-            continue;
-        }
-        if (!parse_linha_emprestimo(linha, &emprestimo))
-        {
-            fputs(linha, temporario);
-            continue;
-        }
-        if (emprestimo.idEmprestimo == idEmprestimo && emprestimo.status == 1)
-        {
-            strncpy(emprestimo.dataDevolucaoPrevista, novaData,
-                    sizeof(emprestimo.dataDevolucaoPrevista) - 1);
-            emprestimo.dataDevolucaoPrevista[
-                sizeof(emprestimo.dataDevolucaoPrevista) - 1] = '\0';
-            atualizado = 1;
-        }
-        fprintf(temporario, "%d;%d;%d;%s;%s;%d\n",
-                emprestimo.idEmprestimo, emprestimo.matriculaUsuario,
-                emprestimo.idLivro, emprestimo.dataEmprestimo,
-                emprestimo.dataDevolucaoPrevista, emprestimo.status);
-    }
+            emprestimos anterior = emprestimosCadastrados[i];
+            strncpy(emprestimosCadastrados[i].dataDevolucaoPrevista, novaData,
+                    sizeof(emprestimosCadastrados[i].dataDevolucaoPrevista) - 1);
+            emprestimosCadastrados[i].dataDevolucaoPrevista[sizeof(emprestimosCadastrados[i].dataDevolucaoPrevista) - 1] = '\0';
 
-    fclose(original);
-    if (fflush(temporario) != 0 || fclose(temporario) != 0 ||
-        !atualizado || remove("emprestimos.txt") != 0 ||
-        rename("emprestimos.tmp", "emprestimos.txt") != 0)
-    {
-        remove("emprestimos.tmp");
-        return -1;
-    }
+            if (salvarEmprestimos() == 0)
+                return 0;
 
-    carregarArquivoNaVariavel("emprestimos.txt", &dadosEmprestimos);
-    carregarVetores();
-    fazerBackupDosDados();
-    return 0;
+            emprestimosCadastrados[i] = anterior;
+            salvarEmprestimos();
+            return -1;
+        }
+
+    return -1;
 }
 
 static void relatorioLivrosMaisEmprestados(void)
@@ -1610,8 +1478,8 @@ void gerenciarEmprestimos(void)
 int main(void) // * Função principal
 {
     // * Inicialização do sistema
-    logFileInit(".log");         // * Inicialização do arquivo .log
-    logFileInit("print.log");    // * Inicialização do arquivo print.log
+    logFileInit(".log");      // * Inicialização do arquivo .log
+    logFileInit("print.log"); // * Inicialização do arquivo print.log
     if (inicializacaoBancoDeDados() != 0)
     {
         fprintf(stderr, "Nao foi possivel inicializar o banco de dados.\n");
@@ -1620,7 +1488,7 @@ int main(void) // * Função principal
         free(dadosEmprestimos);
         return EXIT_FAILURE;
     }
-    cabecalho();                 // * Chamada do cabeçalho
+    cabecalho(); // * Chamada do cabeçalho
 
     int opcaoPrincipal;
     const char *options[] = {

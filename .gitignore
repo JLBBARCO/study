@@ -42,3 +42,9 @@ manus-webdev.json
 
 # Arquivos compilados
 *.exe
+
+# Arquivos temporários
+*.tmp
+
+# Arquivos de backup
+*.bak

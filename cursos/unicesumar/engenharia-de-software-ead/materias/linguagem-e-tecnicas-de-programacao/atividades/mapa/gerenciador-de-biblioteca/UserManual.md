@@ -2,12 +2,7 @@
 
 ## 1. Visão geral
 
-O Gerenciador de Biblioteca é um programa de terminal desenvolvido em C para
-controlar usuários, livros e empréstimos. Os dados são mantidos em arquivos de
-texto, carregados automaticamente na inicialização e atualizados a cada operação.
-
-O programa deve ser executado a partir da pasta que contém os arquivos de dados,
-normalmente `src/`. Os arquivos são procurados usando caminhos relativos.
+O Gerenciador de Biblioteca é um programa de terminal desenvolvido em C para controlar usuários, livros e empréstimos. Os dados são mantidos em arquivos de texto, carregados automaticamente na inicialização e atualizados a cada operação.
 
 ## 2. Inicialização e navegação
 
@@ -27,9 +22,7 @@ Menu principal:
 3 - Emprestimos
 ```
 
-Digite o número da opção e pressione **Enter**. A opção `0` retorna ao menu
-anterior ou encerra o programa. Quando uma entrada numérica é inválida, o
-programa limpa a entrada e solicita uma nova opção.
+Digite o número da opção e pressione **Enter**. A opção `0` retorna ao menu anterior ou encerra o programa. Quando uma entrada numérica é inválida, o programa limpa a entrada e solicita uma nova opção.
 
 ## 3. Usuários
 
@@ -142,8 +135,8 @@ campo vazio para ignorá-lo:
 2. autor;
 3. ano;
 4. status:
-   - `D` para disponível;
-   - `E` para emprestado.
+    - `D` para disponível;
+    - `E` para emprestado.
 
 Os critérios preenchidos são aplicados simultaneamente.
 
@@ -151,11 +144,11 @@ Os critérios preenchidos são aplicados simultaneamente.
 
 Os arquivos são criados na pasta de execução do programa:
 
-| Arquivo | Conteúdo |
-|---|---|
-| `usuarios.txt` | matrícula, nome, curso, telefone e data de cadastro |
-| `livros.txt` | código, título, autor, editora, ano, exemplares e status |
-| `emprestimos.txt` | código, usuário, livro, datas e status |
+| Arquivo           | Conteúdo                                                 |
+| ----------------- | -------------------------------------------------------- |
+| `usuarios.txt`    | matrícula, nome, curso, telefone e data de cadastro      |
+| `livros.txt`      | código, título, autor, editora, ano, exemplares e status |
+| `emprestimos.txt` | código, usuário, livro, datas e status                   |
 
 Os registros são separados por ponto e vírgula (`;`) e possuem uma linha de
 cabeçalho. As datas usam o formato `AAAA-MM-DD`.
@@ -183,5 +176,4 @@ Não edite manualmente os arquivos enquanto o programa estiver em execução.
 
 ## 9. Encerramento
 
-Selecione `0 - Sair` no menu principal. O programa libera a memória utilizada e
-encerra sem alterar os registros além das operações realizadas.
+Selecione `0 - Sair` no menu principal. O programa libera a memória utilizada e encerra sem alterar os registros além das operações realizadas.
