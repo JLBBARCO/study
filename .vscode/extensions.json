@@ -11,6 +11,7 @@
         "ritwickdey.LiveServer",
         "DavidAnson.vscode-markdownlint",
         "ms-vscode.powershell",
-        "redhat.vscode-yaml"
+        "redhat.vscode-yaml",
+        "aaron-bond.better-comments"
     ]
 }
