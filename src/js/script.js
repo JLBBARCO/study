@@ -2,7 +2,7 @@ const VERCEL_DOMAIN_TOKEN = 'vercel.app';
 const JS_BASE_PATH = 'src/js';
 const CSS_BASE_PATH = 'src/css';
 const JS_LOCAL_PATH = 'script.js';
-const CRITICAL_JS_FILES = ['adsense.js', 'header.js', 'footer.js', 'paths.js', 'accessibility.js'];
+const CRITICAL_JS_FILES = ['header.js', 'footer.js', 'paths.js', 'accessibility.js'];
 const CRITICAL_CSS_FILES = [
     { fileName: 'style.css', media: 'screen' },
     {
@@ -20,11 +20,9 @@ const CRITICAL_CSS_FILES = [
     { fileName: 'cards-tv.css', media: 'screen and (min-width: 1200px)' },
     { fileName: 'site-theme.css', media: 'screen' },
 ];
-const DEFERRED_JS_FILES = ['accessibility.js', 'adsense.js'];
+const DEFERRED_JS_FILES = ['accessibility.js'];
 const PRECONNECT_ORIGINS = ['https://kit.fontawesome.com', 'https://ka-f.fontawesome.com'];
 const DEFERRED_TASK_TIMEOUT = 1800;
-const ADSENSE_PUBLISHER_ID = 'ca-pub-1575745628375298';
-const ADSENSE_SCRIPT_ID = 'google-adsense-script';
 const DOCUMENT_TITLE_PREFIX = 'Estudos de JLBBARCO - ';
 const CSS_LINK_TIMEOUT_MS = 9000;
 const CSS_GATE_TIMEOUT_MS = 12000;
@@ -142,7 +140,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         await carregarContextoServidor();
         await headInsert(DOCUMENT_URL_TOKEN);
 
-        invokeGlobal('loadAdSense');
         invokeGlobal('initializeNavigation');
         invokeGlobal('initializeAccessibilityMenu');
         initializeSmoothScroll();
